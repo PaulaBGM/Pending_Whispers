@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,11 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] private GameObject pauseMenuUI;
 
     private bool isPaused;
+
+    private void Awake()
+    {
+        pauseMenuUI.SetActive(false);
+    }
 
     private void OnEnable()
     {
@@ -20,6 +26,8 @@ public class PauseMenuController : MonoBehaviour
 
     private void TogglePause()
     {
+        Debug.Log("Toggle Pause");
+        
         if (isPaused)
             ResumeGame();
         else

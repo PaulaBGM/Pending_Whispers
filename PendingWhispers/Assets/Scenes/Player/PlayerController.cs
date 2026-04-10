@@ -8,18 +8,29 @@ public class PlayerController : MonoBehaviour
     public float interactDistance = 1.5f;
 
     private IInteractable currentTarget;
+    
+    /*CON INPUT ACTION*/
+    private void OnEnable()
+    {
+        InputController.Instance.OnClickPressed += HandleClick;
+    }
+
+    private void OnDisable()
+    {
+        InputController.Instance.OnClickPressed -= HandleClick;
+    }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        /*if (Input.GetMouseButtonDown(0))
         {
             HandleClick();
-        }
+        }*/
 
         Move();
         CheckInteraction();
     }
-
+    
     void HandleClick()
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
