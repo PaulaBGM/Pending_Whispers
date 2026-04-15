@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
     private IInteractable currentTarget;
     
-    /*CON INPUT ACTION*/
+ 
     private void OnEnable()
     {
         InputController.Instance.OnClickPressed += HandleClick;

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class DialogueManager : MonoBehaviour
         GoToNode("start");
     }
 
-    void GoToNode(string nodeID)
+    public void GoToNode(string nodeID)
     {
         DialogueNode node = currentDialogue.GetNode(nodeID);
 
@@ -30,10 +31,9 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        // comprobar condiciones
         if (!GameState.Instance.HasAllFlags(node.requiredFlags))
         {
-            Debug.Log("Nodo bloqueado por flags");
+            Debug.Log("Nodo bloqueado");
             return;
         }
 
@@ -43,26 +43,26 @@ public class DialogueManager : MonoBehaviour
 
     void ShowNode()
     {
-        Debug.Log(currentNode.speaker + ": " + currentNode.text);
+        DialogueUI.Instance.ShowDialogue(currentNode.speaker, currentNode.text);
 
         if (currentNode.choices != null && currentNode.choices.Count > 0)
         {
-            for (int i = 0; i < currentNode.choices.Count; i++)
-            {
-                var choice = currentNode.choices[i];
+            List<DialogueChoice> validChoices = new List<DialogueChoice>();
 
+            foreach (var choice in currentNode.choices)
+            {
                 if (GameState.Instance.HasAllFlags(choice.requiredFlags))
                 {
-                    Debug.Log($"[{i}] {choice.text}");
+                    validChoices.Add(choice);
                 }
             }
+
+            DialogueUI.Instance.ShowChoices(validChoices);
         }
     }
 
-    public void Choose(int index)
+    public void ChooseChoice(DialogueChoice choice)
     {
-        var choice = currentNode.choices[index];
-
         if (choice.addFlags != null)
         {
             foreach (var flag in choice.addFlags)
@@ -86,8 +86,18 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    public void OnContinuePressed()
+    {
+        Next();
+    }
+
+    public void StartDialogueByID(string nodeID)
+    {
+        GoToNode(nodeID);
+    }
+
     void EndDialogue()
     {
-        Debug.Log("Fin del dialogo");
+        DialogueUI.Instance.Hide();
     }
 }

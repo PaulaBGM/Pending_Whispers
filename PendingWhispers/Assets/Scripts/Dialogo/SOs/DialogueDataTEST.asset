@@ -16,6 +16,10 @@ MonoBehaviour:
   - id: start
     speaker: Green
     text: Hey, I'm green
-    choices: []
+    choices:
+    - text: I'm a medium
+      nextNodeID: 
+      addFlags: []
+      requiredFlags: []
     nextNodeID: 
     requiredFlags: []

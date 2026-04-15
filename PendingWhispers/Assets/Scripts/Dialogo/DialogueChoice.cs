@@ -1,7 +1,6 @@
-using System;
 using System.Collections.Generic;
 
-[Serializable]
+[System.Serializable]
 public class DialogueChoice
 {
     public string text;
