@@ -3,7 +3,8 @@ using UnityEngine.UI;
 
 public class MapNode : MonoBehaviour
 {
-    public string nodeID;
+    public NodeData data;
+
     public bool isUnlocked = false;
     public bool isCompleted = false;
 
@@ -16,20 +17,26 @@ public class MapNode : MonoBehaviour
 
     private void Start()
     {
+        icon.sprite = data.icon;
         UpdateVisual();
         button.onClick.AddListener(OnNodeClicked);
     }
 
-    public void Unlock()
+    void OnNodeClicked()
     {
-        isUnlocked = true;
-        UpdateVisual();
+        if (!isUnlocked) return;
+
+        MapManager.Instance.SelectNode(this);
     }
 
-    public void Complete()
+    public string GetName()
     {
-        isCompleted = true;
-        UpdateVisual();
+        return data.displayName;
+    }
+
+    public string GetScene()
+    {
+        return data.sceneName;
     }
 
     void UpdateVisual()
@@ -50,11 +57,14 @@ public class MapNode : MonoBehaviour
             button.interactable = true;
         }
     }
-
-    void OnNodeClicked()
+    public void SetUnlocked(bool value)
     {
-        if (!isUnlocked) return;
+        isUnlocked = value;
+        UpdateVisual();
+    }
 
-        MapManager.Instance.SelectNode(this);
+    public bool IsUnlocked()
+    {
+        return isUnlocked;
     }
 }

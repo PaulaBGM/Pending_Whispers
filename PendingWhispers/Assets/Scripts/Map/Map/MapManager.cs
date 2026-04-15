@@ -25,16 +25,22 @@ public class MapManager : MonoBehaviour
     {
         foreach (var node in nodes)
         {
-            if (node.nodeID == "start")
-                node.Unlock();
+            // Accedemos al ID desde el ScriptableObject
+            if (node.data.nodeID == "start")
+            {
+                node.SetUnlocked(true);
+            }
         }
     }
 
     public void SelectNode(MapNode node)
     {
-        if (!node.isUnlocked) return;
+        if (!node.IsUnlocked()) return;
 
         currentNode = node;
+
+        // Título dinámico
+        MapUI.Instance.UpdateTitle(node.GetName());
 
         player.MoveTo(node.transform.position);
 
@@ -43,15 +49,18 @@ public class MapManager : MonoBehaviour
 
     void EnterNode()
     {
-        Debug.Log("Entrando a: " + currentNode.nodeID);
+        Debug.Log("Entrando a: " + currentNode.data.nodeID);
 
-        SceneManager.LoadScene(currentNode.nodeID);
+        SceneManager.LoadScene(currentNode.GetScene());
     }
 
     public void UnlockNode(string nodeID)
     {
-        MapNode node = nodes.Find(n => n.nodeID == nodeID);
+        MapNode node = nodes.Find(n => n.data.nodeID == nodeID);
+
         if (node != null)
-            node.Unlock();
+        {
+            node.SetUnlocked(true);
+        }
     }
 }
