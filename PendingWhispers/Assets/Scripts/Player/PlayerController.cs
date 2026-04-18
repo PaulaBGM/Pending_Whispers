@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,8 +9,9 @@ public class PlayerController : MonoBehaviour
     public float interactDistance = 1.5f;
 
     private IInteractable currentTarget;
-    
- 
+
+    public bool canMove = true;
+
     private void OnEnable()
     {
         InputController.Instance.OnClickPressed += HandleClick;
@@ -22,17 +24,17 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        /*if (Input.GetMouseButtonDown(0))
-        {
-            HandleClick();
-        }*/
-
         Move();
         CheckInteraction();
     }
-    
+
     void HandleClick()
     {
+        if (!canMove) return;
+
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+            return;
+
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
@@ -55,6 +57,8 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
+        if (!canMove) return;
+
         transform.position = Vector2.MoveTowards(
             transform.position,
             target,
@@ -64,6 +68,8 @@ public class PlayerController : MonoBehaviour
 
     void CheckInteraction()
     {
+        if (!canMove) return;
+
         if (currentTarget == null) return;
 
         float distance = Vector2.Distance(

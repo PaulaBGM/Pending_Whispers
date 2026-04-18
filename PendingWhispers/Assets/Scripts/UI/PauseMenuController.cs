@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenuController : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuUI;
+    [SerializeField] private PlayerController playerController;
 
     private bool isPaused;
 
@@ -27,7 +28,7 @@ public class PauseMenuController : MonoBehaviour
     private void TogglePause()
     {
         Debug.Log("Toggle Pause");
-        
+
         if (isPaused)
             ResumeGame();
         else
@@ -39,6 +40,9 @@ public class PauseMenuController : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
+
+        if (playerController != null)
+            playerController.canMove = false;
     }
 
     public void ResumeGame()
@@ -46,6 +50,9 @@ public class PauseMenuController : MonoBehaviour
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
+
+        if (playerController != null)
+            playerController.canMove = true;
     }
 
     public void Options()
