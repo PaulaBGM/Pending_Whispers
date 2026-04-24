@@ -9,12 +9,25 @@ public class GameState : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); 
+
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void AddFlag(string id)
     {
-        flags.Add(id);
+        if (!flags.Contains(id))
+        {
+            flags.Add(id);
+            Debug.Log("[GameState] Flag añadida: " + id);
+        }
     }
 
     public bool HasFlag(string id)

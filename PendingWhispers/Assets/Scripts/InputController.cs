@@ -9,6 +9,7 @@ public class InputController : MonoBehaviour
     public event Action OnPausePressed;
     public event Action OnSubmitPressed;
     public event Action OnClickPressed;
+    public event Action OnMapPressed;
 
     private PlayerInput playerInput;
 
@@ -31,6 +32,8 @@ public class InputController : MonoBehaviour
         playerInput.actions["PauseMenu"].performed += PausePerformed;
         playerInput.actions["Submit"].performed += SubmitPerformed;
         playerInput.actions["Click"].performed += ClickPerformed;
+        playerInput.actions["Map"].performed += MapPerformed;
+
     }
 
     private void OnDisable()
@@ -38,6 +41,8 @@ public class InputController : MonoBehaviour
         playerInput.actions["PauseMenu"].performed -= PausePerformed;
         playerInput.actions["Submit"].performed -= SubmitPerformed;
         playerInput.actions["Click"].performed -= ClickPerformed;
+        playerInput.actions["Map"].performed -= MapPerformed;
+
     }
 
     private void ClickPerformed(InputAction.CallbackContext context)
@@ -53,5 +58,9 @@ public class InputController : MonoBehaviour
     private void PausePerformed(InputAction.CallbackContext context)
     {
         OnPausePressed?.Invoke();
+    }
+    private void MapPerformed(InputAction.CallbackContext context)
+    {
+        OnMapPressed?.Invoke();
     }
 }

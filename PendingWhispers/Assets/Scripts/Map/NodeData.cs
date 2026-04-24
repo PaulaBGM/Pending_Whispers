@@ -6,6 +6,7 @@ public class NodeData : ScriptableObject
     public string nodeID;
     public string displayName;
     public string sceneName;
+   // public string unlockFlag; 
 
     public Sprite icon;
 

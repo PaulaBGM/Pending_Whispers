@@ -56,7 +56,6 @@ public class DialogueUI : MonoBehaviour
 
         StartTyping(text);
 
-        ClearChoices();
         continueButton.gameObject.SetActive(false);
     }
 
@@ -102,14 +101,12 @@ public class DialogueUI : MonoBehaviour
 
     public void ShowContinue()
     {
-        ClearChoices();
         continueButton.gameObject.SetActive(true);
     }
 
     public void ShowChoices(List<DialogueChoice> choices)
     {
         ClearChoices();
-
         continueButton.gameObject.SetActive(false);
 
         foreach (var choice in choices)
@@ -128,10 +125,13 @@ public class DialogueUI : MonoBehaviour
     public void Hide()
     {
         panel.SetActive(false);
+
+        ClearChoices(); 
+
         CharacterUIController.Instance.ResetCharacters();
     }
 
-    void ClearChoices()
+    public void ClearChoices()
     {
         for (int i = choicesContainer.childCount - 1; i >= 0; i--)
         {

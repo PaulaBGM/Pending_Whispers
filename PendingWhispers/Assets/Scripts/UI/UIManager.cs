@@ -1,14 +1,14 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement; 
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
-    // Evento que los menús escucharán
     public event Action OnPausePressed;
     public event Action OnSubmitPressed;
+    public event Action OnMapPressed;
 
     private void Awake()
     {
@@ -24,8 +24,9 @@ public class UIManager : MonoBehaviour
         {
             InputController.Instance.OnPausePressed += TogglePause;
             InputController.Instance.OnSubmitPressed += SubmitPressed;
+
+            InputController.Instance.OnMapPressed += OpenMap; 
         }
-        
     }
 
     private void OnDisable()
@@ -34,18 +35,26 @@ public class UIManager : MonoBehaviour
         {
             InputController.Instance.OnPausePressed -= TogglePause;
             InputController.Instance.OnSubmitPressed -= SubmitPressed;
+
+            InputController.Instance.OnMapPressed -= OpenMap; // NEW
         }
     }
 
-    // Método que se llama cuando el input de pausa se detecta
     private void TogglePause()
     {
-        // Reenvía el evento a cualquier UI que se suscriba
         OnPausePressed?.Invoke();
     }
-    
+
     private void SubmitPressed()
     {
         OnSubmitPressed?.Invoke();
+    }
+
+    // NEW
+    private void OpenMap()
+    {
+        Debug.Log("[UIManager] Abriendo mapa");
+
+        SceneManager.LoadScene("Map"); 
     }
 }

@@ -49,24 +49,48 @@ public class DialogueManager : MonoBehaviour
 
     public void GoToNode(string nodeID)
     {
-        DialogueNode node = currentDialogue.GetNode(nodeID);
-
-        if (node == null) return;
-
-        if (!GameState.Instance.HasAllFlags(node.requiredFlags))
+        if (currentDialogue == null)
         {
-            Debug.Log("Nodo bloqueado");
+            Debug.LogError("[DialogueManager] currentDialogue es NULL");
             return;
         }
 
-        currentNode = node;
+        var node = currentDialogue.GetNode(nodeID);
+
+        if (node == null)
+        {
+            Debug.LogError("[DialogueManager] Nodo no encontrado: " + nodeID);
+            return;
+        }
+
+        Debug.Log("[DialogueManager] Entrando a nodo: " + nodeID);
+
+        currentNode = node; 
+
+        // FLAGS
+        if (node.onEnterFlags != null)
+        {
+            foreach (var flag in node.onEnterFlags)
+            {
+                GameState.Instance.AddFlag(flag);
+            }
+        }
+
+        // EVENTS
+        if (node.onEnterEvents != null)
+        {
+            foreach (var evt in node.onEnterEvents)
+            {
+                evt?.Raise();
+            }
+        }
+
         ShowNode();
     }
 
     void ShowNode()
     {
         var character = currentDialogue.GetCharacter(currentNode.speakerID);
-
         string speakerName = character != null ? character.displayName : "???";
 
         DialogueUI.Instance.ShowLine(character, speakerName, currentNode.text);
@@ -110,6 +134,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         GoToNode(choice.nextNodeID);
+        DialogueUI.Instance.ClearChoices();
     }
 
     public void Next()
@@ -122,6 +147,7 @@ public class DialogueManager : MonoBehaviour
         {
             EndDialogue();
         }
+
     }
 
     public void EndDialogue()

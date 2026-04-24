@@ -173,7 +173,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e66da9ea65fd894fa0adb9c8bb1eae6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue: {fileID: 11400000, guid: 89acab41a7b5d1f478a950bdaf56c456, type: 2}
+  dialogues:
+  - dialogue: {fileID: 11400000, guid: b07ca4c0950716a40b2e536c07a6bb07, type: 2}
+    requiredFlags:
+    - unlocked_case_1
+  - dialogue: {fileID: 11400000, guid: 89acab41a7b5d1f478a950bdaf56c456, type: 2}
+    requiredFlags: []
 --- !u!70 &176805181648224533
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -253,7 +258,7 @@ GameObject:
   - component: {fileID: 3195875300491393709}
   - component: {fileID: 8901841787832844970}
   m_Layer: 6
-  m_Name: PlayerLight
+  m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

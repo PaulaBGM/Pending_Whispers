@@ -1,12 +1,22 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class NPC : MonoBehaviour, IInteractable
 {
-    public DialogueData dialogue;
+    public List<DialogueCondition> dialogues;
 
     public void Interact()
     {
-        DialogueManager.Instance.StartDialogue(dialogue);
+        foreach (var d in dialogues)
+        {
+            if (GameState.Instance.HasAllFlags(d.requiredFlags))
+            {
+                DialogueManager.Instance.StartDialogue(d.dialogue);
+                return;
+            }
+        }
+
+        Debug.Log("No hay dialogo valido");
     }
 
     public Transform GetTransform()

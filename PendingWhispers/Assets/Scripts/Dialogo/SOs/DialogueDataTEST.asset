@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DialogueDataTEST
   m_EditorClassIdentifier: 
   characters:
-  - id: player
+  - id: Lyra
     displayName: Lyra
     sprite: {fileID: 2916416985251425419, guid: 5d81eb40a54230e4ba26665eb0b757d6, type: 3}
     isLeftSide: 1
@@ -23,7 +23,7 @@ MonoBehaviour:
     isLeftSide: 0
   nodes:
   - id: start
-    speakerID: 
+    speakerID: ghost1
     text: "\u2026mmm\u2026 la\u2026 la-la\u2026"
     nextNodeID: 1
     choices:
@@ -38,21 +38,27 @@ MonoBehaviour:
       requiredFlags: []
       endsDialogue: 1
     requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
   - id: 1
-    speakerID: 
+    speakerID: ghost1
     text: "It used to be everything.\nMy voice\u2026 my legacy\u2026I once had it
       all. "
     nextNodeID: 2
     choices: []
     requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
   - id: 2
-    speakerID: 
+    speakerID: Lyra
     text: Do you remember what happened to you?
     nextNodeID: 3
     choices: []
     requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
   - id: 3
-    speakerID: 
+    speakerID: ghost1
     text: Someone... they MURDERED ME! They were jealous of my fame, my wealth, my
       singing prowess...
     nextNodeID: 3
@@ -68,9 +74,15 @@ MonoBehaviour:
       requiredFlags: []
       endsDialogue: 1
     requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
   - id: 4
-    speakerID: 
+    speakerID: ghost1
     text: I would appreciate it, young one, I'll tell you where you should go
     nextNodeID: 
     choices: []
     requiredFlags: []
+    onEnterFlags:
+    - unlocked_case_1
+    onEnterEvents:
+    - {fileID: 11400000, guid: ee5cb3d4be5031e4d81e444a4be87cb4, type: 2}
