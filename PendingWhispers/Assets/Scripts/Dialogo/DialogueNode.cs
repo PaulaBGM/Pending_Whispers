@@ -6,12 +6,14 @@ public class DialogueNode
 {
     public string id;
 
-    public string speaker;
-    [TextArea] public string text;
+    public string speakerID;
 
-    public List<DialogueChoice> choices;
+    [TextArea(3, 6)]
+    public string text;
 
     public string nextNodeID;
+
+    public List<DialogueChoice> choices;
 
     public List<string> requiredFlags;
 }

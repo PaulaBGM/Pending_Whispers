@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections;
 using System.Collections.Generic;
 
 public class DialogueUI : MonoBehaviour
@@ -17,19 +18,90 @@ public class DialogueUI : MonoBehaviour
 
     public Button continueButton;
 
+    [Header("Typewriter")]
+    public float typingSpeed = 0.03f;
+
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip blipSound;
+
+    private Coroutine typingCoroutine;
+    private bool isTyping;
+    private string fullText;
+
     void Awake()
     {
         Instance = this;
         panel.SetActive(false);
     }
 
-    public void ShowDialogue(string speaker, string text)
+    void Update()
+    {
+        if (!panel.activeSelf) return;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (isTyping)
+                SkipTyping();
+        }
+    }
+
+    public void ShowLine(DialogueCharacter character, string speaker, string text)
     {
         panel.SetActive(true);
 
         speakerText.text = speaker;
-        dialogueText.text = text;
 
+        CharacterUIController.Instance.SetCharacter(character);
+
+        StartTyping(text);
+
+        ClearChoices();
+        continueButton.gameObject.SetActive(false);
+    }
+
+    void StartTyping(string text)
+    {
+        if (typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
+
+        typingCoroutine = StartCoroutine(TypeText(text));
+    }
+
+    IEnumerator TypeText(string text)
+    {
+        isTyping = true;
+        fullText = text;
+        dialogueText.text = "";
+
+        foreach (char c in text)
+        {
+            dialogueText.text += c;
+
+            if (blipSound != null && audioSource != null)
+                audioSource.PlayOneShot(blipSound);
+
+            yield return new WaitForSeconds(typingSpeed);
+        }
+
+        isTyping = false;
+
+        ShowContinue();
+    }
+
+    void SkipTyping()
+    {
+        if (typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
+
+        dialogueText.text = fullText;
+        isTyping = false;
+
+        ShowContinue();
+    }
+
+    public void ShowContinue()
+    {
         ClearChoices();
         continueButton.gameObject.SetActive(true);
     }
@@ -56,13 +128,14 @@ public class DialogueUI : MonoBehaviour
     public void Hide()
     {
         panel.SetActive(false);
+        CharacterUIController.Instance.ResetCharacters();
     }
 
     void ClearChoices()
     {
-        foreach (Transform child in choicesContainer)
+        for (int i = choicesContainer.childCount - 1; i >= 0; i--)
         {
-            Destroy(child.gameObject);
+            Destroy(choicesContainer.GetChild(i).gameObject);
         }
     }
 }

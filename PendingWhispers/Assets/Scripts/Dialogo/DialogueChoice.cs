@@ -9,4 +9,6 @@ public class DialogueChoice
 
     public List<string> addFlags;
     public List<string> requiredFlags;
+
+    public bool endsDialogue;
 }

@@ -8,15 +8,41 @@ public class DialogueManager : MonoBehaviour
     private DialogueData currentDialogue;
     private DialogueNode currentNode;
 
+    private PlayerController player;
+
     void Awake()
     {
         Instance = this;
+    }
+
+    void OnEnable()
+    {
+        PlayerController.OnPlayerSpawned += SetPlayer;
+    }
+
+    void OnDisable()
+    {
+        PlayerController.OnPlayerSpawned -= SetPlayer;
+    }
+
+    void Start()
+    {
+        if (player == null)
+            player = FindFirstObjectByType<PlayerController>();
+    }
+
+    void SetPlayer(PlayerController p)
+    {
+        player = p;
     }
 
     public void StartDialogue(DialogueData dialogue)
     {
         currentDialogue = dialogue;
         currentDialogue.Initialize();
+
+        if (player != null)
+            player.canMove = false;
 
         GoToNode("start");
     }
@@ -25,11 +51,7 @@ public class DialogueManager : MonoBehaviour
     {
         DialogueNode node = currentDialogue.GetNode(nodeID);
 
-        if (node == null)
-        {
-            Debug.LogError("Nodo no encontrado: " + nodeID);
-            return;
-        }
+        if (node == null) return;
 
         if (!GameState.Instance.HasAllFlags(node.requiredFlags))
         {
@@ -43,7 +65,11 @@ public class DialogueManager : MonoBehaviour
 
     void ShowNode()
     {
-        DialogueUI.Instance.ShowDialogue(currentNode.speaker, currentNode.text);
+        var character = currentDialogue.GetCharacter(currentNode.speakerID);
+
+        string speakerName = character != null ? character.displayName : "???";
+
+        DialogueUI.Instance.ShowLine(character, speakerName, currentNode.text);
 
         if (currentNode.choices != null && currentNode.choices.Count > 0)
         {
@@ -57,8 +83,14 @@ public class DialogueManager : MonoBehaviour
                 }
             }
 
-            DialogueUI.Instance.ShowChoices(validChoices);
+            if (validChoices.Count > 0)
+            {
+                DialogueUI.Instance.ShowChoices(validChoices);
+                return;
+            }
         }
+
+        DialogueUI.Instance.ShowContinue();
     }
 
     public void ChooseChoice(DialogueChoice choice)
@@ -69,6 +101,12 @@ public class DialogueManager : MonoBehaviour
             {
                 GameState.Instance.AddFlag(flag);
             }
+        }
+
+        if (choice.endsDialogue)
+        {
+            EndDialogue();
+            return;
         }
 
         GoToNode(choice.nextNodeID);
@@ -86,18 +124,11 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void OnContinuePressed()
-    {
-        Next();
-    }
-
-    public void StartDialogueByID(string nodeID)
-    {
-        GoToNode(nodeID);
-    }
-
-    void EndDialogue()
+    public void EndDialogue()
     {
         DialogueUI.Instance.Hide();
+
+        if (player != null)
+            player.canMove = true;
     }
 }
