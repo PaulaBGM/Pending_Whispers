@@ -8,50 +8,42 @@ namespace Inventory.Model
     [CreateAssetMenu]
     public class InventorySO : ScriptableObject
     {
-        [SerializeField]
-        private List<InventoryItem> inventoryItems;
+        [SerializeField] private List<InventoryItem> inventoryItems;
 
-        [field: SerializeField]
-        public int Size { get; private set; } = 10;
+        [field: SerializeField] public int Size { get; private set; } = 10;
 
         public event Action<Dictionary<int, InventoryItem>> OnInventoryUpdated;
+        public event Action<EvidenceLink> OnNewLinkDiscovered;
+
+        [SerializeField] private List<EvidenceLink> possibleLinks = new();
+        private List<EvidenceLink> discoveredLinks = new();
 
         public void Initialize()
         {
             inventoryItems = new List<InventoryItem>();
 
             for (int i = 0; i < Size; i++)
-            {
                 inventoryItems.Add(InventoryItem.GetEmptyItem());
-            }
         }
 
-        public int AddItem(ItemSO item, int quantity, List<ItemParameter> itemState = null)
+        public int AddItem(ItemSO item, int quantity)
         {
-            if (!item.IsStackable)
+            while (quantity > 0 && !IsInventoryFull())
             {
-                while (quantity > 0 && !IsInventoryFull())
-                {
-                    quantity -= AddItemToFirstFreeSlot(item, 1, itemState);
-                }
-
-                InformAboutChange();
-                return quantity;
+                quantity -= AddItemToFirstFreeSlot(item, 1);
             }
 
-            quantity = AddStackableItem(item, quantity);
             InformAboutChange();
             return quantity;
         }
 
-        private int AddItemToFirstFreeSlot(ItemSO item, int quantity, List<ItemParameter> itemState = null)
+        private int AddItemToFirstFreeSlot(ItemSO item, int quantity)
         {
             InventoryItem newItem = new InventoryItem
             {
                 item = item,
                 quantity = quantity,
-                itemState = new List<ItemParameter>(
-                    itemState == null ? item.DefaultParametersList : itemState)
+                itemState = new List<ItemParameter>()
             };
 
             for (int i = 0; i < inventoryItems.Count; i++)
@@ -71,67 +63,13 @@ namespace Inventory.Model
             return !inventoryItems.Any(item => item.IsEmpty);
         }
 
-        private int AddStackableItem(ItemSO item, int quantity)
+        public void RemoveItem(int index)
         {
-            for (int i = 0; i < inventoryItems.Count; i++)
-            {
-                if (inventoryItems[i].IsEmpty)
-                    continue;
-
-                if (inventoryItems[i].item.ID == item.ID)
-                {
-                    int spaceLeft = inventoryItems[i].item.MaxStackSize - inventoryItems[i].quantity;
-
-                    if (quantity > spaceLeft)
-                    {
-                        inventoryItems[i] = inventoryItems[i]
-                            .ChangeQuantity(inventoryItems[i].item.MaxStackSize);
-
-                        quantity -= spaceLeft;
-                    }
-                    else
-                    {
-                        inventoryItems[i] = inventoryItems[i]
-                            .ChangeQuantity(inventoryItems[i].quantity + quantity);
-
-                        return 0;
-                    }
-                }
-            }
-
-            while (quantity > 0 && !IsInventoryFull())
-            {
-                int newAmount = Mathf.Clamp(quantity, 0, item.MaxStackSize);
-                quantity -= newAmount;
-                AddItemToFirstFreeSlot(item, newAmount);
-            }
-
-            return quantity;
-        }
-
-        public void RemoveItem(int itemIndex, int amount)
-        {
-            if (inventoryItems.Count <= itemIndex)
-                return;
-
-            if (inventoryItems[itemIndex].IsEmpty)
-                return;
-
-            int remaining = inventoryItems[itemIndex].quantity - amount;
-
-            if (remaining <= 0)
-                inventoryItems[itemIndex] = InventoryItem.GetEmptyItem();
-            else
-                inventoryItems[itemIndex] = inventoryItems[itemIndex]
-                    .ChangeQuantity(remaining);
-
+            inventoryItems[index] = InventoryItem.GetEmptyItem();
             InformAboutChange();
         }
 
-        public void AddItem(InventoryItem item)
-        {
-            AddItem(item.item, item.quantity);
-        }
+        public InventoryItem GetItemAt(int index) => inventoryItems[index];
 
         public Dictionary<int, InventoryItem> GetCurrentInventoryState()
         {
@@ -146,35 +84,31 @@ namespace Inventory.Model
             return result;
         }
 
-        public InventoryItem GetItemAt(int index)
-        {
-            return inventoryItems[index];
-        }
-
-        public void SwapItems(int indexA, int indexB)
-        {
-            InventoryItem temp = inventoryItems[indexA];
-            inventoryItems[indexA] = inventoryItems[indexB];
-            inventoryItems[indexB] = temp;
-
-            InformAboutChange();
-        }
-
         public List<InventoryItem> GetItemsByType(ItemType type)
         {
-            List<InventoryItem> result = new List<InventoryItem>();
+            return inventoryItems
+                .Where(i => !i.IsEmpty && i.item.ItemType == type)
+                .ToList();
+        }
 
-            foreach (var item in inventoryItems)
+        public void TryLinkItems(ItemSO a, ItemSO b)
+        {
+            foreach (var link in possibleLinks)
             {
-                if (item.IsEmpty) continue;
+                bool match =
+                    (link.ItemA == a && link.ItemB == b) ||
+                    (link.ItemA == b && link.ItemB == a);
 
-                if (item.item != null && item.item.ItemType == type)
+                if (match && !discoveredLinks.Contains(link))
                 {
-                    result.Add(item);
+                    discoveredLinks.Add(link);
+                    Debug.Log("Conclusión: " + link.Conclusion);
+                    OnNewLinkDiscovered?.Invoke(link);
+                    return;
                 }
             }
 
-            return result;
+            Debug.Log("No hay relación");
         }
 
         private void InformAboutChange()
@@ -191,16 +125,6 @@ namespace Inventory.Model
         public List<ItemParameter> itemState;
 
         public bool IsEmpty => item == null;
-
-        public InventoryItem ChangeQuantity(int newQuantity)
-        {
-            return new InventoryItem
-            {
-                item = this.item,
-                quantity = newQuantity,
-                itemState = new List<ItemParameter>(this.itemState)
-            };
-        }
 
         public static InventoryItem GetEmptyItem()
         {

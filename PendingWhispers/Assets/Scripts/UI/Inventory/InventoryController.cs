@@ -2,7 +2,6 @@ using Inventory.Model;
 using Inventory.UI;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 
 namespace Inventory
@@ -11,36 +10,34 @@ namespace Inventory
     {
         [SerializeField] private UIInventoryPage inventoryUI;
         [SerializeField] private InventorySO inventoryData;
-        private Inventory.Model.ItemType currentTab = Inventory.Model.ItemType.Misc;
 
-        public List<InventoryItem> initialItems = new List<InventoryItem>();
+        private int selectedItemIndex = -1;
 
-        //[SerializeField] private AudioClip dropClip;
-        [SerializeField] private AudioSource audioSource;
+        public List<InventoryItem> initialItems = new();
 
         private void Start()
-        {
-            PrepareUI();
-            PrepareInventoryData();
-        }
-
-        private void PrepareInventoryData()
         {
             inventoryData.Initialize();
             inventoryData.OnInventoryUpdated += UpdateInventoryUI;
 
-            foreach (InventoryItem item in initialItems)
+            inventoryUI.InitializeInventoryUI(inventoryData.Size);
+
+            inventoryUI.OnDescriptionRequested += HandleDescriptionRequest;
+            inventoryUI.OnItemActionRequested += HandleItemActionRequest;
+            inventoryUI.OnSwapItems += (a, b) => { };
+
+            foreach (var item in initialItems)
             {
                 if (!item.IsEmpty)
-                    inventoryData.AddItem(item);
+                    inventoryData.AddItem(item.item, item.quantity);
             }
         }
 
-        private void UpdateInventoryUI(Dictionary<int, InventoryItem> inventoryState)
+        private void UpdateInventoryUI(Dictionary<int, InventoryItem> state)
         {
             inventoryUI.ResetAllItems();
 
-            foreach (var item in inventoryState)
+            foreach (var item in state)
             {
                 inventoryUI.UpdateData(item.Key,
                     item.Value.item.ItemImage,
@@ -48,101 +45,10 @@ namespace Inventory
             }
         }
 
-        private void PrepareUI()
-        {
-            inventoryUI.InitializeInventoryUI(inventoryData.Size);
-
-            inventoryUI.OnDescriptionRequested += HandleDescriptionRequest;
-            inventoryUI.OnSwapItems += HandleSwapItems;
-            inventoryUI.OnStartDragging += HandleDragging;
-            inventoryUI.OnItemActionRequested += HandleItemActionRequest;
-            inventoryUI.OnTabChanged += HandleTabChanged;
-        }
-        private void HandleTabChanged(Inventory.Model.ItemType type)
-        {
-            currentTab = type;
-            UpdateInventoryUIFiltered();
-        }
-
-        private void UpdateInventoryUIFiltered()
-        {
-            inventoryUI.ResetAllItems();
-
-            var items = inventoryData.GetItemsByType(currentTab);
-
-            for (int i = 0; i < items.Count; i++)
-            {
-                inventoryUI.UpdateData(i,
-                    items[i].item.ItemImage,
-                    items[i].quantity);
-            }
-        }
-        private void HandleItemActionRequest(int itemIndex)
-        {
-            InventoryItem inventoryItem = inventoryData.GetItemAt(itemIndex);
-            if (inventoryItem.IsEmpty)
-                return;
-
-            inventoryUI.ShowItemAction(itemIndex);
-
-           /* if (inventoryItem.item is IItemAction action)
-            {
-                inventoryUI.AddAction(action.ActionName,
-                    () => PerformAction(itemIndex));
-            }
-
-            if (inventoryItem.item is IDestroyableItem)
-            {
-                inventoryUI.AddAction("Drop",
-                    () => DropItem(itemIndex, inventoryItem.quantity));
-            }*/
-        }
-
-        private void DropItem(int itemIndex, int quantity)
-        {
-            inventoryData.RemoveItem(itemIndex, quantity);
-            inventoryUI.ResetSelection();
-            //audioSource.PlayOneShot(dropClip);
-        }
-
-        public void PerformAction(int itemIndex)
-        {
-            InventoryItem item = inventoryData.GetItemAt(itemIndex);
-            if (item.IsEmpty)
-                return;
-
-           /* if (item.item is IItemAction action)
-            {
-                bool success = action.PerformAction(gameObject, item.itemState);
-
-                if (success && item.item is IDestroyableItem)
-                {
-                    inventoryData.RemoveItem(itemIndex, 1);
-                }
-
-                audioSource.PlayOneShot(action.actionSFX);
-
-                if (inventoryData.GetItemAt(itemIndex).IsEmpty)
-                    inventoryUI.ResetSelection();
-            }*/
-        }
-
-        private void HandleDragging(int itemIndex)
-        {
-            var item = inventoryData.GetItemAt(itemIndex);
-            if (item.IsEmpty)
-                return;
-
-            inventoryUI.CreateDraggedItem(item.item.ItemImage, item.quantity);
-        }
-
-        private void HandleSwapItems(int a, int b)
-        {
-            inventoryData.SwapItems(a, b);
-        }
-
         private void HandleDescriptionRequest(int index)
         {
+            selectedItemIndex = index;
+
             var item = inventoryData.GetItemAt(index);
 
             if (item.IsEmpty)
@@ -154,22 +60,48 @@ namespace Inventory
             inventoryUI.UpdateDescription(index,
                 item.item.ItemImage,
                 item.item.Name,
-                PrepareDescription(item));
+                item.item.Description);
         }
 
-        private string PrepareDescription(InventoryItem item)
+        private void HandleItemActionRequest(int index)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine(item.item.Description);
+            var item = inventoryData.GetItemAt(index);
+            if (item.IsEmpty) return;
 
-            for (int i = 0; i < item.itemState.Count; i++)
+            inventoryUI.ShowItemAction(index);
+
+            inventoryUI.AddAction("Seleccionar", () =>
             {
-                sb.AppendLine(
-                    $"{item.itemState[i].itemParameter.ParameterName}: " +
-                    $"{item.itemState[i].value} / {item.item.DefaultParametersList[i].value}");
-            }
+                selectedItemIndex = index;
+            });
 
-            return sb.ToString();
+            inventoryUI.AddAction("Vincular", () =>
+            {
+                if (selectedItemIndex != -1 && selectedItemIndex != index)
+                {
+                    var a = inventoryData.GetItemAt(selectedItemIndex);
+                    var b = inventoryData.GetItemAt(index);
+
+                    inventoryData.TryLinkItems(a.item, b.item);
+                }
+            });
+
+            inventoryUI.AddAction("Presentar", () =>
+            {
+                Debug.Log("Presentando: " + item.item.Name);
+            });
+
+            if (item.item is SampleItemSO sample)
+            {
+                inventoryUI.AddAction("Analizar", () =>
+                {
+                    if (!sample.IsAnalyzed)
+                    {
+                        sample.IsAnalyzed = true;
+                        Debug.Log(sample.AnalysisResult);
+                    }
+                });
+            }
         }
 
         private void Update()
