@@ -42,9 +42,8 @@ public class MapManager : MonoBehaviour
                     node.SetUnlocked(true);
                 }
 
-                // NEW: desbloquear según GameState
-                if (GameState.Instance.HasFlag("unlocked_case_1") &&
-                    node.data.nodeID == "House1")
+                // NEW: desbloquear segï¿½n GameState
+                if (GameState.Instance.HasFlag("unlocked_case_1") && node.data.nodeID == "House1")
                 {
                     node.SetUnlocked(true);
                 }
@@ -82,7 +81,7 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    // NEW: método llamado por evento
+    // NEW: mï¿½todo llamado por evento
     void UnlockSurface()
     {
         UnlockNode("surface"); // ID del nodo que quieres desbloquear
