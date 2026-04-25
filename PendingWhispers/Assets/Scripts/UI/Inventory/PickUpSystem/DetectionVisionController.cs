@@ -1,15 +1,11 @@
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class DetectionVisionController : MonoBehaviour
 {
-    private List<Item> items = new List<Item>();
-    private bool isActive = false;
+    public static event Action<bool> OnDetectionVisionChanged;
 
-    private void Start()
-    {
-        items.AddRange(FindObjectsByType<Item>(FindObjectsSortMode.None));
-    }
+    private bool isActive = false;
 
     private void Update()
     {
@@ -19,20 +15,9 @@ public class DetectionVisionController : MonoBehaviour
         }
     }
 
-    public void ToggleVision()
+    private void ToggleVision()
     {
         isActive = !isActive;
-
-        foreach (var item in items)
-        {
-            if (item != null)
-                item.SetHighlight(isActive);
-        }
-    }
-
-    public void RegisterItem(Item item)
-    {
-        if (!items.Contains(item))
-            items.Add(item);
+        OnDetectionVisionChanged?.Invoke(isActive);
     }
 }

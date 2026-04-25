@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Collider2D))]
 public class Item : MonoBehaviour
 {
     [field: SerializeField]
@@ -17,7 +18,7 @@ public class Item : MonoBehaviour
     [Header("Highlight Settings")]
     [SerializeField] private Color highlightColor = Color.cyan;
     [SerializeField] private float pulseSpeed = 3f;
-    [SerializeField] private bool requiresDetectionVision = true;
+    [SerializeField] private bool detectable = true;
 
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
@@ -31,12 +32,14 @@ public class Item : MonoBehaviour
 
     private void Start()
     {
-        spriteRenderer.sprite = InventoryItem.ItemImage;
+        if (InventoryItem != null)
+        {
+            spriteRenderer.sprite = InventoryItem.ItemImage;
+        }
     }
 
     private void Update()
     {
-        // efecto pulso
         if (isHighlighted)
         {
             float t = Mathf.PingPong(Time.time * pulseSpeed, 1f);
@@ -46,19 +49,25 @@ public class Item : MonoBehaviour
 
     public void SetHighlight(bool value)
     {
-        if (requiresDetectionVision)
-        {
-            isHighlighted = value;
-        }
-        else
-        {
-            isHighlighted = false;
-        }
+        if (!detectable)
+            return;
+
+        isHighlighted = value;
 
         if (!isHighlighted)
         {
             spriteRenderer.color = originalColor;
         }
+    }
+
+    private void OnEnable()
+    {
+        DetectionVisionController.OnDetectionVisionChanged += SetHighlight;
+    }
+
+    private void OnDisable()
+    {
+        DetectionVisionController.OnDetectionVisionChanged -= SetHighlight;
     }
 
     public void DestroyItem()
@@ -69,7 +78,8 @@ public class Item : MonoBehaviour
 
     private IEnumerator AnimateItemPickup()
     {
-        audioSource.Play();
+        if (audioSource != null)
+            audioSource.Play();
 
         Vector3 startScale = transform.localScale;
         Vector3 endScale = Vector3.zero;
@@ -78,8 +88,7 @@ public class Item : MonoBehaviour
         while (currentTime < duration)
         {
             currentTime += Time.deltaTime;
-            transform.localScale =
-                Vector3.Lerp(startScale, endScale, currentTime / duration);
+            transform.localScale = Vector3.Lerp(startScale, endScale, currentTime / duration);
             yield return null;
         }
 
