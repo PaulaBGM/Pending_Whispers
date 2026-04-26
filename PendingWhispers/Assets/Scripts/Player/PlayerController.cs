@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using Inventory.Model;
 using Inventory.UI;
 
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour
         {
             InputController.Instance.OnClickPressed += HandleClick;
             InputController.Instance.OnInventoryPressed += ToggleInventory;
+            InputController.Instance.OnMapPressed += OpenMap;
         }
     }
 
@@ -54,6 +56,7 @@ public class PlayerController : MonoBehaviour
         {
             InputController.Instance.OnClickPressed -= HandleClick;
             InputController.Instance.OnInventoryPressed -= ToggleInventory;
+            InputController.Instance.OnMapPressed -= OpenMap;
         }
     }
 
@@ -77,14 +80,26 @@ public class PlayerController : MonoBehaviour
 
         if (hit != null)
         {
+            Debug.Log("Hit detectado: " + hit.name);
+
             IInteractable interactable = hit.GetComponent<IInteractable>();
 
             if (interactable != null)
             {
+                Debug.Log("Interactable válido: " + hit.name);
+
                 currentTarget = interactable;
                 target = interactable.GetTransform().position;
                 return;
             }
+            else
+            {
+                Debug.LogWarning("El objeto tiene collider pero NO IInteractable: " + hit.name);
+            }
+        }
+        else
+        {
+            Debug.Log("No se detectó ningún collider en ese punto");
         }
 
         Collider2D groundHit = Physics2D.OverlapPoint(mousePos, groundLayer);
@@ -144,6 +159,8 @@ public class PlayerController : MonoBehaviour
 
         if (distance <= interactDistance)
         {
+            Debug.Log("Interact ejecutado con: " + currentTarget.GetTransform().name);
+
             currentTarget.Interact(this);
             currentTarget = null;
         }
@@ -172,7 +189,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void ToggleInventory()
+    public void ToggleInventory()
     {
         if (inventoryUI == null) return;
 
@@ -186,5 +203,10 @@ public class PlayerController : MonoBehaviour
             inventoryUI.Hide();
             canMove = true;
         }
+    }
+
+    public void OpenMap()
+    {
+        SceneManager.LoadScene("Map");
     }
 }

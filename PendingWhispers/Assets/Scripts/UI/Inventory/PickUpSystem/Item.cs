@@ -30,6 +30,7 @@ public class Item : MonoBehaviour, IInteractable
 
     public void Interact(PlayerController player)
     {
+        Debug.Log("Interact");
         InventorySO inventory = player.Inventory;
 
         int remainder = inventory.AddItem(InventoryItem, Quantity);
