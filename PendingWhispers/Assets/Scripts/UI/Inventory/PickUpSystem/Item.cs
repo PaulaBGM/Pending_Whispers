@@ -20,6 +20,11 @@ public class Item : MonoBehaviour, IInteractable
 
     private Color originalColor;
 
+    // NEW: sistema de evidencia
+    [Header("Evidence")]
+    [SerializeField] private bool isEvidence = false;
+    [SerializeField] private string evidenceID;
+
     private void Awake()
     {
         if (spriteRenderer == null)
@@ -31,12 +36,18 @@ public class Item : MonoBehaviour, IInteractable
     public void Interact(PlayerController player)
     {
         Debug.Log("Interact");
-        InventorySO inventory = player.Inventory;
 
+        InventorySO inventory = player.Inventory;
         int remainder = inventory.AddItem(InventoryItem, Quantity);
 
         if (remainder == 0)
         {
+            // NEW: registrar evidencia
+            if (isEvidence && !string.IsNullOrEmpty(evidenceID))
+            {
+                EvidenceManager.Instance.AddEvidence(evidenceID);
+            }
+
             DestroyItem();
         }
         else

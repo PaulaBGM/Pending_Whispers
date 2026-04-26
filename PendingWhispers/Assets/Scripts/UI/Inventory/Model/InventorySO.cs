@@ -18,6 +18,12 @@ namespace Inventory.Model
         [SerializeField] private List<EvidenceLink> possibleLinks = new();
         private List<EvidenceLink> discoveredLinks = new();
 
+        // NEW
+        [Header("Progression")]
+        [SerializeField] private List<string> requiredClueIDs;
+        [SerializeField] private string completedFlag = "all_clues_collected";
+        private bool progressionCompleted = false;
+
         public void Initialize()
         {
             inventoryItems = new List<InventoryItem>();
@@ -34,6 +40,10 @@ namespace Inventory.Model
             }
 
             InformAboutChange();
+
+            // NEW
+            CheckClueProgression();
+
             return quantity;
         }
 
@@ -110,6 +120,7 @@ namespace Inventory.Model
 
             Debug.Log("No hay relación");
         }
+
         public void SwapItems(int indexA, int indexB)
         {
             if (indexA < 0 || indexA >= inventoryItems.Count) return;
@@ -125,6 +136,38 @@ namespace Inventory.Model
         private void InformAboutChange()
         {
             OnInventoryUpdated?.Invoke(GetCurrentInventoryState());
+        }
+
+        // NEW
+        private void CheckClueProgression()
+        {
+            if (progressionCompleted) return;
+
+            foreach (var requiredID in requiredClueIDs)
+            {
+                bool found = false;
+
+                foreach (var item in inventoryItems)
+                {
+                    if (!item.IsEmpty && item.item is ClueItemSO clue)
+                    {
+                        if (clue.ClueID == requiredID)
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!found)
+                    return;
+            }
+
+            progressionCompleted = true;
+
+            Debug.Log("[Inventory] Todas las pistas recogidas");
+
+            GameState.Instance.AddFlag(completedFlag);
         }
     }
 

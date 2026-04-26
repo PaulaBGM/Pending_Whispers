@@ -12,8 +12,7 @@ public class GameState : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); 
-
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -27,6 +26,8 @@ public class GameState : MonoBehaviour
         {
             flags.Add(id);
             Debug.Log("[GameState] Flag añadida: " + id);
+
+            
         }
     }
 
