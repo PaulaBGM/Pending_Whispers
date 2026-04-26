@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Inventory.Model
 {
     [Serializable]
-    public class EvidenceLink
+    public class EvidenceLink: MonoBehaviour
     {
         public ItemSO ItemA;
         public ItemSO ItemB;

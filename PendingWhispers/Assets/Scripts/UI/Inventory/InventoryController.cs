@@ -11,45 +11,98 @@ namespace Inventory
         [SerializeField] private UIInventoryPage inventoryUI;
         [SerializeField] private InventorySO inventoryData;
 
-        private int selectedItemIndex = -1;
+        private ItemType currentTab = ItemType.Clue;
 
-        public List<InventoryItem> initialItems = new();
+        private List<int> filteredIndices = new();
 
         private void Start()
         {
-            inventoryData.Initialize();
-            inventoryData.OnInventoryUpdated += UpdateInventoryUI;
+            PrepareUI();
+            PrepareInventoryData();
+        }
 
+        private void PrepareInventoryData()
+        {
+            inventoryData.Initialize();
+            inventoryData.OnInventoryUpdated += UpdateInventoryUIFiltered;
+        }
+
+        private void PrepareUI()
+        {
             inventoryUI.InitializeInventoryUI(inventoryData.Size);
 
             inventoryUI.OnDescriptionRequested += HandleDescriptionRequest;
+            inventoryUI.OnSwapItems += HandleSwapItems;
+            inventoryUI.OnStartDragging += HandleDragging;
             inventoryUI.OnItemActionRequested += HandleItemActionRequest;
-            inventoryUI.OnSwapItems += (a, b) => { };
+            inventoryUI.OnTabChanged += HandleTabChanged;
+        }
 
-            foreach (var item in initialItems)
+        private void HandleTabChanged(ItemType type)
+        {
+            currentTab = type;
+            UpdateInventoryUIFiltered(inventoryData.GetCurrentInventoryState());
+        }
+
+        private void UpdateInventoryUIFiltered(Dictionary<int, InventoryItem> inventoryState)
+        {
+            inventoryUI.ResetAllItems();
+            filteredIndices.Clear();
+
+            int uiIndex = 0;
+
+            foreach (var kvp in inventoryState)
             {
-                if (!item.IsEmpty)
-                    inventoryData.AddItem(item.item, item.quantity);
+                if (kvp.Value.item.ItemType == currentTab)
+                {
+                    filteredIndices.Add(kvp.Key);
+
+                    inventoryUI.UpdateData(
+                        uiIndex,
+                        kvp.Value.item.ItemImage,
+                        kvp.Value.quantity
+                    );
+
+                    uiIndex++;
+                }
             }
         }
 
-        private void UpdateInventoryUI(Dictionary<int, InventoryItem> state)
+        private InventoryItem GetItemByFilteredIndex(int index)
         {
-            inventoryUI.ResetAllItems();
+            if (index < 0 || index >= filteredIndices.Count)
+                return InventoryItem.GetEmptyItem();
 
-            foreach (var item in state)
-            {
-                inventoryUI.UpdateData(item.Key,
-                    item.Value.item.ItemImage,
-                    item.Value.quantity);
-            }
+            return inventoryData.GetItemAt(filteredIndices[index]);
+        }
+
+        private void HandleItemActionRequest(int index)
+        {
+            var item = GetItemByFilteredIndex(index);
+            if (item.IsEmpty) return;
+
+            inventoryUI.ShowItemAction(index);
+        }
+
+        private void HandleDragging(int index)
+        {
+            var item = GetItemByFilteredIndex(index);
+            if (item.IsEmpty) return;
+
+            inventoryUI.CreateDraggedItem(item.item.ItemImage, item.quantity);
+        }
+
+        private void HandleSwapItems(int a, int b)
+        {
+            if (a < 0 || b < 0) return;
+            if (a >= filteredIndices.Count || b >= filteredIndices.Count) return;
+
+            inventoryData.SwapItems(filteredIndices[a], filteredIndices[b]);
         }
 
         private void HandleDescriptionRequest(int index)
         {
-            selectedItemIndex = index;
-
-            var item = inventoryData.GetItemAt(index);
+            var item = GetItemByFilteredIndex(index);
 
             if (item.IsEmpty)
             {
@@ -57,67 +110,12 @@ namespace Inventory
                 return;
             }
 
-            inventoryUI.UpdateDescription(index,
+            inventoryUI.UpdateDescription(
+                index,
                 item.item.ItemImage,
                 item.item.Name,
-                item.item.Description);
-        }
-
-        private void HandleItemActionRequest(int index)
-        {
-            var item = inventoryData.GetItemAt(index);
-            if (item.IsEmpty) return;
-
-            inventoryUI.ShowItemAction(index);
-
-            inventoryUI.AddAction("Seleccionar", () =>
-            {
-                selectedItemIndex = index;
-            });
-
-            inventoryUI.AddAction("Vincular", () =>
-            {
-                if (selectedItemIndex != -1 && selectedItemIndex != index)
-                {
-                    var a = inventoryData.GetItemAt(selectedItemIndex);
-                    var b = inventoryData.GetItemAt(index);
-
-                    inventoryData.TryLinkItems(a.item, b.item);
-                }
-            });
-
-            inventoryUI.AddAction("Presentar", () =>
-            {
-                Debug.Log("Presentando: " + item.item.Name);
-            });
-
-            if (item.item is SampleItemSO sample)
-            {
-                inventoryUI.AddAction("Analizar", () =>
-                {
-                    if (!sample.IsAnalyzed)
-                    {
-                        sample.IsAnalyzed = true;
-                        Debug.Log(sample.AnalysisResult);
-                    }
-                });
-            }
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Tab))
-            {
-                if (!inventoryUI.isActiveAndEnabled)
-                {
-                    inventoryUI.Show();
-                    UpdateInventoryUI(inventoryData.GetCurrentInventoryState());
-                }
-                else
-                {
-                    inventoryUI.Hide();
-                }
-            }
+                item.item.Description
+            );
         }
     }
 }

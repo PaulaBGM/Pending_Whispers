@@ -110,6 +110,17 @@ namespace Inventory.Model
 
             Debug.Log("No hay relación");
         }
+        public void SwapItems(int indexA, int indexB)
+        {
+            if (indexA < 0 || indexA >= inventoryItems.Count) return;
+            if (indexB < 0 || indexB >= inventoryItems.Count) return;
+
+            InventoryItem temp = inventoryItems[indexA];
+            inventoryItems[indexA] = inventoryItems[indexB];
+            inventoryItems[indexB] = temp;
+
+            InformAboutChange();
+        }
 
         private void InformAboutChange()
         {

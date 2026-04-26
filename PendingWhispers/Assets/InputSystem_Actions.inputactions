@@ -37,7 +37,7 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "852140f2-7766-474d-8707-702459ba45f3",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "Hold",
                     "initialStateCheck": false
@@ -600,7 +600,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Inventary",
+                    "name": "Inventory",
                     "type": "Button",
                     "id": "ac0f7dd3-c008-4a3a-8938-b630ec761d4b",
                     "expectedControlType": "",
@@ -612,6 +612,15 @@
                     "name": "Map",
                     "type": "Button",
                     "id": "a96808f4-5ac7-4a0a-9b06-463e3559be40",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Detection",
+                    "type": "Button",
+                    "id": "3340c4a9-c3e4-44a5-adce-036cbe833e91",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -1066,7 +1075,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Inventary",
+                    "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -1089,6 +1098,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Map",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bed2ee49-dedf-4698-b3da-b83f3d576bd4",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Detection",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

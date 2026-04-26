@@ -12,7 +12,8 @@ namespace Inventory.UI
         [SerializeField] private MouseFollower mouseFollower;
         [SerializeField] private ItemActionPanel actionPanel;
 
-        //[SerializeField] private List<InventoryTab> tabs;
+        [Header("Tabs")]
+        [SerializeField] private List<InventoryTab> tabs;
 
         private List<UIInventoryItem> listOfUIItems = new();
         private int currentlyDraggedItemIndex = -1;
@@ -31,10 +32,10 @@ namespace Inventory.UI
             mouseFollower.Toggle(false);
             itemDescription.ResetDescription();
 
-            /*foreach (var tab in tabs)
+            foreach (var tab in tabs)
             {
                 tab.OnTabSelected += HandleTabChanged;
-            }*/
+            }
         }
 
         private void HandleTabChanged(Inventory.Model.ItemType type)

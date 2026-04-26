@@ -10,6 +10,7 @@ public class InputController : MonoBehaviour
     public event Action OnSubmitPressed;
     public event Action OnClickPressed;
     public event Action OnMapPressed;
+    public event Action OnInventoryPressed;
 
     private PlayerInput playerInput;
 
@@ -33,7 +34,7 @@ public class InputController : MonoBehaviour
         playerInput.actions["Submit"].performed += SubmitPerformed;
         playerInput.actions["Click"].performed += ClickPerformed;
         playerInput.actions["Map"].performed += MapPerformed;
-
+        playerInput.actions["Inventory"].performed += InventoryPerformed;
     }
 
     private void OnDisable()
@@ -42,25 +43,31 @@ public class InputController : MonoBehaviour
         playerInput.actions["Submit"].performed -= SubmitPerformed;
         playerInput.actions["Click"].performed -= ClickPerformed;
         playerInput.actions["Map"].performed -= MapPerformed;
-
+        playerInput.actions["Inventory"].performed -= InventoryPerformed;
     }
 
     private void ClickPerformed(InputAction.CallbackContext context)
     {
         OnClickPressed?.Invoke();
     }
-    
-    private void SubmitPerformed(UnityEngine.InputSystem.InputAction.CallbackContext context)
+
+    private void SubmitPerformed(InputAction.CallbackContext context)
     {
-        OnSubmitPressed?.Invoke(); 
+        OnSubmitPressed?.Invoke();
     }
-    
+
     private void PausePerformed(InputAction.CallbackContext context)
     {
         OnPausePressed?.Invoke();
     }
+
     private void MapPerformed(InputAction.CallbackContext context)
     {
         OnMapPressed?.Invoke();
+    }
+
+    private void InventoryPerformed(InputAction.CallbackContext context)
+    {
+        OnInventoryPressed?.Invoke();
     }
 }

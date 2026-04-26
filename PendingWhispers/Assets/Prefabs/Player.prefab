@@ -306,7 +306,6 @@ GameObject:
   - component: {fileID: 5413773589255806077}
   - component: {fileID: 6463203322692211007}
   - component: {fileID: 8639218973566802263}
-  - component: {fileID: 5641112704662922125}
   - component: {fileID: 6545522646693574196}
   - component: {fileID: 8056166827056177147}
   m_Layer: 0
@@ -393,23 +392,11 @@ MonoBehaviour:
   collisionLayer:
     serializedVersion: 2
     m_Bits: 128
-  collisionCheckDistance: 0.1
+  inventoryData: {fileID: 11400000, guid: 198522ccd6bf5274b84a98dffd61ef5b, type: 2}
+  inventoryUI: {fileID: 0}
   speed: 3.5
   interactDistance: 2
   canMove: 1
---- !u!114 &5641112704662922125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5165606389610773166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dda0155238823a441be73dcf0cae1166, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryData: {fileID: 11400000, guid: 198522ccd6bf5274b84a98dffd61ef5b, type: 2}
 --- !u!114 &6545522646693574196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,8 +411,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryUI: {fileID: 0}
   inventoryData: {fileID: 11400000, guid: 198522ccd6bf5274b84a98dffd61ef5b, type: 2}
-  initialItems: []
-  audioSource: {fileID: 8056166827056177147}
 --- !u!82 &8056166827056177147
 AudioSource:
   m_ObjectHideFlags: 0

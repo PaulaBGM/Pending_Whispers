@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Inventory.Model;
+using Inventory.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask collisionLayer;
 
     [SerializeField] private InventorySO inventoryData;
+    [SerializeField] private UIInventoryPage inventoryUI;
 
     private Vector2 target;
     private Animator animator;
@@ -40,13 +42,19 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         if (InputController.Instance != null)
+        {
             InputController.Instance.OnClickPressed += HandleClick;
+            InputController.Instance.OnInventoryPressed += ToggleInventory;
+        }
     }
 
     private void OnDisable()
     {
         if (InputController.Instance != null)
+        {
             InputController.Instance.OnClickPressed -= HandleClick;
+            InputController.Instance.OnInventoryPressed -= ToggleInventory;
+        }
     }
 
     void Update()
@@ -161,6 +169,22 @@ public class PlayerController : MonoBehaviour
                 newItem.SetHighlight(true);
 
             hoveredInteractable = newHover;
+        }
+    }
+
+    void ToggleInventory()
+    {
+        if (inventoryUI == null) return;
+
+        if (!inventoryUI.isActiveAndEnabled)
+        {
+            inventoryUI.Show();
+            canMove = false;
+        }
+        else
+        {
+            inventoryUI.Hide();
+            canMove = true;
         }
     }
 }
