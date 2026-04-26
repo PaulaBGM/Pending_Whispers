@@ -5473,6 +5473,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 254654287}
     m_Modifications:
+    - target: {fileID: 92115458625513358, guid: feb6d2a6617004e4cb711c45f116c3dd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2135614960}
+    - target: {fileID: 357413059153999671, guid: feb6d2a6617004e4cb711c45f116c3dd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2135614960}
     - target: {fileID: 583088370469931561, guid: feb6d2a6617004e4cb711c45f116c3dd, type: 3}
       propertyPath: m_Name
       value: HUD
