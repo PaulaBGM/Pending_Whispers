@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class Item : MonoBehaviour
+public class Item : MonoBehaviour, IInteractable
 {
     [field: SerializeField]
     public ItemSO InventoryItem { get; private set; }
@@ -14,59 +14,44 @@ public class Item : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private float duration = 0.3f;
 
-    [Header("Highlight Settings")]
+    [Header("Highlight")]
+    [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Color highlightColor = Color.cyan;
-    [SerializeField] private float pulseSpeed = 3f;
-    [SerializeField] private bool detectable = true;
 
-    private SpriteRenderer spriteRenderer;
     private Color originalColor;
-    private bool isHighlighted = false;
 
     private void Awake()
     {
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        if (spriteRenderer == null)
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
         originalColor = spriteRenderer.color;
     }
 
-    private void Start()
+    public void Interact(PlayerController player)
     {
-        if (InventoryItem != null)
+        InventorySO inventory = player.Inventory;
+
+        int remainder = inventory.AddItem(InventoryItem, Quantity);
+
+        if (remainder == 0)
         {
-            spriteRenderer.sprite = InventoryItem.ItemImage;
+            DestroyItem();
+        }
+        else
+        {
+            Quantity = remainder;
         }
     }
 
-    private void Update()
+    public Transform GetTransform()
     {
-        if (isHighlighted)
-        {
-            float t = Mathf.PingPong(Time.time * pulseSpeed, 1f);
-            spriteRenderer.color = Color.Lerp(originalColor, highlightColor, t);
-        }
+        return transform;
     }
 
     public void SetHighlight(bool value)
     {
-        if (!detectable)
-            return;
-
-        isHighlighted = value;
-
-        if (!isHighlighted)
-        {
-            spriteRenderer.color = originalColor;
-        }
-    }
-
-    private void OnEnable()
-    {
-        DetectionVisionController.OnDetectionVisionChanged += SetHighlight;
-    }
-
-    private void OnDisable()
-    {
-        DetectionVisionController.OnDetectionVisionChanged -= SetHighlight;
+        spriteRenderer.color = value ? highlightColor : originalColor;
     }
 
     public void DestroyItem()
@@ -82,12 +67,12 @@ public class Item : MonoBehaviour
 
         Vector3 startScale = transform.localScale;
         Vector3 endScale = Vector3.zero;
-        float currentTime = 0;
+        float t = 0;
 
-        while (currentTime < duration)
+        while (t < duration)
         {
-            currentTime += Time.deltaTime;
-            transform.localScale = Vector3.Lerp(startScale, endScale, currentTime / duration);
+            t += Time.deltaTime;
+            transform.localScale = Vector3.Lerp(startScale, endScale, t / duration);
             yield return null;
         }
 

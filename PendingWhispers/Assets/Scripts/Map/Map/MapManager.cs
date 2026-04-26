@@ -10,6 +10,7 @@ public class MapManager : MonoBehaviour
     public PlayerIcon player;
 
     private MapNode currentNode;
+    private string node;
 
     private void Awake()
     {
@@ -42,7 +43,6 @@ public class MapManager : MonoBehaviour
                     node.SetUnlocked(true);
                 }
 
-                // NEW: desbloquear seg�n GameState
                 if (GameState.Instance.HasFlag("unlocked_case_1") && node.data.nodeID == "House1")
                 {
                     node.SetUnlocked(true);
@@ -57,7 +57,7 @@ public class MapManager : MonoBehaviour
 
         currentNode = node;
 
-        MapUI.Instance.UpdateTitle(node.GetName());
+        MapUI.Instance.UpdateTitle(node.GetName(), node.GetDescription());
 
         player.MoveTo(node.transform.position);
 
@@ -81,9 +81,8 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    // NEW: m�todo llamado por evento
     void UnlockSurface()
     {
-        UnlockNode("surface"); // ID del nodo que quieres desbloquear
+        UnlockNode("node"); 
     }
 }

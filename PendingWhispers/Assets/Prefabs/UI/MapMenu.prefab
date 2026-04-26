@@ -177,8 +177,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 593, y: -286}
-  m_SizeDelta: {x: 200, y: 60}
+  m_AnchoredPosition: {x: 596, y: -249.4}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8581742946025902210
 CanvasRenderer:
@@ -201,15 +201,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 2498919099969064102, guid: f3c8ebe87e6946a4b838a1a36c7203e2, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -280,8 +280,8 @@ MonoBehaviour:
   button: {fileID: 174368173154826402}
   icon: {fileID: 1587151763675949072}
   lockedColor: {r: 0, g: 0, b: 0, a: 0.48235294}
-  unlockedColor: {r: 0.4575472, g: 0.8276915, b: 1, a: 1}
-  completedColor: {r: 0.28025985, g: 0.8867924, b: 0.28384873, a: 1}
+  unlockedColor: {r: 1, g: 1, b: 1, a: 1}
+  completedColor: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
 --- !u!1 &2847955977487687474
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,7 +372,7 @@ GameObject:
   - component: {fileID: 4297888863439100054}
   - component: {fileID: 2647273950266461979}
   m_Layer: 5
-  m_Name: House
+  m_Name: HouseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -395,8 +395,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -542, y: 144}
-  m_SizeDelta: {x: 200, y: 60}
+  m_AnchoredPosition: {x: -482.3, y: 163.6}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2061214215385223782
 CanvasRenderer:
@@ -419,15 +419,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 2498919099969064102, guid: f3c8ebe87e6946a4b838a1a36c7203e2, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -498,8 +498,8 @@ MonoBehaviour:
   button: {fileID: 4297888863439100054}
   icon: {fileID: 4390295600257508320}
   lockedColor: {r: 0, g: 0, b: 0, a: 0}
-  unlockedColor: {r: 0.02352941, g: 1, b: 0.9796199, a: 0.64705884}
-  completedColor: {r: 0.5794824, g: 1, b: 0.4764151, a: 0.70980394}
+  unlockedColor: {r: 1, g: 1, b: 1, a: 0.64705884}
+  completedColor: {r: 0.43529412, g: 0.43529412, b: 0.43529412, a: 0.70980394}
 --- !u!1 &3538131727020299475
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,7 +517,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5768326603553362204
 RectTransform:
   m_ObjectHideFlags: 0
@@ -640,7 +640,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HOUSE
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -914,7 +914,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CATACOMBS
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1196,7 +1196,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 597, y: -200}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3530046805992340026
 CanvasRenderer:
@@ -1226,7 +1226,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2584001490668644031, guid: fc592bff725dedf45a35764675a6d9b2, type: 3}
+  m_Sprite: {fileID: 4971762838951690121, guid: c0d41efe52f20a244934f48ee1b487af, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1284,8 +1284,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 411, y: -151}
-  m_SizeDelta: {x: 700, y: 200}
+  m_AnchoredPosition: {x: 303.8733, y: -107.91638}
+  m_SizeDelta: {x: 485.7466, y: 113.8328}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4369566179538899827
 CanvasRenderer:

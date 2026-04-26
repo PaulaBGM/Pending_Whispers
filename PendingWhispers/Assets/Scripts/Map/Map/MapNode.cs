@@ -33,6 +33,10 @@ public class MapNode : MonoBehaviour
     {
         return data.displayName;
     }
+    public string GetDescription()
+    {
+        return data.description;
+    }
 
     public string GetScene()
     {
