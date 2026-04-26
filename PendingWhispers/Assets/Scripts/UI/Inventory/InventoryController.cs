@@ -12,7 +12,6 @@ namespace Inventory
         [SerializeField] private InventorySO inventoryData;
 
         private ItemType currentTab = ItemType.Clue;
-
         private List<int> filteredIndices = new();
 
         private void Start()
@@ -25,6 +24,12 @@ namespace Inventory
         {
             inventoryData.Initialize();
             inventoryData.OnInventoryUpdated += UpdateInventoryUIFiltered;
+        }
+
+        private void OnDestroy()
+        {
+            if (inventoryData != null)
+                inventoryData.OnInventoryUpdated -= UpdateInventoryUIFiltered;
         }
 
         private void PrepareUI()
@@ -46,6 +51,9 @@ namespace Inventory
 
         private void UpdateInventoryUIFiltered(Dictionary<int, InventoryItem> inventoryState)
         {
+            if (inventoryUI == null || !inventoryUI.gameObject.activeInHierarchy)
+                return;
+
             inventoryUI.ResetAllItems();
             filteredIndices.Clear();
 

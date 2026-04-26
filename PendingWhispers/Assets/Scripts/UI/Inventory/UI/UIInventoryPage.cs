@@ -62,8 +62,12 @@ namespace Inventory.UI
 
         public void ResetAllItems()
         {
+            listOfUIItems.RemoveAll(item => item == null);
+
             foreach (var item in listOfUIItems)
             {
+                if (item == null) continue;
+
                 item.ResetData();
                 item.Deselect();
             }

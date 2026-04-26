@@ -1,9 +1,7 @@
 using UnityEngine;
-using System.Collections.Generic;
-using System.Collections;
+using System;
 using TMPro;
 using UnityEngine.UI;
-using System;
 using UnityEngine.EventSystems;
 
 namespace Inventory.UI
@@ -16,43 +14,54 @@ namespace Inventory.UI
 
         public event Action<UIInventoryItem> OnItemClicked, OnItemDroppedOn,
             OnRightMouseBtnClick, OnItemBeginDrag, OnItemEndDrag;
+
         public bool empty = true;
+
         public void Awake()
         {
             ResetData();
             Deselect();
         }
+
         public void ResetData()
         {
+            if (itemImage == null) return;
+
             itemImage.gameObject.SetActive(false);
             empty = true;
         }
+
         public void Deselect()
         {
-            borderImage.enabled = false;
+            if (borderImage != null)
+                borderImage.enabled = false;
         }
+
         public void SetData(Sprite sprite, int quantity)
         {
+            if (itemImage == null) return;
+
             itemImage.gameObject.SetActive(true);
             itemImage.sprite = sprite;
-            quantityTxt.text = quantity.ToString();
+
+            if (quantityTxt != null)
+                quantityTxt.text = quantity.ToString();
+
             empty = false;
         }
+
         public void Select()
         {
-            borderImage.enabled = true;
+            if (borderImage != null)
+                borderImage.enabled = true;
         }
 
         public void OnPointerClick(PointerEventData pointerData)
         {
             if (pointerData.button == PointerEventData.InputButton.Right)
-            {
                 OnRightMouseBtnClick?.Invoke(this);
-            }
             else
-            {
                 OnItemClicked?.Invoke(this);
-            }
         }
 
         public void OnDrop(PointerEventData eventData)
@@ -70,8 +79,6 @@ namespace Inventory.UI
             OnItemEndDrag?.Invoke(this);
         }
 
-        public void OnDrag(PointerEventData eventData)
-        {
-        }
+        public void OnDrag(PointerEventData eventData) { }
     }
 }
