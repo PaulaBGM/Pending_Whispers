@@ -1,17 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Inventory.Model;
 
 public class EvidenceManager : MonoBehaviour
 {
     public static EvidenceManager Instance;
 
-    private HashSet<string> collectedEvidence = new HashSet<string>();
-
     [Header("Config")]
-    public List<string> requiredEvidence;
+    public List<ItemSO> requiredItems;
     public string completedFlag = "all_evidence_collected";
 
-    private bool completed = false; // NEW (evita repetir flag)
+    private bool completed = false;
 
     void Awake()
     {
@@ -19,6 +18,7 @@ public class EvidenceManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            Debug.Log("[Evidence] Inicializado");
         }
         else
         {
@@ -26,36 +26,51 @@ public class EvidenceManager : MonoBehaviour
         }
     }
 
-    public void AddEvidence(string id)
+    public void CheckCompletion()
     {
-        if (collectedEvidence.Contains(id)) return;
+        Debug.Log("[Evidence] CheckCompletion llamado");
 
-        collectedEvidence.Add(id);
-        Debug.Log("[Evidence] Recogido: " + id);
-
-        CheckCompletion();
-    }
-
-    void CheckCompletion()
-    {
-        if (completed) return; // NEW
-
-        foreach (var req in requiredEvidence)
+        if (completed)
         {
-            if (!collectedEvidence.Contains(req))
-                return;
+            Debug.Log("[Evidence] Ya completado");
+            return;
         }
 
-        completed = true; // NEW
+        if (InventoryRuntime.Instance == null)
+        {
+            Debug.LogError("[Evidence] InventoryRuntime NULL");
+            return;
+        }
 
-        Debug.Log("[Evidence] Todas las pruebas recogidas");
+        var inventory = InventoryRuntime.Instance.GetInventory();
+        var items = inventory.GetCurrentInventoryState();
 
-        GameState.Instance.AddFlag(completedFlag); 
-    }
+        Debug.Log("[Evidence] Items actuales: " + items.Count);
 
-    // NEW: útil para debug o UI
-    public bool HasEvidence(string id)
-    {
-        return collectedEvidence.Contains(id);
+        foreach (var required in requiredItems)
+        {
+            bool found = false;
+
+            foreach (var kvp in items)
+            {
+                if (kvp.Value.item == required)
+                {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                Debug.Log("[Evidence] Falta: " + required.name);
+                return;
+            }
+        }
+
+        completed = true;
+
+        Debug.Log("[Evidence] TODAS LAS PRUEBAS COMPLETADAS");
+
+        GameState.Instance.AddFlag(completedFlag);
     }
 }

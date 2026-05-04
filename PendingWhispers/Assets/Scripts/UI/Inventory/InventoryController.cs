@@ -1,6 +1,5 @@
 using Inventory.Model;
 using Inventory.UI;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,21 +7,44 @@ namespace Inventory
 {
     public class InventoryController : MonoBehaviour
     {
+        public static InventoryController Instance { get; private set; }
+
         [SerializeField] private UIInventoryPage inventoryUI;
-        [SerializeField] private InventorySO inventoryData;
+
+        private InventorySO inventoryData;
 
         private ItemType currentTab = ItemType.Clue;
         private List<int> filteredIndices = new();
 
+        private void Awake()
+        {
+            Instance = this;
+
+            PrepareInventoryData(); 
+            PrepareUI();           
+        }
+
         private void Start()
         {
-            PrepareUI();
-            PrepareInventoryData();
+            RefreshUI(); 
         }
 
         private void PrepareInventoryData()
         {
-            inventoryData.Initialize();
+            if (InventoryRuntime.Instance == null)
+            {
+                Debug.LogError("InventoryRuntime no existe");
+                return;
+            }
+
+            inventoryData = InventoryRuntime.Instance.GetInventory();
+
+            if (inventoryData == null)
+            {
+                Debug.LogError("InventorySO no asignado");
+                return;
+            }
+
             inventoryData.OnInventoryUpdated += UpdateInventoryUIFiltered;
         }
 
@@ -34,6 +56,12 @@ namespace Inventory
 
         private void PrepareUI()
         {
+            if (inventoryUI == null)
+            {
+                Debug.LogError("inventoryUI no asignado");
+                return;
+            }
+
             inventoryUI.InitializeInventoryUI(inventoryData.Size);
 
             inventoryUI.OnDescriptionRequested += HandleDescriptionRequest;
@@ -43,16 +71,22 @@ namespace Inventory
             inventoryUI.OnTabChanged += HandleTabChanged;
         }
 
+        public void RefreshUI()
+        {
+            if (inventoryData == null) return;
+
+            UpdateInventoryUIFiltered(inventoryData.GetCurrentInventoryState());
+        }
+
         private void HandleTabChanged(ItemType type)
         {
             currentTab = type;
-            UpdateInventoryUIFiltered(inventoryData.GetCurrentInventoryState());
+            RefreshUI();
         }
 
         private void UpdateInventoryUIFiltered(Dictionary<int, InventoryItem> inventoryState)
         {
-            if (inventoryUI == null || !inventoryUI.gameObject.activeInHierarchy)
-                return;
+            if (inventoryUI == null) return;
 
             inventoryUI.ResetAllItems();
             filteredIndices.Clear();

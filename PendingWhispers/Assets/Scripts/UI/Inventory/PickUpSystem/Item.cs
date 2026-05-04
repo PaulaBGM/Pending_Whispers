@@ -20,13 +20,18 @@ public class Item : MonoBehaviour, IInteractable
 
     private Color originalColor;
 
-    // NEW: sistema de evidencia
-    [Header("Evidence")]
-    [SerializeField] private bool isEvidence = false;
-    [SerializeField] private string evidenceID;
+    [Header("Persistence")]
+    [SerializeField] private string uniqueID;
 
     private void Awake()
     {
+        if (!string.IsNullOrEmpty(uniqueID) && GameState.Instance.HasFlag("item_" + uniqueID))
+        {
+            Debug.Log("[Item] Ya recogido, destruyendo: " + uniqueID);
+            Destroy(gameObject);
+            return;
+        }
+
         if (spriteRenderer == null)
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
@@ -35,23 +40,24 @@ public class Item : MonoBehaviour, IInteractable
 
     public void Interact(PlayerController player)
     {
-        Debug.Log("Interact");
+        Debug.Log("[Item] Recogiendo: " + InventoryItem.name);
 
         InventorySO inventory = player.Inventory;
         int remainder = inventory.AddItem(InventoryItem, Quantity);
 
         if (remainder == 0)
         {
-            // NEW: registrar evidencia
-            if (isEvidence && !string.IsNullOrEmpty(evidenceID))
+            if (!string.IsNullOrEmpty(uniqueID))
             {
-                EvidenceManager.Instance.AddEvidence(evidenceID);
+                Debug.Log("[Item] Guardando persistencia: " + uniqueID);
+                GameState.Instance.AddFlag("item_" + uniqueID);
             }
 
             DestroyItem();
         }
         else
         {
+            Debug.LogWarning("[Item] No se pudo recoger completamente");
             Quantity = remainder;
         }
     }

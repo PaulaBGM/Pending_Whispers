@@ -21,7 +21,6 @@ public class EventManager : MonoBehaviour
             eventDictionary[eventID] += action;
     }
 
-    // NEW
     public void Unsubscribe(string eventID, Action action)
     {
         if (eventDictionary.ContainsKey(eventID))

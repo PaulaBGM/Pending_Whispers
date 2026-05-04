@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3353434903730006818}
   - component: {fileID: 3548887441602882710}
+  - component: {fileID: 8611742373380025930}
   m_Layer: 0
   m_Name: GameState
   m_TagString: Untagged
@@ -44,3 +45,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de91c2dfedf814f4fbc8fdb0f7f9f93b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8611742373380025930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780707610841976917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ed67e85d7b773f499fff76c2574c634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requiredItems:
+  - {fileID: 11400000, guid: 628bfc80ed75e2545a80669a56ba5dca, type: 2}
+  - {fileID: 11400000, guid: e49abcc183c13c445bfc9d5a5faf44f0, type: 2}
+  - {fileID: 11400000, guid: 595d5f8fa8c75534383b81fc8b6040f4, type: 2}
+  - {fileID: 11400000, guid: f3e78da910b13d14a8c4224ed28823c3, type: 2}
+  - {fileID: 11400000, guid: ca30fc7c17d189c4d89c473fb3b18292, type: 2}
+  completedFlag: all_evidence_collected

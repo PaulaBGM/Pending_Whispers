@@ -19,5 +19,5 @@ public class DialogueNode
 
     public List<string> onEnterFlags;
 
-    public List<GameEvent> onEnterEvents;
+    public List<GameEventSO> onEnterEvents;
 }

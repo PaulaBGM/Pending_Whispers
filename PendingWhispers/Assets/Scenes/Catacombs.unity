@@ -1680,6 +1680,7 @@ GameObject:
   m_Component:
   - component: {fileID: 287727908}
   - component: {fileID: 287727907}
+  - component: {fileID: 287727909}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -1714,6 +1715,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 254654287}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &287727909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287727905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58a50cb5c6dfde9478182835bbc440e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 11400000, guid: 198522ccd6bf5274b84a98dffd61ef5b, type: 2}
 --- !u!114 &328073608 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 954612764895480943, guid: 9ab95b0c38445b6419521b1c23e29a88, type: 3}
@@ -4621,31 +4635,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 780707610841976917, guid: 0e521717551cc2546a3fe7f0af399284, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1322068519}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e521717551cc2546a3fe7f0af399284, type: 3}
---- !u!1 &1322068518 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 780707610841976917, guid: 0e521717551cc2546a3fe7f0af399284, type: 3}
-  m_PrefabInstance: {fileID: 1322068517}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1322068519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1322068518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ed67e85d7b773f499fff76c2574c634, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  requiredEvidence:
-  - 
-  completedFlag: all_clues_case_1
 --- !u!1 &1346930522
 GameObject:
   m_ObjectHideFlags: 0
@@ -5520,6 +5511,10 @@ PrefabInstance:
     - target: {fileID: 583088370469931561, guid: feb6d2a6617004e4cb711c45f116c3dd, type: 3}
       propertyPath: m_Name
       value: HUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 583088370469931561, guid: feb6d2a6617004e4cb711c45f116c3dd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5220706100779632446, guid: feb6d2a6617004e4cb711c45f116c3dd, type: 3}
       propertyPath: m_Pivot.x

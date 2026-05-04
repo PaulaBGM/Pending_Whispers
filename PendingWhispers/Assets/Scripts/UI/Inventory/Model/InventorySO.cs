@@ -136,6 +136,18 @@ namespace Inventory.Model
         private void InformAboutChange()
         {
             OnInventoryUpdated?.Invoke(GetCurrentInventoryState());
+
+            Debug.Log("[Inventory] Actualizado");
+
+            if (EvidenceManager.Instance != null)
+            {
+                Debug.Log("[Inventory] Check Evidence");
+                EvidenceManager.Instance.CheckCompletion();
+            }
+            else
+            {
+                Debug.LogWarning("[Inventory] EvidenceManager NULL");
+            }
         }
 
         // NEW

@@ -13,6 +13,7 @@ public class GameState : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            Debug.Log("[GameState] Inicializado");
         }
         else
         {
@@ -26,8 +27,10 @@ public class GameState : MonoBehaviour
         {
             flags.Add(id);
             Debug.Log("[GameState] Flag añadida: " + id);
-
-            
+        }
+        else
+        {
+            Debug.Log("[GameState] Flag ya existía: " + id);
         }
     }
 
