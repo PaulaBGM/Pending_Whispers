@@ -999,6 +999,7 @@ GameObject:
   - component: {fileID: 6260168472135428733}
   - component: {fileID: 247924134826955412}
   - component: {fileID: 987066639941859517}
+  - component: {fileID: 3034453176145477127}
   m_Layer: 5
   m_Name: MapMenu
   m_TagString: Untagged
@@ -1111,6 +1112,22 @@ MonoBehaviour:
   - {fileID: 2281915339443495018}
   - {fileID: 2647273950266461979}
   player: {fileID: 1894777254710137858}
+--- !u!114 &3034453176145477127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8371617720087146365}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 788fc2fac70f8584788203cbd43bfe78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fromNode: {fileID: 2281915339443495018}
+  toNode: {fileID: 2647273950266461979}
+  isUnlocked: 0
+  visualPath: {fileID: 0}
 --- !u!1 &8484065934726061505
 GameObject:
   m_ObjectHideFlags: 0
