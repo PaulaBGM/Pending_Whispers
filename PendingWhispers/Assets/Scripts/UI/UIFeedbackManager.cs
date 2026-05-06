@@ -16,9 +16,30 @@ public class UIFeedbackManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        panel.SetActive(false);
+
+        if (transform.parent != null)
+            transform.SetParent(null);
 
         DontDestroyOnLoad(gameObject);
+
+        panel.SetActive(false);
+    }
+
+    void OnEnable()
+    {
+        UIGameEvents.OnFeedback += ShowMessage;
+        UIGameEvents.OnLocationUnlocked += OnLocationUnlocked;
+    }
+
+    void OnDisable()
+    {
+        UIGameEvents.OnFeedback -= ShowMessage;
+        UIGameEvents.OnLocationUnlocked -= OnLocationUnlocked;
+    }
+
+    void OnLocationUnlocked(string locationName)
+    {
+        ShowMessage("Nueva localización desbloqueada: " + locationName);
     }
 
     public void ShowMessage(string message)

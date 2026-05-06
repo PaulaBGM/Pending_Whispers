@@ -14,14 +14,14 @@ namespace Inventory.Model
 
         public event Action<Dictionary<int, InventoryItem>> OnInventoryUpdated;
         public event Action<EvidenceLink> OnNewLinkDiscovered;
+        public event Action OnInventoryChanged;
 
         [SerializeField] private List<EvidenceLink> possibleLinks = new();
         private List<EvidenceLink> discoveredLinks = new();
 
-        // NEW
         [Header("Progression")]
         [SerializeField] private List<string> requiredClueIDs;
-        [SerializeField] private string completedFlag = "all_clues_collected";
+        [SerializeField] private FlagSO completedFlag;
         private bool progressionCompleted = false;
 
         public void Initialize()
@@ -41,7 +41,6 @@ namespace Inventory.Model
 
             InformAboutChange();
 
-            // NEW
             CheckClueProgression();
 
             return quantity;
@@ -101,7 +100,7 @@ namespace Inventory.Model
                 .ToList();
         }
 
-        public void TryLinkItems(ItemSO a, ItemSO b)
+        public bool TryLinkItems(ItemSO a, ItemSO b)
         {
             foreach (var link in possibleLinks)
             {
@@ -109,16 +108,28 @@ namespace Inventory.Model
                     (link.ItemA == a && link.ItemB == b) ||
                     (link.ItemA == b && link.ItemB == a);
 
-                if (match && !discoveredLinks.Contains(link))
+                if (!match)
+                    continue;
+
+                if (discoveredLinks.Contains(link))
                 {
-                    discoveredLinks.Add(link);
-                    Debug.Log("Conclusión: " + link.Conclusion);
-                    OnNewLinkDiscovered?.Invoke(link);
-                    return;
+                    Debug.Log("[Deduction] Ya descubierto: " + link.Conclusion);
+                    return false;
                 }
+
+                // Nuevo descubrimiento
+                discoveredLinks.Add(link);
+
+                Debug.Log("[Deduction] Nueva conclusión: " + link.Conclusion);
+
+                OnNewLinkDiscovered?.Invoke(link);
+
+                return true;
             }
 
-            Debug.Log("No hay relación");
+            Debug.Log("[Deduction] No hay relación entre objetos");
+
+            return false;
         }
 
         public void SwapItems(int indexA, int indexB)
@@ -139,18 +150,11 @@ namespace Inventory.Model
 
             Debug.Log("[Inventory] Actualizado");
 
-            if (EvidenceManager.Instance != null)
-            {
-                Debug.Log("[Inventory] Check Evidence");
-                EvidenceManager.Instance.CheckCompletion();
-            }
-            else
-            {
-                Debug.LogWarning("[Inventory] EvidenceManager NULL");
-            }
+            OnInventoryChanged?.Invoke(); 
+
+            CheckClueProgression();
         }
 
-        // NEW
         private void CheckClueProgression()
         {
             if (progressionCompleted) return;
@@ -163,7 +167,8 @@ namespace Inventory.Model
                 {
                     if (!item.IsEmpty && item.item is ClueItemSO clue)
                     {
-                        if (clue.ClueID == requiredID)
+                        if (clue.DiscoveryFlag != null &&
+                            GameProgress.Instance.HasFlag(clue.DiscoveryFlag))
                         {
                             found = true;
                             break;
@@ -179,7 +184,7 @@ namespace Inventory.Model
 
             Debug.Log("[Inventory] Todas las pistas recogidas");
 
-            GameState.Instance.AddFlag(completedFlag);
+            GameProgress.Instance.AddFlag(completedFlag);
         }
     }
 

@@ -1627,6 +1627,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49da114b03b34674e9185d8bf958eca7, type: 3}
+--- !u!82 &236451762 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8056166827056177147, guid: 49da114b03b34674e9185d8bf958eca7, type: 3}
+  m_PrefabInstance: {fileID: 236451761}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &254654286
 GameObject:
   m_ObjectHideFlags: 0
@@ -1874,7 +1879,7 @@ MonoBehaviour:
   choiceButtonPrefab: {fileID: 6057514579348668648, guid: 0d81fed3b40a9974092d6888f52b3f58, type: 3}
   continueButton: {fileID: 328073608}
   typingSpeed: 0.03
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 236451762}
   blipSound: {fileID: 0}
 --- !u!1 &776813325
 GameObject:
@@ -4531,7 +4536,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1086321921}
-  - component: {fileID: 1086321922}
   m_Layer: 0
   m_Name: -----SCENARY-----
   m_TagString: Untagged
@@ -4558,18 +4562,6 @@ Transform:
   - {fileID: 1601805245}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1086321922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1086321920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 404f8e1c5dd8e9d479f89eba098e7d77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1153971015 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1028071098005730815, guid: 9ab95b0c38445b6419521b1c23e29a88, type: 3}
@@ -5018,7 +5010,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bf28aed03b9c954f90892299eb562eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSceneName: Map
 --- !u!61 &1615609351
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5183,6 +5174,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC
       objectReference: {fileID: 0}
+    - target: {fileID: 7645477944159180331, guid: e87153918ad9daa4e8f30eb0d70a5920, type: 3}
+      propertyPath: 'dialogues.Array.data[0].requiredFlags.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 9cc3d14b9dc651b4c8d197dcd5f6c5b9, type: 2}
+    - target: {fileID: 7645477944159180331, guid: e87153918ad9daa4e8f30eb0d70a5920, type: 3}
+      propertyPath: 'dialogues.Array.data[0].requiredFlags.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 0bd4ea81fb4c46f4b95fd4140e9cab7d, type: 2}
+    - target: {fileID: 7645477944159180331, guid: e87153918ad9daa4e8f30eb0d70a5920, type: 3}
+      propertyPath: 'dialogues.Array.data[1].requiredFlags.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 9cc3d14b9dc651b4c8d197dcd5f6c5b9, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

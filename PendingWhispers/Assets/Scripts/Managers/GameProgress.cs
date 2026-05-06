@@ -1,0 +1,59 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameProgress : MonoBehaviour
+{
+    public static GameProgress Instance;
+
+    private HashSet<FlagSO> flags = new();
+
+    public event Action<FlagSO> OnFlagAdded;
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(transform.root.gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void AddFlag(FlagSO flag)
+    {
+        if (flag == null) return;
+
+        if (flags.Add(flag))
+        {
+            Debug.Log("[GameProgress] Flag añadida: " + flag.id);
+
+            OnFlagAdded?.Invoke(flag);
+            UIGameEvents.RaiseFlagAdded(flag);
+        }
+    }
+
+    public bool HasFlag(FlagSO flag)
+    {
+        if (flag == null) return false;
+        return flags.Contains(flag);
+    }
+
+    public bool HasAllFlags(List<FlagSO> required)
+    {
+        if (required == null || required.Count == 0) return true;
+
+        foreach (var flag in required)
+        {
+            if (flag == null) continue;
+
+            if (!flags.Contains(flag))
+                return false;
+        }
+
+        return true;
+    }
+}

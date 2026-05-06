@@ -5,7 +5,6 @@ namespace Inventory.Model
     [CreateAssetMenu(menuName = "Inventory/Sample")]
     public class SampleItemSO : ItemSO
     {
-        //[field: SerializeField] public EmotionType DetectedEmotion { get; private set; }
         [field: SerializeField] public bool IsAnalyzed { get; set; }
 
         [field: SerializeField]

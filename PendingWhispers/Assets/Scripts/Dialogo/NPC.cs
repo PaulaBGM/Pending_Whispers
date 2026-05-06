@@ -9,7 +9,7 @@ public class NPC : MonoBehaviour, IInteractable
     {
         foreach (var d in dialogues)
         {
-            if (GameState.Instance.HasAllFlags(d.requiredFlags))
+            if (GameProgress.Instance.HasAllFlags(d.requiredFlags))
             {
                 DialogueManager.Instance.StartDialogue(d.dialogue);
                 return;

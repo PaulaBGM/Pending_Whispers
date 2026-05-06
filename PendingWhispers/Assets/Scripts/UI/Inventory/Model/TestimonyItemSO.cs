@@ -6,7 +6,6 @@ namespace Inventory.Model
     public class TestimonyItemSO : ItemSO
     {
         [field: SerializeField] public string Speaker { get; private set; }
-        //[field: SerializeField] public EmotionType Emotion { get; private set; }
         [field: SerializeField] public bool IsContradictory { get; private set; }
 
         [field: SerializeField]

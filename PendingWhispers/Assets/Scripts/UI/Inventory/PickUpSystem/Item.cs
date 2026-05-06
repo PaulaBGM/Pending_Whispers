@@ -21,13 +21,14 @@ public class Item : MonoBehaviour, IInteractable
     private Color originalColor;
 
     [Header("Persistence")]
-    [SerializeField] private string uniqueID;
+    [SerializeField] private FlagSO persistenceFlag;
 
     private void Awake()
     {
-        if (!string.IsNullOrEmpty(uniqueID) && GameState.Instance.HasFlag("item_" + uniqueID))
+        if (persistenceFlag != null &&
+            GameProgress.Instance.HasFlag(persistenceFlag))
         {
-            Debug.Log("[Item] Ya recogido, destruyendo: " + uniqueID);
+            Debug.Log("[Item] Ya recogido, destruyendo: " + persistenceFlag.id);
             Destroy(gameObject);
             return;
         }
@@ -40,24 +41,23 @@ public class Item : MonoBehaviour, IInteractable
 
     public void Interact(PlayerController player)
     {
-        Debug.Log("[Item] Recogiendo: " + InventoryItem.name);
 
         InventorySO inventory = player.Inventory;
         int remainder = inventory.AddItem(InventoryItem, Quantity);
 
         if (remainder == 0)
         {
-            if (!string.IsNullOrEmpty(uniqueID))
+            if (persistenceFlag != null)
             {
-                Debug.Log("[Item] Guardando persistencia: " + uniqueID);
-                GameState.Instance.AddFlag("item_" + uniqueID);
+                UIGameEvents.OnItemCollected?.Invoke(InventoryItem);
+                GameProgress.Instance.AddFlag(persistenceFlag);
             }
 
             DestroyItem();
         }
         else
         {
-            Debug.LogWarning("[Item] No se pudo recoger completamente");
+            UIGameEvents.OnFeedback?.Invoke("Inventario lleno");
             Quantity = remainder;
         }
     }

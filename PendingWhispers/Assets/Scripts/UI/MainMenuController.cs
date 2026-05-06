@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -17,7 +16,7 @@ public class MainMenuController : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Map");
+        SceneController.Instance.LoadScene("Map");
     }
 
     public void ExitGame()

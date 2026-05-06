@@ -1,18 +1,21 @@
-using System;
 using UnityEngine;
 
 public class DetectionVisionController : MonoBehaviour
 {
-    public static event Action<bool> OnDetectionVisionChanged;
+    public static event System.Action<bool> OnDetectionVisionChanged;
 
     private bool isActive = false;
 
-    private void Update()
+    void OnEnable()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            ToggleVision();
-        }
+        if (InputController.Instance != null)
+            InputController.Instance.OnDetectionPressed += ToggleVision;
+    }
+
+    void OnDisable()
+    {
+        if (InputController.Instance != null)
+            InputController.Instance.OnDetectionPressed -= ToggleVision;
     }
 
     private void ToggleVision()

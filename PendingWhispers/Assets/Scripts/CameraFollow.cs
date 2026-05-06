@@ -4,7 +4,6 @@ public class CameraFollow : MonoBehaviour
 {
     private PlayerController player;
 
-    [Header("Camera Limits")] 
     [SerializeField] private Transform minLimit;
     [SerializeField] private Transform maxLimit;
 
@@ -13,8 +12,9 @@ public class CameraFollow : MonoBehaviour
 
     void Start()
     {
-        halfHeight = Camera.main.orthographicSize;
-        halfWidth = halfHeight * Camera.main.aspect;
+        Camera cam = Camera.main;
+        halfHeight = cam.orthographicSize;
+        halfWidth = halfHeight * cam.aspect;
     }
 
     void OnEnable()
@@ -36,10 +36,11 @@ public class CameraFollow : MonoBehaviour
     {
         if (player == null) return;
 
-        float clampedX = Mathf.Clamp(player.transform.position.x, minLimit.position.x + halfWidth, maxLimit.position.x - halfWidth);
+        Vector3 pos = player.transform.position;
 
-        float clampedY = Mathf.Clamp(player.transform.position.y, minLimit.position.y + halfHeight, maxLimit.position.y - halfHeight);
+        float x = Mathf.Clamp(pos.x, minLimit.position.x + halfWidth, maxLimit.position.x - halfWidth);
+        float y = Mathf.Clamp(pos.y, minLimit.position.y + halfHeight, maxLimit.position.y - halfHeight);
 
-        transform.position = new Vector3(clampedX, clampedY, transform.position.z);
+        transform.position = new Vector3(x, y, transform.position.z);
     }
 }

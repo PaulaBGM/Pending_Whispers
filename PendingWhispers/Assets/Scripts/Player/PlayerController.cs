@@ -4,7 +4,6 @@ using Inventory.UI;
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -203,6 +202,6 @@ public class PlayerController : MonoBehaviour
 
     public void OpenMap()
     {
-        SceneManager.LoadScene("Map");
+        SceneController.Instance.LoadScene("Map");
     }
 }

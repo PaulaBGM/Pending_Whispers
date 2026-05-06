@@ -15,9 +15,9 @@ public class DialogueNode
 
     public List<DialogueChoice> choices;
 
-    public List<string> requiredFlags;
+    public List<FlagSO> requiredFlags;
 
-    public List<string> onEnterFlags;
+    public List<FlagSO> onEnterFlags;
 
     public List<GameEventSO> onEnterEvents;
 }

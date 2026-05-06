@@ -28,8 +28,8 @@ MonoBehaviour:
     nextNodeID: 1
     choices: []
     requiredFlags:
-    - unlocked_case_1
-    - all_evidence_collected
+    - {fileID: 11400000, guid: 9cc3d14b9dc651b4c8d197dcd5f6c5b9, type: 2}
+    - {fileID: 11400000, guid: 0bd4ea81fb4c46f4b95fd4140e9cab7d, type: 2}
     onEnterFlags: []
     onEnterEvents: []
   - id: 1

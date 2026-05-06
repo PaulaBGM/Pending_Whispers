@@ -7,8 +7,8 @@ public class DialogueChoice
 
     public string nextNodeID;
 
-    public List<string> addFlags;
-    public List<string> requiredFlags;
+    public List<FlagSO> addFlags;
+    public List<FlagSO> requiredFlags;
 
     public bool endsDialogue;
 }

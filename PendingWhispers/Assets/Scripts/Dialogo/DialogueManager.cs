@@ -1,10 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
 
+    private DialogueRunner runner;
     private DialogueData currentDialogue;
     private DialogueNode currentNode;
 
@@ -35,73 +37,83 @@ public class DialogueManager : MonoBehaviour
     {
         player = p;
     }
-
     public void StartDialogue(DialogueData dialogue)
     {
+        if (dialogue == null)
+        {
+            Debug.LogError("[DialogueManager] Dialogue es NULL");
+            return;
+        }
+
         currentDialogue = dialogue;
-        currentDialogue.Initialize();
+        runner = new DialogueRunner(dialogue);
 
         if (player != null)
             player.canMove = false;
 
-        GoToNode("start");
+        currentNode = runner.Start();
+
+        ShowNode(currentNode);
     }
 
     public void GoToNode(string nodeID)
     {
-        if (currentDialogue == null)
+        if (runner == null)
         {
-            Debug.LogError("[DialogueManager] currentDialogue es NULL");
+            Debug.LogError("[DialogueManager] Runner es NULL");
             return;
         }
 
-        var node = currentDialogue.GetNode(nodeID);
+        currentNode = runner.Next(nodeID);
 
-        if (node == null)
-        {
-            Debug.LogError("[DialogueManager] Nodo no encontrado: " + nodeID);
-            return;
-        }
-
-        Debug.Log("[DialogueManager] Entrando a nodo: " + nodeID);
-
-        currentNode = node; 
-
-        // FLAGS
-        if (node.onEnterFlags != null)
-        {
-            foreach (var flag in node.onEnterFlags)
-            {
-                GameState.Instance.AddFlag(flag);
-            }
-        }
-
-        // EVENTS
-        if (node.onEnterEvents != null)
-        {
-            foreach (var evt in node.onEnterEvents)
-            {
-                evt?.Raise();
-            }
-        }
-
-        ShowNode();
+        ShowNode(currentNode);
     }
 
-    void ShowNode()
+    public void Next()
     {
-        var character = currentDialogue.GetCharacter(currentNode.speakerID);
-        string speakerName = character != null ? character.displayName : "???";
-
-        DialogueUI.Instance.ShowLine(character, speakerName, currentNode.text);
-
-        if (currentNode.choices != null && currentNode.choices.Count > 0)
+        if (currentNode == null)
         {
-            List<DialogueChoice> validChoices = new List<DialogueChoice>();
+            Debug.LogError("[DialogueManager] currentNode es NULL");
+            return;
+        }
 
-            foreach (var choice in currentNode.choices)
+        if (!string.IsNullOrEmpty(currentNode.nextNodeID))
+        {
+            GoToNode(currentNode.nextNodeID);
+        }
+        else
+        {
+            EndDialogue();
+        }
+    }
+    void ShowNode(DialogueNode node)
+    {
+        if (node == null)
+        {
+            Debug.LogError("[DialogueManager] Nodo NULL");
+            return;
+        }
+
+        if (DialogueUI.Instance == null)
+        {
+            Debug.LogError("[DialogueManager] DialogueUI no existe en escena");
+            return;
+        }
+
+        ApplyNodeEffects(node);
+
+        var charData = currentDialogue.GetCharacter(node.speakerID);
+        string speakerName = charData != null ? charData.displayName : "???";
+
+        DialogueUI.Instance.ShowLine(charData, speakerName, node.text);
+
+        if (node.choices != null && node.choices.Count > 0)
+        {
+            List<DialogueChoice> validChoices = new();
+
+            foreach (var choice in node.choices)
             {
-                if (GameState.Instance.HasAllFlags(choice.requiredFlags))
+                if (GameProgress.Instance.HasAllFlags(choice.requiredFlags))
                 {
                     validChoices.Add(choice);
                 }
@@ -117,13 +129,41 @@ public class DialogueManager : MonoBehaviour
         DialogueUI.Instance.ShowContinue();
     }
 
+    void ApplyNodeEffects(DialogueNode node)
+    {
+        // Flags
+        if (node.onEnterFlags != null)
+        {
+            foreach (var flag in node.onEnterFlags)
+            {
+                Debug.Log("[Dialogue] Añadiendo flag: " + flag.id);
+                GameProgress.Instance.AddFlag(flag);
+            }
+        }
+
+        // Eventos
+        if (node.onEnterEvents != null)
+        {
+            foreach (var evt in node.onEnterEvents)
+            {
+                evt?.Raise();
+            }
+        }
+    }
+
     public void ChooseChoice(DialogueChoice choice)
     {
+        if (choice == null)
+        {
+            Debug.LogError("[DialogueManager] Choice NULL");
+            return;
+        }
+
         if (choice.addFlags != null)
         {
             foreach (var flag in choice.addFlags)
             {
-                GameState.Instance.AddFlag(flag);
+                GameProgress.Instance.AddFlag(flag);
             }
         }
 
@@ -133,28 +173,21 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        GoToNode(choice.nextNodeID);
         DialogueUI.Instance.ClearChoices();
-    }
 
-    public void Next()
-    {
-        if (!string.IsNullOrEmpty(currentNode.nextNodeID))
-        {
-            GoToNode(currentNode.nextNodeID);
-        }
-        else
-        {
-            EndDialogue();
-        }
-
+        GoToNode(choice.nextNodeID);
     }
 
     public void EndDialogue()
     {
-        DialogueUI.Instance.Hide();
+        if (DialogueUI.Instance != null)
+            DialogueUI.Instance.Hide();
 
         if (player != null)
             player.canMove = true;
+
+        runner = null;
+        currentNode = null;
+        currentDialogue = null;
     }
 }

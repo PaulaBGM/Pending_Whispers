@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 
 public class MapManager : MonoBehaviour
 {
@@ -10,7 +9,6 @@ public class MapManager : MonoBehaviour
     public PlayerIcon player;
 
     private MapNode currentNode;
-    private string node;
 
     private void Awake()
     {
@@ -19,12 +17,13 @@ public class MapManager : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.Instance.Subscribe("unlock_surface_map", UnlockSurface);
+        GameProgress.Instance.OnFlagAdded += OnFlagAdded;
     }
 
     private void OnDisable()
     {
-        EventManager.Instance.Unsubscribe("unlock_surface_map", UnlockSurface);
+        if (GameProgress.Instance != null)
+            GameProgress.Instance.OnFlagAdded -= OnFlagAdded;
     }
 
     private void Start()
@@ -33,35 +32,59 @@ public class MapManager : MonoBehaviour
         SetPlayerToCurrentNode();
     }
 
-
     void InitializeMap()
     {
         foreach (var node in nodes)
         {
             // Nodo inicial
-            if (node.data.nodeID == "start")
+            if (node.data.nodeID == "Start")
+                MapState.Instance.UnlockNode("Start");
+
+            // Flags existentes
+            if (node.data.unlockFlag != null &&
+                GameProgress.Instance.HasFlag(node.data.unlockFlag))
             {
-                MapState.Instance.UnlockNode("start");
+                MapState.Instance.UnlockNode(node.data.nodeID);
             }
 
-            // Desbloqueo por progreso
-            if (GameState.Instance.HasFlag("unlocked_case_1"))
-            {
-                MapState.Instance.UnlockNode("House1");
-            }
-
-            // Aplicar estado al nodo visual
             node.SetUnlocked(MapState.Instance.IsUnlocked(node.data.nodeID));
         }
     }
+
+    void OnFlagAdded(FlagSO flag)
+    {
+        Debug.Log("MAP flag recibido: " + flag.id);
+
+        foreach (var node in nodes)
+        {
+            Debug.Log("Nodo: " + node.data.nodeID +
+                      " | unlockFlag: " + (node.data.unlockFlag != null ? node.data.unlockFlag.id : "NULL"));
+
+            if (node.data.unlockFlag == flag)
+            {
+                Debug.Log("MATCH desbloqueando nodo");
+
+                UnlockNodeRuntime(node);
+            }
+        }
+    }
+
+    void UnlockNodeRuntime(MapNode node)
+    {
+        Debug.Log("[Map] Desbloqueado: " + node.data.nodeID);
+
+        MapState.Instance.UnlockNode(node.data.nodeID);
+        node.SetUnlocked(true);
+
+        UIGameEvents.RaiseLocationUnlocked(node.GetName());
+    }
+
     void SetPlayerToCurrentNode()
     {
         string nodeID = MapState.Instance.GetCurrentNode();
 
         if (string.IsNullOrEmpty(nodeID))
-        {
-            nodeID = "start";
-        }
+            nodeID = "Start";
 
         MapNode node = nodes.Find(n => n.data.nodeID == nodeID);
 
@@ -69,10 +92,6 @@ public class MapManager : MonoBehaviour
         {
             currentNode = node;
             player.transform.position = node.transform.position;
-        }
-        else
-        {
-            Debug.LogWarning("Nodo no encontrado: " + nodeID);
         }
     }
 
@@ -84,7 +103,6 @@ public class MapManager : MonoBehaviour
         currentNode = node;
 
         MapUI.Instance.UpdateTitle(node.GetName(), node.GetDescription());
-
         player.MoveTo(node.transform.position);
 
         Invoke(nameof(EnterNode), 0.5f);
@@ -92,25 +110,7 @@ public class MapManager : MonoBehaviour
 
     void EnterNode()
     {
-        Debug.Log("Entrando a: " + currentNode.data.nodeID);
-
         MapState.Instance.SetCurrentNode(currentNode.data.nodeID);
-
-        SceneManager.LoadScene(currentNode.GetScene());
-    }
-
-    public void UnlockNode(string nodeID)
-    {
-        MapNode node = nodes.Find(n => n.data.nodeID == nodeID);
-
-        if (node != null)
-        {
-            node.SetUnlocked(true);
-        }
-    }
-
-    void UnlockSurface()
-    {
-        UnlockNode("node"); 
+        SceneController.Instance.LoadScene(currentNode.GetScene());
     }
 }

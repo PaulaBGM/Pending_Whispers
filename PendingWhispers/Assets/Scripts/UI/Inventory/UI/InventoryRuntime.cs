@@ -14,7 +14,7 @@ public class InventoryRuntime : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
 
             if (!initialized)
             {

@@ -50,11 +50,10 @@ public class UIManager : MonoBehaviour
         OnSubmitPressed?.Invoke();
     }
 
-    // NEW
     private void OpenMap()
     {
         Debug.Log("[UIManager] Abriendo mapa");
 
-        SceneManager.LoadScene("Map"); 
+        SceneController.Instance.LoadScene("Map");
     }
 }

@@ -6,5 +6,5 @@ public class DialogueCondition
 {
     public DialogueData dialogue;
 
-    public List<string> requiredFlags;
+    public List<FlagSO> requiredFlags;
 }

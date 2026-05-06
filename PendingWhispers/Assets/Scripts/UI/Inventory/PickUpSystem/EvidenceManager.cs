@@ -6,46 +6,29 @@ public class EvidenceManager : MonoBehaviour
 {
     public static EvidenceManager Instance;
 
-    [Header("Config")]
     public List<ItemSO> requiredItems;
-    public string completedFlag = "all_evidence_collected";
+    public FlagSO completedFlag;
 
     private bool completed = false;
 
     void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            Debug.Log("[Evidence] Inicializado");
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void Start()
+    {
+        var inventory = InventoryRuntime.Instance.GetInventory();
+        inventory.OnInventoryChanged += CheckCompletion;
     }
 
     public void CheckCompletion()
     {
-        Debug.Log("[Evidence] CheckCompletion llamado");
-
-        if (completed)
-        {
-            Debug.Log("[Evidence] Ya completado");
-            return;
-        }
-
-        if (InventoryRuntime.Instance == null)
-        {
-            Debug.LogError("[Evidence] InventoryRuntime NULL");
-            return;
-        }
+        if (completed) return;
 
         var inventory = InventoryRuntime.Instance.GetInventory();
         var items = inventory.GetCurrentInventoryState();
-
-        Debug.Log("[Evidence] Items actuales: " + items.Count);
 
         foreach (var required in requiredItems)
         {
@@ -60,17 +43,13 @@ public class EvidenceManager : MonoBehaviour
                 }
             }
 
-            if (!found)
-            {
-                Debug.Log("[Evidence] Falta: " + required.name);
-                return;
-            }
+            if (!found) return;
         }
 
         completed = true;
 
-        Debug.Log("[Evidence] TODAS LAS PRUEBAS COMPLETADAS");
+        Debug.Log("[Evidence] COMPLETADO");
 
-        GameState.Instance.AddFlag(completedFlag);
+        GameProgress.Instance.AddFlag(completedFlag);
     }
 }
