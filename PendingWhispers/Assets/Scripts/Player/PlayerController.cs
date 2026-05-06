@@ -2,6 +2,7 @@ using Inventory;
 using Inventory.Model;
 using Inventory.UI;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -9,21 +10,27 @@ public class PlayerController : MonoBehaviour
 {
     public static Action<PlayerController> OnPlayerSpawned;
 
-    [SerializeField] private LayerMask groundLayer;
+    [Header("Layers")]
     [SerializeField] private LayerMask interactableLayer;
-    [SerializeField] private LayerMask collisionLayer;
 
+    [Header("UI")]
     [SerializeField] private UIInventoryPage inventoryUI;
 
-    private Vector2 target;
-    private Animator animator;
-    private Vector2 lastDirection;
+    [Header("Movement")]
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private float waypointReachedDistance = 0.05f;
+    [SerializeField] private float interactDistance = 1.5f;
 
-    public float speed = 5f;
-    public float interactDistance = 1.5f;
+    private Animator animator;
+
+    private readonly Queue<Vector2> currentPath = new();
+
+    private Vector2 lastDirection = Vector2.down;
 
     private IInteractable currentTarget;
     private IInteractable hoveredInteractable;
+
+    private PathNode[] cachedNodes;
 
     public bool canMove = true;
 
@@ -37,6 +44,9 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         animator = GetComponentInChildren<Animator>();
+
+        // Cacheamos los nodos UNA SOLA VEZ
+        cachedNodes = FindObjectsByType<PathNode>(FindObjectsSortMode.None);
     }
 
     private void OnEnable()
@@ -59,85 +69,117 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         Move();
         CheckInteraction();
         HandleHover();
     }
 
-    void HandleClick()
+    private void HandleClick()
     {
-        if (!canMove) return;
-
-        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+        if (!canMove)
             return;
 
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (EventSystem.current != null &&
+            EventSystem.current.IsPointerOverGameObject())
+            return;
 
-        Collider2D hit = Physics2D.OverlapPoint(mousePos, interactableLayer);
+        Vector2 mousePos =
+            Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (hit != null)
+        Collider2D interactableHit =
+            Physics2D.OverlapPoint(mousePos, interactableLayer);
+
+        // CLICK EN INTERACTUABLE
+        if (interactableHit != null)
         {
-            IInteractable interactable = hit.GetComponent<IInteractable>();
+            IInteractable interactable =
+                interactableHit.GetComponent<IInteractable>();
 
             if (interactable != null)
             {
                 currentTarget = interactable;
-                target = interactable.GetTransform().position;
+
+                MoveTo(interactable.GetTransform().position);
+
                 return;
             }
         }
 
-        Collider2D groundHit = Physics2D.OverlapPoint(mousePos, groundLayer);
+        // CLICK EN SUELO
+        currentTarget = null;
 
-        if (groundHit != null)
+        MoveTo(mousePos);
+    }
+
+    private void MoveTo(Vector2 destination)
+    {
+        PathNode startNode = GetClosestNode(transform.position);
+        PathNode endNode = GetClosestNode(destination);
+
+        if (startNode == null || endNode == null)
+            return;
+
+        List<Vector2> path =
+            Pathfinder.Instance.FindPath(startNode, endNode);
+
+        currentPath.Clear();
+
+        foreach (Vector2 point in path)
         {
-            currentTarget = null;
-            target = groundHit.ClosestPoint(mousePos);
+            currentPath.Enqueue(point);
         }
     }
 
-    void Move()
+    private void Move()
     {
-        if (!canMove) return;
-
-        Vector2 currentPosition = transform.position;
-        Vector2 direction = (target - currentPosition).normalized;
-
-        Vector2 nextPosition = Vector2.MoveTowards(currentPosition, target, speed * Time.deltaTime);
-        Vector2 moveDir = nextPosition - currentPosition;
-
-        RaycastHit2D hit = Physics2D.BoxCast(
-            currentPosition,
-            new Vector2(0.8f, 0.8f),
-            0f,
-            moveDir.normalized,
-            moveDir.magnitude,
-            collisionLayer
-        );
-
-        bool isMoving = moveDir.magnitude > 0.0001f && hit.collider == null;
-
-        if (hit.collider == null)
+        if (!canMove)
         {
-            transform.position = nextPosition;
+            animator.SetBool("isMoving", false);
+            return;
         }
 
-        if (isMoving)
+        if (currentPath.Count == 0)
+        {
+            animator.SetBool("isMoving", false);
+            return;
+        }
+
+        Vector2 currentPosition = transform.position;
+        Vector2 targetPosition = currentPath.Peek();
+
+        Vector2 direction =
+            (targetPosition - currentPosition).normalized;
+
+        Vector2 nextPosition = Vector2.MoveTowards(
+            currentPosition,
+            targetPosition,
+            speed * Time.deltaTime
+        );
+
+        transform.position = nextPosition;
+
+        if (Vector2.Distance(nextPosition, targetPosition)
+            <= waypointReachedDistance)
+        {
+            currentPath.Dequeue();
+        }
+
+        if (direction.sqrMagnitude > 0.001f)
         {
             lastDirection = direction;
         }
 
         animator.SetFloat("moveX", lastDirection.x);
         animator.SetFloat("moveY", lastDirection.y);
-        animator.SetBool("isMoving", isMoving);
+        animator.SetBool("isMoving", true);
     }
 
-    void CheckInteraction()
+    private void CheckInteraction()
     {
-        if (!canMove) return;
-        if (currentTarget == null) return;
+        if (!canMove || currentTarget == null)
+            return;
 
         float distance = Vector2.Distance(
             transform.position,
@@ -146,56 +188,87 @@ public class PlayerController : MonoBehaviour
 
         if (distance <= interactDistance)
         {
+            currentPath.Clear();
+
             currentTarget.Interact(this);
+
             currentTarget = null;
         }
     }
 
-    void HandleHover()
+    private void HandleHover()
     {
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousePos =
+            Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        Collider2D hit = Physics2D.OverlapPoint(mousePos, interactableLayer);
+        Collider2D hit =
+            Physics2D.OverlapPoint(mousePos, interactableLayer);
 
         IInteractable newHover = null;
 
         if (hit != null)
-            newHover = hit.GetComponent<IInteractable>();
-
-        if (hoveredInteractable != newHover)
         {
-            if (hoveredInteractable is Item oldItem)
-                oldItem.SetHighlight(false);
-
-            if (newHover is Item newItem)
-                newItem.SetHighlight(true);
-
-            hoveredInteractable = newHover;
+            newHover = hit.GetComponent<IInteractable>();
         }
+
+        if (hoveredInteractable == newHover)
+            return;
+
+        if (hoveredInteractable is Item oldItem)
+        {
+            oldItem.SetHighlight(false);
+        }
+
+        if (newHover is Item newItem)
+        {
+            newItem.SetHighlight(true);
+        }
+
+        hoveredInteractable = newHover;
+    }
+
+    private PathNode GetClosestNode(Vector2 position)
+    {
+        PathNode closest = null;
+
+        float minDistance = float.MaxValue;
+
+        // Sin FindObjectsOfType en runtime
+        foreach (PathNode node in cachedNodes)
+        {
+            float distance =
+                ((Vector2)node.transform.position - position).sqrMagnitude;
+
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closest = node;
+            }
+        }
+
+        return closest;
     }
 
     public void ToggleInventory()
     {
-        if (inventoryUI == null) return;
+        if (inventoryUI == null)
+            return;
 
         if (!inventoryUI.isActiveAndEnabled)
         {
             inventoryUI.Show();
+
             canMove = false;
 
             if (InventoryController.Instance != null)
             {
-                Debug.Log("[Player] Refresh UI");
                 InventoryController.Instance.RefreshUI();
-            }
-            else
-            {
-                Debug.LogWarning("[Player] InventoryController NULL");
             }
         }
         else
         {
             inventoryUI.Hide();
+
             canMove = true;
         }
     }
