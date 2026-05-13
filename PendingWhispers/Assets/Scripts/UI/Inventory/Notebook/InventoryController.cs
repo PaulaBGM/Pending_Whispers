@@ -10,7 +10,9 @@ namespace Inventory
         public static InventoryController Instance { get; private set; }
 
         [SerializeField] private UIInventoryPage inventoryUI;
-
+        [SerializeField] private GameObject pages;
+        [SerializeField] private Animator pagesAnimator;
+        
         private InventorySO inventoryData;
 
         private ItemType currentTab = ItemType.Clue;
@@ -22,11 +24,18 @@ namespace Inventory
 
             PrepareInventoryData(); 
             PrepareUI();           
+            
+            pages.SetActive(false);
         }
 
         private void Start()
         {
-            RefreshUI(); 
+            //RefreshUI(); 
+        }
+        
+        public void ShowInventoryData()
+        {
+            RefreshUI();
         }
 
         private void PrepareInventoryData()
@@ -80,6 +89,8 @@ namespace Inventory
 
         private void HandleTabChanged(ItemType type)
         {
+            pages.SetActive(true);
+            
             currentTab = type;
             RefreshUI();
         }

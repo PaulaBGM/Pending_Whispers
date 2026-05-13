@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     [Header("UI")]
     [SerializeField] private UIInventoryPage inventoryUI;
 
+    [SerializeField] private GameObject hudUI;
+
     [Header("Movement")]
     [SerializeField] private float speed = 5f;
     [SerializeField] private float waypointReachedDistance = 0.05f;
@@ -256,6 +258,7 @@ public class PlayerController : MonoBehaviour
 
         if (!inventoryUI.isActiveAndEnabled)
         {
+            hudUI.SetActive(false);
             inventoryUI.Show();
 
             canMove = false;
