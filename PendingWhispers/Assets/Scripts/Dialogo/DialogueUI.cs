@@ -33,7 +33,6 @@ public class DialogueUI : MonoBehaviour
     {
         Instance = this;
         panel.SetActive(false);
-        Debug.Log("Awake UI");
     }
 
     void Update()
