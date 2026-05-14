@@ -23,8 +23,15 @@ public class Item : MonoBehaviour, IInteractable
     [Header("Persistence")]
     [SerializeField] private FlagSO persistenceFlag;
 
+    [Header("Spectral Detection")]
+    [SerializeField] private bool spectralOnly;
+
+    private Collider2D itemCollider;
+
     private void Awake()
     {
+        itemCollider = GetComponent<Collider2D>();
+
         if (persistenceFlag != null &&
             GameProgress.Instance.HasFlag(persistenceFlag))
         {
@@ -37,12 +44,61 @@ public class Item : MonoBehaviour, IInteractable
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         originalColor = spriteRenderer.color;
+
+        // Detecta automáticamente si es una pista espectral
+        ClueItemSO clue = InventoryItem as ClueItemSO;
+
+        if (clue != null)
+        {
+            spectralOnly = clue.HasSpectralTrace;
+        }
+
+        // Oculta si es espectral
+        if (spectralOnly)
+        {
+            HideSpectralItem();
+        }
+    }
+
+    private void Update()
+    {
+        HandleSpectralVisibility();
+    }
+
+    private void HandleSpectralVisibility()
+    {
+        if (!spectralOnly)
+            return;
+
+        if (SpectralDetectionSystem.Instance == null)
+            return;
+
+        if (SpectralDetectionSystem.Instance.DetectionActive)
+        {
+            ShowSpectralItem();
+        }
+        else
+        {
+            HideSpectralItem();
+        }
+    }
+
+    private void ShowSpectralItem()
+    {
+        spriteRenderer.enabled = true;
+        itemCollider.enabled = true;
+    }
+
+    private void HideSpectralItem()
+    {
+        spriteRenderer.enabled = false;
+        itemCollider.enabled = false;
     }
 
     public void Interact(PlayerController player)
     {
-
         InventorySO inventory = player.Inventory;
+
         int remainder = inventory.AddItem(InventoryItem, Quantity);
 
         if (remainder == 0)
@@ -50,6 +106,7 @@ public class Item : MonoBehaviour, IInteractable
             if (persistenceFlag != null)
             {
                 UIGameEvents.OnItemCollected?.Invoke(InventoryItem);
+
                 GameProgress.Instance.AddFlag(persistenceFlag);
             }
 
@@ -58,6 +115,7 @@ public class Item : MonoBehaviour, IInteractable
         else
         {
             UIGameEvents.OnFeedback?.Invoke("Inventario lleno");
+
             Quantity = remainder;
         }
     }
@@ -74,7 +132,8 @@ public class Item : MonoBehaviour, IInteractable
 
     public void DestroyItem()
     {
-        GetComponent<Collider2D>().enabled = false;
+        itemCollider.enabled = false;
+
         StartCoroutine(AnimateItemPickup());
     }
 
@@ -85,12 +144,19 @@ public class Item : MonoBehaviour, IInteractable
 
         Vector3 startScale = transform.localScale;
         Vector3 endScale = Vector3.zero;
+
         float t = 0;
 
         while (t < duration)
         {
             t += Time.deltaTime;
-            transform.localScale = Vector3.Lerp(startScale, endScale, t / duration);
+
+            transform.localScale = Vector3.Lerp(
+                startScale,
+                endScale,
+                t / duration
+            );
+
             yield return null;
         }
 
