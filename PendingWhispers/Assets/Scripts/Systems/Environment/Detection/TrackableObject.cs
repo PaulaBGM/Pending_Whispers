@@ -2,31 +2,52 @@
 
 public class TrackableObject : MonoBehaviour
 {
-    [Header("Visuals")]
+    [SerializeField] private SpectralTraceType traceType;
+
+    [Header("Visual")]
     [SerializeField] private GameObject visualObject;
+   
+    [Header("Behaviour")]
+    [SerializeField] private bool hideWhenInactive = true;
 
-    [Header("Evidence")]
-    [SerializeField] private FlagSO evidenceFlag;
+    [SerializeField] private bool discovered;
 
-    [SerializeField] private bool autoHide = true;
+    [Header("Conditions")]
+    [SerializeField] private FlagSO requiredFlag;
 
-    private bool discovered = false;
-
-    void Start()
+    private void Awake()
     {
-        HideTrack();
+        visualObject.SetActive(false);
     }
 
-    void Update()
+    private void OnEnable()
     {
-        if (SpectralDetectionSystem.Instance == null)
-            return;
+        SpectralDetectionSystem.OnDetectionChanged +=
+            HandleDetectionChanged;
+    }
 
-        if (SpectralDetectionSystem.Instance.DetectionActive)
+    private void OnDisable()
+    {
+        SpectralDetectionSystem.OnDetectionChanged -=
+            HandleDetectionChanged;
+    }
+
+    private void HandleDetectionChanged(bool active)
+    {
+        if (requiredFlag != null)
+        {
+            if (!GameProgress.Instance.HasFlag(requiredFlag))
+            {
+                visualObject.SetActive(false);
+                return;
+            }
+        }
+
+        if (active)
         {
             ShowTrack();
         }
-        else if (autoHide && !discovered)
+        else if (hideWhenInactive && !discovered)
         {
             HideTrack();
         }
@@ -35,24 +56,15 @@ public class TrackableObject : MonoBehaviour
     public void ShowTrack()
     {
         visualObject.SetActive(true);
-
-        //SpectralDetectionSystem.Instance.RegisterObject(this);
     }
 
     public void HideTrack()
     {
-        if (!discovered)
-            visualObject.SetActive(false);
+        visualObject.SetActive(false);
     }
 
-    public void CollectEvidence()
+    public void MarkDiscovered()
     {
-        if (discovered) return;
-
         discovered = true;
-
-        GameProgress.Instance.AddFlag(evidenceFlag);
-
-        UIFeedbackManager.Instance.ShowMessage("Pista encontrada");
     }
 }

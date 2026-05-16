@@ -1,37 +1,64 @@
 using UnityEngine;
+using System;
 using System.Collections;
+
+public enum SpectralTraceType
+{
+    Footprint,
+    BloodEcho,
+    EmotionalResidue,
+    MemoryFragment,
+    Corruption,
+    HiddenObject,
+    GhostPresence
+}
 
 public class SpectralDetectionSystem : MonoBehaviour
 {
     public static SpectralDetectionSystem Instance;
 
+    public static event Action<bool> OnDetectionChanged;
+
+    public static event Action<float> OnEnergyChanged;
+
     [Header("Energy")]
     [SerializeField] private float maxEnergy = 100f;
+
     [SerializeField] private float currentEnergy = 100f;
 
-    [SerializeField] private float drainPerSecond = 15f;
-    [SerializeField] private float regenPerSecond = 10f;
+    [SerializeField] private float drainPerSecond = 10f;
 
-    [Header("Overload")]
+    [SerializeField] private float regenPerSecond = 15f;
+
+    [Header("Cooldown")]
     [SerializeField] private float overloadCooldown = 4f;
 
-    [Header("State")]
-    [SerializeField] private bool detectionActive;
-
+    private bool detectionActive;
     private bool overloaded;
 
     public bool DetectionActive => detectionActive;
 
+    public float EnergyNormalized =>
+        currentEnergy / maxEnergy;
+
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnEnable()
     {
         if (InputController.Instance != null)
         {
-            InputController.Instance.OnDetectionPressed += ToggleDetection;
+            InputController.Instance.OnDetectionPressed +=
+                ToggleDetection;
         }
     }
 
@@ -39,7 +66,8 @@ public class SpectralDetectionSystem : MonoBehaviour
     {
         if (InputController.Instance != null)
         {
-            InputController.Instance.OnDetectionPressed -= ToggleDetection;
+            InputController.Instance.OnDetectionPressed -=
+                ToggleDetection;
         }
     }
 
@@ -48,66 +76,54 @@ public class SpectralDetectionSystem : MonoBehaviour
         HandleEnergy();
     }
 
-    private void ToggleDetection()
+    void ToggleDetection()
     {
         if (overloaded)
-        {
-            UIGameEvents.OnFeedback?.Invoke("Sobrecarga espectral");
             return;
-        }
 
         detectionActive = !detectionActive;
 
-        if (detectionActive)
-        {
-            UIGameEvents.OnFeedback?.Invoke("Detección espectral activada");
-        }
-        else
-        {
-            UIGameEvents.OnFeedback?.Invoke("Detección espectral desactivada");
-        }
+        OnDetectionChanged?.Invoke(detectionActive);
     }
 
-    private void HandleEnergy()
+    void HandleEnergy()
     {
         if (detectionActive)
         {
-            currentEnergy -= drainPerSecond * Time.deltaTime;
+            currentEnergy -=
+                drainPerSecond * Time.deltaTime;
 
             if (currentEnergy <= 0)
             {
                 currentEnergy = 0;
+
                 StartCoroutine(OverloadRoutine());
             }
         }
         else
         {
-            if (currentEnergy < maxEnergy)
-            {
-                currentEnergy += regenPerSecond * Time.deltaTime;
+            currentEnergy +=
+                regenPerSecond * Time.deltaTime;
 
-                if (currentEnergy > maxEnergy)
-                    currentEnergy = maxEnergy;
-            }
+            currentEnergy =
+                Mathf.Clamp(currentEnergy, 0, maxEnergy);
         }
+
+        OnEnergyChanged?.Invoke(
+            currentEnergy / maxEnergy
+        );
     }
 
-    private IEnumerator OverloadRoutine()
+    IEnumerator OverloadRoutine()
     {
         overloaded = true;
+
         detectionActive = false;
 
-        UIGameEvents.OnFeedback?.Invoke("Sobrecarga espectral");
+        OnDetectionChanged?.Invoke(false);
 
         yield return new WaitForSeconds(overloadCooldown);
 
         overloaded = false;
-
-        UIGameEvents.OnFeedback?.Invoke("Detección restaurada");
-    }
-
-    public float GetNormalizedEnergy()
-    {
-        return currentEnergy / maxEnergy;
     }
 }
