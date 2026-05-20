@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 7645477944159180331}
   - component: {fileID: 176805181648224533}
   m_Layer: 6
-  m_Name: NPC
+  m_Name: SingerNPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -176,11 +176,11 @@ MonoBehaviour:
   dialogues:
   - dialogue: {fileID: 11400000, guid: 908e13b1970ce644e80f5fc311954240, type: 2}
     requiredFlags:
-    - unlocked_case_1
-    - all_evidence_collected
+    - {fileID: 11400000, guid: 0bd4ea81fb4c46f4b95fd4140e9cab7d, type: 2}
+    - {fileID: 11400000, guid: 9cc3d14b9dc651b4c8d197dcd5f6c5b9, type: 2}
   - dialogue: {fileID: 11400000, guid: b07ca4c0950716a40b2e536c07a6bb07, type: 2}
     requiredFlags:
-    - unlocked_case_1
+    - {fileID: 11400000, guid: 9cc3d14b9dc651b4c8d197dcd5f6c5b9, type: 2}
   - dialogue: {fileID: 11400000, guid: 89acab41a7b5d1f478a950bdaf56c456, type: 2}
     requiredFlags: []
 --- !u!70 &176805181648224533
