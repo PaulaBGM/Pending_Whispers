@@ -151,14 +151,9 @@ public class PlayerController : MonoBehaviour
         Vector2 currentPosition = transform.position;
         Vector2 targetPosition = currentPath.Peek();
 
-        Vector2 direction =
-            (targetPosition - currentPosition).normalized;
+        Vector2 direction = (targetPosition - currentPosition).normalized;
 
-        Vector2 nextPosition = Vector2.MoveTowards(
-            currentPosition,
-            targetPosition,
-            speed * Time.deltaTime
-        );
+        Vector2 nextPosition = Vector2.MoveTowards(currentPosition, targetPosition, speed * Time.deltaTime);
 
         transform.position = nextPosition;
 
@@ -200,11 +195,9 @@ public class PlayerController : MonoBehaviour
 
     private void HandleHover()
     {
-        Vector2 mousePos =
-            Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        Collider2D hit =
-            Physics2D.OverlapPoint(mousePos, interactableLayer);
+        Collider2D hit = Physics2D.OverlapPoint(mousePos, interactableLayer);
 
         IInteractable newHover = null;
 
