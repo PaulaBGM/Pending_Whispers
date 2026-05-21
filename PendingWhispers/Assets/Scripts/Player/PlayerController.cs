@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour
         {
             currentPath.Clear();
 
-            currentTarget.Interact(this);
+            //currentTarget.Interact(this);
 
             currentTarget = null;
         }

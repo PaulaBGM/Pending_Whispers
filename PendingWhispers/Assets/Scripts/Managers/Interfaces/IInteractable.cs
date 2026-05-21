@@ -2,6 +2,7 @@ using UnityEngine;
 
 public interface IInteractable
 {
-    void Interact(PlayerController player);
+    void Interact(PlayerController_MovementInteraction player);
     Transform GetTransform();
+    
 }

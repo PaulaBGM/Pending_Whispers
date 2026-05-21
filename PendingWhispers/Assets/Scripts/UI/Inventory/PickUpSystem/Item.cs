@@ -45,7 +45,7 @@ public class Item : MonoBehaviour, IInteractable
 
         originalColor = spriteRenderer.color;
 
-        // Detecta automáticamente si es una pista espectral
+        // Detecta automï¿½ticamente si es una pista espectral
         ClueItemSO clue = InventoryItem as ClueItemSO;
 
         if (clue != null)
@@ -95,7 +95,7 @@ public class Item : MonoBehaviour, IInteractable
         itemCollider.enabled = false;
     }
 
-    public void Interact(PlayerController player)
+    public void Interact(PlayerController_MovementInteraction player)
     {
         InventorySO inventory = player.Inventory;
 

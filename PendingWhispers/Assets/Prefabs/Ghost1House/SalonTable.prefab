@@ -142,6 +142,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2517047152960735213}
   - component: {fileID: 2025519772882891623}
+  - component: {fileID: 9036774992403584179}
   m_Layer: 7
   m_Name: SalonTable
   m_TagString: Untagged
@@ -212,3 +213,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.6453629, y: 1.514968}
   m_EdgeRadius: 0
+--- !u!114 &9036774992403584179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7649828062685085009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa0352a4d56abd42ad2fc69deb72448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 2.4155893, y: 0.6500864, z: 4}
+  m_Center: {x: 0.008901119, y: -0.42419004, z: 0}
+  m_Area: 1
+  m_AffectedAgents: ffffffff

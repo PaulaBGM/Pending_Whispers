@@ -10,7 +10,7 @@ public class DialogueManager : MonoBehaviour
     private DialogueData currentDialogue;
     private DialogueNode currentNode;
 
-    private PlayerController player;
+    private PlayerController_MovementInteraction player;
 
     void Awake()
     {
@@ -19,21 +19,21 @@ public class DialogueManager : MonoBehaviour
 
     void OnEnable()
     {
-        PlayerController.OnPlayerSpawned += SetPlayer;
+        PlayerController_MovementInteraction.OnPlayerSpawned += SetPlayer;
     }
 
     void OnDisable()
     {
-        PlayerController.OnPlayerSpawned -= SetPlayer;
+        PlayerController_MovementInteraction.OnPlayerSpawned -= SetPlayer;
     }
 
     void Start()
     {
         if (player == null)
-            player = FindFirstObjectByType<PlayerController>();
+            player = FindFirstObjectByType<PlayerController_MovementInteraction>();
     }
 
-    void SetPlayer(PlayerController p)
+    void SetPlayer(PlayerController_MovementInteraction p)
     {
         player = p;
     }
@@ -136,7 +136,7 @@ public class DialogueManager : MonoBehaviour
         {
             foreach (var flag in node.onEnterFlags)
             {
-                Debug.Log("[Dialogue] Añadiendo flag: " + flag.id);
+                Debug.Log("[Dialogue] Aï¿½adiendo flag: " + flag.id);
                 GameProgress.Instance.AddFlag(flag);
             }
         }

@@ -5,7 +5,7 @@ public class NPC : MonoBehaviour, IInteractable
 {
     public List<DialogueCondition> dialogues;
 
-    public void Interact(PlayerController player)
+    public void Interact(PlayerController_MovementInteraction player)
     {
         foreach (var d in dialogues)
         {

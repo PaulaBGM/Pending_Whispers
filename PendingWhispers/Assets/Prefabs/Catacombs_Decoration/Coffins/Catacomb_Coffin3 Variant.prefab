@@ -16,13 +16,17 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -6502518018305562863, guid: 37072302f45d30a4bb39be1f4839163e, type: 3}
+    - target: {fileID: 1044115353584122974, guid: d5d078ad989a0c84da4e7f4c70255d70, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 6353573385438415075, guid: d5d078ad989a0c84da4e7f4c70255d70, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 5.06
       objectReference: {fileID: 0}
     - target: {fileID: 6353573385438415075, guid: d5d078ad989a0c84da4e7f4c70255d70, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -3.39
       objectReference: {fileID: 0}
     - target: {fileID: 6353573385438415075, guid: d5d078ad989a0c84da4e7f4c70255d70, type: 3}
       propertyPath: m_LocalPosition.z
@@ -59,5 +63,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1023410436881223024, guid: d5d078ad989a0c84da4e7f4c70255d70, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3207171636789467094}
   m_SourcePrefab: {fileID: 100100000, guid: d5d078ad989a0c84da4e7f4c70255d70, type: 3}
+--- !u!1 &2856915557323652876 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1023410436881223024, guid: d5d078ad989a0c84da4e7f4c70255d70, type: 3}
+  m_PrefabInstance: {fileID: 2996635166793511548}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3207171636789467094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2856915557323652876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa0352a4d56abd42ad2fc69deb72448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 1.6050425, y: 1.0940647, z: 4}
+  m_Center: {x: 0.006268978, y: 0.034493685, z: 0}
+  m_Area: 1
+  m_AffectedAgents: ffffffff

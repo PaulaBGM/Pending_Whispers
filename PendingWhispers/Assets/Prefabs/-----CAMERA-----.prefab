@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8193546266629744718}
   - component: {fileID: 1392478963981142888}
-  - component: {fileID: 3329828224205734768}
   - component: {fileID: 4117235547781976109}
   - component: {fileID: 3168973536796308328}
+  - component: {fileID: 3738378158617288261}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -70,7 +70,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 4
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -86,14 +86,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &3329828224205734768
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 202668628311108619}
-  m_Enabled: 1
 --- !u!114 &4117235547781976109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,6 +144,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minLimit: {fileID: 1739151400672301337}
   maxLimit: {fileID: 2978575810995941377}
+--- !u!114 &3738378158617288261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202668628311108619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
 --- !u!1 &6355512267710446678
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,7 +216,7 @@ Transform:
   m_GameObject: {fileID: 6369951548435068258}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.96, y: -5.04, z: 0}
+  m_LocalPosition: {x: -15, y: -7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -274,7 +280,7 @@ Transform:
   m_GameObject: {fileID: 7769126233800885208}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.89, y: 7.99, z: 0}
+  m_LocalPosition: {x: 15.94, y: 11.96, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

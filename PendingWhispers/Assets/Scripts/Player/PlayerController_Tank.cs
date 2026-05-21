@@ -87,15 +87,15 @@ public class PlayerController_Tank : MonoBehaviour
     {
         if (!canMove) return;
 
-        // ROTACIÓN
+        // ROTACIï¿½N
         transform.Rotate(Vector3.forward, rotationInput * rotationSpeed * Time.deltaTime);
 
-        // DIRECCIÓN (forward del personaje en 2D = up)
+        // DIRECCIï¿½N (forward del personaje en 2D = up)
         Vector2 forward = transform.up;
 
         Vector2 movement = forward * moveInput * moveSpeed * Time.deltaTime;
 
-        // COLISIÓN
+        // COLISIï¿½N
         RaycastHit2D hit = Physics2D.BoxCast(
             transform.position,
             new Vector2(0.8f, 0.8f),
@@ -117,7 +117,7 @@ public class PlayerController_Tank : MonoBehaviour
             lastDirection = forward;
         }
 
-        // ANIMACIÓN
+        // ANIMACIï¿½N
         animator.SetFloat("moveX", lastDirection.x);
         animator.SetFloat("moveY", lastDirection.y);
         animator.SetBool("isMoving", isMoving);
@@ -139,7 +139,7 @@ public class PlayerController_Tank : MonoBehaviour
 
             if (interactable != null)
             {
-                interactable.Interact(null);
+                //interactable.Interact(null);
             }
         }
     }
