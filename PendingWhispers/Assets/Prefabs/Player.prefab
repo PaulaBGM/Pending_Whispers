@@ -329,7 +329,6 @@ GameObject:
   - component: {fileID: 5413773589255806077}
   - component: {fileID: 6463203322692211007}
   - component: {fileID: 4986162120907823578}
-  - component: {fileID: 6545522646693574196}
   - component: {fileID: 7755278882486255537}
   m_Layer: 0
   m_Name: Player
@@ -413,21 +412,6 @@ MonoBehaviour:
   hudUI: {fileID: 0}
   interactDistance: 1.5
   canMove: 1
---- !u!114 &6545522646693574196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5165606389610773166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ec60bae2f466b14e8203fd22eb4a7f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryUI: {fileID: 0}
-  pages: {fileID: 0}
-  pagesAnimator: {fileID: 0}
 --- !u!195 &7755278882486255537
 NavMeshAgent:
   m_ObjectHideFlags: 0

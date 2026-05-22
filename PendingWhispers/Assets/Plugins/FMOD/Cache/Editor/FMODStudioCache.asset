@@ -1,5 +1,33 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6929962453718758807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Footsteps_GroundTypes
+  m_EditorClassIdentifier: 
+  Path: event:/Footsteps_GroundTypes
+  Guid:
+    Data1: -1853116506
+    Data2: 1178338955
+    Data3: 1004099458
+    Data4: -1304522252
+  Banks:
+  - {fileID: 7698760302699471641}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 3932837481481258498}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-5840231939940547672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19,6 +47,26 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 914
+  Exists: 1
+--- !u!114 &-5472793913269340691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/StreamingAssets/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 639149934532123224
+  FileSizes:
+  - Name: Desktop
+    Value: 1478
   Exists: 1
 --- !u!114 &-1400243377035136410
 MonoBehaviour:
@@ -61,22 +109,50 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: -5840231939940547672}
-  - {fileID: 5321729172081951902}
-  - {fileID: 9117803833762038673}
+  - {fileID: 6213263654967855966}
+  - {fileID: -5472793913269340691}
+  - {fileID: 7698760302699471641}
   EditorEvents:
-  - {fileID: -1400243377035136410}
-  EditorParameters: []
+  - {fileID: -6929962453718758807}
+  EditorParameters:
+  - {fileID: 5976444632201327814}
   MasterBanks:
-  - {fileID: 5321729172081951902}
+  - {fileID: -5472793913269340691}
   StringsBanks:
-  - {fileID: -5840231939940547672}
+  - {fileID: 6213263654967855966}
   cacheVersion: 131859
-  cacheTime: 639149781562349310
+  cacheTime: 639149934532133610
   SerializableEventsDict:
   - key: event:/Footsteps_GroundTypes
     index: 0
 --- !u!114 &1625284442751308127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Footsteps_GroundTypes/GroundTypes
+  m_EditorClassIdentifier: 
+  Name: GroundTypes
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 3096520211
+    data2: 2864454172
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Wood
+  - Carpet
+  - Concrete
+  Exists: 1
+--- !u!114 &3932837481481258498
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,6 +198,70 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 1298
+  Exists: 1
+--- !u!114 &5976444632201327814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Parameter 1
+  m_EditorClassIdentifier: 
+  Name: Parameter 1
+  StudioPath: parameter:/Parameter 1
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3012998281
+    data2: 1502114878
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
+--- !u!114 &6213263654967855966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/StreamingAssets/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 639149934532133610
+  FileSizes:
+  - Name: Desktop
+    Value: 968
+  Exists: 1
+--- !u!114 &7698760302699471641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/StreamingAssets/Desktop/SFX.bank
+  Name: SFX
+  StudioPath: bank:/SFX
+  lastModified: 639149933719264962
+  FileSizes:
+  - Name: Desktop
+    Value: 39424
   Exists: 1
 --- !u!114 &9117803833762038673
 MonoBehaviour:
