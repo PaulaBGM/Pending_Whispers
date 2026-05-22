@@ -1,7 +1,5 @@
-using Inventory;
-using Inventory.Model;
-using Inventory.UI;
 using System;
+using Inventory.Model;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
@@ -13,10 +11,6 @@ public class PlayerController_MovementInteraction : MonoBehaviour
     [Header("Layers")]
     [SerializeField] private LayerMask interactableLayer;
 
-    [Header("UI")]
-    [SerializeField] private UIInventoryPage inventoryUI;
-    [SerializeField] private GameObject hudUI;
-
     [Header("Movement")]
     [SerializeField] private float interactDistance = 1.5f;
 
@@ -27,6 +21,8 @@ public class PlayerController_MovementInteraction : MonoBehaviour
     private IInteractable hoveredInteractable;
 
     public bool canMove = true;
+
+    private bool journalOpen;
 
     public InventorySO Inventory => InventoryRuntime.Instance.GetInventory();
 
@@ -101,7 +97,6 @@ public class PlayerController_MovementInteraction : MonoBehaviour
         Collider2D interactableHit =
             Physics2D.OverlapPoint(mousePos, interactableLayer);
 
-        // CLICK EN INTERACTUABLE
         if (interactableHit != null)
         {
             IInteractable interactable =
@@ -115,7 +110,6 @@ public class PlayerController_MovementInteraction : MonoBehaviour
             }
         }
 
-        // CLICK EN SUELO
         currentTarget = null;
         MoveTo(mousePos);
     }
@@ -140,9 +134,6 @@ public class PlayerController_MovementInteraction : MonoBehaviour
             return;
 
         if (agent.remainingDistance > agent.stoppingDistance)
-            return;
-
-        if (currentTarget == null)
             return;
 
         currentTarget.Interact(this);
@@ -178,59 +169,39 @@ public class PlayerController_MovementInteraction : MonoBehaviour
         IInteractable newHover = null;
 
         if (hit != null)
-        {
             newHover = hit.GetComponent<IInteractable>();
-        }
 
         if (hoveredInteractable == newHover)
             return;
 
         if (hoveredInteractable is Item oldItem)
-        {
             oldItem.SetHighlight(false);
-        }
 
         if (newHover is Item newItem)
-        {
             newItem.SetHighlight(true);
-        }
 
         hoveredInteractable = newHover;
     }
 
-    // ---------------- UI ----------------
+    // ---------------- UI / JOURNAL ----------------
 
     public void ToggleInventory()
     {
-        if (inventoryUI == null)
+        if (JournalController.Instance == null)
             return;
 
-        if (!inventoryUI.isActiveAndEnabled)
-        {
-            hudUI.SetActive(false);
-            inventoryUI.Show();
+        journalOpen = !journalOpen;
 
-            canMove = false;
-            agent.isStopped = true;
+        canMove = !journalOpen;
+        agent.isStopped = journalOpen;
 
-            if (InventoryController.Instance != null)
-            {
-                InventoryController.Instance.RefreshUI();
-            }
-        }
-        else
-        {
-            inventoryUI.Hide();
-
-            hudUI.SetActive(true);
-
-            canMove = true;
-            agent.isStopped = false;
-        }
+        JournalController.Instance.ToggleJournal();
     }
 
     public void OpenMap()
     {
-        SceneController.Instance.LoadScene("Map");
+        Debug.Log("OPEN MAP PRESSED");
+
+        GameNavigation.Instance.OpenMap();
     }
 }

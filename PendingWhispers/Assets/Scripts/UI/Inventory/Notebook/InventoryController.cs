@@ -10,9 +10,7 @@ namespace Inventory
         public static InventoryController Instance { get; private set; }
 
         [SerializeField] private UIInventoryPage inventoryUI;
-        [SerializeField] private GameObject pages;
-        [SerializeField] private Animator pagesAnimator;
-        
+
         private InventorySO inventoryData;
 
         private ItemType currentTab = ItemType.Clue;
@@ -21,84 +19,46 @@ namespace Inventory
         private void Awake()
         {
             Instance = this;
-
-            PrepareInventoryData(); 
-            PrepareUI();           
-            
-            pages.SetActive(false);
+            PrepareInventoryData();
+            PrepareUI();
         }
 
-        private void Start()
+        private void PrepareInventoryData()
         {
-            //RefreshUI(); 
+            inventoryData = InventoryRuntime.Instance.GetInventory();
+            inventoryData.OnInventoryUpdated += UpdateInventoryUIFiltered;
         }
-        
+
+        private void PrepareUI()
+        {
+            inventoryUI.InitializeInventoryUI(inventoryData.Size);
+
+            inventoryUI.OnTabChanged += HandleTabChanged;
+            inventoryUI.OnDescriptionRequested += HandleDescriptionRequest;
+            inventoryUI.OnSwapItems += HandleSwapItems;
+            inventoryUI.OnStartDragging += HandleDragging;
+            inventoryUI.OnItemActionRequested += HandleItemActionRequest;
+        }
+
+        // 🔥 SOLO FILTRO DE DATOS
+        private void HandleTabChanged(ItemType type)
+        {
+            currentTab = type;
+            RefreshUI();
+        }
+
         public void ShowInventoryData()
         {
             RefreshUI();
         }
 
-        private void PrepareInventoryData()
-        {
-            if (InventoryRuntime.Instance == null)
-            {
-                Debug.LogError("InventoryRuntime no existe");
-                return;
-            }
-
-            inventoryData = InventoryRuntime.Instance.GetInventory();
-
-            if (inventoryData == null)
-            {
-                Debug.LogError("InventorySO no asignado");
-                return;
-            }
-
-            inventoryData.OnInventoryUpdated += UpdateInventoryUIFiltered;
-        }
-
-        private void OnDestroy()
-        {
-            if (inventoryData != null)
-                inventoryData.OnInventoryUpdated -= UpdateInventoryUIFiltered;
-        }
-
-        private void PrepareUI()
-        {
-            if (inventoryUI == null)
-            {
-                Debug.LogError("inventoryUI no asignado");
-                return;
-            }
-
-            inventoryUI.InitializeInventoryUI(inventoryData.Size);
-
-            inventoryUI.OnDescriptionRequested += HandleDescriptionRequest;
-            inventoryUI.OnSwapItems += HandleSwapItems;
-            inventoryUI.OnStartDragging += HandleDragging;
-            inventoryUI.OnItemActionRequested += HandleItemActionRequest;
-            inventoryUI.OnTabChanged += HandleTabChanged;
-        }
-
         public void RefreshUI()
         {
-            if (inventoryData == null) return;
-
             UpdateInventoryUIFiltered(inventoryData.GetCurrentInventoryState());
-        }
-
-        private void HandleTabChanged(ItemType type)
-        {
-            pages.SetActive(true);
-            
-            currentTab = type;
-            RefreshUI();
         }
 
         private void UpdateInventoryUIFiltered(Dictionary<int, InventoryItem> inventoryState)
         {
-            if (inventoryUI == null) return;
-
             inventoryUI.ResetAllItems();
             filteredIndices.Clear();
 
@@ -148,7 +108,6 @@ namespace Inventory
         private void HandleSwapItems(int a, int b)
         {
             if (a < 0 || b < 0) return;
-            if (a >= filteredIndices.Count || b >= filteredIndices.Count) return;
 
             inventoryData.SwapItems(filteredIndices[a], filteredIndices[b]);
         }

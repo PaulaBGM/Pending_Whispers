@@ -16,7 +16,8 @@ public class PauseMenuController : MonoBehaviour
 
     private void OnEnable()
     {
-        UIManager.Instance.OnPausePressed += TogglePause;
+        if (UIManager.Instance != null)
+            UIManager.Instance.OnPausePressed += TogglePause;
     }
 
     private void OnDisable()

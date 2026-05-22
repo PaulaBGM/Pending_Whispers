@@ -13,10 +13,21 @@ namespace Inventory.UI
 
         private void Awake()
         {
-            button.onClick.AddListener(() =>
-            {
-                OnTabSelected?.Invoke(tabType);
-            });
+            button.onClick.RemoveAllListeners();
+
+            button.onClick.AddListener(OnClicked);
+        }
+
+        private void OnClicked()
+        {
+            
+            Debug.Log("TAB CLICKED: " + tabType);
+            OnTabSelected?.Invoke(tabType);
+        }
+
+        public Inventory.Model.ItemType GetTabType()
+        {
+            return tabType;
         }
     }
 }

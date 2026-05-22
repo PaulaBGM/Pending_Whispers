@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement; 
 
 public class UIManager : MonoBehaviour
 {
@@ -9,51 +8,36 @@ public class UIManager : MonoBehaviour
     public event Action OnPausePressed;
     public event Action OnSubmitPressed;
     public event Action OnMapPressed;
+    public event Action OnJournalPressed;
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
     }
+
+    private void HandlePause() => OnPausePressed?.Invoke();
+    private void HandleSubmit() => OnSubmitPressed?.Invoke();
+    private void HandleMap() => OnMapPressed?.Invoke();
+    private void HandleJournal() => OnJournalPressed?.Invoke();
 
     private void OnEnable()
     {
-        if (InputController.Instance != null)
-        {
-            InputController.Instance.OnPausePressed += TogglePause;
-            InputController.Instance.OnSubmitPressed += SubmitPressed;
+        if (InputController.Instance == null) return;
 
-            InputController.Instance.OnMapPressed += OpenMap; 
-        }
+        InputController.Instance.OnPausePressed += HandlePause;
+        InputController.Instance.OnSubmitPressed += HandleSubmit;
+        InputController.Instance.OnMapPressed += HandleMap;
+        InputController.Instance.OnInventoryPressed += HandleJournal;
     }
 
     private void OnDisable()
     {
-        if (InputController.Instance != null)
-        {
-            InputController.Instance.OnPausePressed -= TogglePause;
-            InputController.Instance.OnSubmitPressed -= SubmitPressed;
+        if (InputController.Instance == null) return;
 
-            InputController.Instance.OnMapPressed -= OpenMap; // NEW
-        }
-    }
-
-    private void TogglePause()
-    {
-        OnPausePressed?.Invoke();
-    }
-
-    private void SubmitPressed()
-    {
-        OnSubmitPressed?.Invoke();
-    }
-
-    private void OpenMap()
-    {
-        Debug.Log("[UIManager] Abriendo mapa");
-
-        SceneController.Instance.LoadScene("Map");
+        InputController.Instance.OnPausePressed -= HandlePause;
+        InputController.Instance.OnSubmitPressed -= HandleSubmit;
+        InputController.Instance.OnMapPressed -= HandleMap;
+        InputController.Instance.OnInventoryPressed -= HandleJournal;
     }
 }

@@ -1,20 +1,57 @@
 using UnityEngine;
-using Inventory;
 
 public class InventoryAnimationEvents : MonoBehaviour
 {
+    [Header("UI Root")]
     [SerializeField] private GameObject tabs;
-    
+    [SerializeField] private GameObject[] inventoryPages;
+
+    [Header("Start Page")]
+    [SerializeField] private GameObject firstPage;
+
     private void Awake()
     {
-        tabs.SetActive(false);
+        SetUIVisible(false);
     }
+
+    //FIN OPEN BOOK
     public void OnOpenAnimationFinished()
     {
-        if (InventoryController.Instance != null)
+        SetUIVisible(true);
+        OpenFirstPage();
+    }
+
+    //INICIO CLOSE BOOK
+    public void OnCloseAnimationStarted()
+    {
+        SetUIVisible(false);
+    }
+
+    private void SetUIVisible(bool value)
+    {
+        if (tabs != null)
+            tabs.SetActive(value);
+
+        if (inventoryPages == null) return;
+
+        foreach (var page in inventoryPages)
         {
-            InventoryController.Instance.ShowInventoryData();
-            tabs.SetActive(true);
+            if (page != null)
+                page.SetActive(value);
         }
+    }
+
+    private void OpenFirstPage()
+    {
+        if (inventoryPages == null) return;
+
+        foreach (var page in inventoryPages)
+        {
+            if (page != null)
+                page.SetActive(false);
+        }
+
+        if (firstPage != null)
+            firstPage.SetActive(true);
     }
 }
