@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class InventoryAnimationEvents : MonoBehaviour
@@ -8,26 +9,49 @@ public class InventoryAnimationEvents : MonoBehaviour
 
     [Header("Start Page")]
     [SerializeField] private GameObject firstPage;
+    
+    private Animator animator;
+
+    public event Action OnOpenFinished;
+    public event Action OnOpenStarted;
+    public event Action OnCloseStarted;
+    public event Action OnCloseFinished;
 
     private void Awake()
     {
+        animator = GetComponent<Animator>();
         SetUIVisible(false);
     }
 
+    public void OnOpenAnimationStarted()
+    {
+        OnOpenStarted?.Invoke();
+    }
+    
     //FIN OPEN BOOK
     public void OnOpenAnimationFinished()
     {
-        SetUIVisible(true);
-        OpenFirstPage();
+        OnOpenFinished?.Invoke();
     }
 
     //INICIO CLOSE BOOK
     public void OnCloseAnimationStarted()
     {
         SetUIVisible(false);
+        OnCloseStarted?.Invoke();
     }
 
-    private void SetUIVisible(bool value)
+    public void OnCloseAnimationFinished()
+    {
+        OnCloseFinished?.Invoke();
+    }
+    
+    public void PlayCloseAnimation(GameObject rootObject)
+    {
+        animator.SetTrigger("Close");
+    }
+    
+    public void SetUIVisible(bool value)
     {
         if (tabs != null)
             tabs.SetActive(value);

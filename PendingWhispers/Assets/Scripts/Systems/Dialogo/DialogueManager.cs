@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System;
 using Inventory.Model;
 
 public class DialogueManager : MonoBehaviour
@@ -203,24 +202,6 @@ public class DialogueManager : MonoBehaviour
         if (!node.isImportantLine)
             return;
 
-        if (PeopleJournalSystem.Instance == null)
-        {
-            Debug.LogError("PeopleJournalSystem INSTANCE NULL");
-            return;
-        }
-
-        if (InventoryRuntime.Instance == null)
-        {
-            Debug.LogError("InventoryRuntime INSTANCE NULL");
-            return;
-        }
-
-        if (InventoryRuntime.Instance.GetInventory() == null)
-        {
-            Debug.LogError("InventorySO NULL");
-            return;
-        }
-
         var item = ScriptableObject.CreateInstance<TestimonyItemSO>();
 
         item.Name = charData.displayName;
@@ -233,7 +214,5 @@ public class DialogueManager : MonoBehaviour
             charData.portrait,
             node.text
         );
-
-        InventoryRuntime.Instance.GetInventory().AddItem(item, 1);
     }
 }

@@ -6,6 +6,9 @@ public class InventoryRuntime : MonoBehaviour
     public static InventoryRuntime Instance { get; private set; }
 
     [SerializeField] private InventorySO inventory;
+    
+    [SerializeField] private PeopleJournalSystem peopleJournal;
+    [SerializeField] private CaseJournalSystem caseJournal;
 
     private bool initialized = false;
 
@@ -31,5 +34,15 @@ public class InventoryRuntime : MonoBehaviour
     public InventorySO GetInventory()
     {
         return inventory;
+    }
+    
+    public PeopleJournalSystem GetPeopleJournal()
+    {
+        return peopleJournal;
+    }
+
+    public CaseJournalSystem GetCaseJournal()
+    {
+        return caseJournal;
     }
 }

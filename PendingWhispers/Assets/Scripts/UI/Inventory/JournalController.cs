@@ -32,6 +32,8 @@ public class JournalController : MonoBehaviour
 
     private bool isOpen;
     private bool isAnimating;
+    private bool instantOpen;
+    private InventoryAnimationEvents animationEvents;
 
     public bool IsAnimating => isAnimating;
 
@@ -41,6 +43,45 @@ public class JournalController : MonoBehaviour
         else Destroy(gameObject);
 
         root.SetActive(false);
+        
+        animationEvents = GetComponentInChildren<InventoryAnimationEvents>();
+        animationEvents.SetUIVisible(false);
+    }
+
+    private void OnEnable()
+    {
+        animationEvents.OnOpenFinished += HandleOpenFinished;
+        animationEvents.OnCloseFinished += HandleCloseFinished;
+    }
+
+    private void HandleCloseFinished()
+    {
+        currentPage = null;
+        pendingPage = null;
+        isOpen = false;
+        isAnimating = false;
+        
+        pagesRoot.SetActive(false);
+        
+        UIManager.Instance.SetJournalOpen(false);
+
+        gameObject.SetActive(false);
+    }
+
+    private void HandleOpenFinished()
+    {
+        isAnimating = false;
+        isOpen = true;
+
+        UIManager.Instance.SetJournalOpen(true);
+
+        animationEvents.SetUIVisible(true);
+
+        currentPage = null;
+        pendingPage = null;
+
+        SetPageImmediate(inventoryPage);
+        RefreshCurrentPage();
     }
 
     private void Start()
@@ -85,16 +126,17 @@ public class JournalController : MonoBehaviour
         if (isAnimating) return;
 
         isOpen = !isOpen;
-        root.SetActive(isOpen);
 
         if (isOpen)
         {
-            OpenFirstPage();
+            isAnimating = true;
+            root.SetActive(isOpen);
         }
         else
         {
             currentPage = null;
             pendingPage = null;
+            GetComponentInChildren<InventoryAnimationEvents>().PlayCloseAnimation(root);
         }
     }
 
@@ -117,9 +159,13 @@ public class JournalController : MonoBehaviour
     private void RequestPage(GameObject page)
     {
         Debug.Log("REQUEST PAGE: " + page.name);
-        if (!isOpen) return;
-        if (isAnimating) return;
-        if (page == currentPage) return;
+        if (!isOpen || isAnimating)
+            return;
+        
+        bool samePage = (page == currentPage);
+
+        pendingPage = page;
+        isAnimating = true;
 
         pendingPage = page;
         isAnimating = true;
@@ -128,15 +174,27 @@ public class JournalController : MonoBehaviour
 
         if (pageTurnAnimator != null)
             pageTurnAnimator.Play("PageTurnAnimation", 0, 0f);
+
+        if (samePage) pendingPage = currentPage;
     }
 
+    private void RefreshCurrentPage()
+    {
+        if (currentPage == inventoryPage)
+            inventoryController?.ShowInventoryData();
+
+        if (currentPage == peoplePage)
+            peoplePage.GetComponent<PeoplePageController>()?.RefreshUI();
+
+        /*if (currentPage == casesPage)
+            casesPage.GetComponent<CasesPageController>()?.RefreshUI();*/
+    }
     // ---------------- ANIMATION EVENT ----------------
 
     public void OnPageTurnFinished()
     {
-        Debug.Log("PAGE TURN FINISHED");
-
         pagesRoot.SetActive(false);
+
         if (currentPage != null)
             currentPage.SetActive(false);
 
@@ -147,8 +205,7 @@ public class JournalController : MonoBehaviour
         {
             currentPage.SetActive(true);
 
-            if (currentPage == inventoryPage && inventoryController != null)
-                inventoryController.ShowInventoryData();
+            RefreshCurrentPage();
         }
 
         isAnimating = false;
@@ -197,5 +254,11 @@ public class JournalController : MonoBehaviour
             ToggleJournal();
 
         HandleTabSelected(ItemType.Testimony);
+    }
+    
+    private void OnDestroy()
+    {
+        animationEvents.OnOpenFinished -= HandleOpenFinished;
+        animationEvents.OnCloseFinished -= HandleCloseFinished;
     }
 }

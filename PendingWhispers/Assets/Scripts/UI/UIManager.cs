@@ -5,6 +5,7 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
+    public event Action<bool> OnJournalStateChanged;
     public event Action OnPausePressed;
     public event Action OnSubmitPressed;
     public event Action OnMapPressed;
@@ -12,8 +13,12 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+
+        DontDestroyOnLoad(gameObject);
     }
 
     private void HandlePause() => OnPausePressed?.Invoke();
@@ -39,5 +44,10 @@ public class UIManager : MonoBehaviour
         InputController.Instance.OnSubmitPressed -= HandleSubmit;
         InputController.Instance.OnMapPressed -= HandleMap;
         InputController.Instance.OnInventoryPressed -= HandleJournal;
+    }
+    
+    public void SetJournalOpen(bool isOpen)
+    {
+        OnJournalStateChanged?.Invoke(isOpen);
     }
 }

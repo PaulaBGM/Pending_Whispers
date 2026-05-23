@@ -8,19 +8,24 @@ public class HypothesisController : MonoBehaviour
     [SerializeField] private HypothesisPanelUI panel;
     [SerializeField] private List<HypothesisSlotDefinition> slotDefinitions;
 
-    private void Start()
+    private void Awake()
     {
-        gameObject.SetActive(false);
+        panel.SetCallback(OnDropdownChanged);
     }
 
     public void OpenHypothesis()
     {
         gameObject.SetActive(true);
 
-        panel.Build(
-            "El culpable fue {0} usando {1} en {2}",
-            BuildSlotOptions()
-        );
+        var textParts = new List<string>
+        {
+            "El culpable fue ",
+            " usando ",
+            " en ",
+            ""
+        };
+
+        panel.Build(textParts, BuildSlotOptions());
     }
 
     public void CloseHypothesis()
@@ -28,9 +33,23 @@ public class HypothesisController : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    // =========================
-    // SLOT OPTIONS PER TYPE
-    // =========================
+    public void OnDropdownChanged(int index, string value)
+    {
+        Debug.Log($"Slot {index}: {value}");
+    }
+
+    private List<List<string>> BuildSlotOptions()
+    {
+        var slots = new List<List<string>>();
+
+        for (int i = 0; i < slotDefinitions.Count; i++)
+        {
+            slots.Add(BuildOptions(slotDefinitions[i].type));
+        }
+
+        return slots;
+    }
+
     private List<string> BuildOptions(HypothesisSlotType type)
     {
         var options = new List<string>();
@@ -47,10 +66,8 @@ public class HypothesisController : MonoBehaviour
                     .GetCurrentInventoryState();
 
                 foreach (var kvp in inventory)
-                {
-                    if (kvp.Value.IsEmpty) continue;
-                    options.Add(kvp.Value.item.name);
-                }
+                    if (!kvp.Value.IsEmpty)
+                        options.Add(kvp.Value.item.name);
                 break;
 
             case HypothesisSlotType.Clue:
@@ -63,25 +80,5 @@ public class HypothesisController : MonoBehaviour
         }
 
         return options;
-    }
-
-    // =========================
-    // BUILD ALL SLOT OPTIONS
-    // =========================
-    private List<List<string>> BuildSlotOptions()
-    {
-        var slots = new List<List<string>>();
-
-        for (int i = 0; i < slotDefinitions.Count; i++)
-        {
-            slots.Add(BuildOptions(slotDefinitions[i].type));
-        }
-
-        return slots;
-    }
-    
-    public void OnDropdownChanged(int index, string value)
-    {
-        Debug.Log($"Slot {index}: {value}");
     }
 }

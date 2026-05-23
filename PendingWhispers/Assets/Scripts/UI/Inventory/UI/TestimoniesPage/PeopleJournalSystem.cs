@@ -6,6 +6,7 @@ public class PeopleJournalSystem : MonoBehaviour
     public static PeopleJournalSystem Instance;
 
     private List<PersonJournalEntry> entries = new();
+    private HashSet<string> seenEntries = new();
 
     private void Awake()
     {
@@ -17,9 +18,16 @@ public class PeopleJournalSystem : MonoBehaviour
 
         Instance = this;
     }
-
+    
     public void AddEntry(string name, Sprite portrait, string dialogue)
     {
+        string id = name + "_" + dialogue; // o mejor GUID desde diálogo si tienes
+
+        if (seenEntries.Contains(id))
+            return;
+
+        seenEntries.Add(id);
+
         PersonJournalEntry existing = entries.Find(e => e.personName == name);
 
         if (existing != null)
@@ -31,6 +39,7 @@ public class PeopleJournalSystem : MonoBehaviour
 
         PersonJournalEntry entry = new PersonJournalEntry
         {
+            id = id,
             personName = name,
             portrait = portrait,
             shortDialogue = Trim(dialogue),
