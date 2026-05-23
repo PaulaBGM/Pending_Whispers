@@ -19,6 +19,12 @@ public class InventoryPageController : MonoBehaviour
 
     public void Refresh()
     {
+        if (InventoryController.Instance == null)
+        {
+            Debug.LogWarning("InventoryController no inicializado aún");
+            return;
+        }
+
         InventoryController.Instance.RefreshUI();
     }
 }

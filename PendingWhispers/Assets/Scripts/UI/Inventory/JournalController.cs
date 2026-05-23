@@ -108,6 +108,8 @@ public class JournalController : MonoBehaviour
 
         //FIX CLAVE: asegurar estado inicial correcto
         currentPage = inventoryPage;
+        pagesRoot.SetActive(false);
+
     }
 
     // ---------------- PAGE REQUEST ----------------
@@ -172,5 +174,28 @@ public class JournalController : MonoBehaviour
         inventoryPage.SetActive(false);
         peoplePage.SetActive(false);
         casesPage.SetActive(false);
+    }
+    
+    public void OpenToCluesTab()
+    {
+        if (!isOpen)
+            ToggleJournal();
+
+        //SOLO abrir página si no es la actual
+        if (currentPage == inventoryPage)
+        {
+            inventoryController.ShowInventoryData();
+            return;
+        }
+
+        RequestPage(inventoryPage);
+    }
+    
+    public void OpenToPeopleTab()
+    {
+        if (!isOpen)
+            ToggleJournal();
+
+        HandleTabSelected(ItemType.Testimony);
     }
 }

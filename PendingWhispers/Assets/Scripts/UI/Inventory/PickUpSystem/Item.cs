@@ -1,5 +1,4 @@
 using Inventory.Model;
-using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
@@ -8,14 +7,15 @@ public class Item : MonoBehaviour, IInteractable
     [field: SerializeField]
     public ItemSO InventoryItem { get; private set; }
 
-    [field: SerializeField]
-    public int Quantity { get; set; } = 1;
+    [Header("Inspection")]
+    [TextArea]
+    [SerializeField] private string discoveryText;
 
     [SerializeField] private AudioSource audioSource;
-    [SerializeField] private float duration = 0.3f;
 
     [Header("Highlight")]
     [SerializeField] private SpriteRenderer spriteRenderer;
+
     [SerializeField] private Color highlightColor = Color.cyan;
 
     private Color originalColor;
@@ -28,24 +28,26 @@ public class Item : MonoBehaviour, IInteractable
 
     private Collider2D itemCollider;
 
+    private bool alreadyRegistered;
+
     private void Awake()
     {
         itemCollider = GetComponent<Collider2D>();
 
+        // Persistencia
         if (persistenceFlag != null &&
             GameProgress.Instance.HasFlag(persistenceFlag))
         {
-            Debug.Log("[Item] Ya recogido, destruyendo: " + persistenceFlag.id);
-            Destroy(gameObject);
-            return;
+            alreadyRegistered = true;
         }
 
         if (spriteRenderer == null)
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
-        originalColor = spriteRenderer.color;
+        if (spriteRenderer != null)
+            originalColor = spriteRenderer.color;
 
-        // Detecta autom�ticamente si es una pista espectral
+        // Detectar evidencia espectral
         ClueItemSO clue = InventoryItem as ClueItemSO;
 
         if (clue != null)
@@ -53,7 +55,7 @@ public class Item : MonoBehaviour, IInteractable
             spectralOnly = clue.HasSpectralTrace;
         }
 
-        // Oculta si es espectral
+        // Ocultar si es espectral
         if (spectralOnly)
         {
             HideSpectralItem();
@@ -85,39 +87,62 @@ public class Item : MonoBehaviour, IInteractable
 
     private void ShowSpectralItem()
     {
-        spriteRenderer.enabled = true;
-        itemCollider.enabled = true;
+        if (spriteRenderer != null)
+            spriteRenderer.enabled = true;
+
+        if (itemCollider != null)
+            itemCollider.enabled = true;
     }
 
     private void HideSpectralItem()
     {
-        spriteRenderer.enabled = false;
-        itemCollider.enabled = false;
+        if (spriteRenderer != null)
+            spriteRenderer.enabled = false;
+
+        if (itemCollider != null)
+            itemCollider.enabled = false;
     }
 
     public void Interact(PlayerController_MovementInteraction player)
     {
+        if (alreadyRegistered)
+        {
+            UIGameEvents.OnFeedback?.Invoke("Ya has examinado esta evidencia.");
+            return;
+        }
+
+        alreadyRegistered = true;
+
+        // 1. Mostrar diálogo
+        string textToShow = string.IsNullOrEmpty(discoveryText)
+            ? InventoryItem.name
+            : discoveryText;
+
+        UIGameEvents.OnDialogue?.Invoke(textToShow);
+
+        // 2. Abrir journal automáticamente
+        JournalController.Instance.OpenToCluesTab();
+
+        // 3. Registrar en journal
+        player.Inventory.AddItem(InventoryItem, 1);
+
+        // 4. feedback opcional
+        UIGameEvents.OnFeedback?.Invoke("Evidencia registrada");
+
+        // 5. persistencia
+        if (persistenceFlag != null)
+            GameProgress.Instance.AddFlag(persistenceFlag);
+    }
+
+    private void RegisterEvidence(PlayerController_MovementInteraction player)
+    {
         InventorySO inventory = player.Inventory;
 
-        int remainder = inventory.AddItem(InventoryItem, Quantity);
+        // Evita duplicados
+        if (inventory.Contains(InventoryItem))
+            return;
 
-        if (remainder == 0)
-        {
-            if (persistenceFlag != null)
-            {
-                UIGameEvents.OnItemCollected?.Invoke(InventoryItem);
-
-                GameProgress.Instance.AddFlag(persistenceFlag);
-            }
-
-            DestroyItem();
-        }
-        else
-        {
-            UIGameEvents.OnFeedback?.Invoke("Inventario lleno");
-
-            Quantity = remainder;
-        }
+        inventory.AddItem(InventoryItem, 1);
     }
 
     public Transform GetTransform()
@@ -127,39 +152,9 @@ public class Item : MonoBehaviour, IInteractable
 
     public void SetHighlight(bool value)
     {
+        if (spriteRenderer == null)
+            return;
+
         spriteRenderer.color = value ? highlightColor : originalColor;
-    }
-
-    public void DestroyItem()
-    {
-        itemCollider.enabled = false;
-
-        StartCoroutine(AnimateItemPickup());
-    }
-
-    private IEnumerator AnimateItemPickup()
-    {
-        if (audioSource != null)
-            audioSource.Play();
-
-        Vector3 startScale = transform.localScale;
-        Vector3 endScale = Vector3.zero;
-
-        float t = 0;
-
-        while (t < duration)
-        {
-            t += Time.deltaTime;
-
-            transform.localScale = Vector3.Lerp(
-                startScale,
-                endScale,
-                t / duration
-            );
-
-            yield return null;
-        }
-
-        Destroy(gameObject);
     }
 }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using Inventory.Model;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -106,6 +107,7 @@ public class DialogueManager : MonoBehaviour
         string speakerName = charData != null ? charData.displayName : "???";
 
         DialogueUI.Instance.ShowLine(charData, speakerName, node.text);
+        RegisterDialogueToJournal(charData, node);
 
         if (node.choices != null && node.choices.Count > 0)
         {
@@ -189,5 +191,49 @@ public class DialogueManager : MonoBehaviour
         runner = null;
         currentNode = null;
         currentDialogue = null;
+        
+        if (JournalController.Instance != null) JournalController.Instance.OpenToPeopleTab();
+    }
+    
+    void RegisterDialogueToJournal(DialogueCharacter charData, DialogueNode node)
+    {
+        if (charData == null || node == null)
+            return;
+
+        if (!node.isImportantLine)
+            return;
+
+        if (PeopleJournalSystem.Instance == null)
+        {
+            Debug.LogError("PeopleJournalSystem INSTANCE NULL");
+            return;
+        }
+
+        if (InventoryRuntime.Instance == null)
+        {
+            Debug.LogError("InventoryRuntime INSTANCE NULL");
+            return;
+        }
+
+        if (InventoryRuntime.Instance.GetInventory() == null)
+        {
+            Debug.LogError("InventorySO NULL");
+            return;
+        }
+
+        var item = ScriptableObject.CreateInstance<TestimonyItemSO>();
+
+        item.Name = charData.displayName;
+        item.ItemImage = charData.portrait;
+        item.Description = node.text;
+        item.ItemType = ItemType.Testimony;
+
+        PeopleJournalSystem.Instance.AddEntry(
+            charData.displayName,
+            charData.portrait,
+            node.text
+        );
+
+        InventoryRuntime.Instance.GetInventory().AddItem(item, 1);
     }
 }

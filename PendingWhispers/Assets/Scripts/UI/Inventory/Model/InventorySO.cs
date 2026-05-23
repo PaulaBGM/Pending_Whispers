@@ -34,13 +34,32 @@ namespace Inventory.Model
 
         public int AddItem(ItemSO item, int quantity)
         {
-            while (quantity > 0 && !IsInventoryFull())
+            /*while (quantity > 0 && !IsInventoryFull())
             {
                 quantity -= AddItemToFirstFreeSlot(item, 1);
             }
 
             InformAboutChange();
 
+            CheckClueProgression();
+
+            return quantity;*/
+            
+            if (item is ClueItemSO)
+            {
+                // evitar duplicados en slots
+                if (Contains(item))
+                    return 0;
+
+                quantity = 1;
+            }
+
+            while (quantity > 0 && !IsInventoryFull())
+            {
+                quantity -= AddItemToFirstFreeSlot(item, 1);
+            }
+
+            InformAboutChange();
             CheckClueProgression();
 
             return quantity;
@@ -100,6 +119,11 @@ namespace Inventory.Model
                 .ToList();
         }
 
+        public bool Contains(ItemSO item)
+        {
+            return inventoryItems.Any(i => !i.IsEmpty && i.item == item);
+        }
+        
         public bool TryLinkItems(ItemSO a, ItemSO b)
         {
             foreach (var link in possibleLinks)
@@ -120,14 +144,14 @@ namespace Inventory.Model
                 // Nuevo descubrimiento
                 discoveredLinks.Add(link);
 
-                Debug.Log("[Deduction] Nueva conclusión: " + link.Conclusion);
+                Debug.Log("[Deduction] Nueva conclusiï¿½n: " + link.Conclusion);
 
                 OnNewLinkDiscovered?.Invoke(link);
 
                 return true;
             }
 
-            Debug.Log("[Deduction] No hay relación entre objetos");
+            Debug.Log("[Deduction] No hay relaciï¿½n entre objetos");
 
             return false;
         }

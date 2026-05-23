@@ -20,4 +20,5 @@ public class DialogueNode
     public List<FlagSO> onEnterFlags;
 
     public List<GameEventSO> onEnterEvents;
+    public bool isImportantLine;
 }

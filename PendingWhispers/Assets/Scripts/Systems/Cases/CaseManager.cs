@@ -44,7 +44,7 @@ public class CaseManager : MonoBehaviour
             }
         }
 
-        UIFeedbackManager.Instance.ShowMessage("No has llegado a ninguna conclusión clara...");
+        UIFeedbackManager.Instance.ShowMessage("No has llegado a ninguna conclusiï¿½n clara...");
     }
 
     void ApplyOutcome(CaseOutcome outcome)
@@ -58,5 +58,15 @@ public class CaseManager : MonoBehaviour
         }
 
         UIGameEvents.RaiseFeedback(outcome.feedbackText);
+    }
+    
+    public CaseRuntime GetCurrentCase()
+    {
+        return currentCase;
+    }
+
+    public CaseData GetCurrentCaseData()
+    {
+        return currentCaseData;
     }
 }

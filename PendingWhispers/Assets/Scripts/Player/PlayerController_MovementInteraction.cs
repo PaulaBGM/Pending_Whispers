@@ -50,8 +50,6 @@ public class PlayerController_MovementInteraction : MonoBehaviour
         {
             agent.Warp(hit.position);
         }
-
-        Debug.Log("READY isOnNavMesh: " + agent.isOnNavMesh);
     }
 
     private void OnEnable()

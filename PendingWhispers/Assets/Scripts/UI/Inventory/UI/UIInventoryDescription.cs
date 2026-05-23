@@ -17,17 +17,29 @@ namespace Inventory.UI
 
         public void ResetDescription()
         {
-            itemImage.gameObject.SetActive(false);
-            title.text = "";
-            description.text = "";
+            if (itemImage != null)
+                itemImage.sprite = null;
+
+            if (title != null)
+                title.text = "";
+
+            if (description != null)
+                description.text = "";
         }
 
         public void SetDescription(Sprite sprite, string itemName, string itemDescription)
         {
-            itemImage.gameObject.SetActive(true);
-            itemImage.sprite = sprite;
-            title.text = itemName;
-            description.text = itemDescription;
+            if (itemImage != null)
+            {
+                itemImage.sprite = sprite;
+                itemImage.enabled = sprite != null;
+            }
+
+            if (title != null)
+                title.text = itemName;
+
+            if (description != null)
+                description.text = itemDescription;
         }
     }
 }

@@ -16,10 +16,12 @@ MonoBehaviour:
   - id: Lyra
     displayName: Lyra
     sprite: {fileID: 2916416985251425419, guid: 5d81eb40a54230e4ba26665eb0b757d6, type: 3}
+    portrait: {fileID: -6159030981858838909, guid: ac86a53648c7c574986ea53d7179d5c8, type: 3}
     isLeftSide: 1
   - id: ghost1
     displayName: Singing Ghost
     sprite: {fileID: -6393559205685776795, guid: 7af75cd6ca4e87e42a37e2e3ed3946b2, type: 3}
+    portrait: {fileID: -6159030981858838909, guid: ac86a53648c7c574986ea53d7179d5c8, type: 3}
     isLeftSide: 0
   nodes:
   - id: start
@@ -40,6 +42,7 @@ MonoBehaviour:
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
+    isImportantLine: 1
   - id: 1
     speakerID: ghost1
     text: "It used to be everything.\nMy voice\u2026 my legacy\u2026I once had it
@@ -49,6 +52,7 @@ MonoBehaviour:
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
+    isImportantLine: 0
   - id: 2
     speakerID: Lyra
     text: Do you remember what happened to you?
@@ -57,6 +61,7 @@ MonoBehaviour:
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
+    isImportantLine: 0
   - id: 3
     speakerID: ghost1
     text: Someone... they MURDERED ME! They were jealous of my fame, my wealth, my
@@ -76,6 +81,7 @@ MonoBehaviour:
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
+    isImportantLine: 1
   - id: 4
     speakerID: ghost1
     text: I would appreciate it, young one, I'll tell you where you should go
@@ -86,3 +92,4 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 9cc3d14b9dc651b4c8d197dcd5f6c5b9, type: 2}
     onEnterEvents:
     - {fileID: 11400000, guid: ee5cb3d4be5031e4d81e444a4be87cb4, type: 2}
+    isImportantLine: 0
