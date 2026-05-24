@@ -23,9 +23,15 @@ MonoBehaviour:
     isLeftSide: 0
   nodes:
   - id: start
+<<<<<<< Updated upstream:PendingWhispers/Assets/Scripts/Dialogo/SOs/DialogueOneLiner.asset
     speakerID: ghost1
     text: you should be able to uncover more information on the outside world
     nextNodeID: 
+=======
+    speakerID: "Desir\xE9e Cahu\xE8te"
+    text: "\u266A Oh Vivienne\u2026 oh, Mistress Vivienne\u2026 \u266A"
+    nextNodeID: 1
+>>>>>>> Stashed changes:PendingWhispers/Assets/Scripts/Systems/Dialogo/SOs/Case1/butler/DialogueButler1.asset
     choices: []
     requiredFlags:
     - unlocked_case_1

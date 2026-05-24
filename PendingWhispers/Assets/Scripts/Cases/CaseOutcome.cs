@@ -1,3 +1,4 @@
+using UnityEngine;
 using System.Collections.Generic;
 
 [System.Serializable]
@@ -5,8 +6,10 @@ public class CaseOutcome
 {
     public string outcomeID;
 
-    public List<FlagSO> requiredFlags;
-    public List<FlagSO> resultingFlags;
-
+    [TextArea]
     public string feedbackText;
+
+    public List<FlagSO> requiredFlags;
+
+    public List<FlagSO> resultingFlags;
 }
