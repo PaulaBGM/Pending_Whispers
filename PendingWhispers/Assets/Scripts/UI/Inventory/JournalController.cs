@@ -101,7 +101,6 @@ public class JournalController : MonoBehaviour
     private void HandleTabSelected(ItemType type)
     {
         pagesRoot.SetActive(true);
-        Debug.Log("TAB RECEIVED: " + type);
 
         switch (type)
         {
@@ -158,7 +157,6 @@ public class JournalController : MonoBehaviour
 
     private void RequestPage(GameObject page)
     {
-        Debug.Log("REQUEST PAGE: " + page.name);
         if (!isOpen || isAnimating)
             return;
         

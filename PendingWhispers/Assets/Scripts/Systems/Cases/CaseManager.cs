@@ -17,7 +17,10 @@ public class CaseManager : MonoBehaviour
     public void LoadCase(CaseData data)
     {
         currentCaseData = data;
+        Debug.Log("Loading case: " + data.name);
         currentCase = new CaseRuntime(data);
+        
+        if (CaseJournalSystem.Instance != null) CaseJournalSystem.Instance.TryAddCase(data);
     }
 
     public void TryResolveCase()

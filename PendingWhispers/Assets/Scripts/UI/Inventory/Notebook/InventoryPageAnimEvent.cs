@@ -22,8 +22,6 @@ public class InventoryPageAnimEvent : MonoBehaviour
     //llamado al final de animación
     public void OnAnimationFinished()
     {
-        Debug.Log("PAGE FLIP FINISHED");
-        
         JournalController.Instance.OnPageTurnFinished();
     }
 }

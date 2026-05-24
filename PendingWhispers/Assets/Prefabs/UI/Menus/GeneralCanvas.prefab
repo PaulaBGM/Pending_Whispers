@@ -2177,6 +2177,8 @@ MonoBehaviour:
   summaryPanel: {fileID: 5136627045392993420}
   hypothesisPanel: {fileID: 3494987646317452462}
   hypothesis: {fileID: 1667826528357799250}
+  caseEntryPrefab: {fileID: -5900676808708414225, guid: c7796abf30e760b4baa279519100a31e, type: 3}
+  content: {fileID: 7448135286962569792}
 --- !u!114 &1667826528357799250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5092,7 +5094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
   m_MinWidth: 100
-  m_MinHeight: 690.46
+  m_MinHeight: 690
   m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
@@ -5831,10 +5833,10 @@ MonoBehaviour:
     m_Right: 20
     m_Top: 20
     m_Bottom: 20
-  m_ChildAlignment: 0
+  m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 100, y: 100}
+  m_CellSize: {x: 400, y: 80}
   m_Spacing: {x: 20, y: 20}
   m_Constraint: 0
   m_ConstraintCount: 2

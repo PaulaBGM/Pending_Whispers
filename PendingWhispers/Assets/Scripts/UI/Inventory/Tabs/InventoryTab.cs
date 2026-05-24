@@ -20,8 +20,6 @@ namespace Inventory.UI
 
         private void OnClicked()
         {
-            
-            Debug.Log("TAB CLICKED: " + tabType);
             OnTabSelected?.Invoke(tabType);
         }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ public class CaseJournalSystem : MonoBehaviour
     public static CaseJournalSystem Instance;
 
     private Dictionary<string, CaseData> cases = new();
+
+    public event Action OnCasesChanged;
 
     private void Awake()
     {
@@ -16,25 +19,9 @@ public class CaseJournalSystem : MonoBehaviour
         }
 
         Instance = this;
-
-        InitializePrototypeCase();
+        DontDestroyOnLoad(gameObject);
     }
 
-    // ---------------- PROTOTYPE ----------------
-    private void InitializePrototypeCase()
-    {
-        // IMPORTANTE:
-        // No crees ScriptableObjects con new
-        // Usa uno ya creado en assets o asignado
-
-        CaseData starterCase = ScriptableObject.CreateInstance<CaseData>();
-
-        starterCase.caseID = "case_001";
-
-        cases.Add(starterCase.caseID, starterCase);
-    }
-
-    // ---------------- ADD ----------------
     public bool TryAddCase(CaseData newCase)
     {
         if (newCase == null || string.IsNullOrEmpty(newCase.caseID))
@@ -44,19 +31,20 @@ public class CaseJournalSystem : MonoBehaviour
             return false;
 
         cases.Add(newCase.caseID, newCase);
+
+        OnCasesChanged?.Invoke();
+
         return true;
     }
 
-    // ---------------- GET BY ID ----------------
-    public CaseData GetCase(string id)
-    {
-        cases.TryGetValue(id, out var caseData);
-        return caseData;
-    }
-
-    // ---------------- GET ALL ----------------
     public List<CaseData> GetAllCases()
     {
         return new List<CaseData>(cases.Values);
+    }
+
+    public CaseData GetCase(string id)
+    {
+        cases.TryGetValue(id, out var c);
+        return c;
     }
 }

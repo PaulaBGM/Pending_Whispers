@@ -35,8 +35,7 @@ public class Item : MonoBehaviour, IInteractable
         itemCollider = GetComponent<Collider2D>();
 
         // Persistencia
-        if (persistenceFlag != null &&
-            GameProgress.Instance.HasFlag(persistenceFlag))
+        if (persistenceFlag != null && GameProgress.Instance.HasFlag(persistenceFlag))
         {
             alreadyRegistered = true;
         }

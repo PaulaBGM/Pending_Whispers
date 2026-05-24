@@ -4,9 +4,14 @@ using Inventory.Model;
 
 public class HypothesisController : MonoBehaviour
 {
+    [Header("Sentence")]
+    [SerializeField] private List<string> textParts;
+    
     [Header("UI")]
     [SerializeField] private HypothesisPanelUI panel;
     [SerializeField] private List<HypothesisSlotDefinition> slotDefinitions;
+    
+    private string[] currentHypothesis;
 
     private void Awake()
     {
@@ -16,14 +21,8 @@ public class HypothesisController : MonoBehaviour
     public void OpenHypothesis()
     {
         gameObject.SetActive(true);
-
-        var textParts = new List<string>
-        {
-            "El culpable fue ",
-            " usando ",
-            " en ",
-            ""
-        };
+        
+        currentHypothesis = new string[slotDefinitions.Count];
 
         panel.Build(textParts, BuildSlotOptions());
     }
@@ -35,6 +34,8 @@ public class HypothesisController : MonoBehaviour
 
     public void OnDropdownChanged(int index, string value)
     {
+        currentHypothesis[index] = value;
+
         Debug.Log($"Slot {index}: {value}");
     }
 
@@ -80,5 +81,22 @@ public class HypothesisController : MonoBehaviour
         }
 
         return options;
+    }
+    
+    public string GetHypothesisText()
+    {
+        string result = "";
+
+        for (int i = 0; i < slotDefinitions.Count; i++)
+        {
+            result += textParts[i];
+
+            if (i < currentHypothesis.Length && currentHypothesis[i] != null)
+                result += currentHypothesis[i];
+        }
+
+        result += textParts[^1];
+
+        return result;
     }
 }
