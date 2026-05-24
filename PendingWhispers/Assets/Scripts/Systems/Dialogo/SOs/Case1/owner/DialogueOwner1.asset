@@ -20,7 +20,33 @@ MonoBehaviour:
     isLeftSide: 1
   - id: owner
     displayName: "Ren\xE9 Venue"
-    sprite: {fileID: -6393559205685776795, guid: 7af75cd6ca4e87e42a37e2e3ed3946b2, type: 3}
-    portrait: {fileID: 0}
+    sprite: {fileID: 21300000, guid: e87a487b606e8f1498c577b7aba31ed6, type: 3}
+    portrait: {fileID: 7791214535279931073, guid: 3c236ddd44c220a4b91c8ae3d6bba2a4, type: 3}
     isLeftSide: 0
-  nodes: []
+  nodes:
+  - id: start
+    speakerID: owner
+    text: 'Welcome, welcome to my humble establishment. You must be that freaky detective
+      who could see the dead, right? '
+    nextNodeID: 1
+    choices:
+    - text: Yes, it's me, I'm Lyra, nice to meet you
+      nextNodeID: 1
+      addFlags: []
+      requiredFlags: []
+      endsDialogue: 0
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+  - id: 1
+    speakerID: owner
+    text: Well, thank you for coming, these weird humming is scaring my customers,
+      and paintings have started to move... and all of this when that arrogant singer's
+      death's 50 anniverary was coming up...
+    nextNodeID: 
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 1

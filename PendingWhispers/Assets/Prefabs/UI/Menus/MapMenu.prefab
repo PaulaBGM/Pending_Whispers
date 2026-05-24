@@ -275,7 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 5e1785044c83751459c7d2bcf9f6adc0, type: 2}
-  isUnlocked: 1
+  isUnlocked: 0
   isCompleted: 0
   button: {fileID: 174368173154826402}
   icon: {fileID: 1587151763675949072}
@@ -493,7 +493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: fa8ea3c058e22f54da5faa0630a75c87, type: 2}
-  isUnlocked: 0
+  isUnlocked: 1
   isCompleted: 0
   button: {fileID: 4297888863439100054}
   icon: {fileID: 4390295600257508320}
@@ -1109,8 +1109,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodes:
-  - {fileID: 2281915339443495018}
   - {fileID: 2647273950266461979}
+  - {fileID: 2281915339443495018}
   player: {fileID: 1894777254710137858}
 --- !u!114 &3034453176145477127
 MonoBehaviour:
@@ -1213,7 +1213,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 597, y: -164}
+  m_AnchoredPosition: {x: -590, y: 136}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3530046805992340026

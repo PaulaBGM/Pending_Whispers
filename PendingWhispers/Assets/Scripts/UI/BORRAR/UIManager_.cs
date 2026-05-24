@@ -56,4 +56,5 @@ public partial class UIManager_ : MonoBehaviour
 
         SceneController.Instance.LoadScene("Map");
     }
+
 }
