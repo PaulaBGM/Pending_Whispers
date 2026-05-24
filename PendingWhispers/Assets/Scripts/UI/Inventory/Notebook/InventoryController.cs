@@ -46,7 +46,7 @@ namespace Inventory
             inventoryUI.OnItemActionRequested += HandleItemActionRequest;
         }
 
-        // 🔥 SOLO FILTRO DE DATOS
+        //SOLO FILTRO DE DATOS
         private void HandleTabChanged(ItemType type)
         {
             currentTab = type;
@@ -55,6 +55,7 @@ namespace Inventory
 
         public void ShowInventoryData()
         {
+            Debug.Log("Refreshing inventory UI");
             RefreshUI();
         }
 

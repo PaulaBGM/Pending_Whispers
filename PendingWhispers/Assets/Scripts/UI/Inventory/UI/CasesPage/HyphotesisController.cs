@@ -58,8 +58,11 @@ public class HypothesisController : MonoBehaviour
         switch (type)
         {
             case HypothesisSlotType.Person:
+                options.Add("Nobody");
+
                 foreach (var person in PeopleJournalSystem.Instance.GetEntries())
                     options.Add(person.personName);
+                break;
                 break;
 
             case HypothesisSlotType.Item:

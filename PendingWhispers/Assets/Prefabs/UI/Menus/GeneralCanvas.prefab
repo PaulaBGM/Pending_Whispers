@@ -2191,8 +2191,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 830a4935d49345644b53565151d3954e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textParts:
+  - The ghost
+  - was killed by
+  - due to
   panel: {fileID: 3855959525227307616}
   slotDefinitions:
+  - type: 1
   - type: 1
   - type: 0
 --- !u!1 &1830104903989858861
@@ -6232,7 +6237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ad632e6a7b3244caeb1724ce99972d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemImage: {fileID: 6968295682452257198}
+  itemImage: {fileID: 7712096710988948587}
   title: {fileID: 477405006004228649}
   description: {fileID: 5365975860800227290}
 --- !u!1 &5199314234746574811

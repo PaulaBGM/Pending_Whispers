@@ -34,7 +34,8 @@ public class JournalController : MonoBehaviour
     private bool isAnimating;
     private bool instantOpen;
     private InventoryAnimationEvents animationEvents;
-
+    private GameObject pendingInitialPage;
+    
     public bool IsAnimating => isAnimating;
 
     private void Awake()
@@ -47,7 +48,7 @@ public class JournalController : MonoBehaviour
         animationEvents = GetComponentInChildren<InventoryAnimationEvents>();
         animationEvents.SetUIVisible(false);
     }
-
+    
     private void OnEnable()
     {
         animationEvents.OnOpenFinished += HandleOpenFinished;
@@ -74,13 +75,21 @@ public class JournalController : MonoBehaviour
         isOpen = true;
 
         UIManager.Instance.SetJournalOpen(true);
-
         animationEvents.SetUIVisible(true);
 
         currentPage = null;
         pendingPage = null;
 
-        SetPageImmediate(inventoryPage);
+        if (pendingInitialPage != null)
+        {
+            SetPageImmediate(pendingInitialPage);
+            pendingInitialPage = null;
+        }
+        else
+        {
+            SetPageImmediate(inventoryPage);
+        }
+
         RefreshCurrentPage();
     }
 
@@ -233,25 +242,26 @@ public class JournalController : MonoBehaviour
     
     public void OpenToCluesTab()
     {
+        pendingInitialPage = inventoryPage;
+
         if (!isOpen)
             ToggleJournal();
-
-        //SOLO abrir página si no es la actual
-        if (currentPage == inventoryPage)
-        {
-            inventoryController.ShowInventoryData();
-            return;
-        }
-
-        RequestPage(inventoryPage);
+        else
+            RequestPage(inventoryPage);
     }
     
     public void OpenToPeopleTab()
     {
-        if (!isOpen)
-            ToggleJournal();
+        pendingInitialPage = peoplePage;
 
-        HandleTabSelected(ItemType.Testimony);
+        if (!isOpen)
+        {
+            ToggleJournal();
+        }
+        else
+        {
+            RequestPage(peoplePage);
+        }
     }
     
     private void OnDestroy()

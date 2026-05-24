@@ -29,6 +29,12 @@ public class HypothesisPanelUI : MonoBehaviour
 
         for (int i = 0; i < slotCount; i++)
         {
+            if (i >= rowContainers.Length)
+            {
+                Debug.LogError("Not enough rowContainers!");
+                return;
+            }
+
             Transform row = rowContainers[i];
 
             SpawnText(row, textParts[i]);
@@ -39,7 +45,10 @@ public class HypothesisPanelUI : MonoBehaviour
             spawned.Add(dd.gameObject);
         }
 
-        SpawnText(rowContainers[slotCount], textParts[slotCount]);
+        if (slotCount < rowContainers.Length)
+        {
+            SpawnText(rowContainers[slotCount], textParts[slotCount]);
+        }
     }
 
     private void SetupDropdown(TMP_Dropdown dropdown, int index, List<string> options)
