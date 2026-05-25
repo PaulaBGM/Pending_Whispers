@@ -393,7 +393,7 @@ Transform:
   m_GameObject: {fileID: 381295716}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 731.78937, y: 808.00476, z: -11.805664}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1193,25 +1193,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: --GAMESYSTEMS--
       objectReference: {fileID: 0}
-    - target: {fileID: 2094720780190871680, guid: 0e521717551cc2546a3fe7f0af399284, type: 3}
-      propertyPath: m_margin.x
-      value: -4.343338
-      objectReference: {fileID: 0}
-    - target: {fileID: 2094720780190871680, guid: 0e521717551cc2546a3fe7f0af399284, type: 3}
-      propertyPath: m_margin.z
-      value: -2.1954956
-      objectReference: {fileID: 0}
     - target: {fileID: 3353434903730006818, guid: 0e521717551cc2546a3fe7f0af399284, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.98197246
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3353434903730006818, guid: 0e521717551cc2546a3fe7f0af399284, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.098270364
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3353434903730006818, guid: 0e521717551cc2546a3fe7f0af399284, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.07250755
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3353434903730006818, guid: 0e521717551cc2546a3fe7f0af399284, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1240,18 +1232,6 @@ PrefabInstance:
     - target: {fileID: 3353434903730006818, guid: 0e521717551cc2546a3fe7f0af399284, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4540389862327541272, guid: 0e521717551cc2546a3fe7f0af399284, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8628264932699156916, guid: 0e521717551cc2546a3fe7f0af399284, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 695.23
-      objectReference: {fileID: 0}
-    - target: {fileID: 8628264932699156916, guid: 0e521717551cc2546a3fe7f0af399284, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 80.349
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

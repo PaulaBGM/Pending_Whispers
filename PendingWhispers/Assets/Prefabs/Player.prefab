@@ -408,8 +408,6 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 64
-  inventoryUI: {fileID: 0}
-  hudUI: {fileID: 0}
   interactDistance: 1.5
   canMove: 1
 --- !u!195 &7755278882486255537
@@ -426,7 +424,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

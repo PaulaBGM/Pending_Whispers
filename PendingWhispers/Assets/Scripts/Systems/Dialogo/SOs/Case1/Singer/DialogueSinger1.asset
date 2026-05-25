@@ -26,10 +26,7 @@ MonoBehaviour:
   nodes:
   - id: start
     speakerID: ghost1
-    text: 'Another visitor? Another rat hungry for stories?
-
-      Get out of my
-      house!'
+    text: Another visitor? Another rat hungry for stories?
     nextNodeID: 1
     choices:
     - text: "I\u2019m not here for the museum. I came to help."
@@ -48,20 +45,42 @@ MonoBehaviour:
     isImportantLine: 0
   - id: 1
     speakerID: ghost1
-    text: "Help?\nThey all say that.\nThen they steal pieces of me. My dresses\u2026
-      my jewels\u2026 my songs\u2026\nThey didn\u2019t even let my bones rest."
+    text: GET OUT OF MY HOUSE!
     nextNodeID: 2
+    choices: []
+    requiredFlags: []
+    onEnterFlags:
+    - {fileID: 11400000, guid: 9cc3d14b9dc651b4c8d197dcd5f6c5b9, type: 2}
+    onEnterEvents:
+    - {fileID: 11400000, guid: ee5cb3d4be5031e4d81e444a4be87cb4, type: 2}
+    isImportantLine: 0
+  - id: 2
+    speakerID: ghost1
+    text: Help?
+    nextNodeID: 3
     choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 0
-  - id: 2
+  - id: 3
     speakerID: ghost1
-    text: "I didn\u2019t hurt them\u2026 not at first.\nBut I hear them every night.\nWhispers.
-      Laughter. Just like at that party.\nAll of them watching me\u2026 waiting to
-      see me fall."
-    nextNodeID: 3
+    text: "They all say that. Then they steal pieces of me. My dresses\u2026 my jewels\u2026
+      my songs\u2026 They didn\u2019t even let my bones rest."
+    nextNodeID: 4
+    choices: []
+    requiredFlags: []
+    onEnterFlags:
+    - {fileID: 11400000, guid: 9cc3d14b9dc651b4c8d197dcd5f6c5b9, type: 2}
+    onEnterEvents:
+    - {fileID: 11400000, guid: ee5cb3d4be5031e4d81e444a4be87cb4, type: 2}
+    isImportantLine: 0
+  - id: 4
+    speakerID: ghost1
+    text: "I didn\u2019t hurt them\u2026 not at first. But I hear them every night.
+      Whispers. Laughter. Just like at that party. All of them watching me\u2026
+      waiting to see me fall."
+    nextNodeID: 5
     choices:
     - text: Who?
       nextNodeID: 3
@@ -72,11 +91,11 @@ MonoBehaviour:
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 0
-  - id: 3
+  - id: 5
     speakerID: ghost1
-    text: "Everyone.\nMy lover\u2026 Laurent\u2026\nMy butler\u2026\nThe guests\u2026\nThey
-      all wanted to get rid of me."
-    nextNodeID: 3
+    text: "EVERYONE. My lover\u2026 Laurent\u2026 My butler\u2026 The guests\u2026
+      They all wanted to get rid of me."
+    nextNodeID: 6
     choices:
     - text: Why would you think that?
       nextNodeID: 4
@@ -87,26 +106,32 @@ MonoBehaviour:
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 1
-  - id: 4
+  - id: 7
     speakerID: ghost1
-    text: 'Because I saw it in their eyes.
-
-      Because they stopped applauding
-      when I became ill.
-
-      Because my voice was worth more than my life.'
-    nextNodeID: 5
+    text: Because I saw it in their eyes. Because they stopped applauding when I
+      became ill. Because my voice was worth more than my life.
+    nextNodeID: 8
     choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 0
-  - id: 5
+  - id: 9
     speakerID: ghost1
     text: 'And now they desecrate my home to sell memories!
 
-      They will never
-      know peace!'
+'
+    nextNodeID: 10
+    choices: []
+    requiredFlags: []
+    onEnterFlags:
+    - {fileID: 11400000, guid: 9cc3d14b9dc651b4c8d197dcd5f6c5b9, type: 2}
+    onEnterEvents:
+    - {fileID: 11400000, guid: ee5cb3d4be5031e4d81e444a4be87cb4, type: 2}
+    isImportantLine: 0
+  - id: 9
+    speakerID: ghost1
+    text: THEY WILL NEVER KNOW PEACE!
     nextNodeID: 
     choices: []
     requiredFlags: []

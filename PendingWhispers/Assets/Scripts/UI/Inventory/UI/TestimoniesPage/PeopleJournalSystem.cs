@@ -32,7 +32,7 @@ public class PeopleJournalSystem : MonoBehaviour
 
         if (existing != null)
         {
-            existing.fullDialogue += "\n" + dialogue;
+            existing.fullDialogue += "\n\n• " + dialogue;
             existing.shortDialogue = Trim(dialogue);
             return;
         }
@@ -43,7 +43,7 @@ public class PeopleJournalSystem : MonoBehaviour
             personName = name,
             portrait = portrait,
             shortDialogue = Trim(dialogue),
-            fullDialogue = dialogue
+            fullDialogue = "• " + dialogue
         };
 
         entries.Add(entry);

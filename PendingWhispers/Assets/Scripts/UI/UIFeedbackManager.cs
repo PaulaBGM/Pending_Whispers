@@ -15,7 +15,11 @@ public class UIFeedbackManager : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         if (transform.parent != null)
             transform.SetParent(null);
@@ -39,7 +43,7 @@ public class UIFeedbackManager : MonoBehaviour
 
     void OnLocationUnlocked(string locationName)
     {
-        ShowMessage("Nueva localización desbloqueada: " + locationName);
+        ShowMessage("Nueva localizaciï¿½n desbloqueada: " + locationName);
     }
 
     public void ShowMessage(string message)
@@ -52,11 +56,15 @@ public class UIFeedbackManager : MonoBehaviour
 
     IEnumerator ShowRoutine(string message)
     {
+        if (panel == null || text == null)
+            yield break;
+
         panel.SetActive(true);
         text.text = message;
 
         yield return new WaitForSeconds(duration);
 
-        panel.SetActive(false);
+        if (panel != null)
+            panel.SetActive(false);
     }
 }

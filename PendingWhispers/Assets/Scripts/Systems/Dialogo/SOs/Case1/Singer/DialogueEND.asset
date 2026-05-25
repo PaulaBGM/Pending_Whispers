@@ -26,7 +26,7 @@ MonoBehaviour:
   nodes:
   - id: start
     speakerID: lyra
-    text: I've finally reached the truth
+    text: I've finally reached the truth.
     nextNodeID: 1
     choices: []
     requiredFlags:
@@ -60,9 +60,8 @@ MonoBehaviour:
     speakerID: ghost1
     text: "Oh? Is that so? All of these years I've hold on to these grudge against
       the world who silenced me, when I was the one who didn't listen to others...
-      how... sad... \n\n\nThank you... Lyra, was it? Now, I'll finally be able to
-      rest this voice... "
-    nextNodeID: 
+      how... sad... \n\n"
+    nextNodeID: 4
     choices: []
     requiredFlags: []
     onEnterFlags: []
@@ -71,9 +70,19 @@ MonoBehaviour:
     isImportantLine: 0
   - id: 3
     speakerID: ghost1
-    text: "I knew it... that butler... he was always after me, envious of my voice,
-      my wealth, my POWER... \n\nI'LL SHATTER THIS UNGRATEFUL WORLD WITH THE POWER
-      OF MY VOICE... "
+    text: 'I knew it... that butler... he was always after me, envious of my voice,
+      my wealth, my POWER...  I''LL SHATTER THIS UNGRATEFUL WORLD WITH THE POWER
+      OF MY VOICE... '
+    nextNodeID: 
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents:
+    - {fileID: 11400000, guid: bbd47d83a4602724db2c4e969b3a2e83, type: 2}
+    isImportantLine: 0
+  - id: 4
+    speakerID: ghost1
+    text: 'Thank you... Lyra, was it? Now, I''ll finally be able to rest this voice... '
     nextNodeID: 
     choices: []
     requiredFlags: []

@@ -106,7 +106,7 @@ Transform:
   m_GameObject: {fileID: 3251498118334565667}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 516.36084, y: -77.20569, z: -1.8489624}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -288,9 +288,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4027415868076447628, guid: 119e6182bc4bd3944a1d09d6315acc76, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 695.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027415868076447628, guid: 119e6182bc4bd3944a1d09d6315acc76, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 80.349
+      objectReference: {fileID: 0}
+    - target: {fileID: 6721746872021423800, guid: 119e6182bc4bd3944a1d09d6315acc76, type: 3}
+      propertyPath: m_margin.x
+      value: -4.343338
+      objectReference: {fileID: 0}
+    - target: {fileID: 6721746872021423800, guid: 119e6182bc4bd3944a1d09d6315acc76, type: 3}
+      propertyPath: m_margin.z
+      value: -2.1954956
+      objectReference: {fileID: 0}
     - target: {fileID: 8858543888515591842, guid: 119e6182bc4bd3944a1d09d6315acc76, type: 3}
       propertyPath: m_Name
       value: FeedbackCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 9176986798681274400, guid: 119e6182bc4bd3944a1d09d6315acc76, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
