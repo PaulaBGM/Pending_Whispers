@@ -6,7 +6,9 @@ public class PeopleJournalSystem : MonoBehaviour
     public static PeopleJournalSystem Instance;
 
     private List<PersonJournalEntry> entries = new();
-    private HashSet<string> seenEntries = new();
+
+    // 🔥 SOLO para evitar duplicados exactos
+    private HashSet<string> seenLines = new();
 
     private void Awake()
     {
@@ -18,45 +20,69 @@ public class PeopleJournalSystem : MonoBehaviour
 
         Instance = this;
     }
-    
+
     public void AddEntry(string name, Sprite portrait, string dialogue)
     {
-        string id = name + "_" + dialogue; // o mejor GUID desde diálogo si tienes
-
-        if (seenEntries.Contains(id))
+        if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(dialogue))
             return;
 
-        seenEntries.Add(id);
+        string npcId = name;
+        string lineKey = name + "|" + dialogue.Trim(); // 🔥 más estable
+
+        // evitar duplicados exactos
+        if (seenLines.Contains(lineKey))
+            return;
+
+        seenLines.Add(lineKey);
 
         PersonJournalEntry existing = entries.Find(e => e.personName == name);
 
         if (existing != null)
         {
-            existing.fullDialogue += "\n\n• " + dialogue;
+            if (existing.dialogues == null)
+                existing.dialogues = new List<string>();
+
+            if (!existing.dialogues.Contains(dialogue))
+                existing.dialogues.Add(dialogue);
+
             existing.shortDialogue = Trim(dialogue);
+
+            // 🔥 IMPORTANTE: fullDialogue siempre reconstruido desde source of truth
+            existing.fullDialogue = BuildFullDialogue(existing.dialogues);
+
             return;
         }
 
         PersonJournalEntry entry = new PersonJournalEntry
         {
-            id = id,
+            id = npcId,
             personName = name,
             portrait = portrait,
             shortDialogue = Trim(dialogue),
-            fullDialogue = "• " + dialogue
+
+            // 🔥 fuente de verdad
+            dialogues = new List<string> { dialogue },
+
+            // generado
+            fullDialogue = dialogue
         };
 
         entries.Add(entry);
+    }
+
+    private string BuildFullDialogue(List<string> dialogues)
+    {
+        if (dialogues == null || dialogues.Count == 0)
+            return "";
+
+        return string.Join("\n\n• ", dialogues);
     }
 
     private string Trim(string text)
     {
         if (string.IsNullOrEmpty(text)) return "";
 
-        if (text.Length > 120)
-            return text.Substring(0, 120) + "...";
-
-        return text;
+        return text.Length > 120 ? text.Substring(0, 120) + "..." : text;
     }
 
     public List<PersonJournalEntry> GetEntries()

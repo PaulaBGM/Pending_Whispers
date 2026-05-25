@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Inventory.UI;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class PeoplePageController : MonoBehaviour
@@ -13,19 +14,15 @@ public class PeoplePageController : MonoBehaviour
     [SerializeField] private Transform content;
     [SerializeField] private GameObject entryPrefab;
 
+    private List<PersonJournalEntry> cachedEntries = new();
     private List<PeopleEntryUI> slots = new();
     private List<int> filteredIndices = new();
 
     private PersonJournalEntry selectedEntry;
     private PeopleEntryUI selectedSlot;
 
-    private IEnumerator Start()
+    private void Start()
     {
-        yield return new WaitUntil(() =>
-            PeopleJournalSystem.Instance != null &&
-            PeopleJournalSystem.Instance.GetEntries().Count > 0
-        );
-
         RefreshUI();
     }
 
@@ -36,67 +33,51 @@ public class PeoplePageController : MonoBehaviour
     {
         var entries = PeopleJournalSystem.Instance.GetEntries();
 
-        // reset filtrado
         filteredIndices.Clear();
 
-        // crear slots si faltan
         while (slots.Count < entries.Count)
         {
             var obj = Instantiate(entryPrefab, content);
             var ui = obj.GetComponent<PeopleEntryUI>();
 
             ui.OnEntryClicked += HandleClick;
-
             slots.Add(ui);
         }
 
-        // reset total (igual que inventoryUI.ResetAllItems)
         for (int i = 0; i < slots.Count; i++)
         {
             slots[i].ResetData();
             slots[i].Deselect();
         }
 
-        // update filtrado + UI
         int uiIndex = 0;
 
         for (int i = 0; i < entries.Count; i++)
         {
-            var entry = entries[i];
-
             filteredIndices.Add(i);
-
-            slots[uiIndex].SetData(entry);
-
+            slots[uiIndex].SetData(entries[i]);
             uiIndex++;
         }
+
+        Canvas.ForceUpdateCanvases();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(content.GetComponent<RectTransform>());
     }
 
-    // =========================
-    // CLICK HANDLER (tipo InventoryController)
-    // =========================
     private void HandleClick(PersonJournalEntry entry)
     {
-        var entries = PeopleJournalSystem.Instance.GetEntries();
-
-        for (int uiIndex = 0; uiIndex < slots.Count; uiIndex++)
+        for (int i = 0; i < cachedEntries.Count; i++)
         {
-            if (uiIndex >= filteredIndices.Count) continue;
-
-            var realIndex = filteredIndices[uiIndex];
-            var data = entries[realIndex];
-
-            bool isSelected = data == entry;
+            bool isSelected = cachedEntries[i] == entry;
 
             if (isSelected)
             {
-                slots[uiIndex].Select();
-                selectedSlot = slots[uiIndex];
+                slots[i].Select();
+                selectedSlot = slots[i];
                 selectedEntry = entry;
             }
             else
             {
-                slots[uiIndex].Deselect();
+                slots[i].Deselect();
             }
         }
 
@@ -119,14 +100,17 @@ public class PeoplePageController : MonoBehaviour
 
     public void ShowDetail(PersonJournalEntry entry)
     {
-        if (entry == null) return;
+        if (entry == null || descriptionPanel == null)
+            return;
+
+        detailPanel.SetActive(true);
+
+        descriptionPanel.gameObject.SetActive(true);
 
         descriptionPanel.SetDescription(
             entry.portrait,
             entry.personName,
             entry.fullDialogue
         );
-
-        ShowDetail();
     }
 }

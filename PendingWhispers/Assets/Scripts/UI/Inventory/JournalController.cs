@@ -1,5 +1,6 @@
-using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 using Inventory.UI;
 using Inventory.Model;
 
@@ -32,11 +33,9 @@ public class JournalController : MonoBehaviour
 
     private bool isOpen;
     private bool isAnimating;
-    private bool instantOpen;
+
     private InventoryAnimationEvents animationEvents;
     private GameObject pendingInitialPage;
-    
-    public bool IsAnimating => isAnimating;
 
     private void Awake()
     {
@@ -44,26 +43,60 @@ public class JournalController : MonoBehaviour
         else Destroy(gameObject);
 
         root.SetActive(false);
-        
+
         animationEvents = GetComponentInChildren<InventoryAnimationEvents>();
         animationEvents.SetUIVisible(false);
     }
-    
+
     private void OnEnable()
     {
         animationEvents.OnOpenFinished += HandleOpenFinished;
         animationEvents.OnCloseFinished += HandleCloseFinished;
     }
 
+    private void OnDestroy()
+    {
+        if (animationEvents != null)
+        {
+            animationEvents.OnOpenFinished -= HandleOpenFinished;
+            animationEvents.OnCloseFinished -= HandleCloseFinished;
+        }
+    }
+
+    // =========================
+    // OPEN / CLOSE
+    // =========================
+
+    public void ToggleJournal()
+    {
+        if (isAnimating) return;
+
+        isOpen = !isOpen;
+
+        if (isOpen)
+        {
+            isAnimating = true;
+            root.SetActive(true);
+        }
+        else
+        {
+            currentPage = null;
+            pendingPage = null;
+
+            animationEvents.PlayCloseAnimation(root);
+        }
+    }
+
     private void HandleCloseFinished()
     {
         currentPage = null;
         pendingPage = null;
+
         isOpen = false;
         isAnimating = false;
-        
+
         pagesRoot.SetActive(false);
-        
+
         UIManager.Instance.SetJournalOpen(false);
 
         gameObject.SetActive(false);
@@ -90,22 +123,26 @@ public class JournalController : MonoBehaviour
             SetPageImmediate(inventoryPage);
         }
 
+        StartCoroutine(RefreshAfterOpen());
+    }
+
+    private IEnumerator RefreshAfterOpen()
+    {
+        yield return null;
         RefreshCurrentPage();
     }
 
+    // =========================
+    // TABS
+    // =========================
+
     private void Start()
     {
-        //FIX 1: suscripción segura
-        if (tabs != null)
-        {
-            foreach (var tab in tabs)
-            {
-                tab.OnTabSelected += HandleTabSelected;
-            }
-        }
-    }
+        if (tabs == null) return;
 
-    // ---------------- TABS ----------------
+        foreach (var tab in tabs)
+            tab.OnTabSelected += HandleTabSelected;
+    }
 
     private void HandleTabSelected(ItemType type)
     {
@@ -127,52 +164,13 @@ public class JournalController : MonoBehaviour
         }
     }
 
-    // ---------------- TOGGLE ----------------
-
-    public void ToggleJournal()
-    {
-        if (isAnimating) return;
-
-        isOpen = !isOpen;
-
-        if (isOpen)
-        {
-            isAnimating = true;
-            root.SetActive(isOpen);
-        }
-        else
-        {
-            currentPage = null;
-            pendingPage = null;
-            GetComponentInChildren<InventoryAnimationEvents>().PlayCloseAnimation(root);
-        }
-    }
-
-    // ---------------- FIRST PAGE FIX ----------------
-
-    private void OpenFirstPage()
-    {
-        isAnimating = false;
-
-        SetPageImmediate(inventoryPage);
-
-        //FIX CLAVE: asegurar estado inicial correcto
-        currentPage = inventoryPage;
-        pagesRoot.SetActive(false);
-
-    }
-
-    // ---------------- PAGE REQUEST ----------------
+    // =========================
+    // PAGE REQUEST
+    // =========================
 
     private void RequestPage(GameObject page)
     {
-        if (!isOpen || isAnimating)
-            return;
-        
-        bool samePage = (page == currentPage);
-
-        pendingPage = page;
-        isAnimating = true;
+        if (!isOpen || isAnimating) return;
 
         pendingPage = page;
         isAnimating = true;
@@ -181,22 +179,7 @@ public class JournalController : MonoBehaviour
 
         if (pageTurnAnimator != null)
             pageTurnAnimator.Play("PageTurnAnimation", 0, 0f);
-
-        if (samePage) pendingPage = currentPage;
     }
-
-    private void RefreshCurrentPage()
-    {
-        if (currentPage == inventoryPage)
-            inventoryController?.ShowInventoryData();
-
-        if (currentPage == peoplePage)
-            peoplePage.GetComponent<PeoplePageController>()?.RefreshUI();
-
-        /*if (currentPage == casesPage)
-            casesPage.GetComponent<CasesPageController>()?.RefreshUI();*/
-    }
-    // ---------------- ANIMATION EVENT ----------------
 
     public void OnPageTurnFinished()
     {
@@ -211,14 +194,37 @@ public class JournalController : MonoBehaviour
         if (currentPage != null)
         {
             currentPage.SetActive(true);
-
-            RefreshCurrentPage();
+            StartCoroutine(RefreshPageNextFrame());
         }
 
         isAnimating = false;
     }
 
-    // ---------------- INSTANT SET ----------------
+    private IEnumerator RefreshPageNextFrame()
+    {
+        yield return null;
+        RefreshCurrentPage();
+    }
+
+    // =========================
+    // PAGE REFRESH LOGIC
+    // =========================
+
+    private void RefreshCurrentPage()
+    {
+        if (currentPage == inventoryPage)
+            inventoryController?.RefreshUI();
+
+        if (currentPage == peoplePage)
+            peoplePage.GetComponent<PeoplePageController>()?.RefreshUI();
+
+        if (currentPage == casesPage)
+            casesPage.GetComponent<CasesPageController>()?.RefreshUI();
+    }
+
+    // =========================
+    // SET PAGE IMMEDIATE
+    // =========================
 
     private void SetPageImmediate(GameObject page)
     {
@@ -228,18 +234,19 @@ public class JournalController : MonoBehaviour
 
         currentPage = page;
         currentPage.SetActive(true);
-
-        if (currentPage == inventoryPage && inventoryController != null)
-            inventoryController.ShowInventoryData();
     }
-    
+
     private void HideAllPages()
     {
         inventoryPage.SetActive(false);
         peoplePage.SetActive(false);
         casesPage.SetActive(false);
     }
-    
+
+    // =========================
+    // EXTERNAL OPENERS
+    // =========================
+
     public void OpenToCluesTab()
     {
         pendingInitialPage = inventoryPage;
@@ -249,24 +256,14 @@ public class JournalController : MonoBehaviour
         else
             RequestPage(inventoryPage);
     }
-    
+
     public void OpenToPeopleTab()
     {
         pendingInitialPage = peoplePage;
 
         if (!isOpen)
-        {
             ToggleJournal();
-        }
         else
-        {
             RequestPage(peoplePage);
-        }
-    }
-    
-    private void OnDestroy()
-    {
-        animationEvents.OnOpenFinished -= HandleOpenFinished;
-        animationEvents.OnCloseFinished -= HandleCloseFinished;
     }
 }

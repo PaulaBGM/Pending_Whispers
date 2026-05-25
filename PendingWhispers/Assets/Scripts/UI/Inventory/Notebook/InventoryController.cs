@@ -1,7 +1,7 @@
-using Inventory.Model;
-using Inventory.UI;
 using System.Collections.Generic;
 using UnityEngine;
+using Inventory.Model;
+using Inventory.UI;
 
 namespace Inventory
 {
@@ -16,6 +16,10 @@ namespace Inventory
         private ItemType currentTab = ItemType.Clue;
         private List<int> filteredIndices = new();
 
+        // 🔥 estado diferido (sin coroutines)
+        private Dictionary<int, InventoryItem> lastState;
+        private bool hasPendingUpdate;
+
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -25,14 +29,29 @@ namespace Inventory
             }
 
             Instance = this;
+
             PrepareInventoryData();
             PrepareUI();
+        }
+
+        private void OnEnable()
+        {
+            if (inventoryData != null)
+                inventoryData.OnInventoryUpdated += QueueRefresh;
+        }
+
+        private void OnDisable()
+        {
+            if (inventoryData != null)
+                inventoryData.OnInventoryUpdated -= QueueRefresh;
         }
 
         private void PrepareInventoryData()
         {
             inventoryData = InventoryRuntime.Instance.GetInventory();
-            inventoryData.OnInventoryUpdated += UpdateInventoryUIFiltered;
+
+            if (inventoryData != null)
+                inventoryData.OnInventoryUpdated += QueueRefresh;
         }
 
         private void PrepareUI()
@@ -46,32 +65,65 @@ namespace Inventory
             inventoryUI.OnItemActionRequested += HandleItemActionRequest;
         }
 
-        //SOLO FILTRO DE DATOS
+        // =========================
+        // TAB CHANGE
+        // =========================
         private void HandleTabChanged(ItemType type)
         {
             currentTab = type;
+
             RefreshUI();
         }
 
-        public void ShowInventoryData()
-        {
-            Debug.Log("Refreshing inventory UI");
-            RefreshUI();
-        }
-
+        // =========================
+        // PUBLIC ENTRY
+        // =========================
         public void RefreshUI()
         {
-            UpdateInventoryUIFiltered(inventoryData.GetCurrentInventoryState());
+            if (inventoryData == null) return;
+
+            QueueRefresh(inventoryData.GetCurrentInventoryState());
         }
 
-        private void UpdateInventoryUIFiltered(Dictionary<int, InventoryItem> inventoryState)
+        // =========================
+        // QUEUE (SAFE)
+        // =========================
+        private void QueueRefresh(Dictionary<int, InventoryItem> state)
         {
+            if (state == null) return;
+
+            // snapshot seguro
+            lastState = new Dictionary<int, InventoryItem>(state);
+            hasPendingUpdate = true;
+        }
+
+        // =========================
+        // SAFE UPDATE LOOP
+        // =========================
+        private void Update()
+        {
+            if (!hasPendingUpdate) return;
+            if (inventoryUI == null) return;
+            if (!inventoryUI.gameObject.activeInHierarchy) return;
+
+            hasPendingUpdate = false;
+
+            ApplyRefresh();
+        }
+
+        // =========================
+        // UI RENDER
+        // =========================
+        private void ApplyRefresh()
+        {
+            if (lastState == null) return;
+
             inventoryUI.ResetAllItems();
             filteredIndices.Clear();
 
             int uiIndex = 0;
 
-            foreach (var kvp in inventoryState)
+            foreach (var kvp in lastState)
             {
                 if (kvp.Value.item.ItemType == currentTab)
                 {
@@ -88,6 +140,9 @@ namespace Inventory
             }
         }
 
+        // =========================
+        // ITEM HELPERS
+        // =========================
         private InventoryItem GetItemByFilteredIndex(int index)
         {
             if (index < 0 || index >= filteredIndices.Count)
@@ -115,6 +170,7 @@ namespace Inventory
         private void HandleSwapItems(int a, int b)
         {
             if (a < 0 || b < 0) return;
+            if (a >= filteredIndices.Count || b >= filteredIndices.Count) return;
 
             inventoryData.SwapItems(filteredIndices[a], filteredIndices[b]);
         }
@@ -135,6 +191,15 @@ namespace Inventory
                 item.item.Name,
                 item.item.Description
             );
+        }
+
+        private void OnDestroy()
+        {
+            if (inventoryData != null)
+                inventoryData.OnInventoryUpdated -= QueueRefresh;
+
+            if (Instance == this)
+                Instance = null;
         }
     }
 }
