@@ -43,7 +43,7 @@ public class UIFeedbackManager : MonoBehaviour
 
     void OnLocationUnlocked(string locationName)
     {
-        ShowMessage("Nueva localizaci�n desbloqueada: " + locationName);
+        ShowMessage("Nueva localizacion desbloqueada: " + locationName);
     }
 
     public void ShowMessage(string message)

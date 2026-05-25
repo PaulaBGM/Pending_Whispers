@@ -47,7 +47,6 @@ namespace Inventory.Model
             
             if (item is ClueItemSO)
             {
-                // evitar duplicados en slots
                 if (Contains(item))
                     return 0;
 

@@ -106,7 +106,7 @@ public class Item : MonoBehaviour, IInteractable
     {
         if (alreadyRegistered)
         {
-            UIGameEvents.OnFeedback?.Invoke("Ya has examinado esta evidencia.");
+            UIGameEvents.OnFeedback?.Invoke("You have already examined this evidence.");
             return;
         }
 
@@ -126,7 +126,7 @@ public class Item : MonoBehaviour, IInteractable
         player.Inventory.AddItem(InventoryItem, 1);
 
         // 4. feedback opcional
-        UIGameEvents.OnFeedback?.Invoke("Evidencia registrada");
+        UIGameEvents.OnFeedback?.Invoke("Evidence registered");
 
         // 5. persistencia
         if (persistenceFlag != null)

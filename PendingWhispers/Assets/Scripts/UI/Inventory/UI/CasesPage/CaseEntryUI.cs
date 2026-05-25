@@ -25,7 +25,7 @@ public class CaseEntryUI : MonoBehaviour
             titleText.text = runtime.data.caseTitle;
 
         if (objectiveText != null)
-            objectiveText.text = runtime.data.currentObjective;
+            objectiveText.text = runtime.currentObjective;
 
         if (progressText != null)
             progressText.text = runtime.GetProgressText();

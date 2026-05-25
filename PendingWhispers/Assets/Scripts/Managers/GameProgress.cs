@@ -9,7 +9,6 @@ public class GameProgress : MonoBehaviour
     private HashSet<FlagSO> flags = new();
 
     public event Action<FlagSO> OnFlagAdded;
-
     void Awake()
     {
         if (Instance == null)

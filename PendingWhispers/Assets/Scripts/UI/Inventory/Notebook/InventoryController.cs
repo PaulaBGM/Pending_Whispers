@@ -16,7 +16,6 @@ namespace Inventory
         private ItemType currentTab = ItemType.Clue;
         private List<int> filteredIndices = new();
 
-        // 🔥 estado diferido (sin coroutines)
         private Dictionary<int, InventoryItem> lastState;
         private bool hasPendingUpdate;
 

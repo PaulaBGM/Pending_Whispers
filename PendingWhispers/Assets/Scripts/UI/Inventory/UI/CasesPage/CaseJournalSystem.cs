@@ -23,15 +23,20 @@ public class CaseJournalSystem : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public bool TryAddCase(CaseData newCase)
+    public bool TryAddCase(CaseRuntime runtime)
     {
-        if (newCase == null || string.IsNullOrEmpty(newCase.caseID))
+        if (runtime == null || runtime.data == null)
             return false;
 
-        if (cases.ContainsKey(newCase.caseID))
+        string caseID = runtime.data.caseID;
+
+        if (string.IsNullOrEmpty(caseID))
             return false;
 
-        cases.Add(newCase.caseID, new CaseRuntime(newCase));
+        if (cases.ContainsKey(caseID))
+            return false;
+
+        cases.Add(caseID, runtime);
 
         OnCasesChanged?.Invoke();
 

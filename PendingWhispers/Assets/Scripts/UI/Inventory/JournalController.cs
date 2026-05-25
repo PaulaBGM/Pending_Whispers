@@ -219,7 +219,7 @@ public class JournalController : MonoBehaviour
             peoplePage.GetComponent<PeoplePageController>()?.RefreshUI();
 
         if (currentPage == casesPage)
-            casesPage.GetComponent<CasesPageController>()?.RefreshUI();
+            casesPage.GetComponent<CasePageController>()?.RefreshUI();
     }
 
     // =========================

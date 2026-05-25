@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CasesPageController : MonoBehaviour
+public class CasePageController : MonoBehaviour
 {
     [Header("Panels")]
     [SerializeField] private GameObject listPanel;
@@ -37,11 +37,15 @@ public class CasesPageController : MonoBehaviour
     {
         if (CaseJournalSystem.Instance != null)
             CaseJournalSystem.Instance.OnCasesChanged -= RefreshUI;
+
+        if (selectedCase != null)
+            selectedCase.OnCaseUpdated -= RefreshSelectedCase;
     }
 
     private void Start()
     {
         summaryPanel.SetActive(true);
+
         hypothesisPanel.SetActive(false);
 
         RefreshUI();
@@ -62,11 +66,18 @@ public class CasesPageController : MonoBehaviour
         for (int i = 0; i < cases.Count; i++)
         {
             spawnedEntries[i].SetData(cases[i]);
+
+            if (cases[i] == selectedCase)
+                spawnedEntries[i].Select();
         }
 
-        if (cases.Count > 0)
+        if (selectedCase == null && cases.Count > 0)
         {
             HandleCaseClicked(cases[0]);
+        }
+        else if (selectedCase != null)
+        {
+            RefreshSelectedCase();
         }
     }
 
@@ -86,7 +97,14 @@ public class CasesPageController : MonoBehaviour
 
     private void HandleCaseClicked(CaseRuntime runtime)
     {
+        if (selectedCase != null)
+        {
+            selectedCase.OnCaseUpdated -= RefreshSelectedCase;
+        }
+
         selectedCase = runtime;
+
+        selectedCase.OnCaseUpdated += RefreshSelectedCase;
 
         foreach (var entry in spawnedEntries)
         {
@@ -97,6 +115,21 @@ public class CasesPageController : MonoBehaviour
         }
 
         ShowSummary(runtime);
+    }
+
+    private void RefreshSelectedCase()
+    {
+        if (selectedCase == null) return;
+
+        UpdateSummary(selectedCase);
+
+        foreach (var entry in spawnedEntries)
+        {
+            if (entry.GetData() == selectedCase)
+            {
+                entry.SetData(selectedCase);
+            }
+        }
     }
 
     private void ShowSummary(CaseRuntime runtime)
@@ -116,7 +149,7 @@ public class CasesPageController : MonoBehaviour
 
         descriptionText.text = data.caseDescription;
 
-        objectiveText.text = data.currentObjective;
+        objectiveText.text = runtime.currentObjective;
 
         progressText.text = runtime.GetProgressText();
 
