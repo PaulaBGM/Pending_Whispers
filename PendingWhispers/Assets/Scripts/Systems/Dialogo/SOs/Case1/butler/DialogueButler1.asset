@@ -28,7 +28,7 @@ MonoBehaviour:
     speakerID: butler
     text: "\u266A Oh, mistress Vivienne\u2026 Your voice was more beautiful than
       the angels\u2019\u2026 \u266A"
-    nextNodeID: 1
+    nextNodeID: start
     choices:
     - text: Excuse me?
       nextNodeID: 1
@@ -47,7 +47,7 @@ MonoBehaviour:
   - id: 1
     speakerID: butler
     text: "Hm?\nOh\u2026 you\u2019re not her.\n\u2026Sorry."
-    nextNodeID: 2
+    nextNodeID: 1
     choices:
     - text: "I\u2019m Lyra. I\u2019m trying to understand what happened to Vivienne."
       nextNodeID: 2
@@ -61,7 +61,7 @@ MonoBehaviour:
   - id: 2
     speakerID: butler
     text: "Ah\u2026 my lady\u2026 Still radiant. Even now."
-    nextNodeID: 3
+    nextNodeID: 2
     choices:
     - text: You cared about her a lot.
       nextNodeID: 3
@@ -75,7 +75,7 @@ MonoBehaviour:
   - id: 3
     speakerID: butler
     text: "More than anything. Well\u2026 perhaps equally to peanuts."
-    nextNodeID: 4
+    nextNodeID: 3
     choices:
     - text: "You were there the night she died, weren\u2019t you?"
       nextNodeID: 4
@@ -85,7 +85,7 @@ MonoBehaviour:
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
+    isImportantLine: 1
   - id: 4
     speakerID: butler
     text: But Lady Vivienne was allergic, so I learned restraint.
@@ -98,10 +98,10 @@ MonoBehaviour:
   - id: 5
     speakerID: butler
     text: Yes.
-    nextNodeID: 6
+    nextNodeID: 5
     choices:
     - text: What happened?
-      nextNodeID: 5
+      nextNodeID: 6
       addFlags: []
       requiredFlags: []
       endsDialogue: 0
@@ -123,10 +123,10 @@ MonoBehaviour:
   - id: 7
     speakerID: butler
     text: "Laurent went looking for her first. Then\u2026 the screaming started."
-    nextNodeID: 8
+    nextNodeID: 7
     choices:
     - text: Did you notice anything strange before that?
-      nextNodeID: 6
+      nextNodeID: 8
       addFlags: []
       requiredFlags: []
       endsDialogue: 0
@@ -146,7 +146,7 @@ MonoBehaviour:
     isImportantLine: 1
   - id: 9
     speakerID: butler
-    text: Never.
+    text: NEVER.
     nextNodeID: 
     choices: []
     requiredFlags: []

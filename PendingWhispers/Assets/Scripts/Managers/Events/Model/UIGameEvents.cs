@@ -4,7 +4,7 @@ using Inventory.Model;
 
 public static class UIGameEvents
 {
-    // Feedback genérico
+    // Feedback generico
     public static Action<string> OnFeedback;
 
     // Inventory real (si aún lo usas para items físicos)

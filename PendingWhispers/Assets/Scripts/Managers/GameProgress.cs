@@ -29,7 +29,7 @@ public class GameProgress : MonoBehaviour
 
         if (flags.Add(flag))
         {
-            Debug.Log("[GameProgress] Flag a�adida: " + flag.id);
+            Debug.Log("[GameProgress] Flag added: " + flag.id);
 
             OnFlagAdded?.Invoke(flag);
             UIGameEvents.RaiseFlagAdded(flag);

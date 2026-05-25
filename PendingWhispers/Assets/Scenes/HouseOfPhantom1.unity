@@ -4308,6 +4308,7 @@ MonoBehaviour:
     uncover their mysteries and help the citizens deal with the supernatural.
   - Today, she finds herself at the Encore Mansion for a new case. Speak with the
     owner of the mansion so he can give you the details.
+  introSeenFlag: {fileID: 11400000, guid: c96105dd9a6a2844abdbc8360e4a4064, type: 2}
   fadeDuration: 0.5
   textDuration: 5
 --- !u!4 &665324609 stripped
@@ -14456,8 +14457,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

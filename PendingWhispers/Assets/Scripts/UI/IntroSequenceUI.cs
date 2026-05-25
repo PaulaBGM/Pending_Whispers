@@ -8,10 +8,14 @@ public class IntroSequenceUI : MonoBehaviour
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private TextMeshProUGUI introText;
 
-    [Header("Settings")]
+    [Header("Texto")]
     [TextArea(4, 8)]
     [SerializeField] private string[] messages;
 
+    [Header("Flags")]
+    [SerializeField] private FlagSO introSeenFlag;
+
+    [Header("Settings")]
     [SerializeField] private float fadeDuration = 1f;
     [SerializeField] private float textDuration = 4f;
 
@@ -19,6 +23,13 @@ public class IntroSequenceUI : MonoBehaviour
 
     void Start()
     {
+        // Si ya vio la intro, no mostrar nada
+        if (GameProgress.Instance.HasFlag(introSeenFlag))
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
         player = FindFirstObjectByType<PlayerController>();
 
         if (player != null)
@@ -39,6 +50,9 @@ public class IntroSequenceUI : MonoBehaviour
         }
 
         yield return Fade(1, 0);
+
+        // Marcar intro como vista
+        GameProgress.Instance.AddFlag(introSeenFlag);
 
         if (player != null)
             player.canMove = true;
