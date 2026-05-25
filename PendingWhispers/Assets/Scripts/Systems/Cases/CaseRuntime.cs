@@ -18,4 +18,14 @@ public class CaseRuntime
     {
         return GameProgress.Instance.HasAllFlags(data.requiredClues);
     }
+
+    public int GetProgress()
+    {
+        return localFlags.Count;
+    }
+
+    public string GetProgressText()
+    {
+        return $"{localFlags.Count}/{data.requiredClues.Count}";
+    }
 }

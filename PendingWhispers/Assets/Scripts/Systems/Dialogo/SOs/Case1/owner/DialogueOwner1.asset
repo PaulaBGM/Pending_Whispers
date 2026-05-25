@@ -26,11 +26,11 @@ MonoBehaviour:
   nodes:
   - id: start
     speakerID: owner
-    text: 'Welcome, welcome to my humble establishment. You must be that freaky detective
-      who could see the dead, right? '
+    text: "Ah, you must be Lyra Durand. Finally. I was starting to think all those
+      stories about \u201Cthe medium of Paris\u201D were just marketing nonsense."
     nextNodeID: 1
     choices:
-    - text: Yes, it's me, I'm Lyra, nice to meet you
+    - text: "Lyra Durand. And yes, I can see them. You\u2019re Ren\xE9 Venue, I assume?"
       nextNodeID: 1
       addFlags: []
       requiredFlags: []
@@ -41,11 +41,107 @@ MonoBehaviour:
     isImportantLine: 0
   - id: 1
     speakerID: owner
-    text: Well, thank you for coming, these weird humming is scaring my customers,
-      and paintings have started to move... and all of this when that arrogant singer's
-      death's 50 anniverary was coming up...
+    text: "Good. Then maybe you can help me before this place loses all its customers.
+      Strange humming in the halls, paintings moving on their own\u2026 and all this
+      right before Vivienne Encore\u2019s fiftieth death anniversary."
+    nextNodeID: 2
+    choices:
+    - text: Vivienne Encore. The opera singer
+      nextNodeID: 2
+      addFlags: []
+      requiredFlags: []
+      endsDialogue: 0
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+  - id: 2
+    speakerID: owner
+    text: The Vivienne Encore. People come from everywhere to see this mansion because
+      of her story. Or they did, before the ghost started terrorizing everyone.
+    nextNodeID: 3
+    choices:
+    - text: "Spirits don\u2019t usually become violent without a reason."
+      nextNodeID: 3
+      addFlags: []
+      requiredFlags: []
+      endsDialogue: 0
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 1
+  - id: 3
+    speakerID: owner
+    text: "Well, whatever the reason is, it\u2019s costing me money. Last night a
+      chandelier nearly crushed two tourists."
+    nextNodeID: 4
+    choices:
+    - text: When did the disturbances begin?
+      nextNodeID: 4
+      addFlags: []
+      requiredFlags: []
+      endsDialogue: 0
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+  - id: 4
+    speakerID: owner
+    text: "A few weeks ago. First the singing started at night. Then objects began
+      moving, mirrors shattered\u2026 some staff even claimed they saw Vivienne herself
+      wandering the upper floor."
+    nextNodeID: 5
+    choices:
+    - text: And what do you know about her death?
+      nextNodeID: 5
+      addFlags: []
+      requiredFlags: []
+      endsDialogue: 0
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+  - id: 5
+    speakerID: owner
+    text: "Officially? A tragic accident. But people whispered about jealousy, inheritance
+      fights\u2026 even betrayal from those close to her."
+    nextNodeID: 6
+    choices:
+    - text: Close to her how?
+      nextNodeID: 6
+      addFlags: []
+      requiredFlags: []
+      endsDialogue: 0
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+  - id: 6
+    speakerID: owner
+    text: "A former lover, rivals, a few servants\u2026 I don\u2019t know the details.
+      I just bought the mansion years later."
+    nextNodeID: 7
+    choices:
+    - text: And her remains?
+      nextNodeID: 7
+      addFlags: []
+      requiredFlags: []
+      endsDialogue: 0
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+  - id: 7
+    speakerID: owner
+    text: Most of Vivienne and her family were moved to the catacombs long ago. Stored
+      there with countless others.
     nextNodeID: 
-    choices: []
+    choices:
+    - text: "I see\u2026 Then that\u2019s probably where this all began."
+      nextNodeID: 
+      addFlags: []
+      requiredFlags: []
+      endsDialogue: 1
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []

@@ -26,10 +26,13 @@ MonoBehaviour:
   nodes:
   - id: start
     speakerID: ghost1
-    text: "\u2026mmm\u2026 la\u2026 la-la\u2026"
+    text: 'Another visitor? Another rat hungry for stories?
+
+      Get out of my
+      house!'
     nextNodeID: 1
     choices:
-    - text: "That humming\u2026 was that you?"
+    - text: "I\u2019m not here for the museum. I came to help."
       nextNodeID: 1
       addFlags: []
       requiredFlags: []
@@ -45,8 +48,8 @@ MonoBehaviour:
     isImportantLine: 0
   - id: 1
     speakerID: ghost1
-    text: "It used to be everything.\nMy voice\u2026 my legacy\u2026I once had it
-      all. "
+    text: "Help?\nThey all say that.\nThen they steal pieces of me. My dresses\u2026
+      my jewels\u2026 my songs\u2026\nThey didn\u2019t even let my bones rest."
     nextNodeID: 2
     choices: []
     requiredFlags: []
@@ -54,37 +57,56 @@ MonoBehaviour:
     onEnterEvents: []
     isImportantLine: 0
   - id: 2
-    speakerID: Lyra
-    text: Do you remember what happened to you?
+    speakerID: ghost1
+    text: "I didn\u2019t hurt them\u2026 not at first.\nBut I hear them every night.\nWhispers.
+      Laughter. Just like at that party.\nAll of them watching me\u2026 waiting to
+      see me fall."
     nextNodeID: 3
-    choices: []
+    choices:
+    - text: Who?
+      nextNodeID: 3
+      addFlags: []
+      requiredFlags: []
+      endsDialogue: 0
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 0
   - id: 3
     speakerID: ghost1
-    text: Someone... they MURDERED ME! They were jealous of my fame, my wealth, my
-      singing prowess...
+    text: "Everyone.\nMy lover\u2026 Laurent\u2026\nMy butler\u2026\nThe guests\u2026\nThey
+      all wanted to get rid of me."
     nextNodeID: 3
     choices:
-    - text: I'm a ghost detective, I can help you out, my name's Lyra
+    - text: Why would you think that?
       nextNodeID: 4
       addFlags: []
       requiredFlags: []
       endsDialogue: 0
-    - text: 'Good luck with that. '
-      nextNodeID: 
-      addFlags: []
-      requiredFlags: []
-      endsDialogue: 1
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 1
   - id: 4
     speakerID: ghost1
-    text: I would appreciate it, young one, I'll tell you where you should go
+    text: 'Because I saw it in their eyes.
+
+      Because they stopped applauding
+      when I became ill.
+
+      Because my voice was worth more than my life.'
+    nextNodeID: 5
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+  - id: 5
+    speakerID: ghost1
+    text: 'And now they desecrate my home to sell memories!
+
+      They will never
+      know peace!'
     nextNodeID: 
     choices: []
     requiredFlags: []

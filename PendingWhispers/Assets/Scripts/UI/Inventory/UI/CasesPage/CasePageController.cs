@@ -1,6 +1,7 @@
-using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CasesPageController : MonoBehaviour
 {
@@ -8,15 +9,23 @@ public class CasesPageController : MonoBehaviour
     [SerializeField] private GameObject listPanel;
     [SerializeField] private GameObject summaryPanel;
     [SerializeField] private GameObject hypothesisPanel;
-    
+
     [Header("UI References")]
     [SerializeField] private HypothesisController hypothesis;
     [SerializeField] private CaseEntryUI caseEntryPrefab;
     [SerializeField] private Transform content;
 
+    [Header("Summary UI")]
+    [SerializeField] private TMP_Text titleText;
+    [SerializeField] private TMP_Text descriptionText;
+    [SerializeField] private TMP_Text objectiveText;
+    [SerializeField] private TMP_Text progressText;
+
+    [SerializeField] private Image caseImage;
+
     private readonly List<CaseEntryUI> spawnedEntries = new();
 
-    private CaseData selectedCase;
+    private CaseRuntime selectedCase;
 
     private void OnEnable()
     {
@@ -34,11 +43,9 @@ public class CasesPageController : MonoBehaviour
     {
         summaryPanel.SetActive(true);
         hypothesisPanel.SetActive(false);
-        
+
         RefreshUI();
     }
-
-    // ---------------- UI REFRESH ----------------
 
     public void RefreshUI()
     {
@@ -56,6 +63,11 @@ public class CasesPageController : MonoBehaviour
         {
             spawnedEntries[i].SetData(cases[i]);
         }
+
+        if (cases.Count > 0)
+        {
+            HandleCaseClicked(cases[0]);
+        }
     }
 
     private void EnsureSlots(int count)
@@ -63,6 +75,7 @@ public class CasesPageController : MonoBehaviour
         while (spawnedEntries.Count < count)
         {
             var obj = Instantiate(caseEntryPrefab, content);
+
             var ui = obj.GetComponent<CaseEntryUI>();
 
             ui.OnEntryClicked += HandleCaseClicked;
@@ -71,46 +84,50 @@ public class CasesPageController : MonoBehaviour
         }
     }
 
-    // ---------------- CLICK ----------------
-
-    private void HandleCaseClicked(CaseData caseData)
+    private void HandleCaseClicked(CaseRuntime runtime)
     {
-        selectedCase = caseData;
+        selectedCase = runtime;
 
         foreach (var entry in spawnedEntries)
         {
-            if (entry.GetData() == caseData)
+            if (entry.GetData() == runtime)
                 entry.Select();
             else
                 entry.Deselect();
         }
 
-        ShowSummary(caseData);
+        ShowSummary(runtime);
     }
 
-    // ---------------- UI STATES ----------------
-
-    private void ShowSummary(CaseData caseData)
+    private void ShowSummary(CaseRuntime runtime)
     {
         summaryPanel.SetActive(true);
+
         hypothesisPanel.SetActive(false);
 
-        UpdateSummary(caseData);
+        UpdateSummary(runtime);
     }
 
-    private void UpdateSummary(CaseData caseData)
+    private void UpdateSummary(CaseRuntime runtime)
     {
-        // Aquí luego metes:
-        // - progreso del caso
-        // - pistas desbloqueadas
-        // - estado del caso
+        var data = runtime.data;
 
-        Debug.Log("Showing case: " + caseData.caseID);
+        titleText.text = data.caseTitle;
+
+        descriptionText.text = data.caseDescription;
+
+        objectiveText.text = data.currentObjective;
+
+        progressText.text = runtime.GetProgressText();
+
+        if (caseImage != null)
+            caseImage.sprite = data.caseIcon;
     }
 
     public void OnCreateHypothesis()
     {
         hypothesisPanel.SetActive(true);
+
         hypothesis.OpenHypothesis();
 
         summaryPanel.SetActive(false);
@@ -121,12 +138,14 @@ public class CasesPageController : MonoBehaviour
         hypothesis.CloseHypothesis();
 
         summaryPanel.SetActive(true);
+
         hypothesisPanel.SetActive(false);
     }
 
     public void BackToList()
     {
         summaryPanel.SetActive(true);
+
         hypothesisPanel.SetActive(false);
     }
 }

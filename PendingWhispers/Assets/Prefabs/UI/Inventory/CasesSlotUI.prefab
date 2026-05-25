@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 7070993313183625867}
   - component: {fileID: 6695338466153594820}
   - component: {fileID: 3734606707167347755}
-  - component: {fileID: -5900676808708414225}
+  - component: {fileID: 5174894743687704127}
   m_Layer: 5
   m_Name: CasesSlotUI
   m_TagString: Untagged
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &-5900676808708414225
+--- !u!114 &5174894743687704127
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -193,7 +193,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   titleText: {fileID: 4566465921947173322}
-  borderImage: {fileID: 8759975595545445266}
+  objectiveText: {fileID: 0}
+  progressText: {fileID: 0}
+  icon: {fileID: 3734606707167347755}
+  selectedBorder: {fileID: 1860607176289071377}
 --- !u!1 &3071925666869389616
 GameObject:
   m_ObjectHideFlags: 0
