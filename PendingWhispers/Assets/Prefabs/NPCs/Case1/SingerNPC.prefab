@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1438706241412440261, guid: 8b7f0d32da3977e408aa7f38e899f143, type: 3}
+  m_Sprite: {fileID: -7806103805540087679, guid: 6c89d086796f9134f9345d60908d642e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,7 +99,7 @@ Animator:
   m_GameObject: {fileID: 413082295712665338}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 84168c303ffc4004d8cbc36a62e4ed9d, type: 2}
+  m_Controller: {fileID: 9100000, guid: c838c34b6a800f8419cb3e205ba56f0f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 7645477944159180331}
   - component: {fileID: 176805181648224533}
   m_Layer: 6
-  m_Name: ButlerNPC
+  m_Name: SingerNPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -174,8 +174,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogues:
-  - dialogue: {fileID: 11400000, guid: 908e13b1970ce644e80f5fc311954240, type: 2}
-    requiredFlags: []
+  - dialogue: {fileID: 11400000, guid: 651ec2fc10fd23d45bdb6e7e670990a0, type: 2}
+    requiredFlags:
+    - {fileID: 11400000, guid: 9cc3d14b9dc651b4c8d197dcd5f6c5b9, type: 2}
 --- !u!70 &176805181648224533
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

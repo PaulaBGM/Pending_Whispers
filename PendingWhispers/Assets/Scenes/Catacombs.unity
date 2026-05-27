@@ -7016,42 +7016,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC
       objectReference: {fileID: 0}
-    - target: {fileID: 3801063788064508956, guid: e87153918ad9daa4e8f30eb0d70a5920, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 82cf47ae46ec82343a2dc14122892bbd, type: 3}
-    - target: {fileID: 7645477944159180331, guid: e87153918ad9daa4e8f30eb0d70a5920, type: 3}
-      propertyPath: dialogues.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7645477944159180331, guid: e87153918ad9daa4e8f30eb0d70a5920, type: 3}
-      propertyPath: dialogues.Array.data[0].dialogue
-      value: 
-      objectReference: {fileID: 11400000, guid: 651ec2fc10fd23d45bdb6e7e670990a0, type: 2}
-    - target: {fileID: 7645477944159180331, guid: e87153918ad9daa4e8f30eb0d70a5920, type: 3}
-      propertyPath: dialogues.Array.data[1].dialogue
-      value: 
-      objectReference: {fileID: 11400000, guid: 89acab41a7b5d1f478a950bdaf56c456, type: 2}
-    - target: {fileID: 7645477944159180331, guid: e87153918ad9daa4e8f30eb0d70a5920, type: 3}
-      propertyPath: dialogues.Array.data[0].requiredFlags.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7645477944159180331, guid: e87153918ad9daa4e8f30eb0d70a5920, type: 3}
-      propertyPath: dialogues.Array.data[1].requiredFlags.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7645477944159180331, guid: e87153918ad9daa4e8f30eb0d70a5920, type: 3}
-      propertyPath: 'dialogues.Array.data[0].requiredFlags.Array.data[0]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 9cc3d14b9dc651b4c8d197dcd5f6c5b9, type: 2}
-    - target: {fileID: 7645477944159180331, guid: e87153918ad9daa4e8f30eb0d70a5920, type: 3}
-      propertyPath: 'dialogues.Array.data[0].requiredFlags.Array.data[1]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 0bd4ea81fb4c46f4b95fd4140e9cab7d, type: 2}
-    - target: {fileID: 7645477944159180331, guid: e87153918ad9daa4e8f30eb0d70a5920, type: 3}
-      propertyPath: 'dialogues.Array.data[1].requiredFlags.Array.data[0]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 9cc3d14b9dc651b4c8d197dcd5f6c5b9, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

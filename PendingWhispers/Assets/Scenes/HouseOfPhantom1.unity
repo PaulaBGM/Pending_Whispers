@@ -4192,7 +4192,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!225 &642377369
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -4708,6 +4708,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SingerNPC
       objectReference: {fileID: 0}
+    - target: {fileID: 2456334407320603034, guid: e87153918ad9daa4e8f30eb0d70a5920, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 1c0f91c11c027ec4db61365101828e1e, type: 2}
+    - target: {fileID: 3801063788064508956, guid: e87153918ad9daa4e8f30eb0d70a5920, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -5741321063430696138, guid: 0a84c68b0a6d28344ab5326488d7c023, type: 3}
     - target: {fileID: 7645477944159180331, guid: e87153918ad9daa4e8f30eb0d70a5920, type: 3}
       propertyPath: dialogues.Array.size
       value: 2

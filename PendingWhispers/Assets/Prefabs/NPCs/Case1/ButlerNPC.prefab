@@ -78,12 +78,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e87a487b606e8f1498c577b7aba31ed6, type: 3}
+  m_Sprite: {fileID: -7806103805540087679, guid: 6c89d086796f9134f9345d60908d642e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 1, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -97,9 +97,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 413082295712665338}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 84168c303ffc4004d8cbc36a62e4ed9d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 24365ea138462244b9a39e1f2407a517, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 7645477944159180331}
   - component: {fileID: 176805181648224533}
   m_Layer: 6
-  m_Name: OwnerNPC
+  m_Name: ButlerNPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogues:
-  - dialogue: {fileID: 11400000, guid: 26e3b1fe34fe67546bab460f58b7b58e, type: 2}
+  - dialogue: {fileID: 11400000, guid: 908e13b1970ce644e80f5fc311954240, type: 2}
     requiredFlags: []
 --- !u!70 &176805181648224533
 CapsuleCollider2D:
