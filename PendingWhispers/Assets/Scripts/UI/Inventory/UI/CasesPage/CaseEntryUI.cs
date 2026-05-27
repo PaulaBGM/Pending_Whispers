@@ -1,102 +1,80 @@
-using System;
-using UnityEngine;
-using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+using System;
 
-public class CaseEntryUI : MonoBehaviour, IPointerClickHandler
+public class CaseEntryUI : MonoBehaviour
 {
-    [Header("UI")]
     [SerializeField] private TMP_Text titleText;
+    [SerializeField] private TMP_Text objectiveText;
+    [SerializeField] private TMP_Text progressText;
 
-    [SerializeField] private UnityEngine.UI.Image borderImage;
+    [SerializeField] private Image icon;
 
-    public event Action<CaseData> OnEntryClicked;
+    [SerializeField] private GameObject selectedBorder;
 
-    private CaseData data;
+    private CaseRuntime runtime;
 
-    private bool empty = true;
+    public event Action<CaseRuntime> OnEntryClicked;
 
-    private const float SelectedAlpha = 1f;
-    private const float DeselectedAlpha = 0.4f;
-
-    private Color originalColor;
-
-    private void Awake()
+    public void SetData(CaseRuntime caseRuntime)
     {
-        if (borderImage != null)
-            originalColor = borderImage.color;
-
-        ResetData();
-
-        Deselect();
-    }
-
-    // ---------------- DATA ----------------
-
-    public void SetData(CaseData caseData)
-    {
-        if (caseData == null)
-            return;
-
-        data = caseData;
-
-        empty = false;
+        runtime = caseRuntime;
 
         if (titleText != null)
-        {
-            titleText.text =
-                string.IsNullOrEmpty(caseData.displayName)
-                ? caseData.caseID
-                : caseData.displayName;
-        }
+            titleText.text = runtime.data.caseTitle;
+
+        if (objectiveText != null)
+            objectiveText.text = runtime.currentObjective;
+
+        if (progressText != null)
+            progressText.text = runtime.GetProgressText();
+
+        if (icon != null)
+            icon.sprite = runtime.data.caseIcon;
+
+        gameObject.SetActive(true);
     }
 
     public void ResetData()
     {
-        data = null;
-
-        empty = true;
+        runtime = null;
 
         if (titleText != null)
             titleText.text = "";
-    }
 
-    public CaseData GetData()
-    {
-        return data;
-    }
+        if (objectiveText != null)
+            objectiveText.text = "";
 
-    // ---------------- SELECTION ----------------
+        if (progressText != null)
+            progressText.text = "";
+
+        if (icon != null)
+            icon.sprite = null;
+
+        gameObject.SetActive(false);
+    }
 
     public void Select()
     {
-        SetAlpha(SelectedAlpha);
+        if (selectedBorder != null)
+            selectedBorder.SetActive(true);
     }
 
     public void Deselect()
     {
-        SetAlpha(DeselectedAlpha);
+        if (selectedBorder != null)
+            selectedBorder.SetActive(false);
     }
 
-    private void SetAlpha(float alpha)
+    public void OnClick()
     {
-        if (borderImage == null)
-            return;
-
-        Color c = originalColor;
-
-        c.a = alpha;
-
-        borderImage.color = c;
+        if (runtime != null)
+            OnEntryClicked?.Invoke(runtime);
     }
 
-    // ---------------- CLICK ----------------
-
-    public void OnPointerClick(PointerEventData eventData)
+    public CaseRuntime GetData()
     {
-        if (empty || data == null)
-            return;
-
-        OnEntryClicked?.Invoke(data);
+        return runtime;
     }
 }

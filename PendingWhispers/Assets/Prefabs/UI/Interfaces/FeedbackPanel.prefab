@@ -105,6 +105,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1932496745832950345}
     m_Modifications:
+    - target: {fileID: 2074813410937825302, guid: 72f9ec4a5475c3649a65c1994544a5ac, type: 3}
+      propertyPath: m_text
+      value: Feedback
+      objectReference: {fileID: 0}
     - target: {fileID: 4513388725462562388, guid: 72f9ec4a5475c3649a65c1994544a5ac, type: 3}
       propertyPath: m_Name
       value: FeedbackTextText (TMP)

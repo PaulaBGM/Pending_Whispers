@@ -8,33 +8,23 @@ public class IntroSequenceUI : MonoBehaviour
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private TextMeshProUGUI introText;
 
-    [Header("Texto Intro")]
-    [TextArea(3, 8)]
+    [Header("Texto")]
+    [TextArea(4, 8)]
     [SerializeField] private string[] messages;
 
     [Header("Flags")]
     [SerializeField] private FlagSO introSeenFlag;
 
-    [Header("Animación")]
+    [Header("Settings")]
     [SerializeField] private float fadeDuration = 1f;
-
-    [SerializeField] private float textDuration = 3f;
-
-    [SerializeField] private bool allowSkip = true;
+    [SerializeField] private float textDuration = 4f;
 
     private PlayerController player;
 
-    private bool isRunning;
-
     void Start()
     {
-        gameObject.SetActive(true);
-
-        canvasGroup.alpha = 0;
-
-        // Si ya vio la intro, no mostrarla otra vez
-        if (introSeenFlag != null &&
-            GameProgress.Instance.HasFlag(introSeenFlag))
+        // Si ya vio la intro, no mostrar nada
+        if (GameProgress.Instance.HasFlag(introSeenFlag))
         {
             gameObject.SetActive(false);
             return;
@@ -48,75 +38,41 @@ public class IntroSequenceUI : MonoBehaviour
         StartCoroutine(IntroRoutine());
     }
 
-    void Update()
-    {
-        if (!isRunning) return;
-
-        if (allowSkip && Input.GetMouseButtonDown(0))
-        {
-            StopAllCoroutines();
-            EndIntro();
-        }
-    }
-
     IEnumerator IntroRoutine()
     {
-        isRunning = true;
+        yield return Fade(0, 1);
 
         foreach (var msg in messages)
         {
-            // Texto actual
             introText.text = msg;
 
-            // Fade In
-            yield return StartCoroutine(Fade(0, 1));
-
-            // Espera
             yield return new WaitForSeconds(textDuration);
-
-            // Fade Out
-            yield return StartCoroutine(Fade(1, 0));
-
-            yield return new WaitForSeconds(0.2f);
         }
 
-        EndIntro();
+        yield return Fade(1, 0);
+
+        // Marcar intro como vista
+        GameProgress.Instance.AddFlag(introSeenFlag);
+
+        if (player != null)
+            player.canMove = true;
+
+        gameObject.SetActive(false);
     }
 
     IEnumerator Fade(float from, float to)
     {
-        float timer = 0f;
+        float t = 0;
 
-        while (timer < fadeDuration)
+        while (t < fadeDuration)
         {
-            timer += Time.deltaTime;
+            t += Time.deltaTime;
 
-            canvasGroup.alpha = Mathf.Lerp(
-                from,
-                to,
-                timer / fadeDuration
-            );
+            canvasGroup.alpha = Mathf.Lerp(from, to, t / fadeDuration);
 
             yield return null;
         }
 
         canvasGroup.alpha = to;
-    }
-
-    void EndIntro()
-    {
-        isRunning = false;
-
-        // Guardar flag
-        if (introSeenFlag != null)
-        {
-            GameProgress.Instance.AddFlag(introSeenFlag);
-        }
-
-        // Devolver control al jugador
-        if (player != null)
-            player.canMove = true;
-
-        gameObject.SetActive(false);
     }
 }

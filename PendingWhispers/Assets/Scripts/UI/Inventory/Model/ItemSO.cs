@@ -8,7 +8,6 @@ namespace Inventory.Model
     {
         Testimony,
         Clue,
-        Sample,
         Case
     }
 
@@ -26,7 +25,7 @@ namespace Inventory.Model
         [field: SerializeField] public Sprite ItemImage { get; set; }
         [field: SerializeField] public List<ItemParameter> DefaultParametersList { get; set; }
 
-        [field: SerializeField] public ItemType ItemType { get; private set; }
+        [field: SerializeField] public ItemType ItemType { get; set; }
 
         [field: SerializeField] public string CaseID { get; set; }
     }

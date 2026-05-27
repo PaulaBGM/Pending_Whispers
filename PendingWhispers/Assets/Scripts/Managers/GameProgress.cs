@@ -9,7 +9,6 @@ public class GameProgress : MonoBehaviour
     private HashSet<FlagSO> flags = new();
 
     public event Action<FlagSO> OnFlagAdded;
-
     void Awake()
     {
         if (Instance == null)
@@ -29,7 +28,7 @@ public class GameProgress : MonoBehaviour
 
         if (flags.Add(flag))
         {
-            Debug.Log("[GameProgress] Flag añadida: " + flag.id);
+            Debug.Log("[GameProgress] Flag added: " + flag.id);
 
             OnFlagAdded?.Invoke(flag);
             UIGameEvents.RaiseFlagAdded(flag);
@@ -55,5 +54,10 @@ public class GameProgress : MonoBehaviour
         }
 
         return true;
+    }
+    
+    public List<FlagSO> GetFlags()
+    {
+        return new List<FlagSO>(flags);
     }
 }

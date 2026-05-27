@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7056661013277105007}
   - component: {fileID: 2392253829685923342}
+  - component: {fileID: 216217475196557581}
   m_Layer: 7
   m_Name: Kitchen
   m_TagString: Untagged
@@ -80,6 +81,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.1493053, y: 1.8445437}
   m_EdgeRadius: 0
+--- !u!114 &216217475196557581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787531826994338364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa0352a4d56abd42ad2fc69deb72448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 1.0495558, y: 1.790318, z: 4}
+  m_Center: {x: -0.08851385, y: -0.032655954, z: 0}
+  m_Area: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &7051726343602376008
 GameObject:
   m_ObjectHideFlags: 0

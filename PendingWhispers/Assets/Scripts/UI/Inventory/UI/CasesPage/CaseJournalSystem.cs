@@ -6,7 +6,7 @@ public class CaseJournalSystem : MonoBehaviour
 {
     public static CaseJournalSystem Instance;
 
-    private Dictionary<string, CaseData> cases = new();
+    private Dictionary<string, CaseRuntime> cases = new();
 
     public event Action OnCasesChanged;
 
@@ -23,33 +23,32 @@ public class CaseJournalSystem : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public bool TryAddCase(CaseData newCase)
+    public bool TryAddCase(CaseRuntime runtime)
     {
-        if (newCase == null ||
-            string.IsNullOrEmpty(newCase.caseID))
+        if (runtime == null || runtime.data == null)
             return false;
 
-        if (cases.ContainsKey(newCase.caseID))
+        string caseID = runtime.data.caseID;
+
+        if (string.IsNullOrEmpty(caseID))
             return false;
 
-        cases.Add(newCase.caseID, newCase);
+        if (cases.ContainsKey(caseID))
+            return false;
 
-        Debug.Log(
-            "[CaseJournal] Caso añadido: " +
-            newCase.caseID
-        );
+        cases.Add(caseID, runtime);
 
         OnCasesChanged?.Invoke();
 
         return true;
     }
 
-    public List<CaseData> GetAllCases()
+    public List<CaseRuntime> GetAllCases()
     {
-        return new List<CaseData>(cases.Values);
+        return new List<CaseRuntime>(cases.Values);
     }
 
-    public CaseData GetCase(string id)
+    public CaseRuntime GetCase(string id)
     {
         cases.TryGetValue(id, out var c);
 

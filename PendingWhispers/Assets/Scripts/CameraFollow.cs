@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    private PlayerController player;
+    private PlayerController_MovementInteraction player;
 
     [SerializeField] private Transform minLimit;
     [SerializeField] private Transform maxLimit;
@@ -19,15 +19,16 @@ public class CameraFollow : MonoBehaviour
 
     void OnEnable()
     {
-        PlayerController.OnPlayerSpawned += SetPlayer;
+        PlayerController_MovementInteraction.OnPlayerSpawned += SetPlayer;
     }
 
     void OnDisable()
     {
-        PlayerController.OnPlayerSpawned -= SetPlayer;
+        PlayerController_MovementInteraction.OnPlayerSpawned -= SetPlayer;
+
     }
 
-    void SetPlayer(PlayerController p)
+    void SetPlayer(PlayerController_MovementInteraction p)
     {
         player = p;
     }

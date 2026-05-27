@@ -30,8 +30,7 @@ MonoBehaviour:
       stories about \u201Cthe medium of Paris\u201D were just marketing nonsense."
     nextNodeID: 1
     choices:
-    - text: Lyra Durand. And yes, I can see them. Depends on whether they want to
-        be seen.
+    - text: "Lyra Durand. And yes, I can see them. You\u2019re Ren\xE9 Venue, I assume?"
       nextNodeID: 1
       addFlags: []
       requiredFlags: []
@@ -77,8 +76,7 @@ MonoBehaviour:
       chandelier nearly crushed two tourists."
     nextNodeID: 4
     choices:
-    - text: You turned her mansion into an attraction. When did the disturbances
-        begin?
+    - text: When did the disturbances begin?
       nextNodeID: 4
       addFlags: []
       requiredFlags: []
@@ -89,10 +87,9 @@ MonoBehaviour:
     isImportantLine: 0
   - id: 4
     speakerID: owner
-    text: "People pay to remember legends. I simply provide the experience. A few
-      weeks ago. First the singing started at night. Then objects began moving, mirrors
-      shattered\u2026 some staff even claimed they saw Vivienne herself wandering
-      the upper floor."
+    text: "A few weeks ago. First the singing started at night. Then objects began
+      moving, mirrors shattered\u2026 some staff even claimed they saw Vivienne herself
+      wandering the upper floor."
     nextNodeID: 5
     choices:
     - text: And what do you know about her death?
@@ -121,7 +118,7 @@ MonoBehaviour:
     isImportantLine: 0
   - id: 6
     speakerID: owner
-    text: "A former lover, rivals, servants\u2026 I don\u2019t know the details.
+    text: "A former lover, rivals, a few servants\u2026 I don\u2019t know the details.
       I just bought the mansion years later."
     nextNodeID: 7
     choices:
@@ -146,9 +143,6 @@ MonoBehaviour:
       requiredFlags: []
       endsDialogue: 1
     requiredFlags: []
-    onEnterFlags:
-    - {fileID: 11400000, guid: 9cc3d14b9dc651b4c8d197dcd5f6c5b9, type: 2}
-    - {fileID: 11400000, guid: 8026d71d73230a548b720e9ed6b330cf, type: 2}
-    onEnterEvents:
-    - {fileID: 11400000, guid: ee5cb3d4be5031e4d81e444a4be87cb4, type: 2}
+    onEnterFlags: []
+    onEnterEvents: []
     isImportantLine: 1

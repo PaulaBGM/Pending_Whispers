@@ -1,42 +1,45 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class CasesPageController : MonoBehaviour
+public class CasePageController : MonoBehaviour
 {
     [Header("Panels")]
     [SerializeField] private GameObject listPanel;
-
     [SerializeField] private GameObject summaryPanel;
-
     [SerializeField] private GameObject hypothesisPanel;
 
     [Header("UI References")]
     [SerializeField] private HypothesisController hypothesis;
-
     [SerializeField] private CaseEntryUI caseEntryPrefab;
-
     [SerializeField] private Transform content;
+
+    [Header("Summary UI")]
+    [SerializeField] private TMP_Text titleText;
+    [SerializeField] private TMP_Text descriptionText;
+    [SerializeField] private TMP_Text objectiveText;
+    [SerializeField] private TMP_Text progressText;
+
+    [SerializeField] private Image caseImage;
 
     private readonly List<CaseEntryUI> spawnedEntries = new();
 
-    private CaseData selectedCase;
+    private CaseRuntime selectedCase;
 
     private void OnEnable()
     {
         if (CaseJournalSystem.Instance != null)
-        {
             CaseJournalSystem.Instance.OnCasesChanged += RefreshUI;
-        }
-
-        RefreshUI();
     }
 
     private void OnDisable()
     {
         if (CaseJournalSystem.Instance != null)
-        {
             CaseJournalSystem.Instance.OnCasesChanged -= RefreshUI;
-        }
+
+        if (selectedCase != null)
+            selectedCase.OnCaseUpdated -= RefreshSelectedCase;
     }
 
     private void Start()
@@ -48,13 +51,8 @@ public class CasesPageController : MonoBehaviour
         RefreshUI();
     }
 
-    // ---------------- UI REFRESH ----------------
-
     public void RefreshUI()
     {
-        if (CaseJournalSystem.Instance == null)
-            return;
-
         var cases = CaseJournalSystem.Instance.GetAllCases();
 
         EnsureSlots(cases.Count);
@@ -62,23 +60,24 @@ public class CasesPageController : MonoBehaviour
         for (int i = 0; i < spawnedEntries.Count; i++)
         {
             spawnedEntries[i].ResetData();
-
             spawnedEntries[i].Deselect();
-
-            spawnedEntries[i].gameObject.SetActive(false);
         }
 
         for (int i = 0; i < cases.Count; i++)
         {
-            spawnedEntries[i].gameObject.SetActive(true);
-
             spawnedEntries[i].SetData(cases[i]);
+
+            if (cases[i] == selectedCase)
+                spawnedEntries[i].Select();
         }
 
-        // Seleccionar automáticamente el primer caso
-        if (cases.Count > 0)
+        if (selectedCase == null && cases.Count > 0)
         {
             HandleCaseClicked(cases[0]);
+        }
+        else if (selectedCase != null)
+        {
+            RefreshSelectedCase();
         }
     }
 
@@ -96,47 +95,66 @@ public class CasesPageController : MonoBehaviour
         }
     }
 
-    // ---------------- CLICK ----------------
-
-    private void HandleCaseClicked(CaseData caseData)
+    private void HandleCaseClicked(CaseRuntime runtime)
     {
-        selectedCase = caseData;
+        if (selectedCase != null)
+        {
+            selectedCase.OnCaseUpdated -= RefreshSelectedCase;
+        }
+
+        selectedCase = runtime;
+
+        selectedCase.OnCaseUpdated += RefreshSelectedCase;
 
         foreach (var entry in spawnedEntries)
         {
-            if (entry.GetData() == caseData)
+            if (entry.GetData() == runtime)
                 entry.Select();
             else
                 entry.Deselect();
         }
 
-        ShowSummary(caseData);
+        ShowSummary(runtime);
     }
 
-    // ---------------- UI STATES ----------------
+    private void RefreshSelectedCase()
+    {
+        if (selectedCase == null) return;
 
-    private void ShowSummary(CaseData caseData)
+        UpdateSummary(selectedCase);
+
+        foreach (var entry in spawnedEntries)
+        {
+            if (entry.GetData() == selectedCase)
+            {
+                entry.SetData(selectedCase);
+            }
+        }
+    }
+
+    private void ShowSummary(CaseRuntime runtime)
     {
         summaryPanel.SetActive(true);
 
         hypothesisPanel.SetActive(false);
 
-        UpdateSummary(caseData);
+        UpdateSummary(runtime);
     }
 
-    private void UpdateSummary(CaseData caseData)
+    private void UpdateSummary(CaseRuntime runtime)
     {
-        Debug.Log(
-            "Showing case: " +
-            caseData.caseID
-        );
+        var data = runtime.data;
 
-        // Aquí luego:
-        // descripción
-        // pistas
-        // progreso
-        // personajes
-        // hipótesis
+        titleText.text = data.caseTitle;
+
+        descriptionText.text = data.caseDescription;
+
+        objectiveText.text = runtime.currentObjective;
+
+        progressText.text = runtime.GetProgressText();
+
+        if (caseImage != null)
+            caseImage.sprite = data.caseIcon;
     }
 
     public void OnCreateHypothesis()
