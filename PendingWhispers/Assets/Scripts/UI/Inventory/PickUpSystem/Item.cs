@@ -102,7 +102,7 @@ public class Item : MonoBehaviour, IInteractable
             itemCollider.enabled = false;
     }
 
-    public void Interact(PlayerController_MovementInteraction player)
+    public void Interact(PlayerController_Actions player)
     {
         if (alreadyRegistered)
         {
@@ -133,7 +133,7 @@ public class Item : MonoBehaviour, IInteractable
             GameProgress.Instance.AddFlag(persistenceFlag);
     }
 
-    private void RegisterEvidence(PlayerController_MovementInteraction player)
+    private void RegisterEvidence(PlayerController_Actions player)
     {
         InventorySO inventory = player.Inventory;
 

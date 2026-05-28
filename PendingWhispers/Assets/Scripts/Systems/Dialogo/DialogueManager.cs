@@ -10,7 +10,7 @@ public class DialogueManager : MonoBehaviour
     private DialogueData currentDialogue;
     private DialogueNode currentNode;
 
-    private PlayerController_MovementInteraction player;
+    private PlayerController_Actions player;
 
     void Awake()
     {
@@ -19,21 +19,21 @@ public class DialogueManager : MonoBehaviour
 
     void OnEnable()
     {
-        PlayerController_MovementInteraction.OnPlayerSpawned += SetPlayer;
+        PlayerController_Actions.OnPlayerSpawned += SetPlayer;
     }
 
     void OnDisable()
     {
-        PlayerController_MovementInteraction.OnPlayerSpawned -= SetPlayer;
+        PlayerController_Actions.OnPlayerSpawned -= SetPlayer;
     }
 
     void Start()
     {
         if (player == null)
-            player = FindFirstObjectByType<PlayerController_MovementInteraction>();
+            player = FindFirstObjectByType<PlayerController_Actions>();
     }
 
-    void SetPlayer(PlayerController_MovementInteraction p)
+    void SetPlayer(PlayerController_Actions p)
     {
         player = p;
     }

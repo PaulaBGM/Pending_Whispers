@@ -4,15 +4,16 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
-public class PlayerController_MovementInteraction : MonoBehaviour
+public class PlayerController_Actions : MonoBehaviour
 {
-    public static Action<PlayerController_MovementInteraction> OnPlayerSpawned;
+    public static Action<PlayerController_Actions> OnPlayerSpawned;
 
     [Header("Layers")]
     [SerializeField] private LayerMask interactableLayer;
 
     [Header("Movement")]
-    [SerializeField] private float interactDistance = 1.5f;
+    [SerializeField] private float interactDistance = 1.5f; // Distancia necesaria para interactuar con objetos
+    [SerializeField] private float moveStoppingDistance = 0.1f; // Distancia mínima para movimiento normal
 
     private NavMeshAgent agent;
     private Animator animator;
@@ -29,23 +30,25 @@ public class PlayerController_MovementInteraction : MonoBehaviour
     private void Awake()
     {
         OnPlayerSpawned?.Invoke(this);
+        
+        agent = GetComponent<NavMeshAgent>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        animator = GetComponentInChildren<Animator>();
-
+        // Configuración necesaria para NavMesh 2D
         agent.updatePosition = true;
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
         agent.speed = 3.5f;
         agent.acceleration = 8f;
-        agent.stoppingDistance = interactDistance;
+        agent.stoppingDistance = moveStoppingDistance;
 
         agent.isStopped = false;
 
+        // Asegura que el player empiece dentro del NavMesh
         if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 2f, NavMesh.AllAreas))
         {
             agent.Warp(hit.position);
@@ -78,23 +81,34 @@ public class PlayerController_MovementInteraction : MonoBehaviour
         CheckInteraction();
         HandleHover();
     }
+    
+    private void LateUpdate()
+    {
+        if (!agent.isOnNavMesh)
+        {
+            if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 2f, NavMesh.AllAreas))
+            {
+                agent.Warp(hit.position);
+            }
+        }
+    }
 
-    // ---------------- CLICK + MOVEMENT ----------------
+    // ---------------- CLICK + MOVIMIENTO ----------------
 
     private void HandleClick()
     {
         if (!canMove)
             return;
 
-        if (EventSystem.current != null &&
-            EventSystem.current.IsPointerOverGameObject())
+        // Ignora clicks sobre UI
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
             return;
 
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        Collider2D interactableHit =
-            Physics2D.OverlapPoint(mousePos, interactableLayer);
+        Collider2D interactableHit = Physics2D.OverlapPoint(mousePos, interactableLayer);
 
+        // Click sobre interactuable
         if (interactableHit != null)
         {
             IInteractable interactable =
@@ -109,6 +123,8 @@ public class PlayerController_MovementInteraction : MonoBehaviour
         }
 
         currentTarget = null;
+        agent.stoppingDistance = moveStoppingDistance; // Distancia pequeña para que el player se acerque bien
+
         MoveTo(mousePos);
     }
 
@@ -117,11 +133,13 @@ public class PlayerController_MovementInteraction : MonoBehaviour
         if (!canMove)
             return;
 
-        agent.isStopped = false;
-        agent.SetDestination(destination);
+        if (NavMesh.SamplePosition(destination, out NavMeshHit hit, 2f, NavMesh.AllAreas))
+        {
+            agent.SetDestination(hit.position);
+        }
     }
 
-    // ---------------- INTERACTION ----------------
+    // ---------------- INTERACCIÓN ----------------
 
     private void CheckInteraction()
     {
@@ -131,14 +149,17 @@ public class PlayerController_MovementInteraction : MonoBehaviour
         if (agent.pathPending)
             return;
 
-        if (agent.remainingDistance > agent.stoppingDistance)
-            return;
+        float distance = Vector2.Distance(transform.position,currentTarget.GetTransform().position); // Distancia real al objetivo Más fiable que remainingDistance en 2D
 
-        currentTarget.Interact(this);
-        currentTarget = null;
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + interactDistance)
+        {
+            agent.isStopped = true;
+            currentTarget.Interact(this);
+            currentTarget = null;
+        }
     }
 
-    // ---------------- ANIMATION ----------------
+    // ---------------- ANIMACIÓN ----------------
 
     private void UpdateAnimator()
     {
@@ -169,6 +190,7 @@ public class PlayerController_MovementInteraction : MonoBehaviour
         if (hit != null)
             newHover = hit.GetComponent<IInteractable>();
 
+        // Evita actualizar highlight innecesariamente
         if (hoveredInteractable == newHover)
             return;
 
@@ -191,15 +213,22 @@ public class PlayerController_MovementInteraction : MonoBehaviour
         journalOpen = !journalOpen;
 
         canMove = !journalOpen;
-        agent.isStopped = journalOpen;
-
+        
+        // Detiene el movimiento al abrir UI
+        if (journalOpen)
+        {
+            agent.isStopped = true;
+        }
+        else
+        {
+            agent.isStopped = false;
+        }
+        
         JournalController.Instance.ToggleJournal();
     }
 
     public void OpenMap()
     {
-        Debug.Log("OPEN MAP PRESSED");
-
         GameNavigation.Instance.OpenMap();
     }
 }
