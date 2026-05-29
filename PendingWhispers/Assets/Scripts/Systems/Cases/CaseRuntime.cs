@@ -8,8 +8,6 @@ public class CaseRuntime
     public bool isResolved;
     public string chosenOutcome;
 
-    public string currentObjective;
-
     public HashSet<FlagSO> localFlags = new();
 
     public event Action OnCaseUpdated;
@@ -17,8 +15,6 @@ public class CaseRuntime
     public CaseRuntime(CaseData data)
     {
         this.data = data;
-
-        currentObjective = data.currentObjective;
     }
 
     public bool CanResolve()
@@ -33,7 +29,7 @@ public class CaseRuntime
 
     public string GetProgressText()
     {
-        return $"{localFlags.Count}/{data.requiredClues.Count}";
+        return $"{GetCompletedObjectivesCount()}/{data.objectives.Count}";
     }
 
     public void AddClue(FlagSO clue)
@@ -49,11 +45,39 @@ public class CaseRuntime
         OnCaseUpdated?.Invoke();
     }
 
-    public void UpdateObjective(string newObjective)
+    public int GetCompletedObjectivesCount()
     {
-        currentObjective = newObjective;
+        int completed = 0;
 
-        OnCaseUpdated?.Invoke();
+        foreach (var objective in data.objectives)
+        {
+            if (IsObjectiveCompleted(objective))
+                completed++;
+        }
+
+        return completed;
+    }
+
+    public bool IsObjectiveCompleted(CaseObjective objective)
+    {
+        if (objective == null)
+            return false;
+
+        if (objective.completedFlag == null)
+            return false;
+
+        return GameProgress.Instance.HasFlag(objective.completedFlag);
+    }
+
+    public string GetCurrentObjective()
+    {
+        foreach (var objective in data.objectives)
+        {
+            if (!IsObjectiveCompleted(objective))
+                return objective.objectiveText;
+        }
+
+        return "Case Completed";
     }
 
     public void Resolve()

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameProgress : MonoBehaviour
@@ -55,7 +56,6 @@ public class GameProgress : MonoBehaviour
 
         return true;
     }
-    
     public List<FlagSO> GetFlags()
     {
         return new List<FlagSO>(flags);

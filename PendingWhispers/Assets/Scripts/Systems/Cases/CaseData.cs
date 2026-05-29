@@ -12,8 +12,8 @@ public class CaseData : ScriptableObject
 
     public Sprite caseIcon;
 
-    [TextArea(2, 5)]
-    public string currentObjective;
+    [Header("Objectives")]
+    public List<CaseObjective> objectives;
 
     [Header("ID")]
     public string caseID;
