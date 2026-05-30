@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,6 +7,7 @@ public class DialogueUI : MonoBehaviour
 {
     public static DialogueUI Instance;
 
+    [Header("UI")]
     public GameObject panel;
 
     public TextMeshProUGUI speakerText;
@@ -15,8 +15,6 @@ public class DialogueUI : MonoBehaviour
 
     public Transform choicesContainer;
     public GameObject choiceButtonPrefab;
-
-    public Button continueButton;
 
     [Header("Typewriter")]
     public float typingSpeed = 0.03f;
@@ -37,26 +35,44 @@ public class DialogueUI : MonoBehaviour
 
     void Update()
     {
-        if (!panel.activeSelf) return;
+        if (!panel.activeSelf)
+            return;
 
         if (Input.GetMouseButtonDown(0))
         {
+            // Si el texto se está escribiendo, completarlo
             if (isTyping)
+            {
                 SkipTyping();
+                return;
+            }
+
+            // Si hay elecciones visibles, no avanzar
+            if (choicesContainer.childCount > 0)
+                return;
+
+            // Avanzar al siguiente nodo
+            DialogueManager.Instance.Next();
         }
     }
 
-    public void ShowLine(DialogueCharacter character, string speaker, string text)
+    public void ShowLine(
+    DialogueCharacter character,
+    string speaker,
+    string text,
+    Sprite expressionSprite
+)
     {
         panel.SetActive(true);
 
         speakerText.text = speaker;
 
-        CharacterUIController.Instance.SetCharacter(character);
+        if (CharacterUIController.Instance != null)
+        {
+            CharacterUIController.Instance.SetCharacter(character,expressionSprite);
+        }
 
         StartTyping(text);
-
-        continueButton.gameObject.SetActive(false);
     }
 
     void StartTyping(string text)
@@ -84,8 +100,6 @@ public class DialogueUI : MonoBehaviour
         }
 
         isTyping = false;
-
-        ShowContinue();
     }
 
     void SkipTyping()
@@ -95,19 +109,11 @@ public class DialogueUI : MonoBehaviour
 
         dialogueText.text = fullText;
         isTyping = false;
-
-        ShowContinue();
-    }
-
-    public void ShowContinue()
-    {
-        continueButton.gameObject.SetActive(true);
     }
 
     public void ShowChoices(List<DialogueChoice> choices)
     {
         ClearChoices();
-        continueButton.gameObject.SetActive(false);
 
         foreach (var choice in choices)
         {
@@ -115,7 +121,7 @@ public class DialogueUI : MonoBehaviour
 
             btn.GetComponentInChildren<TextMeshProUGUI>().text = choice.text;
 
-            btn.GetComponent<Button>().onClick.AddListener(() =>
+            btn.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() =>
             {
                 DialogueManager.Instance.ChooseChoice(choice);
             });
@@ -126,9 +132,10 @@ public class DialogueUI : MonoBehaviour
     {
         panel.SetActive(false);
 
-        ClearChoices(); 
+        ClearChoices();
 
-        CharacterUIController.Instance.ResetCharacters();
+        if (CharacterUIController.Instance != null)
+            CharacterUIController.Instance.ResetCharacters();
     }
 
     public void ClearChoices()

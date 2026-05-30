@@ -9,6 +9,7 @@ public class DialogueManager : MonoBehaviour
     private DialogueRunner runner;
     private DialogueData currentDialogue;
     private DialogueNode currentNode;
+    private NPC currentNPC;
 
     private PlayerController_Actions player;
 
@@ -37,8 +38,11 @@ public class DialogueManager : MonoBehaviour
     {
         player = p;
     }
-    public void StartDialogue(DialogueData dialogue)
+
+    public void StartDialogue(DialogueData dialogue, NPC npc)
     {
+        currentNPC = npc;
+
         if (dialogue == null)
         {
             Debug.LogError("[DialogueManager] Dialogue es NULL");
@@ -86,6 +90,7 @@ public class DialogueManager : MonoBehaviour
             EndDialogue();
         }
     }
+
     void ShowNode(DialogueNode node)
     {
         if (node == null)
@@ -105,7 +110,20 @@ public class DialogueManager : MonoBehaviour
         var charData = currentDialogue.GetCharacter(node.speakerID);
         string speakerName = charData != null ? charData.displayName : "???";
 
-        DialogueUI.Instance.ShowLine(charData, speakerName, node.text);
+        Sprite expressionSprite = null;
+
+        if (currentNPC != null)
+        {
+            expressionSprite = currentNPC.GetExpression(node.expression);
+        }
+
+        DialogueUI.Instance.ShowLine(
+            charData,
+            speakerName,
+            node.text,
+            expressionSprite
+        );
+
         RegisterDialogueToJournal(charData, node);
 
         if (node.choices != null && node.choices.Count > 0)
@@ -126,23 +144,19 @@ public class DialogueManager : MonoBehaviour
                 return;
             }
         }
-
-        DialogueUI.Instance.ShowContinue();
     }
 
     void ApplyNodeEffects(DialogueNode node)
     {
-        // Flags
         if (node.onEnterFlags != null)
         {
             foreach (var flag in node.onEnterFlags)
             {
-                Debug.Log("[Dialogue] Aï¿½adiendo flag: " + flag.id);
+                Debug.Log("[Dialogue] Añadiendo flag: " + flag.id);
                 GameProgress.Instance.AddFlag(flag);
             }
         }
 
-        // Eventos
         if (node.onEnterEvents != null)
         {
             foreach (var evt in node.onEnterEvents)
@@ -190,10 +204,12 @@ public class DialogueManager : MonoBehaviour
         runner = null;
         currentNode = null;
         currentDialogue = null;
-        
-        if (JournalController.Instance != null) JournalController.Instance.OpenToPeopleTab();
+        currentNPC = null;
+
+        if (JournalController.Instance != null)
+            JournalController.Instance.OpenToPeopleTab();
     }
-    
+
     void RegisterDialogueToJournal(DialogueCharacter charData, DialogueNode node)
     {
         if (charData == null || node == null)

@@ -20,13 +20,16 @@ public class CharacterUIController : MonoBehaviour
         Instance = this;
     }
 
-    public void SetCharacter(DialogueCharacter character)
+    public void SetCharacter(DialogueCharacter character, Sprite expressionSprite)
     {
-        if (character == null) return;
+        if (character == null)
+            return;
 
-        Image target = character.isLeftSide ? leftCharacter : rightCharacter;
+        Image target = character.isLeftSide
+            ? leftCharacter
+            : rightCharacter;
 
-        target.sprite = character.sprite;
+        target.sprite = expressionSprite;
         target.gameObject.SetActive(true);
 
         SetActiveSpeaker(character.isLeftSide);
