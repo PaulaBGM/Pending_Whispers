@@ -113,9 +113,7 @@ public class Item : MonoBehaviour, IInteractable
         alreadyRegistered = true;
 
         // 1. Mostrar diálogo
-        string textToShow = string.IsNullOrEmpty(discoveryText)
-            ? InventoryItem.name
-            : discoveryText;
+        string textToShow = string.IsNullOrEmpty(discoveryText) ? InventoryItem.name : discoveryText;
 
         UIGameEvents.OnDialogue?.Invoke(textToShow);
 

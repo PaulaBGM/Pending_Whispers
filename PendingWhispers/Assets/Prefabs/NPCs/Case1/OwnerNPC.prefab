@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 353582117503343894}
   - component: {fileID: 7645477944159180331}
   - component: {fileID: 176805181648224533}
+  - component: {fileID: 3885220766990103060}
   m_Layer: 6
   m_Name: OwnerNPC
   m_TagString: Untagged
@@ -211,8 +212,24 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: -0.1354127}
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 1.11, y: 2}
   m_Direction: 0
+--- !u!114 &3885220766990103060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2366997595347320042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa0352a4d56abd42ad2fc69deb72448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 1, y: 1, z: 4}
+  m_Center: {x: 0, y: 0, z: 0}
+  m_Area: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &5306947319315896893
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,7 +255,7 @@ Transform:
   m_GameObject: {fileID: 5306947319315896893}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: -0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -307,7 +307,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -99
+  m_SortingOrder: -19000
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.000030517578, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -2971,7 +2971,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -95
+  m_SortingOrder: -18500
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.000030517578, y: 0.00008136034, z: 0}
   m_MaxChunkCount: 16
@@ -6330,10 +6330,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Catacomb_Coffin1 (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 1044115353584122974, guid: d5d078ad989a0c84da4e7f4c70255d70, type: 3}
-      propertyPath: m_SortingOrder
-      value: -3
-      objectReference: {fileID: 0}
     - target: {fileID: 6353573385438415075, guid: d5d078ad989a0c84da4e7f4c70255d70, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.99
@@ -7012,10 +7008,6 @@ PrefabInstance:
     - target: {fileID: 3845950691135155979, guid: c5630a7e85a3e9848a913e21a87c272b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7137805135194889142, guid: c5630a7e85a3e9848a913e21a87c272b, type: 3}
-      propertyPath: m_SortingOrder
-      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 7151717086720567960, guid: c5630a7e85a3e9848a913e21a87c272b, type: 3}
       propertyPath: m_Name

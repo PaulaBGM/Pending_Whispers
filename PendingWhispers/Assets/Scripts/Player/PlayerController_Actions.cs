@@ -10,10 +10,12 @@ public class PlayerController_Actions : MonoBehaviour
 
     [Header("Layers")]
     [SerializeField] private LayerMask interactableLayer;
-
+    
     [Header("Movement")]
+    [SerializeField] private float speed = 3.5f; // Distancia necesaria para interactuar con objetos
     [SerializeField] private float interactDistance = 1.5f; // Distancia necesaria para interactuar con objetos
     [SerializeField] private float moveStoppingDistance = 0.1f; // Distancia mínima para movimiento normal
+    [SerializeField] private float aceleration = 50f; // Distancia mínima para movimiento normal
 
     private NavMeshAgent agent;
     private Animator animator;
@@ -22,9 +24,7 @@ public class PlayerController_Actions : MonoBehaviour
     private IInteractable hoveredInteractable;
 
     public bool canMove = true;
-
-    private bool journalOpen;
-
+    
     public InventorySO Inventory => InventoryRuntime.Instance.GetInventory();
 
     private void Awake()
@@ -42,8 +42,8 @@ public class PlayerController_Actions : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
-        agent.speed = 3.5f;
-        agent.acceleration = 8f;
+        agent.speed = speed;
+        agent.acceleration = aceleration;
         agent.stoppingDistance = moveStoppingDistance;
 
         agent.isStopped = false;
@@ -63,6 +63,8 @@ public class PlayerController_Actions : MonoBehaviour
             InputController.Instance.OnInventoryPressed += ToggleInventory;
             InputController.Instance.OnMapPressed += OpenMap;
         }
+        
+        JournalController.OnJournalStateChanged += HandleJournalStateChanged;
     }
 
     private void OnDisable()
@@ -73,6 +75,8 @@ public class PlayerController_Actions : MonoBehaviour
             InputController.Instance.OnInventoryPressed -= ToggleInventory;
             InputController.Instance.OnMapPressed -= OpenMap;
         }
+        
+        JournalController.OnJournalStateChanged -= HandleJournalStateChanged;
     }
 
     private void Update()
@@ -133,6 +137,8 @@ public class PlayerController_Actions : MonoBehaviour
         if (!canMove)
             return;
 
+        agent.isStopped = false;
+
         if (NavMesh.SamplePosition(destination, out NavMeshHit hit, 2f, NavMesh.AllAreas))
         {
             agent.SetDestination(hit.position);
@@ -165,7 +171,7 @@ public class PlayerController_Actions : MonoBehaviour
     {
         if (agent.velocity.sqrMagnitude > 0.01f)
         {
-            Vector2 direction = (agent.steeringTarget - transform.position).normalized;
+            Vector2 direction = new Vector2(agent.velocity.x, agent.velocity.y).normalized;
 
             animator.SetFloat("moveX", direction.x, 0.1f, Time.deltaTime);
             animator.SetFloat("moveY", direction.y, 0.1f, Time.deltaTime);
@@ -205,25 +211,21 @@ public class PlayerController_Actions : MonoBehaviour
 
     // ---------------- UI / JOURNAL ----------------
 
+    private void HandleJournalStateChanged(bool opened)
+    {
+        canMove = !opened;
+
+        if (agent != null)
+        {
+            agent.isStopped = opened;
+            agent.ResetPath();
+        }
+    }
     public void ToggleInventory()
     {
         if (JournalController.Instance == null)
             return;
 
-        journalOpen = !journalOpen;
-
-        canMove = !journalOpen;
-        
-        // Detiene el movimiento al abrir UI
-        if (journalOpen)
-        {
-            agent.isStopped = true;
-        }
-        else
-        {
-            agent.isStopped = false;
-        }
-        
         JournalController.Instance.ToggleJournal();
     }
 

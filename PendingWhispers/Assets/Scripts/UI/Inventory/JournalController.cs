@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,9 @@ using Inventory.Model;
 public class JournalController : MonoBehaviour
 {
     public static JournalController Instance { get; private set; }
-
+    public static event Action<bool> OnJournalStateChanged;
+    public bool IsOpen => isOpen;
+    
     [Header("Root")]
     [SerializeField] private GameObject root;
 
@@ -99,6 +102,8 @@ public class JournalController : MonoBehaviour
 
         UIManager.Instance.SetJournalOpen(false);
 
+        OnJournalStateChanged?.Invoke(false);
+
         gameObject.SetActive(false);
     }
 
@@ -112,6 +117,8 @@ public class JournalController : MonoBehaviour
 
         currentPage = null;
         pendingPage = null;
+
+        OnJournalStateChanged?.Invoke(true);
 
         if (pendingInitialPage != null)
         {
