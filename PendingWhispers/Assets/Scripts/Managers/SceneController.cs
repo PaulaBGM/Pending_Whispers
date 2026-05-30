@@ -3,9 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : BaseSingleton<SceneController>
 {
-    public static SceneController Instance { get; private set; }
+    public static new SceneController Instance { get; private set; }
 
-    private void Awake()
+    private new void Awake()
     {
         if (Instance == null)
         {

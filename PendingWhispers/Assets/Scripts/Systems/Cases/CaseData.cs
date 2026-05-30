@@ -14,7 +14,10 @@ public class CaseData : ScriptableObject
 
     [Header("Objectives")]
     public List<CaseObjective> objectives;
-
+    
+    [Header("Hypothesis")]
+    public HypothesisData hypothesis;
+    
     [Header("ID")]
     public string caseID;
 

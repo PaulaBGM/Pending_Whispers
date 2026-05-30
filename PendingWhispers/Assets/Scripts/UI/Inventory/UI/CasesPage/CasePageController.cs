@@ -178,8 +178,8 @@ public class CasePageController : MonoBehaviour
             bool completed = runtime.IsObjectiveCompleted(objective);
 
             text.text = completed
-                ? "\n\n[COMPLETE] " + objective.objectiveText
-                : "\n\n[PENDING] " + objective.objectiveText;
+                ? "[COMPLETE] " + objective.objectiveText
+                : "[PENDING] " + objective.objectiveText;
 
             objectiveEntries.Add(text);
         }

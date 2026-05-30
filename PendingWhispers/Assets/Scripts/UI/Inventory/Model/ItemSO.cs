@@ -4,12 +4,6 @@ using UnityEngine;
 
 namespace Inventory.Model
 {
-    public enum ItemType
-    {
-        Testimony,
-        Clue,
-        Case
-    }
 
     public abstract class ItemSO : ScriptableObject
     {
