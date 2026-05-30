@@ -6,7 +6,7 @@ using System;
 public class CaseEntryUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text titleText;
-    [SerializeField] private TMP_Text progressText;
+    [SerializeField] public TMP_Text progressText;
 
     [SerializeField] private Image icon;
 

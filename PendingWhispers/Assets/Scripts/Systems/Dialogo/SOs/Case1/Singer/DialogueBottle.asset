@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 772d907194c90e1499655d8cccb4f43c, type: 3}
-  m_Name: DialogueOneLiner
+  m_Name: DialogueBottle
   m_EditorClassIdentifier: 
   characters:
   - id: Lyra
@@ -26,11 +26,12 @@ MonoBehaviour:
   nodes:
   - id: start
     speakerID: ghost1
-    text: You should be able to uncover more information on the outside world
+    text: Is that... Waker's Wark? That's my favorite liquor, oh how I've missed
+      it
     nextNodeID: 
     choices: []
     requiredFlags:
-    - {fileID: 0}
+    - {fileID: 11400000, guid: 1b75c72b9eb796b48bd430228ed4bc8e, type: 2}
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 0

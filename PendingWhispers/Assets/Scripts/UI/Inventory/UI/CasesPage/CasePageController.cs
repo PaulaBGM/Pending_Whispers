@@ -151,7 +151,6 @@ public class CasePageController : MonoBehaviour
 
         titleText.text = data.caseTitle;
         descriptionText.text = data.caseDescription;
-        progressText.text = runtime.GetProgressText();
 
         UpdateObjectives(runtime);
 
@@ -179,8 +178,8 @@ public class CasePageController : MonoBehaviour
             bool completed = runtime.IsObjectiveCompleted(objective);
 
             text.text = completed
-                ? "[COMPLETADO] " + objective.objectiveText
-                : "[PENDIENTE] " + objective.objectiveText;
+                ? "\n\n[COMPLETE] " + objective.objectiveText
+                : "\n\n[PENDING] " + objective.objectiveText;
 
             objectiveEntries.Add(text);
         }

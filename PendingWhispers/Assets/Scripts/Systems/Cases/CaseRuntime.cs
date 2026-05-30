@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class CaseRuntime
 {
@@ -29,7 +30,7 @@ public class CaseRuntime
 
     public string GetProgressText()
     {
-        return $"{GetCompletedObjectivesCount()}/{data.objectives.Count}";
+        return $"{GetCompletedEvidenceCount()}/{data.requiredClues.Count}";
     }
 
     public void AddClue(FlagSO clue)
@@ -56,6 +57,16 @@ public class CaseRuntime
         }
 
         return completed;
+    }
+
+    public int GetCompletedEvidenceCount()
+    {
+        if (data.requiredClues == null || data.requiredClues.Count == 0)
+            return 0;
+
+        return data.requiredClues.Count(clue =>
+            clue != null &&
+            GameProgress.Instance.HasFlag(clue));
     }
 
     public bool IsObjectiveCompleted(CaseObjective objective)
