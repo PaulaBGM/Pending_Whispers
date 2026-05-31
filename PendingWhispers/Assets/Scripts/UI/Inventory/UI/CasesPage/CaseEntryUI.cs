@@ -6,8 +6,7 @@ using System;
 public class CaseEntryUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text titleText;
-    [SerializeField] private TMP_Text objectiveText;
-    [SerializeField] private TMP_Text progressText;
+    [SerializeField] public TMP_Text progressText;
 
     [SerializeField] private Image icon;
 
@@ -21,11 +20,11 @@ public class CaseEntryUI : MonoBehaviour
     {
         runtime = caseRuntime;
 
+        if (runtime == null || runtime.data == null)
+            return;
+
         if (titleText != null)
             titleText.text = runtime.data.caseTitle;
-
-        if (objectiveText != null)
-            objectiveText.text = runtime.currentObjective;
 
         if (progressText != null)
             progressText.text = runtime.GetProgressText();
@@ -42,9 +41,6 @@ public class CaseEntryUI : MonoBehaviour
 
         if (titleText != null)
             titleText.text = "";
-
-        if (objectiveText != null)
-            objectiveText.text = "";
 
         if (progressText != null)
             progressText.text = "";

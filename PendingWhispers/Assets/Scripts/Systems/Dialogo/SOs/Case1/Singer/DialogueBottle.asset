@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772d907194c90e1499655d8cccb4f43c, type: 3}
+  m_Name: DialogueBottle
+  m_EditorClassIdentifier: 
+  characters:
+  - id: Lyra
+    displayName: Lyra
+    portrait: {fileID: -6159030981858838909, guid: ac86a53648c7c574986ea53d7179d5c8, type: 3}
+    isLeftSide: 1
+    neutral: {fileID: 2916416985251425419, guid: 5d81eb40a54230e4ba26665eb0b757d6, type: 3}
+    happy: {fileID: 0}
+    sad: {fileID: 0}
+    angry: {fileID: 0}
+    surprised: {fileID: 0}
+    thinking: {fileID: 0}
+  - id: ghost1
+    displayName: Vivienne Encore
+    portrait: {fileID: -6159030981858838909, guid: ac86a53648c7c574986ea53d7179d5c8, type: 3}
+    isLeftSide: 0
+    neutral: {fileID: -5741321063430696138, guid: 0a84c68b0a6d28344ab5326488d7c023, type: 3}
+    happy: {fileID: 0}
+    sad: {fileID: 0}
+    angry: {fileID: 0}
+    surprised: {fileID: 0}
+    thinking: {fileID: 0}
+  nodes:
+  - id: start
+    speakerID: ghost1
+    text: Is that... Waker's Wark? That's my favorite liquor, oh how I've missed
+      it
+    nextNodeID: 
+    choices: []
+    requiredFlags:
+    - {fileID: 11400000, guid: 1b75c72b9eb796b48bd430228ed4bc8e, type: 2}
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 0

@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &261264902158962348
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7772088861155791734}
+  - component: {fileID: 1160535764374028825}
+  m_Layer: 0
+  m_Name: HypothesisController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7772088861155791734
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261264902158962348}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3353434903730006818}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1160535764374028825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261264902158962348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 830a4935d49345644b53565151d3954e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 0}
 --- !u!1 &780707610841976917
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,8 +57,8 @@ GameObject:
   - component: {fileID: 8611742373380025930}
   - component: {fileID: 3621207979925411352}
   - component: {fileID: 4395396960806434001}
-  - component: {fileID: 4164299506986804670}
   - component: {fileID: 5679117998153338676}
+  - component: {fileID: 8365675972222820050}
   m_Layer: 0
   m_Name: --GAMESYSTEMS--
   m_TagString: Untagged
@@ -37,6 +82,7 @@ Transform:
   - {fileID: 2559509679418670937}
   - {fileID: 5401745151898819114}
   - {fileID: 4779467917536468691}
+  - {fileID: 7772088861155791734}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8611742373380025930
@@ -82,19 +128,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 081c4652db497d640918c280ab576de4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4164299506986804670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 780707610841976917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 538eb37a3c888dc47b4d5897adc51059, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentCaseData: {fileID: 11400000, guid: 3e85a2fb99d126649871b389b4c96626, type: 2}
 --- !u!114 &5679117998153338676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,6 +141,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCaseData: {fileID: 0}
+--- !u!114 &8365675972222820050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780707610841976917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbc065c2cd0d34845ac7fd8a67a0c5c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hypothesisController: {fileID: 1160535764374028825}
+  goodEndingFlag: {fileID: 11400000, guid: 8c9823eacec837c4299e0acca9e31dad, type: 2}
+  badEndingFlag: {fileID: 11400000, guid: 62256de666409794a87f3313daea52e4, type: 2}
 --- !u!1 &3251498118334565667
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +166,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2559509679418670937}
   - component: {fileID: 2809504119525209106}
+  - component: {fileID: 2743508893831717398}
   m_Layer: 0
   m_Name: UIFeedbackManager
   m_TagString: Untagged
@@ -155,6 +204,34 @@ MonoBehaviour:
   panel: {fileID: 4540389862327541272}
   text: {fileID: 2094720780190871680}
   duration: 2
+--- !u!114 &2743508893831717398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3251498118334565667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba083b2a818784b4f87df67753976cd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: e38427cb1783d0b479e4922b73fc0a52, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8365675972222820050}
+        m_TargetAssemblyTypeName: HypothesisDialogueResolver, Assembly-CSharp
+        m_MethodName: PresentHypothesis
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8803370654408009387
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,8 +279,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 11400000, guid: 198522ccd6bf5274b84a98dffd61ef5b, type: 2}
-  peopleJournal: {fileID: 0}
-  caseJournal: {fileID: 0}
+  peopleJournal: {fileID: 7561839298475165077}
+  caseJournal: {fileID: 5962105659473384824}
 --- !u!114 &7561839298475165077
 MonoBehaviour:
   m_ObjectHideFlags: 0

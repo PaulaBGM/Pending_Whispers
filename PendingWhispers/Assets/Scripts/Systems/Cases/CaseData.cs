@@ -12,9 +12,12 @@ public class CaseData : ScriptableObject
 
     public Sprite caseIcon;
 
-    [TextArea(2, 5)]
-    public string currentObjective;
-
+    [Header("Objectives")]
+    public List<CaseObjective> objectives;
+    
+    [Header("Hypothesis")]
+    public HypothesisData hypothesis;
+    
     [Header("ID")]
     public string caseID;
 

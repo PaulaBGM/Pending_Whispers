@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 [System.Serializable]
 public class DialogueChoice
@@ -9,6 +10,9 @@ public class DialogueChoice
 
     public List<FlagSO> addFlags;
     public List<FlagSO> requiredFlags;
+
+    [Header("Events")]
+    public GameEventSO onSelectedEvent;
 
     public bool endsDialogue;
 }

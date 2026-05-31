@@ -777,7 +777,7 @@ GameObject:
   - component: {fileID: 620878172}
   - component: {fileID: 620878171}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Interface
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -882,6 +882,7 @@ GameObject:
   - component: {fileID: 815681265}
   - component: {fileID: 815681264}
   - component: {fileID: 815681263}
+  - component: {fileID: 815681267}
   m_Layer: 5
   m_Name: Quit
   m_TagString: Untagged
@@ -1025,6 +1026,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 815681261}
   m_CullTransparentMesh: 1
+--- !u!114 &815681267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815681261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 994639974
+      Data2: 1263348018
+      Data3: 35169720
+      Data4: 1181852691
+    Path: event:/SelectButton
+  Event: 
+  EventPlayTrigger: 19
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1381067562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1038,6 +1070,7 @@ GameObject:
   - component: {fileID: 1381067565}
   - component: {fileID: 1381067564}
   - component: {fileID: 1381067567}
+  - component: {fileID: 1381067568}
   m_Layer: 5
   m_Name: Start
   m_TagString: Untagged
@@ -1181,6 +1214,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1381067568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381067562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 994639974
+      Data2: 1263348018
+      Data3: 35169720
+      Data4: 1181852691
+    Path: event:/SelectButton
+  Event: 
+  EventPlayTrigger: 19
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &1537187423
 PrefabInstance:
   m_ObjectHideFlags: 0

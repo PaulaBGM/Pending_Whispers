@@ -8,7 +8,6 @@ public partial class UIManager_ : MonoBehaviour
 
     public event Action OnPausePressed;
     public event Action OnSubmitPressed;
-    public event Action OnMapPressed;
 
     private void Awake()
     {
@@ -25,7 +24,6 @@ public partial class UIManager_ : MonoBehaviour
             InputController.Instance.OnPausePressed += TogglePause;
             InputController.Instance.OnSubmitPressed += SubmitPressed;
 
-            InputController.Instance.OnMapPressed += OpenMap; 
         }
     }
 
@@ -36,7 +34,6 @@ public partial class UIManager_ : MonoBehaviour
             InputController.Instance.OnPausePressed -= TogglePause;
             InputController.Instance.OnSubmitPressed -= SubmitPressed;
 
-            InputController.Instance.OnMapPressed -= OpenMap; // NEW
         }
     }
 

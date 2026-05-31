@@ -20,6 +20,7 @@ namespace Inventory.UI
 
         private void OnClicked()
         {
+            Debug.Log($"Tab pulsado: {tabType}");
             OnTabSelected?.Invoke(tabType);
         }
 

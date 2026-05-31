@@ -102,7 +102,7 @@ public class Item : MonoBehaviour, IInteractable
             itemCollider.enabled = false;
     }
 
-    public void Interact(PlayerController_MovementInteraction player)
+    public void Interact(PlayerController_Actions player)
     {
         if (alreadyRegistered)
         {
@@ -112,28 +112,23 @@ public class Item : MonoBehaviour, IInteractable
 
         alreadyRegistered = true;
 
-        // 1. Mostrar diálogo
-        string textToShow = string.IsNullOrEmpty(discoveryText)
-            ? InventoryItem.name
-            : discoveryText;
+        string textToShow = string.IsNullOrEmpty(discoveryText) ? InventoryItem.name : discoveryText;
 
         UIGameEvents.OnDialogue?.Invoke(textToShow);
 
-        // 2. Abrir journal automáticamente
-        JournalController.Instance.OpenToCluesTab();
+        //JournalController.Instance.OpenToCluesTab();
 
-        // 3. Registrar en journal
         player.Inventory.AddItem(InventoryItem, 1);
 
-        // 4. feedback opcional
+        FindFirstObjectByType<HUDController>()?.AddClueNotification();
+
         UIGameEvents.OnFeedback?.Invoke("Evidence registered");
 
-        // 5. persistencia
         if (persistenceFlag != null)
             GameProgress.Instance.AddFlag(persistenceFlag);
     }
 
-    private void RegisterEvidence(PlayerController_MovementInteraction player)
+    private void RegisterEvidence(PlayerController_Actions player)
     {
         InventorySO inventory = player.Inventory;
 

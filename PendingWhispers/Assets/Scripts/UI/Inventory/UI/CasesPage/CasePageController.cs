@@ -18,12 +18,15 @@ public class CasePageController : MonoBehaviour
     [Header("Summary UI")]
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private TMP_Text descriptionText;
-    [SerializeField] private TMP_Text objectiveText;
     [SerializeField] private TMP_Text progressText;
-
     [SerializeField] private Image caseImage;
 
+    [Header("Objectives")]
+    [SerializeField] private TMP_Text objectivePrefab;
+    [SerializeField] private Transform objectivesContainer;
+
     private readonly List<CaseEntryUI> spawnedEntries = new();
+    private readonly List<TMP_Text> objectiveEntries = new();
 
     private CaseRuntime selectedCase;
 
@@ -45,7 +48,6 @@ public class CasePageController : MonoBehaviour
     private void Start()
     {
         summaryPanel.SetActive(true);
-
         hypothesisPanel.SetActive(false);
 
         RefreshUI();
@@ -53,6 +55,9 @@ public class CasePageController : MonoBehaviour
 
     public void RefreshUI()
     {
+        if (CaseJournalSystem.Instance == null)
+            return;
+
         var cases = CaseJournalSystem.Instance.GetAllCases();
 
         EnsureSlots(cases.Count);
@@ -98,9 +103,7 @@ public class CasePageController : MonoBehaviour
     private void HandleCaseClicked(CaseRuntime runtime)
     {
         if (selectedCase != null)
-        {
             selectedCase.OnCaseUpdated -= RefreshSelectedCase;
-        }
 
         selectedCase = runtime;
 
@@ -119,7 +122,8 @@ public class CasePageController : MonoBehaviour
 
     private void RefreshSelectedCase()
     {
-        if (selectedCase == null) return;
+        if (selectedCase == null)
+            return;
 
         UpdateSummary(selectedCase);
 
@@ -128,6 +132,7 @@ public class CasePageController : MonoBehaviour
             if (entry.GetData() == selectedCase)
             {
                 entry.SetData(selectedCase);
+                break;
             }
         }
     }
@@ -135,7 +140,6 @@ public class CasePageController : MonoBehaviour
     private void ShowSummary(CaseRuntime runtime)
     {
         summaryPanel.SetActive(true);
-
         hypothesisPanel.SetActive(false);
 
         UpdateSummary(runtime);
@@ -146,15 +150,39 @@ public class CasePageController : MonoBehaviour
         var data = runtime.data;
 
         titleText.text = data.caseTitle;
-
         descriptionText.text = data.caseDescription;
 
-        objectiveText.text = runtime.currentObjective;
-
-        progressText.text = runtime.GetProgressText();
+        UpdateObjectives(runtime);
 
         if (caseImage != null)
             caseImage.sprite = data.caseIcon;
+    }
+
+    private void UpdateObjectives(CaseRuntime runtime)
+    {
+        foreach (var entry in objectiveEntries)
+        {
+            if (entry != null)
+                Destroy(entry.gameObject);
+        }
+
+        objectiveEntries.Clear();
+
+        if (runtime.data.objectives == null)
+            return;
+
+        foreach (var objective in runtime.data.objectives)
+        {
+            TMP_Text text = Instantiate(objectivePrefab, objectivesContainer);
+
+            bool completed = runtime.IsObjectiveCompleted(objective);
+
+            text.text = completed
+                ? "[COMPLETE] " + objective.objectiveText
+                : "[PENDING] " + objective.objectiveText;
+
+            objectiveEntries.Add(text);
+        }
     }
 
     public void OnCreateHypothesis()

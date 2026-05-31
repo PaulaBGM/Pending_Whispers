@@ -7,7 +7,6 @@ public class PeopleJournalSystem : MonoBehaviour
 
     private List<PersonJournalEntry> entries = new();
 
-    // 🔥 SOLO para evitar duplicados exactos
     private HashSet<string> seenLines = new();
 
     private void Awake()
@@ -27,7 +26,7 @@ public class PeopleJournalSystem : MonoBehaviour
             return;
 
         string npcId = name;
-        string lineKey = name + "|" + dialogue.Trim(); // 🔥 más estable
+        string lineKey = name + "|" + dialogue.Trim();
 
         // evitar duplicados exactos
         if (seenLines.Contains(lineKey))
@@ -47,7 +46,6 @@ public class PeopleJournalSystem : MonoBehaviour
 
             existing.shortDialogue = Trim(dialogue);
 
-            // 🔥 IMPORTANTE: fullDialogue siempre reconstruido desde source of truth
             existing.fullDialogue = BuildFullDialogue(existing.dialogues);
 
             return;
@@ -60,7 +58,6 @@ public class PeopleJournalSystem : MonoBehaviour
             portrait = portrait,
             shortDialogue = Trim(dialogue),
 
-            // 🔥 fuente de verdad
             dialogues = new List<string> { dialogue },
 
             // generado

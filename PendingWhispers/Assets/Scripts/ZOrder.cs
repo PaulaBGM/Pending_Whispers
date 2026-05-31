@@ -14,6 +14,6 @@ public class ZOrder : MonoBehaviour
     private void LateUpdate()
     {
         float y = anchor != null ? anchor.position.y : transform.position.y;
-        sprite.sortingOrder = Mathf.RoundToInt(y * -10);
+        sprite.sortingOrder = -(int)(anchor.position.y * 1000);    
     }
 }

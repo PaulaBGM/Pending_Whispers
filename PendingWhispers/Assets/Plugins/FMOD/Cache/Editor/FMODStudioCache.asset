@@ -1,5 +1,59 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7864056071029657983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/JournalSound/JournalState
+  m_EditorClassIdentifier: 
+  Name: JournalState
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 861664983
+    data2: 3021122013
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - TurnPage
+  - Open
+  - Close
+  Exists: 1
+--- !u!114 &-7033542550015514404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SelectButton
+  m_EditorClassIdentifier: 
+  Path: event:/SelectButton
+  Guid:
+    Data1: 994639974
+    Data2: 1263348018
+    Data3: 35169720
+    Data4: 1181852691
+  Banks:
+  - {fileID: 7698760302699471641}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-6929962453718758807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,9 +117,37 @@ MonoBehaviour:
   Path: Assets/StreamingAssets/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639154781590276111
+  lastModified: 639156132707577806
   FileSizes: []
   Exists: 1
+--- !u!114 &-5441402171328562129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/JournalSound
+  m_EditorClassIdentifier: 
+  Path: event:/JournalSound
+  Guid:
+    Data1: 462276463
+    Data2: 1274612670
+    Data3: 93147573
+    Data4: -1094488079
+  Banks:
+  - {fileID: 7698760302699471641}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -7864056071029657983}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-1400243377035136410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +176,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-753788581847475533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/CameraShot
+  m_EditorClassIdentifier: 
+  Path: event:/CameraShot
+  Guid:
+    Data1: 1978296762
+    Data2: 1114666190
+    Data3: 1873619608
+    Data4: -1399612048
+  Banks:
+  - {fileID: 7698760302699471641}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,6 +221,11 @@ MonoBehaviour:
   - {fileID: 7698760302699471641}
   EditorEvents:
   - {fileID: -6929962453718758807}
+  - {fileID: 6056852448801506981}
+  - {fileID: -5441402171328562129}
+  - {fileID: -753788581847475533}
+  - {fileID: -7033542550015514404}
+  - {fileID: 6759123550494063477}
   EditorParameters:
   - {fileID: 5976444632201327814}
   MasterBanks:
@@ -119,10 +233,20 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 6213263654967855966}
   cacheVersion: 131859
-  cacheTime: 639154781590296106
+  cacheTime: 639156137030962900
   SerializableEventsDict:
   - key: event:/Footsteps_GroundTypes
     index: 0
+  - key: event:/Dialogue
+    index: 1
+  - key: event:/JournalSound
+    index: 2
+  - key: event:/CameraShot
+    index: 3
+  - key: event:/SelectButton
+    index: 4
+  - key: event:/OpenMap
+    index: 5
 --- !u!114 &1625284442751308127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,6 +345,33 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
+--- !u!114 &6056852448801506981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dialogue
+  m_EditorClassIdentifier: 
+  Path: event:/Dialogue
+  Guid:
+    Data1: 437021255
+    Data2: 1142802782
+    Data3: -1480543355
+    Data4: 143432452
+  Banks:
+  - {fileID: 7698760302699471641}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &6213263654967855966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,9 +387,36 @@ MonoBehaviour:
   Path: Assets/StreamingAssets/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639154781590286108
+  lastModified: 639156137030902871
   FileSizes: []
   Exists: 1
+--- !u!114 &6759123550494063477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/OpenMap
+  m_EditorClassIdentifier: 
+  Path: event:/OpenMap
+  Guid:
+    Data1: -1549364507
+    Data2: 1203543141
+    Data3: 939585438
+    Data4: 1807465104
+  Banks:
+  - {fileID: 7698760302699471641}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &7698760302699471641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,7 +432,7 @@ MonoBehaviour:
   Path: Assets/StreamingAssets/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 639154781590296106
+  lastModified: 639156137030962900
   FileSizes: []
   Exists: 1
 --- !u!114 &9117803833762038673

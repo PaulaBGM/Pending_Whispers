@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameProgress : MonoBehaviour
@@ -9,6 +10,7 @@ public class GameProgress : MonoBehaviour
     private HashSet<FlagSO> flags = new();
 
     public event Action<FlagSO> OnFlagAdded;
+
     void Awake()
     {
         if (Instance == null)
@@ -55,9 +57,14 @@ public class GameProgress : MonoBehaviour
 
         return true;
     }
-    
+
     public List<FlagSO> GetFlags()
     {
         return new List<FlagSO>(flags);
+    }
+
+    public int GetFlagCount()
+    {
+        return flags.Count;
     }
 }

@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 5952754675163272183}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5987213705223818247}
   - component: {fileID: 5572275895199217252}
+  - component: {fileID: 2356996331198416392}
   m_Layer: 7
   m_Name: Visual
   m_TagString: Untagged
@@ -106,7 +107,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 23
+  m_SortingOrder: -18300
   m_Sprite: {fileID: -5022300237401619403, guid: cde2b5bb06d59ef46aed77d8aa22a04c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -118,6 +119,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2356996331198416392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6041027822253057189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ba256994774a524288c672dde6352cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchor: {fileID: 7417330942443568852}
 --- !u!1 &7781844641180192041
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,6 +142,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6952870049188604728}
   - component: {fileID: 6153383016473575680}
+  - component: {fileID: 7872865658338680634}
   m_Layer: 7
   m_Name: Sofa
   m_TagString: Untagged
@@ -198,3 +213,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.7870793, y: 1.1449246}
   m_EdgeRadius: 0
+--- !u!114 &7872865658338680634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7781844641180192041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa0352a4d56abd42ad2fc69deb72448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 2.4155893, y: 0.46520185, z: 4}
+  m_Center: {x: 0.008901119, y: -0.27628207, z: 0}
+  m_Area: 1
+  m_AffectedAgents: ffffffff

@@ -16,7 +16,12 @@ MonoBehaviour:
   caseDescription: A famous opera singer died thinking everyone was against her,
     now they're using her name as an attraction, help her find peace
   caseIcon: {fileID: -6393559205685776795, guid: 7af75cd6ca4e87e42a37e2e3ed3946b2, type: 3}
-  currentObjective: "Talk to Ren\xE9"
+  objectives:
+  - objectiveText: "Talk With Ren\xE9"
+    completedFlag: {fileID: 11400000, guid: 8026d71d73230a548b720e9ed6b330cf, type: 2}
+  - objectiveText: Investigate all clues
+    completedFlag: {fileID: 11400000, guid: 0bd4ea81fb4c46f4b95fd4140e9cab7d, type: 2}
+  hypothesis: {fileID: 11400000, guid: c37d2d3938d040245bec8dfc8fabe8fa, type: 2}
   caseID: Case 1 - The Singer
   unlockFlag: {fileID: 11400000, guid: 6c5bdc2491f13214c838eb1520ab17f4, type: 2}
   startedFlag: {fileID: 11400000, guid: 8026d71d73230a548b720e9ed6b330cf, type: 2}
@@ -33,12 +38,14 @@ MonoBehaviour:
   - outcomeID: goodcase1
     requiredFlags:
     - {fileID: 11400000, guid: 0bd4ea81fb4c46f4b95fd4140e9cab7d, type: 2}
+    - {fileID: 11400000, guid: 8c9823eacec837c4299e0acca9e31dad, type: 2}
     resultingFlags:
     - {fileID: 11400000, guid: dc4c1bf252451fc40ae424878cff7de7, type: 2}
-    feedbackText: you did it!!
+    feedbackText: you solved the case
   - outcomeID: badcase1
     requiredFlags:
     - {fileID: 11400000, guid: 0bd4ea81fb4c46f4b95fd4140e9cab7d, type: 2}
+    - {fileID: 11400000, guid: 62256de666409794a87f3313daea52e4, type: 2}
     resultingFlags:
     - {fileID: 11400000, guid: dc4c1bf252451fc40ae424878cff7de7, type: 2}
     feedbackText: she's corrupt now, good freaking job, you doofus

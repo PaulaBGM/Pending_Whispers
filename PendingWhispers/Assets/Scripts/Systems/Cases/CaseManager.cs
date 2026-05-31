@@ -16,9 +16,6 @@ public class CaseManager : MonoBehaviour
         {
             LoadCase(currentCaseData);
         }
-        else
-        {
-        }
     }
 
     void Start()
@@ -40,9 +37,7 @@ public class CaseManager : MonoBehaviour
     public void LoadCase(CaseData data)
     {
         if (data == null)
-        {
             return;
-        }
 
         currentCaseData = data;
 

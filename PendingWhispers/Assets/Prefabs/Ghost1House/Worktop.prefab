@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7024090224697295996}
   - component: {fileID: 8174618737474151696}
+  - component: {fileID: 8140405933041827479}
   m_Layer: 7
   m_Name: Worktop
   m_TagString: Untagged
@@ -111,6 +112,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.88827825, y: 1.779287}
   m_EdgeRadius: 0
+--- !u!114 &8140405933041827479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6374301664020428767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa0352a4d56abd42ad2fc69deb72448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 0.7151731, y: 1.6526296, z: 4}
+  m_Center: {x: -0.0786795, y: 0.12961897, z: 0}
+  m_Area: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &8110883081303837945
 GameObject:
   m_ObjectHideFlags: 0
