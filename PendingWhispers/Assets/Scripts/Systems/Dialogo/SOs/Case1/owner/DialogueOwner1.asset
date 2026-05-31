@@ -15,14 +15,24 @@ MonoBehaviour:
   characters:
   - id: lyra
     displayName: Lyra
-    sprite: {fileID: 2916416985251425419, guid: 5d81eb40a54230e4ba26665eb0b757d6, type: 3}
     portrait: {fileID: 0}
     isLeftSide: 1
+    neutral: {fileID: 2916416985251425419, guid: 5d81eb40a54230e4ba26665eb0b757d6, type: 3}
+    happy: {fileID: 0}
+    sad: {fileID: 0}
+    angry: {fileID: 0}
+    surprised: {fileID: 0}
+    thinking: {fileID: 0}
   - id: owner
     displayName: "Ren\xE9 Venue"
-    sprite: {fileID: 8186938708035040425, guid: 4d309bd6b710d134f9e5bb515036c026, type: 3}
     portrait: {fileID: 7791214535279931073, guid: 3c236ddd44c220a4b91c8ae3d6bba2a4, type: 3}
     isLeftSide: 0
+    neutral: {fileID: 8186938708035040425, guid: 4d309bd6b710d134f9e5bb515036c026, type: 3}
+    happy: {fileID: 0}
+    sad: {fileID: 0}
+    angry: {fileID: 0}
+    surprised: {fileID: 0}
+    thinking: {fileID: 0}
   nodes:
   - id: start
     speakerID: owner
@@ -35,6 +45,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 8026d71d73230a548b720e9ed6b330cf, type: 2}
     onEnterEvents: []
     isImportantLine: 0
+    expression: 0
   - id: 1
     speakerID: lyra
     text: "Lyra Durand. And yes, I can see them. You\u2019re Ren\xE9 Venue, I assume?"
@@ -44,6 +55,7 @@ MonoBehaviour:
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 0
+    expression: 0
   - id: 2
     speakerID: owner
     text: "Good. Then maybe you can help me before this place loses all its customers.
@@ -55,6 +67,7 @@ MonoBehaviour:
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 0
+    expression: 0
   - id: 3
     speakerID: lyra
     text: Vivienne Encore. The opera singer
@@ -64,6 +77,7 @@ MonoBehaviour:
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 0
+    expression: 0
   - id: 4
     speakerID: owner
     text: The Vivienne Encore. People come from everywhere to see this mansion because
@@ -74,6 +88,7 @@ MonoBehaviour:
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 1
+    expression: 0
   - id: 5
     speakerID: lyra
     text: "Spirits don\u2019t usually become violent without a reason."
@@ -83,11 +98,13 @@ MonoBehaviour:
       nextNodeID: 
       addFlags: []
       requiredFlags: []
+      onSelectedEvent: {fileID: 0}
       endsDialogue: 1
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 0
+    expression: 0
   - id: 6
     speakerID: owner
     text: "Well, whatever the reason is, it\u2019s costing me money. Last night a
@@ -98,6 +115,7 @@ MonoBehaviour:
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 0
+    expression: 0
   - id: 7
     speakerID: lyra
     text: When did the disturbances begin?
@@ -107,6 +125,7 @@ MonoBehaviour:
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 0
+    expression: 0
   - id: 8
     speakerID: owner
     text: "A few weeks ago. First the singing started at night. Then objects began
@@ -118,6 +137,7 @@ MonoBehaviour:
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 0
+    expression: 0
   - id: 9
     speakerID: lyra
     text: And what do you know about her death?
@@ -127,6 +147,7 @@ MonoBehaviour:
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 0
+    expression: 0
   - id: 10
     speakerID: owner
     text: "Officially? A tragic accident. But people whispered about jealousy, inheritance
@@ -137,6 +158,7 @@ MonoBehaviour:
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 0
+    expression: 0
   - id: 11
     speakerID: lyra
     text: Close to her how?
@@ -146,11 +168,13 @@ MonoBehaviour:
       nextNodeID: 
       addFlags: []
       requiredFlags: []
+      onSelectedEvent: {fileID: 0}
       endsDialogue: 1
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 0
+    expression: 0
   - id: 12
     speakerID: owner
     text: "A former lover, rivals, a few servants\u2026 I don\u2019t know the details.
@@ -161,6 +185,7 @@ MonoBehaviour:
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 0
+    expression: 0
   - id: 13
     speakerID: lyra
     text: And her remains?
@@ -170,11 +195,13 @@ MonoBehaviour:
       nextNodeID: 
       addFlags: []
       requiredFlags: []
+      onSelectedEvent: {fileID: 0}
       endsDialogue: 1
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 0
+    expression: 0
   - id: 14
     speakerID: owner
     text: Most of Vivienne and her family were moved to the catacombs long ago. Stored
@@ -185,8 +212,10 @@ MonoBehaviour:
       nextNodeID: 
       addFlags: []
       requiredFlags: []
+      onSelectedEvent: {fileID: 0}
       endsDialogue: 1
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 1
+    expression: 0

@@ -15,14 +15,24 @@ MonoBehaviour:
   characters:
   - id: lyra
     displayName: Lyra
-    sprite: {fileID: 2916416985251425419, guid: 5d81eb40a54230e4ba26665eb0b757d6, type: 3}
-    portrait: {fileID: 0}
+    portrait: {fileID: -6159030981858838909, guid: ac86a53648c7c574986ea53d7179d5c8, type: 3}
     isLeftSide: 1
+    neutral: {fileID: 2916416985251425419, guid: 5d81eb40a54230e4ba26665eb0b757d6, type: 3}
+    happy: {fileID: 0}
+    sad: {fileID: 0}
+    angry: {fileID: 0}
+    surprised: {fileID: 0}
+    thinking: {fileID: 0}
   - id: butler
     displayName: "Desir\xE9e Cahu\xE8te"
-    sprite: {fileID: -7806103805540087679, guid: 6c89d086796f9134f9345d60908d642e, type: 3}
     portrait: {fileID: 7142518519572273488, guid: ad514fb12feb06641907c05812225daf, type: 3}
     isLeftSide: 0
+    neutral: {fileID: -7806103805540087679, guid: 6c89d086796f9134f9345d60908d642e, type: 3}
+    happy: {fileID: 0}
+    sad: {fileID: 0}
+    angry: {fileID: 0}
+    surprised: {fileID: 0}
+    thinking: {fileID: 0}
   nodes:
   - id: start
     speakerID: butler
@@ -34,17 +44,20 @@ MonoBehaviour:
       nextNodeID: 1
       addFlags: []
       requiredFlags: []
+      onSelectedEvent: {fileID: 0}
       endsDialogue: 0
     - text: See you
       nextNodeID: 
       addFlags: []
       requiredFlags: []
+      onSelectedEvent: {fileID: 0}
       endsDialogue: 1
     requiredFlags:
     - {fileID: 0}
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 0
+    expression: 0
   - id: 1
     speakerID: butler
     text: "Hm?\nOh\u2026 you\u2019re not her.\n\u2026Sorry."
@@ -54,8 +67,10 @@ MonoBehaviour:
       nextNodeID: 2
       addFlags: []
       requiredFlags: []
+      onSelectedEvent: {fileID: 0}
       endsDialogue: 0
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 0
+    expression: 0

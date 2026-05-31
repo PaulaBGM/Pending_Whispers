@@ -6,12 +6,6 @@ public class CaseManager : MonoBehaviour
 
     [SerializeField] private CaseData currentCaseData;
 
-    [Header("Hypothesis")]
-    [SerializeField] private HypothesisController hypothesisController;
-    [SerializeField] private FlagSO perfectHypothesisFlag;
-    [SerializeField] private FlagSO partialHypothesisFlag;
-    [SerializeField] private FlagSO wrongHypothesisFlag;
-
     private CaseRuntime currentCase;
 
     void Awake()
@@ -90,54 +84,6 @@ public class CaseManager : MonoBehaviour
         {
             UIFeedbackManager.Instance.ShowMessage("Faltan pistas...");
             return;
-        }
-
-        EvaluateOutcomes();
-    }
-
-    public void TryResolveCaseWithHypothesis()
-    {
-        if (currentCase == null)
-            return;
-
-        if (currentCase.isResolved)
-            return;
-
-        if (hypothesisController == null)
-        {
-            Debug.LogError("Missing HypothesisController");
-            return;
-        }
-
-        if (!currentCase.CanResolve())
-        {
-            UIFeedbackManager.Instance.ShowMessage("Faltan pistas...");
-            return;
-        }
-
-        int score = hypothesisController.GetCorrectCount();
-        int totalSlots = hypothesisController.TotalSlots;
-
-        if (totalSlots <= 0)
-        {
-            Debug.LogError("Hypothesis has no slots.");
-            return;
-        }
-
-        if (score == totalSlots)
-        {
-            if (perfectHypothesisFlag != null)
-                GameProgress.Instance.AddFlag(perfectHypothesisFlag);
-        }
-        else if (score >= Mathf.CeilToInt(totalSlots * 0.5f))
-        {
-            if (partialHypothesisFlag != null)
-                GameProgress.Instance.AddFlag(partialHypothesisFlag);
-        }
-        else
-        {
-            if (wrongHypothesisFlag != null)
-                GameProgress.Instance.AddFlag(wrongHypothesisFlag);
         }
 
         EvaluateOutcomes();

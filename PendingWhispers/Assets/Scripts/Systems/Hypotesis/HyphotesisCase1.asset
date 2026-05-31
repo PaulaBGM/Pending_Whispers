@@ -13,6 +13,16 @@ MonoBehaviour:
   m_Name: HyphotesisCase1
   m_EditorClassIdentifier: 
   hypothesisID: hypho1
-  textParts: []
-  slots: []
-  correctAnswers: []
+  textParts:
+  - 'Creo que '
+  - "muri\xF3 por culpa de "
+  - usando
+  - .
+  slots:
+  - type: 1
+  - type: 1
+  - type: 2
+  correctAnswers:
+  - Vivienne
+  - "Desir\xE9e"
+  - Alergia

@@ -106,23 +106,19 @@ public class DialogueManager : MonoBehaviour
         }
 
         ApplyNodeEffects(node);
-
         var charData = currentDialogue.GetCharacter(node.speakerID);
+
         string speakerName = charData != null ? charData.displayName : "???";
+
 
         Sprite expressionSprite = null;
 
-        if (currentNPC != null)
+        if (charData != null)
         {
-            expressionSprite = currentNPC.GetExpression(node.expression);
+            expressionSprite = charData.GetExpression(node.expression);
         }
 
-        DialogueUI.Instance.ShowLine(
-            charData,
-            speakerName,
-            node.text,
-            expressionSprite
-        );
+        DialogueUI.Instance.ShowLine(charData,speakerName,node.text,expressionSprite);
 
         RegisterDialogueToJournal(charData, node);
 
@@ -180,6 +176,11 @@ public class DialogueManager : MonoBehaviour
             {
                 GameProgress.Instance.AddFlag(flag);
             }
+        }
+
+        if (choice.onSelectedEvent != null)
+        {
+            choice.onSelectedEvent.Raise();
         }
 
         if (choice.endsDialogue)

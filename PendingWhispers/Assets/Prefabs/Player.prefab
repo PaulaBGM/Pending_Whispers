@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 1526406824740760342}
   - component: {fileID: 2679471290407124799}
   - component: {fileID: 4638168494695136075}
+  - component: {fileID: 2310946345927640699}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -318,6 +319,21 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+--- !u!114 &2310946345927640699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2228694621081910136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4813ba3cb7530244bb5958dd5b18fe55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expressions:
+  - expression: 0
+    sprite: {fileID: 2916416985251425419, guid: 5d81eb40a54230e4ba26665eb0b757d6, type: 3}
 --- !u!1 &5165606389610773166
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,8 +424,10 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 64
+  speed: 3.5
   interactDistance: 1
   moveStoppingDistance: 0.1
+  aceleration: 50
   canMove: 1
 --- !u!195 &7755278882486255537
 NavMeshAgent:
