@@ -45,7 +45,7 @@ public class HypothesisPanelUI : MonoBehaviour
             spawned.Add(dd.gameObject);
         }
 
-        if (slotCount < rowContainers.Length)
+        if (slotCount < rowContainers.Length && slotCount < textParts.Count)
         {
             SpawnText(rowContainers[slotCount], textParts[slotCount]);
         }

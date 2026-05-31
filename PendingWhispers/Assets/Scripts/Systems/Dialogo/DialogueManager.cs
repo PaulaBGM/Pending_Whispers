@@ -106,10 +106,12 @@ public class DialogueManager : MonoBehaviour
         }
 
         ApplyNodeEffects(node);
+
         var charData = currentDialogue.GetCharacter(node.speakerID);
 
-        string speakerName = charData != null ? charData.displayName : "???";
-
+        string speakerName = charData != null
+            ? charData.displayName
+            : "???";
 
         Sprite expressionSprite = null;
 
@@ -118,7 +120,12 @@ public class DialogueManager : MonoBehaviour
             expressionSprite = charData.GetExpression(node.expression);
         }
 
-        DialogueUI.Instance.ShowLine(charData,speakerName,node.text,expressionSprite);
+        DialogueUI.Instance.ShowLine(
+            charData,
+            speakerName,
+            node.text,
+            expressionSprite
+        );
 
         RegisterDialogueToJournal(charData, node);
 
@@ -128,7 +135,14 @@ public class DialogueManager : MonoBehaviour
 
             foreach (var choice in node.choices)
             {
-                if (GameProgress.Instance.HasAllFlags(choice.requiredFlags))
+                bool hasFlags =
+                    GameProgress.Instance.HasAllFlags(choice.requiredFlags);
+
+                bool hasReputation =
+                    ReputationManager.Instance == null ||
+                    ReputationManager.Instance.HasReputation(choice.requiredReputation);
+
+                if (hasFlags && hasReputation)
                 {
                     validChoices.Add(choice);
                 }
@@ -148,7 +162,11 @@ public class DialogueManager : MonoBehaviour
         {
             foreach (var flag in node.onEnterFlags)
             {
-                Debug.Log("[Dialogue] Añadiendo flag: " + flag.id);
+                if (flag == null)
+                    continue;
+
+                Debug.Log("[Dialogue] Adding flag: " + flag.id);
+
                 GameProgress.Instance.AddFlag(flag);
             }
         }
@@ -174,8 +192,18 @@ public class DialogueManager : MonoBehaviour
         {
             foreach (var flag in choice.addFlags)
             {
+                if (flag == null)
+                    continue;
+
                 GameProgress.Instance.AddFlag(flag);
             }
+        }
+
+        if (choice.reputationChange != 0)
+        {
+            ReputationManager.Instance?.AddReputation(
+                choice.reputationChange
+            );
         }
 
         if (choice.onSelectedEvent != null)
@@ -211,7 +239,9 @@ public class DialogueManager : MonoBehaviour
             JournalController.Instance.OpenToPeopleTab();
     }
 
-    void RegisterDialogueToJournal(DialogueCharacter charData, DialogueNode node)
+    void RegisterDialogueToJournal(
+        DialogueCharacter charData,
+        DialogueNode node)
     {
         if (charData == null || node == null)
             return;

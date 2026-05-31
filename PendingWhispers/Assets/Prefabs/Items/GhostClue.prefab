@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7619199833407566373}
   - component: {fileID: 692194896236172794}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,9 @@ GameObject:
   - component: {fileID: 7211262680953750532}
   - component: {fileID: 242705804387433461}
   - component: {fileID: 6913659012784949347}
-  m_Layer: 0
+  - component: {fileID: -3889464237674218480}
+  - component: {fileID: 5815766596693883860}
+  m_Layer: 6
   m_Name: GhostClue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,10 +136,10 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -158,10 +160,10 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
@@ -179,11 +181,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1afe5c93cffee44bbd13e31201a4e58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <InventoryItem>k__BackingField: {fileID: 11400000, guid: 628bfc80ed75e2545a80669a56ba5dca, type: 2}
-  <Quantity>k__BackingField: 1
+  <InventoryItem>k__BackingField: {fileID: 11400000, guid: bf5aa14119038e04da55a64de30c2e23, type: 2}
+  discoveryText: KNIFE
   audioSource: {fileID: 0}
-  duration: 0.3
   spriteRenderer: {fileID: 692194896236172794}
-  highlightColor: {r: 0, g: 1, b: 1, a: 1}
-  persistenceFlag: {fileID: 0}
-  spectralOnly: 1
+  highlightColor: {r: 0.6968409, g: 0.4198113, b: 1, a: 1}
+  persistenceFlag: {fileID: 11400000, guid: 538da547a0d6177408bea1982f7e6116, type: 2}
+--- !u!114 &-3889464237674218480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743288295344349784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d17d890cee891c54f955c6718f93b933, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlight: {fileID: 5815766596693883860}
+  revealOnlyOnce: 1
+--- !u!114 &5815766596693883860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743288295344349784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a074d9a7d1833a46b05acd1d9eb5318, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightRenderer: {fileID: 692194896236172794}
+  duration: 20

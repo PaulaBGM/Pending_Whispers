@@ -146,7 +146,9 @@ namespace Inventory.UI
 
         public void Hide()
         {
-            actionPanel.Toggle(false);
+            if (actionPanel != null)
+                //actionPanel.Toggle(false);
+
             gameObject.SetActive(false);
         }
 

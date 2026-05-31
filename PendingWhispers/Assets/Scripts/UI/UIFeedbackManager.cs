@@ -21,12 +21,15 @@ public class UIFeedbackManager : MonoBehaviour
             return;
         }
 
+        Instance = this;
+
         if (transform.parent != null)
             transform.SetParent(null);
 
         DontDestroyOnLoad(gameObject);
 
-        panel.SetActive(false);
+        if (panel != null)
+            panel.SetActive(false);
     }
 
     void OnEnable()

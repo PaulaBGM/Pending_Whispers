@@ -23,19 +23,12 @@ public class Item : MonoBehaviour, IInteractable
     [Header("Persistence")]
     [SerializeField] private FlagSO persistenceFlag;
 
-    [Header("Spectral Detection")]
-    [SerializeField] private bool spectralOnly;
-
-    private Collider2D itemCollider;
-
     private bool alreadyRegistered;
 
     private void Awake()
     {
-        itemCollider = GetComponent<Collider2D>();
-
-        // Persistencia
-        if (persistenceFlag != null && GameProgress.Instance.HasFlag(persistenceFlag))
+        if (persistenceFlag != null &&
+            GameProgress.Instance.HasFlag(persistenceFlag))
         {
             alreadyRegistered = true;
         }
@@ -45,98 +38,40 @@ public class Item : MonoBehaviour, IInteractable
 
         if (spriteRenderer != null)
             originalColor = spriteRenderer.color;
-
-        // Detectar evidencia espectral
-        ClueItemSO clue = InventoryItem as ClueItemSO;
-
-        if (clue != null)
-        {
-            spectralOnly = clue.HasSpectralTrace;
-        }
-
-        // Ocultar si es espectral
-        if (spectralOnly)
-        {
-            HideSpectralItem();
-        }
-    }
-
-    private void Update()
-    {
-        HandleSpectralVisibility();
-    }
-
-    private void HandleSpectralVisibility()
-    {
-        if (!spectralOnly)
-            return;
-
-        if (SpectralDetectionSystem.Instance == null)
-            return;
-
-        if (SpectralDetectionSystem.Instance.DetectionActive)
-        {
-            ShowSpectralItem();
-        }
-        else
-        {
-            HideSpectralItem();
-        }
-    }
-
-    private void ShowSpectralItem()
-    {
-        if (spriteRenderer != null)
-            spriteRenderer.enabled = true;
-
-        if (itemCollider != null)
-            itemCollider.enabled = true;
-    }
-
-    private void HideSpectralItem()
-    {
-        if (spriteRenderer != null)
-            spriteRenderer.enabled = false;
-
-        if (itemCollider != null)
-            itemCollider.enabled = false;
     }
 
     public void Interact(PlayerController_Actions player)
     {
         if (alreadyRegistered)
         {
-            UIGameEvents.OnFeedback?.Invoke("You have already examined this evidence.");
+            UIGameEvents.OnFeedback?.Invoke(
+                "You have already examined this evidence."
+            );
+
             return;
         }
 
         alreadyRegistered = true;
 
-        string textToShow = string.IsNullOrEmpty(discoveryText) ? InventoryItem.name : discoveryText;
+        string textToShow =
+            string.IsNullOrEmpty(discoveryText)
+            ? InventoryItem.name
+            : discoveryText;
 
         UIGameEvents.OnDialogue?.Invoke(textToShow);
-
-        //JournalController.Instance.OpenToCluesTab();
 
         player.Inventory.AddItem(InventoryItem, 1);
 
         FindFirstObjectByType<HUDController>()?.AddClueNotification();
 
-        UIGameEvents.OnFeedback?.Invoke("Evidence registered");
+        UIGameEvents.OnFeedback?.Invoke(
+            "Evidence registered"
+        );
 
         if (persistenceFlag != null)
             GameProgress.Instance.AddFlag(persistenceFlag);
-    }
 
-    private void RegisterEvidence(PlayerController_Actions player)
-    {
-        InventorySO inventory = player.Inventory;
-
-        // Evita duplicados
-        if (inventory.Contains(InventoryItem))
-            return;
-
-        inventory.AddItem(InventoryItem, 1);
+        //gameObject.SetActive(false);
     }
 
     public Transform GetTransform()
@@ -149,6 +84,9 @@ public class Item : MonoBehaviour, IInteractable
         if (spriteRenderer == null)
             return;
 
-        spriteRenderer.color = value ? highlightColor : originalColor;
+        spriteRenderer.color =
+            value
+            ? highlightColor
+            : originalColor;
     }
 }

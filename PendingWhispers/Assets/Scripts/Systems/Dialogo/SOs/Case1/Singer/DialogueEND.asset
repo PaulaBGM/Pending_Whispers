@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: DialogueEND
   m_EditorClassIdentifier: 
   characters:
-  - id: Lyra
+  - id: lyra
     displayName: Lyra
-    portrait: {fileID: -6159030981858838909, guid: ac86a53648c7c574986ea53d7179d5c8, type: 3}
+    portrait: {fileID: 0}
     isLeftSide: 1
-    neutral: {fileID: 2916416985251425419, guid: 5d81eb40a54230e4ba26665eb0b757d6, type: 3}
-    happy: {fileID: 0}
+    neutral: {fileID: 21300000, guid: ffb48b6e326c88945a3719d85028a556, type: 3}
+    happy: {fileID: 21300000, guid: 71c89171196d1ca4dbdc0471bd45b5e2, type: 3}
     sad: {fileID: 0}
     angry: {fileID: 0}
-    surprised: {fileID: 0}
-    thinking: {fileID: 0}
+    surprised: {fileID: 21300000, guid: 86904446567e7c24781ddbacbf1e15de, type: 3}
+    thinking: {fileID: 21300000, guid: eb7388b74540dd04bb76306815bdce5d, type: 3}
   - id: ghost1
     displayName: Vivienne Encore
     portrait: {fileID: -6159030981858838909, guid: ac86a53648c7c574986ea53d7179d5c8, type: 3}
@@ -61,7 +61,7 @@ MonoBehaviour:
       onSelectedEvent: {fileID: 0}
       endsDialogue: 0
     - text: They murdered you because they wanted your precious necklace
-      nextNodeID: 
+      nextNodeID: 3
       addFlags: []
       requiredFlags:
       - {fileID: 11400000, guid: 62256de666409794a87f3313daea52e4, type: 2}
@@ -77,11 +77,22 @@ MonoBehaviour:
     text: "Oh? Is that so? All of these years I've hold on to these grudge against
       the world who silenced me, when I was the one who didn't listen to others...
       how... sad... \n\n"
-    nextNodeID: 4
+    nextNodeID: 
     choices: []
-    requiredFlags: []
+    requiredFlags:
+    - {fileID: 11400000, guid: 8c9823eacec837c4299e0acca9e31dad, type: 2}
     onEnterFlags: []
-    onEnterEvents:
-    - {fileID: 11400000, guid: ed83ddcd1271f88408fb4efb562267a6, type: 2}
+    onEnterEvents: []
     isImportantLine: 0
     expression: 0
+  - id: 3
+    speakerID: ghost1
+    text: So... IT WAS TRUE, THEY WANTED MY RICHES, MY POWER, MY FAME, MY VOICE!!
+    nextNodeID: 4
+    choices: []
+    requiredFlags:
+    - {fileID: 11400000, guid: 62256de666409794a87f3313daea52e4, type: 2}
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 3

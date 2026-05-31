@@ -12,7 +12,7 @@ namespace Inventory.Model
 
         [field: SerializeField] public int MaxStackSize { get; set; } = 1;
         [field: SerializeField] public string Name { get; set; }
-
+        [field: SerializeField] public string NameHypothesis { get; set; }
         [field: SerializeField, TextArea]
         public string Description { get; set; }
 

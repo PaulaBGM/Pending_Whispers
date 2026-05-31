@@ -7,19 +7,13 @@ public class HypothesisController : MonoBehaviour
     [Header("UI")]
     [SerializeField] private HypothesisPanelUI panel;
 
+    [Header("Flags")]
+    [SerializeField] private FlagSO hypothesisReadyFlag;
+    [SerializeField] private FlagSO correctHypothesisFlag;
+    [SerializeField] private FlagSO wrongHypothesisFlag;
+
     private HypothesisData hypothesisData;
     private string[] currentHypothesis;
-
-    public int TotalSlots
-    {
-        get
-        {
-            if (hypothesisData == null)
-                return 0;
-
-            return hypothesisData.slots.Count;
-        }
-    }
 
     private void Awake()
     {
@@ -47,7 +41,8 @@ public class HypothesisController : MonoBehaviour
 
         hypothesisData = currentCase.hypothesis;
 
-        currentHypothesis = new string[hypothesisData.slots.Count];
+        if (currentHypothesis == null || currentHypothesis.Length != hypothesisData.slots.Count)
+            currentHypothesis = new string[hypothesisData.slots.Count];
 
         panel.Build(
             hypothesisData.textParts,
@@ -69,8 +64,55 @@ public class HypothesisController : MonoBehaviour
             return;
 
         currentHypothesis[index] = value;
+    }
 
-        Debug.Log($"Hypothesis Slot {index}: {value}");
+    public void ConfirmHypothesis()
+    {
+        if (!IsHypothesisComplete())
+        {
+            UIFeedbackManager.Instance.ShowMessage(
+                "Complete the hypothesis before continuing."
+            );
+            return;
+        }
+
+        if (hypothesisReadyFlag != null)
+        {
+            GameProgress.Instance.AddFlag(hypothesisReadyFlag);
+        }
+
+        if (IsCorrect())
+        {
+            if (correctHypothesisFlag != null)
+            {
+                GameProgress.Instance.AddFlag(correctHypothesisFlag);
+            }
+        }
+        else
+        {
+            if (wrongHypothesisFlag != null)
+            {
+                GameProgress.Instance.AddFlag(wrongHypothesisFlag);
+            }
+        }
+
+        UIFeedbackManager.Instance.ShowMessage(
+            "Hypothesis recorded."
+        );
+    }
+
+    public bool IsHypothesisComplete()
+    {
+        if (currentHypothesis == null)
+            return false;
+
+        foreach (string answer in currentHypothesis)
+        {
+            if (string.IsNullOrEmpty(answer))
+                return false;
+        }
+
+        return true;
     }
 
     public bool IsCorrect()
@@ -86,33 +128,22 @@ public class HypothesisController : MonoBehaviour
 
         for (int i = 0; i < currentHypothesis.Length; i++)
         {
-            if (currentHypothesis[i] != hypothesisData.correctAnswers[i])
+            Debug.Log(
+                $"Slot {i} | Player=[{currentHypothesis[i]}] | Correct=[{hypothesisData.correctAnswers[i]}]"
+            );
+
+            if (
+                currentHypothesis[i].Trim().ToLowerInvariant()
+                !=
+                hypothesisData.correctAnswers[i].Trim().ToLowerInvariant()
+            )
+            {
+                Debug.Log($"FAILED SLOT {i}");
                 return false;
+            }
         }
 
         return true;
-    }
-
-    public int GetCorrectCount()
-    {
-        if (hypothesisData == null)
-            return 0;
-
-        if (currentHypothesis == null)
-            return 0;
-
-        int score = 0;
-
-        for (int i = 0; i < currentHypothesis.Length; i++)
-        {
-            if (i >= hypothesisData.correctAnswers.Count)
-                continue;
-
-            if (currentHypothesis[i] == hypothesisData.correctAnswers[i])
-                score++;
-        }
-
-        return score;
     }
 
     private List<List<string>> BuildSlotOptions()
@@ -154,15 +185,12 @@ public class HypothesisController : MonoBehaviour
 
                 if (InventoryRuntime.Instance != null)
                 {
-                    var inventory = InventoryRuntime.Instance.GetInventory()
-                        .GetCurrentInventoryState();
+                    var inventory = InventoryRuntime.Instance.GetInventory().GetCurrentInventoryState();
 
                     foreach (var kvp in inventory)
                     {
                         if (!kvp.Value.IsEmpty)
-                        {
-                            options.Add(kvp.Value.item.name);
-                        }
+                            options.Add(kvp.Value.item.NameHypothesis);
                     }
                 }
 
@@ -172,8 +200,7 @@ public class HypothesisController : MonoBehaviour
 
                 if (InventoryRuntime.Instance != null)
                 {
-                    var items = InventoryRuntime.Instance.GetInventory()
-                        .GetItemsByType(ItemType.Clue);
+                    var items = InventoryRuntime.Instance.GetInventory().GetItemsByType(ItemType.Clue);
 
                     foreach (var item in items)
                     {
@@ -201,15 +228,17 @@ public class HypothesisController : MonoBehaviour
         {
             result += hypothesisData.textParts[i];
 
-            if (i < currentHypothesis.Length &&
-                !string.IsNullOrEmpty(currentHypothesis[i]))
-            {
+            if (i < currentHypothesis.Length && !string.IsNullOrEmpty(currentHypothesis[i]))
                 result += currentHypothesis[i];
-            }
         }
 
         result += hypothesisData.textParts[^1];
 
         return result;
+    }
+
+    public string[] GetCurrentHypothesis()
+    {
+        return currentHypothesis;
     }
 }

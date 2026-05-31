@@ -10,19 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a02f401b2f1802b4d8d0f65ce3355cec, type: 3}
-  m_Name: HyphotesisCase1
+  m_Name: HypotesisCase1
   m_EditorClassIdentifier: 
-  hypothesisID: hypho1
+  hypothesisID: hypo1
   textParts:
-  - 'Creo que '
-  - "muri\xF3 por culpa de "
-  - usando
-  - .
+  - I think
+  - died because of
   slots:
-  - type: 1
   - type: 1
   - type: 2
   correctAnswers:
-  - Vivienne
-  - "Desir\xE9e"
-  - Alergia
+  - Vivienne Encore
+  - ClueDocuments
