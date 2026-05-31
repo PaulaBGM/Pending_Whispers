@@ -201,9 +201,7 @@ public class DialogueManager : MonoBehaviour
 
         if (choice.reputationChange != 0)
         {
-            ReputationManager.Instance?.AddReputation(
-                choice.reputationChange
-            );
+            ReputationManager.Instance?.AddReputation(choice.reputationChange);
         }
 
         if (choice.onSelectedEvent != null)

@@ -42,6 +42,7 @@ MonoBehaviour:
     resultingFlags:
     - {fileID: 11400000, guid: dc4c1bf252451fc40ae424878cff7de7, type: 2}
     feedbackText: you solved the case
+    reputationReward: 2
   - outcomeID: badcase1
     requiredFlags:
     - {fileID: 11400000, guid: 0bd4ea81fb4c46f4b95fd4140e9cab7d, type: 2}
@@ -49,3 +50,4 @@ MonoBehaviour:
     resultingFlags:
     - {fileID: 11400000, guid: dc4c1bf252451fc40ae424878cff7de7, type: 2}
     feedbackText: she's corrupt now, good freaking job, you doofus
+    reputationReward: -2

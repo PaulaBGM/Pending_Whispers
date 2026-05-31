@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 [System.Serializable]
 public class CaseOutcome
@@ -9,4 +10,7 @@ public class CaseOutcome
     public List<FlagSO> resultingFlags;
 
     public string feedbackText;
+
+    [Header("Reputation")]
+    public int reputationReward;
 }
