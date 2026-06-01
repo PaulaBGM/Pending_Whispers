@@ -3502,8 +3502,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2628527514657845595, guid: 929d4c261fbe5e34081744e871cc5e0a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerController_Actions, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846881488887935109, guid: 929d4c261fbe5e34081744e871cc5e0a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846881488887935109, guid: 929d4c261fbe5e34081744e871cc5e0a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846881488887935109, guid: 929d4c261fbe5e34081744e871cc5e0a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 955
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547356338361418995, guid: 929d4c261fbe5e34081744e871cc5e0a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2241398343323591403, guid: 231ddd6769e8d22449c05253b21e00c4, type: 3}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7481716557188041559, guid: 929d4c261fbe5e34081744e871cc5e0a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 929d4c261fbe5e34081744e871cc5e0a, type: 3}

@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: ffb48b6e326c88945a3719d85028a556
+guid: 8142a1ff8408e2c4189efa114d997a6e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4346214728480024497
-    second: Lyra1_0
+      213: 3652085389764901965
+    second: ReneExpresions_SpriteSheet_0
+  - first:
+      213: -4413838979861532499
+    second: ReneExpresions_SpriteSheet_1
+  - first:
+      213: -8236101453732318523
+    second: ReneExpresions_SpriteSheet_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +43,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -46,12 +52,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 1024
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -126,13 +132,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Lyra1_0
+      name: ReneExpresions_Neutral
       rect:
         serializedVersion: 2
-        x: 158
-        y: 104
-        width: 703
-        height: 856
+        x: 0
+        y: 0
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +147,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1b76f90b44bd05c30800000000000000
-      internalID: 4346214728480024497
+      spriteID: d4cb45aff40dea230800000000000000
+      internalID: 3652085389764901965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ReneExpresions_Thinking
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da0b49555d4eeb2c0800000000000000
+      internalID: -4413838979861532499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ReneExpresions_Angry
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c2f4345d5d73bd80800000000000000
+      internalID: -8236101453732318523
       vertices: []
       indices: 
       edges: []
@@ -151,7 +201,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: d3858b2d0f31b2b4abe2a64700e7b953
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +211,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Lyra1_0: 4346214728480024497
+      ReneExpresions_Angry: -8236101453732318523
+      ReneExpresions_Neutral: 3652085389764901965
+      ReneExpresions_Thinking: -4413838979861532499
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

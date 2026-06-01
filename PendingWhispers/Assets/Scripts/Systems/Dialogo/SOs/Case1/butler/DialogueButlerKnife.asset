@@ -17,22 +17,22 @@ MonoBehaviour:
     displayName: Lyra
     portrait: {fileID: 0}
     isLeftSide: 1
-    neutral: {fileID: 21300000, guid: ffb48b6e326c88945a3719d85028a556, type: 3}
-    happy: {fileID: 21300000, guid: 71c89171196d1ca4dbdc0471bd45b5e2, type: 3}
+    neutral: {fileID: 6795179555359847349, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
+    happy: {fileID: -1103926389690433412, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
     sad: {fileID: 0}
     angry: {fileID: 0}
-    surprised: {fileID: 21300000, guid: 86904446567e7c24781ddbacbf1e15de, type: 3}
-    thinking: {fileID: 21300000, guid: eb7388b74540dd04bb76306815bdce5d, type: 3}
+    surprised: {fileID: -8241981511714330664, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
+    thinking: {fileID: 3356771313395980172, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
   - id: butler
     displayName: "Desir\xE9e Cahu\xE8te"
-    portrait: {fileID: 7142518519572273488, guid: ad514fb12feb06641907c05812225daf, type: 3}
+    portrait: {fileID: 21300000, guid: 1d364f4b642932d40adc9cecbfeb71f5, type: 3}
     isLeftSide: 0
-    neutral: {fileID: -7806103805540087679, guid: 6c89d086796f9134f9345d60908d642e, type: 3}
-    happy: {fileID: 0}
-    sad: {fileID: 0}
+    neutral: {fileID: 21300000, guid: 1d364f4b642932d40adc9cecbfeb71f5, type: 3}
+    happy: {fileID: 21300000, guid: 6bd6f33d70437744fad8b2ac2c71ba16, type: 3}
+    sad: {fileID: 21300000, guid: 0e6fc337674431141907fae9306fa81a, type: 3}
     angry: {fileID: 0}
     surprised: {fileID: 0}
-    thinking: {fileID: 0}
+    thinking: {fileID: 21300000, guid: 1d364f4b642932d40adc9cecbfeb71f5, type: 3}
   nodes:
   - id: start
     speakerID: butler
@@ -43,12 +43,16 @@ MonoBehaviour:
       nextNodeID: 
       addFlags: []
       requiredFlags: []
+      requiredReputation: 0
+      reputationChange: 0
       onSelectedEvent: {fileID: 0}
       endsDialogue: 1
     - text: See you
       nextNodeID: 
       addFlags: []
       requiredFlags: []
+      requiredReputation: 0
+      reputationChange: 0
       onSelectedEvent: {fileID: 0}
       endsDialogue: 1
     requiredFlags:

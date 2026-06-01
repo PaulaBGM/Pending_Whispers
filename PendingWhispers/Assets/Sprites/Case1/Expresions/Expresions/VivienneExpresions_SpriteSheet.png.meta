@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 71c89171196d1ca4dbdc0471bd45b5e2
+guid: bec2bde4e2b7c0e43b2a6d425780aa68
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 9153451109658338658
-    second: Ilustracion_sin_titulo_0
+      213: -2309538511025058491
+    second: VivianExpresions_SpriteSheet_0
+  - first:
+      213: -2639373083943347036
+    second: VivianExpresions_SpriteSheet_1
+  - first:
+      213: 8430273765688819406
+    second: VivianExpresions_SpriteSheet_2
+  - first:
+      213: 1409497517209106125
+    second: VivianExpresions_SpriteSheet_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,9 +55,9 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -126,13 +135,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ilustracion_sin_titulo_0
+      name: VivianExpresions_Neutral
       rect:
         serializedVersion: 2
-        x: 158
-        y: 104
-        width: 703
-        height: 856
+        x: 0
+        y: 0
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +150,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 26527148947970f70800000000000000
-      internalID: 9153451109658338658
+      spriteID: 54d444fe5fed2ffd0800000000000000
+      internalID: -2309538511025058491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VivianExpresions_Angry
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ac54d50a201f5bd0800000000000000
+      internalID: -2639373083943347036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VivianExpresions_Happy
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ece3d2b03595ef470800000000000000
+      internalID: 8430273765688819406
       vertices: []
       indices: 
       edges: []
@@ -151,7 +204,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: ff529b7c019e7cf418bba5c62e0a9dce
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +214,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Ilustracion_sin_titulo_0: 9153451109658338658
+      0: -2639373083943347036
+      VivianExpresions_Angry: -2639373083943347036
+      VivianExpresions_Happy: 8430273765688819406
+      VivianExpresions_Neutral: -2309538511025058491
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
