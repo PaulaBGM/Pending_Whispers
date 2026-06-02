@@ -1,16 +1,17 @@
-using UnityEngine;
-using System.Collections.Generic;
 using Inventory.Model;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
+    public static event Action<bool> OnDialogueStateChanged;
 
     private DialogueRunner runner;
     private DialogueData currentDialogue;
     private DialogueNode currentNode;
     private NPC currentNPC;
-
     private PlayerController_Actions player;
 
     void Awake()
@@ -48,6 +49,8 @@ public class DialogueManager : MonoBehaviour
             Debug.LogError("[DialogueManager] Dialogue es NULL");
             return;
         }
+
+        OnDialogueStateChanged?.Invoke(true);
 
         currentDialogue = dialogue;
         runner = new DialogueRunner(dialogue);
@@ -222,21 +225,23 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
+        OnDialogueStateChanged?.Invoke(false);
+
         if (DialogueUI.Instance != null)
             DialogueUI.Instance.Hide();
 
         if (player != null)
             player.canMove = true;
-        
+
         if (currentNPC != null)
         {
             currentNPC.TryTransform();
         }
+
         runner = null;
         currentNode = null;
         currentDialogue = null;
         currentNPC = null;
-
     }
 
     void RegisterDialogueToJournal(

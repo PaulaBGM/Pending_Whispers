@@ -87,10 +87,12 @@ public class JournalController : MonoBehaviour
 
     public void ToggleJournal()
     {
+        Debug.Log("[Journal] ToggleJournal");
         if (isAnimating)
             return;
 
         isOpen = !isOpen;
+        Debug.Log("[Journal] isOpen = " + isOpen);
 
         if (isOpen)
         {
@@ -155,8 +157,8 @@ public class JournalController : MonoBehaviour
 
     private IEnumerator RefreshAfterOpen()
     {
-        yield return null;
         RefreshCurrentPage();
+        yield return null;
     }
 
     // =========================

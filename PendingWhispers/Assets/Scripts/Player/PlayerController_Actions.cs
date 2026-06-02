@@ -223,6 +223,10 @@ public class PlayerController_Actions : MonoBehaviour
     }
     public void ToggleInventory()
     {
+        if (PauseMenuController.Instance != null &&
+            PauseMenuController.Instance.IsPaused)
+            return;
+
         if (JournalController.Instance == null)
             return;
 

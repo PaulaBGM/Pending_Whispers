@@ -217,7 +217,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 'This tab opens the testimonies page, where every important line the characters
+    say will be recorded. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9ce69c45913c6a0458ce004774048889, type: 2}
   m_sharedMaterial: {fileID: -8053236303809071689, guid: 9ce69c45913c6a0458ce004774048889, type: 2}
@@ -1319,7 +1320,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 462, y: 55}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5636111333923332809
 CanvasRenderer:
@@ -1415,7 +1416,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 450, y: 450}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &982432481900193543
 CanvasRenderer:
@@ -1445,7 +1446,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 'To make a deduction, use the dropdown buttons to choose what you believe
+    happened in this case, and click the confirm button to click it in place. The
+    ghosts will react depending on if your deductions are right or wrong. Your reputation
+    and mental health will depend on it too... so work hard and think carefully. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9ce69c45913c6a0458ce004774048889, type: 2}
   m_sharedMaterial: {fileID: -8053236303809071689, guid: 9ce69c45913c6a0458ce004774048889, type: 2}
@@ -1511,7 +1515,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -441.9679, w: -326.90765}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1524,7 +1528,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5017242221670355106}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
   m_Name: 
@@ -1758,7 +1762,7 @@ MonoBehaviour:
   m_ChildControlWidth: 0
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 1
+  m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
 --- !u!114 &2621651015098946003
 MonoBehaviour:
@@ -1998,7 +2002,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: Here you'll be able to see a summary of the case, with your current progress.
+    You'll also be able to form your hypothesis of the events of the case
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9ce69c45913c6a0458ce004774048889, type: 2}
   m_sharedMaterial: {fileID: -8053236303809071689, guid: 9ce69c45913c6a0458ce004774048889, type: 2}
@@ -2374,7 +2379,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 450, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3761610115142221816
 CanvasRenderer:
@@ -2427,9 +2432,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
-  m_MinWidth: -1
+  m_MinWidth: 400
   m_MinHeight: -1
-  m_PreferredWidth: -1
+  m_PreferredWidth: 500
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: 200
@@ -2447,12 +2452,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 30
-    m_Right: 30
-    m_Top: 30
-    m_Bottom: 30
-  m_ChildAlignment: 1
-  m_Spacing: 20
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 0
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -2525,7 +2530,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: This page opens the clues sections, all the important objects will appear
+    here!!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9ce69c45913c6a0458ce004774048889, type: 2}
   m_sharedMaterial: {fileID: -8053236303809071689, guid: 9ce69c45913c6a0458ce004774048889, type: 2}
@@ -2738,7 +2744,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: This is the tutorial page, come here if you forget where things are
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9ce69c45913c6a0458ce004774048889, type: 2}
   m_sharedMaterial: {fileID: -8053236303809071689, guid: 9ce69c45913c6a0458ce004774048889, type: 2}

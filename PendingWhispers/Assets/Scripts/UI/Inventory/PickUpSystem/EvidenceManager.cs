@@ -6,28 +6,35 @@ public class EvidenceManager : MonoBehaviour
 {
     public static EvidenceManager Instance;
 
-    public List<ItemSO> requiredItems;
-    public FlagSO completedFlag;
+    [SerializeField] private InventorySO inventory;
 
-    private bool completed = false;
+    [SerializeField] private List<ItemSO> requiredItems;
+    [SerializeField] private FlagSO completedFlag;
 
-    void Awake()
+    private bool completed;
+
+    private void Awake()
     {
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
-    void Start()
+    private void Start()
     {
-        var inventory = InventoryRuntime.Instance.GetInventory();
+        if (inventory == null)
+        {
+            Debug.LogError("[EvidenceManager] InventorySO no asignado");
+            return;
+        }
+
         inventory.OnInventoryChanged += CheckCompletion;
     }
 
     public void CheckCompletion()
     {
-        if (completed) return;
+        if (completed || inventory == null)
+            return;
 
-        var inventory = InventoryRuntime.Instance.GetInventory();
         var items = inventory.GetCurrentInventoryState();
 
         foreach (var required in requiredItems)
@@ -43,7 +50,8 @@ public class EvidenceManager : MonoBehaviour
                 }
             }
 
-            if (!found) return;
+            if (!found)
+                return;
         }
 
         completed = true;

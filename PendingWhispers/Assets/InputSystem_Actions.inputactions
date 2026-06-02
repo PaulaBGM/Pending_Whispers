@@ -636,15 +636,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Detection",
-                    "type": "Button",
-                    "id": "3340c4a9-c3e4-44a5-adce-036cbe833e91",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1118,17 +1109,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Map",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "bed2ee49-dedf-4698-b3da-b83f3d576bd4",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Detection",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

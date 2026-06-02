@@ -28,7 +28,6 @@ public class PeopleJournalSystem : MonoBehaviour
         string npcId = name;
         string lineKey = name + "|" + dialogue.Trim();
 
-        // evitar duplicados exactos
         if (seenLines.Contains(lineKey))
             return;
 
@@ -45,7 +44,6 @@ public class PeopleJournalSystem : MonoBehaviour
                 existing.dialogues.Add(dialogue);
 
             existing.shortDialogue = Trim(dialogue);
-
             existing.fullDialogue = BuildFullDialogue(existing.dialogues);
 
             return;
@@ -57,10 +55,7 @@ public class PeopleJournalSystem : MonoBehaviour
             personName = name,
             portrait = portrait,
             shortDialogue = Trim(dialogue),
-
             dialogues = new List<string> { dialogue },
-
-            // generado
             fullDialogue = dialogue
         };
 
@@ -77,7 +72,8 @@ public class PeopleJournalSystem : MonoBehaviour
 
     private string Trim(string text)
     {
-        if (string.IsNullOrEmpty(text)) return "";
+        if (string.IsNullOrEmpty(text))
+            return "";
 
         return text.Length > 120 ? text.Substring(0, 120) + "..." : text;
     }

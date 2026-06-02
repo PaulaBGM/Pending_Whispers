@@ -1,34 +1,59 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseMenuController : MonoBehaviour
 {
+    public static PauseMenuController Instance { get; private set; }
+
     [SerializeField] private GameObject pauseMenuUI;
     [SerializeField] private PlayerController_Actions playerController;
 
     private bool isPaused;
+    private bool subscribed;
+
+    public bool IsPaused => isPaused;
 
     private void Awake()
     {
-        pauseMenuUI.SetActive(false);
+        Instance = this;
+
+        if (pauseMenuUI != null)
+            pauseMenuUI.SetActive(false);
     }
 
     private void OnEnable()
     {
-        if (UIManager.Instance != null)
-            UIManager.Instance.OnPausePressed += TogglePause;
+        TrySubscribe();
+    }
+
+    private void TrySubscribe()
+    {
+        if (subscribed)
+            return;
+
+        if (UIManager.Instance == null)
+        {
+            Invoke(nameof(TrySubscribe), 0.1f);
+            return;
+        }
+
+        UIManager.Instance.OnPausePressed += TogglePause;
+        subscribed = true;
     }
 
     private void OnDisable()
     {
-        if (UIManager.Instance != null)
-            UIManager.Instance.OnPausePressed -= TogglePause;
+        if (!subscribed || UIManager.Instance == null)
+            return;
+
+        UIManager.Instance.OnPausePressed -= TogglePause;
+        subscribed = false;
     }
 
     private void TogglePause()
     {
-        Debug.Log("Toggle Pause");
+        if (JournalController.Instance != null && JournalController.Instance.IsOpen)
+            return;
 
         if (isPaused)
             ResumeGame();
@@ -38,9 +63,13 @@ public class PauseMenuController : MonoBehaviour
 
     private void PauseGame()
     {
-        pauseMenuUI.SetActive(true);
+        if (pauseMenuUI != null)
+            pauseMenuUI.SetActive(true);
+
         Time.timeScale = 0f;
         isPaused = true;
+
+        UIManager.Instance?.SetPauseOpen(true);
 
         if (playerController != null)
             playerController.canMove = false;
@@ -48,9 +77,13 @@ public class PauseMenuController : MonoBehaviour
 
     public void ResumeGame()
     {
-        pauseMenuUI.SetActive(false);
+        if (pauseMenuUI != null)
+            pauseMenuUI.SetActive(false);
+
         Time.timeScale = 1f;
         isPaused = false;
+
+        UIManager.Instance?.SetPauseOpen(false);
 
         if (playerController != null)
             playerController.canMove = true;
@@ -58,7 +91,6 @@ public class PauseMenuController : MonoBehaviour
 
     public void Options()
     {
-        Debug.Log("Options menu not implemented yet");
     }
 
     public void ExitGame()
