@@ -5,9 +5,12 @@ public class ReputationManager : MonoBehaviour
 {
     public static ReputationManager Instance;
 
-    [SerializeField] private int reputation;
+    [SerializeField, Range(0, 100)]
+    private int reputation = 50;
 
     public event Action<int> OnReputationChanged;
+
+    public int Reputation => reputation;
 
     private void Awake()
     {
@@ -22,22 +25,26 @@ public class ReputationManager : MonoBehaviour
         }
     }
 
-    public int GetReputation()
+    public void SetReputation(int value)
     {
-        return reputation;
-    }
+        reputation = Mathf.Clamp(value, 0, 100);
 
-    public void AddReputation(int amount)
-    {
-        reputation += amount;
-
-        Debug.Log($"[Reputation] {amount:+#;-#;0} -> {reputation}");
+        Debug.Log($"[Reputation] Set -> {reputation}%");
 
         OnReputationChanged?.Invoke(reputation);
     }
 
-    public bool HasReputation(int required)
+    public void AddReputation(int amount)
     {
-        return reputation >= required;
+        reputation = Mathf.Clamp(reputation + amount, 0, 100);
+
+        Debug.Log($"[Reputation] {amount:+#;-#;0} -> {reputation}%");
+
+        OnReputationChanged?.Invoke(reputation);
+    }
+
+    public bool HasReputation(int requiredPercent)
+    {
+        return reputation >= requiredPercent;
     }
 }

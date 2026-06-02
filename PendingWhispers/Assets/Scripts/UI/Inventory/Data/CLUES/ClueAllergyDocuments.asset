@@ -10,20 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f8d2d7ddd6f1ea4580c0342119c6c43, type: 3}
-  m_Name: ClueBottle
+  m_Name: ClueAllergyDocuments
   m_EditorClassIdentifier: 
   <IsStackable>k__BackingField: 0
   <MaxStackSize>k__BackingField: 1
-  <Name>k__BackingField: Fancy bottle
-  <NameHypothesis>k__BackingField: Bottle of rum
-  <Description>k__BackingField: 'Limited edition rum bottle, this brand was Vivienne''s
-    favorite, it is said that she always drank a shot of this beverage to prepare
-    her throat before a performance. '
-  <ItemImage>k__BackingField: {fileID: -4789945259554619583, guid: 231ddd6769e8d22449c05253b21e00c4, type: 3}
+  <Name>k__BackingField: allergy documents
+  <NameHypothesis>k__BackingField: allergy
+  <Description>k__BackingField: 'Medical documents stating the serious peanut allergy
+    Vivienne had '
+  <ItemImage>k__BackingField: {fileID: -2279307563218064573, guid: 231ddd6769e8d22449c05253b21e00c4, type: 3}
   <DefaultParametersList>k__BackingField: []
   <ItemType>k__BackingField: 2
   <CaseID>k__BackingField: 1
-  <ClueID>k__BackingField: 1
+  <ClueID>k__BackingField: 2
   <LocationFound>k__BackingField: house
   <HasSpectralTrace>k__BackingField: 0
-  discoveryFlag: {fileID: 11400000, guid: 1b75c72b9eb796b48bd430228ed4bc8e, type: 2}
+  discoveryFlag: {fileID: 11400000, guid: 19ce5521cd7a54a479a597a90d55675e, type: 2}

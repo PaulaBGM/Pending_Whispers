@@ -14,24 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryItems:
   - quantity: 1
-    item: {fileID: 11400000, guid: 628bfc80ed75e2545a80669a56ba5dca, type: 2}
-    itemState: []
-  - quantity: 1
-    item: {fileID: 11400000, guid: e49abcc183c13c445bfc9d5a5faf44f0, type: 2}
-    itemState: []
-  - quantity: 1
     item: {fileID: 11400000, guid: 595d5f8fa8c75534383b81fc8b6040f4, type: 2}
     itemState: []
-  - quantity: 1
-    item: {fileID: 11400000, guid: f3e78da910b13d14a8c4224ed28823c3, type: 2}
+  - quantity: 0
+    item: {fileID: 0}
     itemState: []
-  - quantity: 1
-    item: {fileID: 11400000, guid: ca30fc7c17d189c4d89c473fb3b18292, type: 2}
+  - quantity: 0
+    item: {fileID: 0}
     itemState: []
-  - quantity: 1
-    item: {fileID: 11400000, guid: bf5aa14119038e04da55a64de30c2e23, type: 2}
+  - quantity: 0
+    item: {fileID: 0}
     itemState: []
-  <Size>k__BackingField: 6
+  - quantity: 0
+    item: {fileID: 0}
+    itemState: []
+  - quantity: 0
+    item: {fileID: 0}
+    itemState: []
+  - quantity: 0
+    item: {fileID: 0}
+    itemState: []
+  <Size>k__BackingField: 7
   possibleLinks: []
   requiredClueIDs:
   - 1
@@ -39,4 +42,6 @@ MonoBehaviour:
   - 3
   - 4
   - 5
+  - 6
+  - 7
   completedFlag: {fileID: 11400000, guid: 0bd4ea81fb4c46f4b95fd4140e9cab7d, type: 2}

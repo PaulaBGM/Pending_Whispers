@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 0}
+  hypothesisReadyFlag: {fileID: 0}
+  correctHypothesisFlag: {fileID: 0}
+  wrongHypothesisFlag: {fileID: 0}
 --- !u!1 &780707610841976917
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,6 +106,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 595d5f8fa8c75534383b81fc8b6040f4, type: 2}
   - {fileID: 11400000, guid: f3e78da910b13d14a8c4224ed28823c3, type: 2}
   - {fileID: 11400000, guid: ca30fc7c17d189c4d89c473fb3b18292, type: 2}
+  - {fileID: 11400000, guid: 6f44f632074a95948a786ac4b4f9b374, type: 2}
+  - {fileID: 11400000, guid: bf5aa14119038e04da55a64de30c2e23, type: 2}
   completedFlag: {fileID: 11400000, guid: 0bd4ea81fb4c46f4b95fd4140e9cab7d, type: 2}
 --- !u!114 &3621207979925411352
 MonoBehaviour:

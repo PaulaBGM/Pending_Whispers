@@ -227,14 +227,16 @@ public class DialogueManager : MonoBehaviour
 
         if (player != null)
             player.canMove = true;
-
+        
+        if (currentNPC != null)
+        {
+            currentNPC.TryTransform();
+        }
         runner = null;
         currentNode = null;
         currentDialogue = null;
         currentNPC = null;
 
-        if (JournalController.Instance != null)
-            JournalController.Instance.OpenToPeopleTab();
     }
 
     void RegisterDialogueToJournal(
@@ -254,10 +256,8 @@ public class DialogueManager : MonoBehaviour
         item.Description = node.text;
         item.ItemType = ItemType.Testimony;
 
-        PeopleJournalSystem.Instance.AddEntry(
-            charData.displayName,
-            charData.portrait,
-            node.text
-        );
+        PeopleJournalSystem.Instance.AddEntry(charData.displayName,charData.portrait,node.text);
+        FindFirstObjectByType<HUDController>()?.AddClueNotification();
+
     }
 }

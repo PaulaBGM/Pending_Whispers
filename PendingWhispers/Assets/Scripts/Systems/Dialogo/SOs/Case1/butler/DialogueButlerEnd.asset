@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772d907194c90e1499655d8cccb4f43c, type: 3}
+  m_Name: DialogueButlerEnd
+  m_EditorClassIdentifier: 
+  characters:
+  - id: lyra
+    displayName: Lyra
+    portrait: {fileID: 0}
+    isLeftSide: 1
+    neutral: {fileID: 6795179555359847349, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
+    happy: {fileID: -1103926389690433412, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
+    sad: {fileID: 0}
+    angry: {fileID: 0}
+    surprised: {fileID: -8241981511714330664, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
+    thinking: {fileID: 3356771313395980172, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
+  - id: butler
+    displayName: "Desir\xE9e Cahu\xE8te"
+    portrait: {fileID: 21300000, guid: 1d364f4b642932d40adc9cecbfeb71f5, type: 3}
+    isLeftSide: 0
+    neutral: {fileID: 21300000, guid: 1d364f4b642932d40adc9cecbfeb71f5, type: 3}
+    happy: {fileID: 21300000, guid: 6bd6f33d70437744fad8b2ac2c71ba16, type: 3}
+    sad: {fileID: 21300000, guid: 0e6fc337674431141907fae9306fa81a, type: 3}
+    angry: {fileID: 0}
+    surprised: {fileID: 0}
+    thinking: {fileID: 21300000, guid: 1d364f4b642932d40adc9cecbfeb71f5, type: 3}
+  nodes:
+  - id: start
+    speakerID: butler
+    text: 'Oh... it''s you again, what the issue? '
+    nextNodeID: 1
+    choices:
+    - text: Vivienne's murder finally came to an end
+      nextNodeID: 1
+      addFlags: []
+      requiredFlags:
+      - {fileID: 11400000, guid: 8c9823eacec837c4299e0acca9e31dad, type: 2}
+      requiredReputation: 0
+      reputationChange: 5
+      onSelectedEvent: {fileID: 0}
+      endsDialogue: 0
+    - text: See you
+      nextNodeID: 
+      addFlags: []
+      requiredFlags: []
+      requiredReputation: 0
+      reputationChange: 0
+      onSelectedEvent: {fileID: 0}
+      endsDialogue: 1
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 0
+  - id: 1
+    speakerID: lyra
+    text: She finally knows the truth, and has chosen to forgive. She is now finally
+      resting, and waiting for you
+    nextNodeID: 2
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 0
+  - id: 2
+    speakerID: butler
+    text: Really? My lady is waiting for me? My fragile heart couldn't be more thankful
+      to you, Lyra... Thank you for helping my beloved lady Vivienne
+    nextNodeID: 
+    choices:
+    - text: "See you, Desir\xE9e"
+      nextNodeID: 
+      addFlags:
+      - {fileID: 11400000, guid: 5ee7935ae53503c41b0946528eeac02a, type: 2}
+      requiredFlags: []
+      requiredReputation: 0
+      reputationChange: 0
+      onSelectedEvent: {fileID: 11400000, guid: 889f61a947eee54448fee4cf3b0368f5, type: 2}
+      endsDialogue: 1
+    requiredFlags: []
+    onEnterFlags:
+    - {fileID: 11400000, guid: 5ee7935ae53503c41b0946528eeac02a, type: 2}
+    onEnterEvents:
+    - {fileID: 11400000, guid: 889f61a947eee54448fee4cf3b0368f5, type: 2}
+    isImportantLine: 0
+    expression: 1

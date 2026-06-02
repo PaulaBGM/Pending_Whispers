@@ -80,7 +80,8 @@ MonoBehaviour:
     speakerID: ghost1
     text: "Oh? Is that so? All of these years I've hold on to these grudge against
       the world who silenced me, when I was the one who didn't listen to others...
-      how... sad... \n\n"
+      how... sad... \nIf you see my loyal Desir\xE9e, tell her I'll be waiting for
+      her."
     nextNodeID: 
     choices:
     - text: 'See you Vivienne '
@@ -88,12 +89,13 @@ MonoBehaviour:
       addFlags: []
       requiredFlags: []
       requiredReputation: 0
-      reputationChange: 3
+      reputationChange: 5
       onSelectedEvent: {fileID: 11400000, guid: 889f61a947eee54448fee4cf3b0368f5, type: 2}
       endsDialogue: 1
     requiredFlags:
     - {fileID: 11400000, guid: 8c9823eacec837c4299e0acca9e31dad, type: 2}
-    onEnterFlags: []
+    onEnterFlags:
+    - {fileID: 11400000, guid: b20d31eec589dbb4fafd6102542a3f00, type: 2}
     onEnterEvents: []
     isImportantLine: 0
     expression: 1
@@ -101,21 +103,18 @@ MonoBehaviour:
     speakerID: ghost1
     text: So... IT WAS TRUE, THEY WANTED MY RICHES, MY POWER, MY FAME, MY VOICE!!
     nextNodeID: 4
-    choices: []
+    choices:
+    - text: Ahhh!! Sorry!!!
+      nextNodeID: 
+      addFlags: []
+      requiredFlags: []
+      requiredReputation: 0
+      reputationChange: -5
+      onSelectedEvent: {fileID: 0}
+      endsDialogue: 1
     requiredFlags:
     - {fileID: 11400000, guid: 62256de666409794a87f3313daea52e4, type: 2}
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 0
     expression: 3
-  - id: 4
-    speakerID: lyra
-    text: Ahhh!! Sorry!!!
-    nextNodeID: 4
-    choices: []
-    requiredFlags:
-    - {fileID: 11400000, guid: 62256de666409794a87f3313daea52e4, type: 2}
-    onEnterFlags: []
-    onEnterEvents: []
-    isImportantLine: 0
-    expression: 2
