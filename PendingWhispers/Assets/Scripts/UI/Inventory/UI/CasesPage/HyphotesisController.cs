@@ -14,7 +14,7 @@ public class HypothesisController : MonoBehaviour
 
     private HypothesisData hypothesisData;
 
-    // NUNCA será null
+    // NUNCA serï¿½ null
     private string[] currentHypothesis = System.Array.Empty<string>();
 
     private void Awake()
@@ -76,11 +76,10 @@ public class HypothesisController : MonoBehaviour
 
     public void ConfirmHypothesis()
     {
+        Debug.Log("CONFIRM HYPOTHESIS CALLED");
         if (!IsHypothesisComplete())
         {
-            UIFeedbackManager.Instance?.ShowMessage(
-                "Complete the hypothesis before continuing."
-            );
+            UIFeedbackManager.Instance?.ShowMessage("Complete the hypothesis before continuing.");
             return;
         }
 
@@ -144,12 +143,9 @@ public class HypothesisController : MonoBehaviour
             string playerAnswer =
                 currentHypothesis[i]?.Trim().ToLowerInvariant() ?? "";
 
-            string correctAnswer =
-                hypothesisData.correctAnswers[i]?.Trim().ToLowerInvariant() ?? "";
+            string correctAnswer = hypothesisData.correctAnswers[i]?.Trim().ToLowerInvariant() ?? "";
 
-            Debug.Log(
-                $"Slot {i} | Player=[{playerAnswer}] | Correct=[{correctAnswer}]"
-            );
+            Debug.Log($"Slot {i} | Player=[{playerAnswer}] | Correct=[{correctAnswer}]");
 
             if (playerAnswer != correctAnswer)
             {

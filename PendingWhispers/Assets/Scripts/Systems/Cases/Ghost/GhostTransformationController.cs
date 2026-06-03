@@ -1,11 +1,13 @@
 using UnityEngine;
+using FMODUnity;
 
 public class GhostTransformationController : MonoBehaviour
 {
     [SerializeField] private FlagSO correctHypothesisFlag;
     [SerializeField] private FlagSO transformedFlag;
     [SerializeField] private Animator animator;
-
+    [SerializeField] private EventReference transformationEvent;
+    
     private void Awake()
     {
         if (animator == null)
@@ -25,7 +27,8 @@ public class GhostTransformationController : MonoBehaviour
             return;
 
         animator.SetTrigger("Transformation");
-
+        RuntimeManager.PlayOneShot(transformationEvent, transform.position);
+        
         if (transformedFlag != null)
             GameProgress.Instance.AddFlag(transformedFlag);
     }

@@ -56,11 +56,12 @@ public class HypothesisPanelUI : MonoBehaviour
         dropdown.ClearOptions();
         dropdown.AddOptions(options);
 
-        dropdown.onValueChanged.AddListener(i =>
+        dropdown.onValueChanged.AddListener(i => { string value = dropdown.options[i].text; onValueChanged?.Invoke(index, value); });
+        
+        if (options.Count > 0)
         {
-            string value = dropdown.options[i].text;
-            onValueChanged?.Invoke(index, value);
-        });
+            onValueChanged?.Invoke(index, options[0]);
+        }
     }
 
     private void SpawnText(Transform container, string text)

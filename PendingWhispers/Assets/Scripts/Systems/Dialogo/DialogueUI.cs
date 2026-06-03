@@ -2,6 +2,8 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
+using FMODUnity;
 
 public class DialogueUI : MonoBehaviour
 {
@@ -19,13 +21,12 @@ public class DialogueUI : MonoBehaviour
     [Header("Typewriter")]
     public float typingSpeed = 0.03f;
 
-    [Header("Audio")]
-    public AudioSource audioSource;
-    public AudioClip blipSound;
-
     private Coroutine typingCoroutine;
     private bool isTyping;
     private string fullText;
+    
+    [Header("FMOD")]
+    public string dialogueEventPath = "event:/Dialogue";
 
     void Awake()
     {
@@ -40,7 +41,7 @@ public class DialogueUI : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            // Si el texto se está escribiendo, completarlo
+            // Si el texto se estï¿½ escribiendo, completarlo
             if (isTyping)
             {
                 SkipTyping();
@@ -56,12 +57,7 @@ public class DialogueUI : MonoBehaviour
         }
     }
 
-    public void ShowLine(
-    DialogueCharacter character,
-    string speaker,
-    string text,
-    Sprite expressionSprite
-)
+    public void ShowLine(DialogueCharacter character, string speaker, string text, Sprite expressionSprite )
     {
         panel.SetActive(true);
 
@@ -71,7 +67,7 @@ public class DialogueUI : MonoBehaviour
         {
             CharacterUIController.Instance.SetCharacter(character,expressionSprite);
         }
-
+        
         StartTyping(text);
     }
 
@@ -92,9 +88,11 @@ public class DialogueUI : MonoBehaviour
         foreach (char c in text)
         {
             dialogueText.text += c;
-
-            if (blipSound != null && audioSource != null)
-                audioSource.PlayOneShot(blipSound);
+            
+            if (c != ' ' && Random.value < 0.35f)
+            {
+                RuntimeManager.PlayOneShot(dialogueEventPath);
+            }
 
             yield return new WaitForSeconds(typingSpeed);
         }

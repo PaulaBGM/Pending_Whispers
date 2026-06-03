@@ -244,9 +244,7 @@ public class DialogueManager : MonoBehaviour
         currentNPC = null;
     }
 
-    void RegisterDialogueToJournal(
-        DialogueCharacter charData,
-        DialogueNode node)
+    void RegisterDialogueToJournal(DialogueCharacter charData, DialogueNode node)
     {
         if (charData == null || node == null)
             return;
@@ -263,6 +261,5 @@ public class DialogueManager : MonoBehaviour
 
         PeopleJournalSystem.Instance.AddEntry(charData.displayName,charData.portrait,node.text);
         FindFirstObjectByType<HUDController>()?.AddClueNotification();
-
     }
 }

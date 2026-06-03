@@ -4742,6 +4742,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1086321921}
+  - component: {fileID: 1086321922}
   m_Layer: 0
   m_Name: -----SCENARY-----
   m_TagString: Untagged
@@ -4771,6 +4772,37 @@ Transform:
   - {fileID: 1521208414}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1086321922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086321920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1596296711
+      Data2: 1107783330
+      Data3: -1764240505
+      Data4: -1194669457
+    Path: snapshot:/Catacombs
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
 --- !u!1 &1092229185
 GameObject:
   m_ObjectHideFlags: 0
@@ -6053,9 +6085,9 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2162721840098785311, guid: c67c7ec799f3c8f4c9ac460358c59052, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
+    - target: {fileID: 2173273556785387511, guid: c67c7ec799f3c8f4c9ac460358c59052, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -345.22998
       objectReference: {fileID: 0}
     - target: {fileID: 2190913125483429820, guid: c67c7ec799f3c8f4c9ac460358c59052, type: 3}
       propertyPath: m_AnchorMax.y
@@ -6341,10 +6373,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5232519653711159878, guid: c67c7ec799f3c8f4c9ac460358c59052, type: 3}
-      propertyPath: m_Value
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5250066866005714335, guid: c67c7ec799f3c8f4c9ac460358c59052, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -6364,10 +6392,6 @@ PrefabInstance:
     - target: {fileID: 5477692497809824651, guid: c67c7ec799f3c8f4c9ac460358c59052, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5477692497809824651, guid: c67c7ec799f3c8f4c9ac460358c59052, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.0016784668
       objectReference: {fileID: 0}
     - target: {fileID: 5896930542601771522, guid: c67c7ec799f3c8f4c9ac460358c59052, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

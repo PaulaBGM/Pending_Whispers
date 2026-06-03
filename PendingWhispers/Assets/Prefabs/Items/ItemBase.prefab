@@ -89,7 +89,13 @@ MonoBehaviour:
   spriteRenderer: {fileID: 6735833463994383162}
   highlightColor: {r: 0.6745098, g: 0.4509804, b: 0.9254902, a: 1}
   persistenceFlag: {fileID: 11400000, guid: 08bf42f2103682f4c994e59e5de5aedd, type: 2}
-  spectralOnly: 0
+  highlightEvent:
+    Guid:
+      Data1: 143249075
+      Data2: 1281150225
+      Data3: 1531029413
+      Data4: 1653313218
+    Path: event:/HoverItem
 --- !u!1 &3274896088191391363
 GameObject:
   m_ObjectHideFlags: 0

@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 1587151763675949072}
   - component: {fileID: 174368173154826402}
   - component: {fileID: 2281915339443495018}
+  - component: {fileID: 6264245176900380501}
   m_Layer: 5
   m_Name: Catacombs
   m_TagString: Untagged
@@ -280,6 +281,39 @@ MonoBehaviour:
   lockedColor: {r: 0, g: 0, b: 0, a: 0.48235294}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   completedColor: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
+--- !u!114 &6264245176900380501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375820668437695897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 536392396
+      Data2: 1092836268
+      Data3: 1670356873
+      Data4: 2123521980
+    Path: event:/ButtonMainMenu
+  Event: 
+  EventPlayTrigger: 19
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params:
+  - Name: MenuButtons
+    Value: 2
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &2847955977487687474
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,6 +403,7 @@ GameObject:
   - component: {fileID: 4390295600257508320}
   - component: {fileID: 4297888863439100054}
   - component: {fileID: 2647273950266461979}
+  - component: {fileID: 6002290214517804566}
   m_Layer: 5
   m_Name: HouseButton
   m_TagString: Untagged
@@ -498,6 +533,39 @@ MonoBehaviour:
   lockedColor: {r: 0, g: 0, b: 0, a: 0}
   unlockedColor: {r: 1, g: 1, b: 1, a: 0.64705884}
   completedColor: {r: 0.43529412, g: 0.43529412, b: 0.43529412, a: 0.70980394}
+--- !u!114 &6002290214517804566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2982280871228542850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 536392396
+      Data2: 1092836268
+      Data3: 1670356873
+      Data4: 2123521980
+    Path: event:/ButtonMainMenu
+  Event: 
+  EventPlayTrigger: 19
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params:
+  - Name: MenuButtons
+    Value: 2
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &3538131727020299475
 GameObject:
   m_ObjectHideFlags: 0

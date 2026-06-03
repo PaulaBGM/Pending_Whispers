@@ -232,7 +232,7 @@ MonoBehaviour:
     Path: event:/SpectralWave
   Event: 
   EventPlayTrigger: 1
-  EventStopTrigger: 0
+  EventStopTrigger: 12
   AllowFadeout: 1
   TriggerOnce: 0
   Preload: 0
@@ -249,13 +249,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4106488158361142186}
     m_Modifications:
+    - target: {fileID: 956893341003841158, guid: 2a0141422ddeb6e4fb7eaccb5606a723, type: 3}
+      propertyPath: m_SortingOrder
+      value: -14999
+      objectReference: {fileID: 0}
+    - target: {fileID: 4452237714931219992, guid: 2a0141422ddeb6e4fb7eaccb5606a723, type: 3}
+      propertyPath: m_SortingOrder
+      value: -15000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4452237714931219992, guid: 2a0141422ddeb6e4fb7eaccb5606a723, type: 3}
+      propertyPath: m_MaskInteraction
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4452237714950701816, guid: 2a0141422ddeb6e4fb7eaccb5606a723, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4452237714950701816, guid: 2a0141422ddeb6e4fb7eaccb5606a723, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.244
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4452237714950701816, guid: 2a0141422ddeb6e4fb7eaccb5606a723, type: 3}
       propertyPath: m_LocalPosition.z
@@ -298,8 +310,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a0141422ddeb6e4fb7eaccb5606a723, type: 3}
---- !u!4 &2286042802201148071 stripped
-Transform:
+--- !u!224 &2286042802201148071 stripped
+RectTransform:
   m_CorrespondingSourceObject: {fileID: 4452237714950701816, guid: 2a0141422ddeb6e4fb7eaccb5606a723, type: 3}
   m_PrefabInstance: {fileID: 2481520012795476063}
   m_PrefabAsset: {fileID: 0}

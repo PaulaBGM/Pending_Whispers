@@ -363,28 +363,40 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1205920315234631975, guid: d827acc48c1675a48ad38ef58318dad5, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1205920315234631975, guid: d827acc48c1675a48ad38ef58318dad5, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1205920315234631975, guid: d827acc48c1675a48ad38ef58318dad5, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1205920315234631975, guid: d827acc48c1675a48ad38ef58318dad5, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1205920315234631975, guid: d827acc48c1675a48ad38ef58318dad5, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1920
+      value: 1720
       objectReference: {fileID: 0}
     - target: {fileID: 1205920315234631975, guid: d827acc48c1675a48ad38ef58318dad5, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1080
+      value: 980
+      objectReference: {fileID: 0}
+    - target: {fileID: 2340641822408482909, guid: d827acc48c1675a48ad38ef58318dad5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2340641822408482909, guid: d827acc48c1675a48ad38ef58318dad5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2340641822408482909, guid: d827acc48c1675a48ad38ef58318dad5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -155
+      objectReference: {fileID: 0}
+    - target: {fileID: 2935435231807046984, guid: d827acc48c1675a48ad38ef58318dad5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 320
+      objectReference: {fileID: 0}
+    - target: {fileID: 2935435231807046984, guid: d827acc48c1675a48ad38ef58318dad5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 2935435231807046984, guid: d827acc48c1675a48ad38ef58318dad5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 248
+      objectReference: {fileID: 0}
+    - target: {fileID: 4515307738177659244, guid: d827acc48c1675a48ad38ef58318dad5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 147
       objectReference: {fileID: 0}
     - target: {fileID: 5460521370798097634, guid: d827acc48c1675a48ad38ef58318dad5, type: 3}
       propertyPath: m_Pivot.x
@@ -469,6 +481,22 @@ PrefabInstance:
     - target: {fileID: 5935616498789381923, guid: d827acc48c1675a48ad38ef58318dad5, type: 3}
       propertyPath: m_Name
       value: TutorialCANVAS
+      objectReference: {fileID: 0}
+    - target: {fileID: 7298817454036184809, guid: d827acc48c1675a48ad38ef58318dad5, type: 3}
+      propertyPath: m_margin.x
+      value: -298.27798
+      objectReference: {fileID: 0}
+    - target: {fileID: 7298817454036184809, guid: d827acc48c1675a48ad38ef58318dad5, type: 3}
+      propertyPath: m_margin.z
+      value: -299.69385
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543969413076263373, guid: d827acc48c1675a48ad38ef58318dad5, type: 3}
+      propertyPath: m_margin.x
+      value: -163.74854
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543969413076263373, guid: d827acc48c1675a48ad38ef58318dad5, type: 3}
+      propertyPath: m_margin.z
+      value: -145.80347
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1219,11 +1247,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 994639974
-      Data2: 1263348018
-      Data3: 35169720
-      Data4: 1181852691
-    Path: event:/SelectButton
+      Data1: 536392396
+      Data2: 1092836268
+      Data3: 1670356873
+      Data4: 2123521980
+    Path: event:/ButtonMainMenu
   Event: 
   EventPlayTrigger: 19
   EventStopTrigger: 0
@@ -1231,7 +1259,9 @@ MonoBehaviour:
   TriggerOnce: 0
   Preload: 0
   NonRigidbodyVelocity: 0
-  Params: []
+  Params:
+  - Name: MenuButtons
+    Value: 0
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
@@ -1407,11 +1437,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 994639974
-      Data2: 1263348018
-      Data3: 35169720
-      Data4: 1181852691
-    Path: event:/SelectButton
+      Data1: 536392396
+      Data2: 1092836268
+      Data3: 1670356873
+      Data4: 2123521980
+    Path: event:/ButtonMainMenu
   Event: 
   EventPlayTrigger: 19
   EventStopTrigger: 0
@@ -1419,7 +1449,9 @@ MonoBehaviour:
   TriggerOnce: 0
   Preload: 0
   NonRigidbodyVelocity: 0
-  Params: []
+  Params:
+  - Name: MenuButtons
+    Value: 1
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20

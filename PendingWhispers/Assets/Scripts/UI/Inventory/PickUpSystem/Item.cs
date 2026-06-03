@@ -1,5 +1,6 @@
 using Inventory.Model;
 using UnityEngine;
+using FMODUnity;
 
 [RequireComponent(typeof(Collider2D))]
 public class Item : MonoBehaviour, IInteractable
@@ -24,6 +25,10 @@ public class Item : MonoBehaviour, IInteractable
     [SerializeField] private FlagSO persistenceFlag;
 
     private bool alreadyRegistered;
+    
+    [Header("FMOD")]
+    [SerializeField] private EventReference highlightEvent;
+    private bool isHighlighted;
 
     private void Awake()
     {
@@ -53,16 +58,15 @@ public class Item : MonoBehaviour, IInteractable
 
         alreadyRegistered = true;
 
-        string textToShow =
-            string.IsNullOrEmpty(discoveryText)
-            ? InventoryItem.name
-            : discoveryText;
+        string textToShow = string.IsNullOrEmpty(discoveryText) ? InventoryItem.name : discoveryText;
 
         UIGameEvents.OnDialogue?.Invoke(textToShow);
 
         player.Inventory.AddItem(InventoryItem, 1);
 
         FindFirstObjectByType<HUDController>()?.AddClueNotification();
+
+        CameraFlash.Instance.PlayFlash();
 
         UIGameEvents.OnFeedback?.Invoke(
             "Evidence registered"
@@ -84,9 +88,15 @@ public class Item : MonoBehaviour, IInteractable
         if (spriteRenderer == null)
             return;
 
-        spriteRenderer.color =
-            value
-            ? highlightColor
-            : originalColor;
+        if (value == isHighlighted)
+            return;
+        
+        spriteRenderer.color = value ? highlightColor : originalColor;
+        isHighlighted = value;
+        
+        if (value)
+        {
+            RuntimeManager.PlayOneShot(highlightEvent, transform.position);
+        }
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6814115045191479825}
   - component: {fileID: 1892653957657150434}
   - component: {fileID: 8530586632202389375}
+  - component: {fileID: 2897064518412157426}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -133,6 +134,39 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2897064518412157426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214742966509218245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 536392396
+      Data2: 1092836268
+      Data3: 1670356873
+      Data4: 2123521980
+    Path: event:/ButtonMainMenu
+  Event: 
+  EventPlayTrigger: 19
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params:
+  - Name: MenuButtons
+    Value: 2
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &2855776371195091386
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,10 +733,10 @@ RectTransform:
   - {fileID: 2340641822408482909}
   m_Father: {fileID: 5460521370798097634}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6540880740885614660
 CanvasRenderer:
