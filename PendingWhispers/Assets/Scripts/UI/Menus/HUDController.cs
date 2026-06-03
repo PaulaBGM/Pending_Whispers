@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HUDController : MonoBehaviour
 {
@@ -10,6 +11,13 @@ public class HUDController : MonoBehaviour
     [SerializeField] private GameObject clueNotification;
     [SerializeField] private TextMeshProUGUI clueNotificationText;
 
+    [Header("Detection Button")]
+    [SerializeField] private Image detectionButtonImage;
+    [SerializeField] private Button detectionButton;
+
+    [SerializeField] private Color readyColor = Color.white;
+    [SerializeField] private Color cooldownColor = Color.gray;
+
     private int pendingClues;
 
     private bool journalOpen;
@@ -19,11 +27,20 @@ public class HUDController : MonoBehaviour
     {
         TrySubscribe();
         ResetClueNotifications();
+
+        HandleDetectionCooldown(false);
     }
 
     private void OnEnable()
     {
         DialogueManager.OnDialogueStateChanged += HandleDialogue;
+        SpectralDetectionSystem.OnCooldownStateChanged += HandleDetectionCooldown;
+    }
+
+    private void OnDisable()
+    {
+        DialogueManager.OnDialogueStateChanged -= HandleDialogue;
+        SpectralDetectionSystem.OnCooldownStateChanged -= HandleDetectionCooldown;
     }
 
     private void TrySubscribe()
@@ -37,13 +54,18 @@ public class HUDController : MonoBehaviour
         UIManager.Instance.OnJournalStateChanged += HandleJournal;
     }
 
-    private void OnDisable()
-    {
-        DialogueManager.OnDialogueStateChanged -= HandleDialogue;
+    // ---------------- DETECTION UI ----------------
 
-        if (UIManager.Instance != null)
-            UIManager.Instance.OnJournalStateChanged -= HandleJournal;
+    private void HandleDetectionCooldown(bool isCooldown)
+    {
+        if (detectionButtonImage != null)
+            detectionButtonImage.color = isCooldown ? cooldownColor : readyColor;
+
+        if (detectionButton != null)
+            detectionButton.interactable = !isCooldown;
     }
+
+    // ---------------- HUD VISIBILITY ----------------
 
     private void HandleJournal(bool open)
     {
@@ -65,6 +87,8 @@ public class HUDController : MonoBehaviour
         if (hudRoot != null)
             hudRoot.SetActive(!journalOpen && !dialogueOpen);
     }
+
+    // ---------------- CLUES ----------------
 
     public void AddClueNotification()
     {

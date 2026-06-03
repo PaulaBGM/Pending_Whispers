@@ -469,8 +469,9 @@ MonoBehaviour:
   currentEnergy: 100
   scanCost: 25
   regenPerSecond: 15
-  overloadCooldown: 4
-  scanWavePrefab: {fileID: 9017066990258054697, guid: af100394e2f1476478d786845738797c, type: 3}
+  cooldownTime: 10
+  overloadCooldown: 10
+  scanWave: {fileID: 3302292732733241594}
 --- !u!1 &8020407692079477077
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,11 +555,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9017066990258054697, guid: af100394e2f1476478d786845738797c, type: 3}
+      propertyPath: maxParticleSize
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9017066990258054697, guid: af100394e2f1476478d786845738797c, type: 3}
+      propertyPath: startParticleSize
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af100394e2f1476478d786845738797c, type: 3}
+--- !u!114 &3302292732733241594 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9017066990258054697, guid: af100394e2f1476478d786845738797c, type: 3}
+  m_PrefabInstance: {fileID: 5834157239645003475}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0646928cb1ff864a8c127a5ac6395c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7496868440329067897 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4106488158361142186, guid: af100394e2f1476478d786845738797c, type: 3}
