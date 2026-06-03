@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class PlayerController_Actions : MonoBehaviour
 {
     public static Action<PlayerController_Actions> OnPlayerSpawned;
-
+    [SerializeField] private FlagSO unlockCatacombsFlag;
     [Header("Layers")]
     [SerializeField] private LayerMask interactableLayer;
     
@@ -231,9 +231,11 @@ public class PlayerController_Actions : MonoBehaviour
 
         JournalController.Instance.ToggleJournal();
     }
-
     public void OpenMap()
     {
-        GameNavigation.Instance.OpenMap();
+        if (!GameProgress.Instance.HasFlag(unlockCatacombsFlag))
+            return;
+
+        SceneController.Instance.LoadScene("Map");
     }
 }

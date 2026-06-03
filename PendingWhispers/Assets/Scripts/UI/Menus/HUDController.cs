@@ -6,7 +6,9 @@ public class HUDController : MonoBehaviour
 {
     [Header("HUD")]
     [SerializeField] private GameObject hudRoot;
-
+    [SerializeField] private Button mapButton;
+    [SerializeField] private FlagSO unlockCatacombsFlag;
+   
     [Header("Notifications")]
     [SerializeField] private GameObject clueNotification;
     [SerializeField] private TextMeshProUGUI clueNotificationText;
@@ -29,18 +31,25 @@ public class HUDController : MonoBehaviour
         ResetClueNotifications();
 
         HandleDetectionCooldown(false);
+        RefreshMapButton();
     }
 
     private void OnEnable()
     {
         DialogueManager.OnDialogueStateChanged += HandleDialogue;
         SpectralDetectionSystem.OnCooldownStateChanged += HandleDetectionCooldown;
+
+        if (GameProgress.Instance != null)
+            GameProgress.Instance.OnFlagAdded += OnFlagAdded;
     }
 
     private void OnDisable()
     {
         DialogueManager.OnDialogueStateChanged -= HandleDialogue;
         SpectralDetectionSystem.OnCooldownStateChanged -= HandleDetectionCooldown;
+
+        if (GameProgress.Instance != null)
+            GameProgress.Instance.OnFlagAdded -= OnFlagAdded;
     }
 
     private void TrySubscribe()
@@ -110,5 +119,16 @@ public class HUDController : MonoBehaviour
 
         if (clueNotificationText != null)
             clueNotificationText.text = string.Empty;
+    }
+    private void OnFlagAdded(FlagSO flag)
+    {
+        if (flag == unlockCatacombsFlag)
+            RefreshMapButton();
+    }
+
+    private void RefreshMapButton()
+    {
+        if (mapButton != null)
+            mapButton.interactable = GameProgress.Instance.HasFlag(unlockCatacombsFlag);
     }
 }
