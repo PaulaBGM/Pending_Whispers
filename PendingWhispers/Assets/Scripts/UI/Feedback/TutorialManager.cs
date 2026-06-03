@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class TutorialManager : MonoBehaviour
 {
-    public static TutorialManager Instance;
+    public static TutorialManager Instance { get; private set; }
 
-    private readonly HashSet<TutorialID> shownTutorials = new();
+    private readonly HashSet<string> shownTutorials = new();
 
     private void Awake()
     {
@@ -19,24 +19,22 @@ public class TutorialManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public bool HasSeen(TutorialID id)
+    public bool HasSeen(string tutorialID)
     {
-        return shownTutorials.Contains(id);
+        return shownTutorials.Contains(tutorialID);
     }
 
-    public void ShowTutorial(
-        TutorialID id,
-        string title,
-        string description)
+    public void MarkSeen(string tutorialID)
     {
-        if (HasSeen(id))
-            return;
+        shownTutorials.Add(tutorialID);
+    }
 
-        shownTutorials.Add(id);
+    public bool TryShowTutorial(string tutorialID)
+    {
+        if (shownTutorials.Contains(tutorialID))
+            return false;
 
-        TutorialPopup.Instance.ShowTutorial(
-            title,
-            description
-        );
+        shownTutorials.Add(tutorialID);
+        return true;
     }
 }

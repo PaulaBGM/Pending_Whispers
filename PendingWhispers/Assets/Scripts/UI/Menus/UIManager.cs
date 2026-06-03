@@ -18,8 +18,6 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("[UIManager] Awake");
-
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -34,15 +32,12 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator TestCoroutine()
     {
-        Debug.Log("[UIManager] Coroutine Start");
 
         yield return null;
 
-        Debug.Log("[UIManager] Coroutine Frame 1");
 
         yield return null;
 
-        Debug.Log("[UIManager] Coroutine Frame 2");
     }
 
     private void Start()
@@ -62,25 +57,20 @@ public class UIManager : MonoBehaviour
 
         subscribed = true;
 
-        Debug.Log("[UIManager] Suscrito a InputController");
     }
     private void OnEnable()
     {
-        Debug.Log("[UIManager] OnEnable");
     }
 
     private void OnDisable()
     {
-        Debug.Log("[UIManager] OnDisable");
     }
 
     private void OnDestroy()
     {
-        Debug.Log("[UIManager] OnDestroy");
     }
     private void HandlePause()
     {
-        Debug.Log("[UIManager] Evento Pause recibido");
         OnPausePressed?.Invoke();
     }
 

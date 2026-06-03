@@ -3643,7 +3643,8 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: SpectralDetectionSystem, Assembly-CSharp
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1842546018578523440, guid: 929d4c261fbe5e34081744e871cc5e0a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3740,6 +3741,10 @@ PrefabInstance:
     - target: {fileID: 1618746980713273862, guid: c63a23194caea974aad8f42e9719a107, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1858283263738666711, guid: c63a23194caea974aad8f42e9719a107, type: 3}
+      propertyPath: m_Value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2112463517679396634, guid: c63a23194caea974aad8f42e9719a107, type: 3}
       propertyPath: m_SizeDelta.y
@@ -3907,7 +3912,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4159075912076132421, guid: c63a23194caea974aad8f42e9719a107, type: 3}
       propertyPath: m_Size
-      value: 0.99999994
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5717282483533726862, guid: c63a23194caea974aad8f42e9719a107, type: 3}
       propertyPath: m_AnchorMax.x

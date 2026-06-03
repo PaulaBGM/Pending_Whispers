@@ -87,12 +87,10 @@ public class JournalController : MonoBehaviour
 
     public void ToggleJournal()
     {
-        Debug.Log("[Journal] ToggleJournal");
         if (isAnimating)
             return;
 
         isOpen = !isOpen;
-        Debug.Log("[Journal] isOpen = " + isOpen);
 
         if (isOpen)
         {
@@ -134,7 +132,11 @@ public class JournalController : MonoBehaviour
             SetPageImmediate(inventoryPage);
         }
 
-        StartCoroutine(RefreshAfterOpen());
+        if (isActiveAndEnabled)
+            StartCoroutine(RefreshAfterOpen());
+        else
+            RefreshCurrentPage();
+        TutorialPopup.Instance.ShowTutorialOnce("journal", "Diario", "Aquí encontrarás pistas, testimonios, personas conocidas e hipótesis. Utiliza esta información para reconstruir cada caso.");
     }
 
     private void HandleCloseFinished()
