@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 1338927891651448622}
   - component: {fileID: 2181570093517603920}
   - component: {fileID: 4072886108091331159}
-  - component: {fileID: 2313536958826803159}
   m_Layer: 8
   m_Name: CaseTab
   m_TagString: Untagged
@@ -155,39 +154,6 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls: []
---- !u!114 &2313536958826803159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 27685710126465960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 462276463
-      Data2: 1274612670
-      Data3: 93147573
-      Data4: -1094488079
-    Path: event:/JournalSound
-  Event: 
-  EventPlayTrigger: 19
-  EventStopTrigger: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  NonRigidbodyVelocity: 0
-  Params:
-  - Name: JournalState
-    Value: 0
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1 &203833981473290497
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,6 +862,13 @@ MonoBehaviour:
   - {fileID: 2181570093517603920}
   pageTurnAnimator: {fileID: 9113138534691158249}
   pageAnimation: {fileID: 5638501534004225971}
+  pageTurnSFX:
+    Guid:
+      Data1: 1749137319
+      Data2: 1233726526
+      Data3: -1354475863
+      Data4: 278826754
+    Path: event:/TurnPage
 --- !u!1 &3718181421371045562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1152,8 +1125,8 @@ MonoBehaviour:
   hudRoot: {fileID: 4192792934779512125}
   clueNotification: {fileID: 8647359964842673043}
   clueNotificationText: {fileID: 8310218978983033140}
-  detectionButtonImage: {fileID: 0}
-  detectionButton: {fileID: 0}
+  detectionButtonImage: {fileID: 2906716922083118996}
+  detectionButton: {fileID: 6141555258238718766}
   readyColor: {r: 1, g: 1, b: 1, a: 1}
   cooldownColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &4499223285178431783
@@ -1246,7 +1219,6 @@ GameObject:
   - component: {fileID: 7211010783246146279}
   - component: {fileID: 2688393497420240567}
   - component: {fileID: 1663851446422332148}
-  - component: {fileID: 7685992580666688459}
   m_Layer: 8
   m_Name: JournalInstructionTab
   m_TagString: Untagged
@@ -1387,39 +1359,6 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls: []
---- !u!114 &7685992580666688459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5273420710871610798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 462276463
-      Data2: 1274612670
-      Data3: 93147573
-      Data4: -1094488079
-    Path: event:/JournalSound
-  Event: 
-  EventPlayTrigger: 19
-  EventStopTrigger: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  NonRigidbodyVelocity: 0
-  Params:
-  - Name: JournalState
-    Value: 0
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1 &5434645188453884281
 GameObject:
   m_ObjectHideFlags: 0
@@ -2295,7 +2234,6 @@ GameObject:
   - component: {fileID: 2105123458979298100}
   - component: {fileID: 5884352455248825923}
   - component: {fileID: 1073043657897540022}
-  - component: {fileID: 562594139882591486}
   m_Layer: 8
   m_Name: TestimonyTab
   m_TagString: Untagged
@@ -2436,39 +2374,6 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls: []
---- !u!114 &562594139882591486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8586181567206338262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 462276463
-      Data2: 1274612670
-      Data3: 93147573
-      Data4: -1094488079
-    Path: event:/JournalSound
-  Event: 
-  EventPlayTrigger: 19
-  EventStopTrigger: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  NonRigidbodyVelocity: 0
-  Params:
-  - Name: JournalState
-    Value: 0
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1 &9061183475829141534
 GameObject:
   m_ObjectHideFlags: 0
@@ -2483,7 +2388,6 @@ GameObject:
   - component: {fileID: 4070980336708483801}
   - component: {fileID: 5200457491687648452}
   - component: {fileID: 6127303552856714068}
-  - component: {fileID: 7475530470865126252}
   m_Layer: 8
   m_Name: CluesTab
   m_TagString: Untagged
@@ -2624,39 +2528,6 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls: []
---- !u!114 &7475530470865126252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9061183475829141534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 462276463
-      Data2: 1274612670
-      Data3: 93147573
-      Data4: -1094488079
-    Path: event:/JournalSound
-  Event: 
-  EventPlayTrigger: 19
-  EventStopTrigger: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  NonRigidbodyVelocity: 0
-  Params:
-  - Name: JournalState
-    Value: 0
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1001 &312574843172533265
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3543,18 +3414,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUD
       objectReference: {fileID: 0}
-    - target: {fileID: 1842546018578523440, guid: 929d4c261fbe5e34081744e871cc5e0a, type: 3}
-      propertyPath: hudRoot
-      value: 
-      objectReference: {fileID: 3723676845402853605}
-    - target: {fileID: 1842546018578523440, guid: 929d4c261fbe5e34081744e871cc5e0a, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1842546018578523440, guid: 929d4c261fbe5e34081744e871cc5e0a, type: 3}
-      propertyPath: detectionButtonImage
-      value: 
-      objectReference: {fileID: 2906716922083118996}
     - target: {fileID: 1890014820322477291, guid: 929d4c261fbe5e34081744e871cc5e0a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3635,16 +3494,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7040214402500293810, guid: 929d4c261fbe5e34081744e871cc5e0a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LaunchScan
-      objectReference: {fileID: 0}
-    - target: {fileID: 7040214402500293810, guid: 929d4c261fbe5e34081744e871cc5e0a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SpectralDetectionSystem, Assembly-CSharp
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1842546018578523440, guid: 929d4c261fbe5e34081744e871cc5e0a, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3670,6 +3520,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1055874969194644129, guid: 929d4c261fbe5e34081744e871cc5e0a, type: 3}
   m_PrefabInstance: {fileID: 3785541865044846492}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6141555258238718766 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7040214402500293810, guid: 929d4c261fbe5e34081744e871cc5e0a, type: 3}
+  m_PrefabInstance: {fileID: 3785541865044846492}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8310218978983033140 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5177774410813152936, guid: 929d4c261fbe5e34081744e871cc5e0a, type: 3}
@@ -3743,12 +3604,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1858283263738666711, guid: c63a23194caea974aad8f42e9719a107, type: 3}
+      propertyPath: m_Size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1858283263738666711, guid: c63a23194caea974aad8f42e9719a107, type: 3}
       propertyPath: m_Value
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2112463517679396634, guid: c63a23194caea974aad8f42e9719a107, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2112463517679396634, guid: c63a23194caea974aad8f42e9719a107, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.00010681152
       objectReference: {fileID: 0}
     - target: {fileID: 2253979784311572533, guid: c63a23194caea974aad8f42e9719a107, type: 3}
       propertyPath: m_Name
@@ -3914,6 +3783,10 @@ PrefabInstance:
       propertyPath: m_Size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4159075912076132421, guid: c63a23194caea974aad8f42e9719a107, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5717282483533726862, guid: c63a23194caea974aad8f42e9719a107, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -3924,7 +3797,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5727825455515904870, guid: c63a23194caea974aad8f42e9719a107, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -345.22998
+      value: -345.23004
       objectReference: {fileID: 0}
     - target: {fileID: 5897799535257664895, guid: c63a23194caea974aad8f42e9719a107, type: 3}
       propertyPath: m_AnchorMax.y

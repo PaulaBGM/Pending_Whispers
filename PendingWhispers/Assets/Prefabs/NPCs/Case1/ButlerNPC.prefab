@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2456334407320603034}
   - component: {fileID: 8975404625304830374}
   - component: {fileID: 3932998944510116926}
+  - component: {fileID: 4978019847864428779}
   m_Layer: 6
   m_Name: Visual
   m_TagString: Untagged
@@ -177,6 +178,21 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &4978019847864428779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413082295712665338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4813ba3cb7530244bb5958dd5b18fe55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expressions:
+  - expression: 0
+    sprite: {fileID: -7806103805540087679, guid: 6c89d086796f9134f9345d60908d642e, type: 3}
 --- !u!1 &2366997595347320042
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,6 +204,8 @@ GameObject:
   - component: {fileID: 353582117503343894}
   - component: {fileID: 7645477944159180331}
   - component: {fileID: 176805181648224533}
+  - component: {fileID: 8915959771875406831}
+  - component: {fileID: 1520429949953685024}
   m_Layer: 6
   m_Name: ButlerNPC
   m_TagString: Untagged
@@ -226,7 +244,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogues:
-  - dialogue: {fileID: 11400000, guid: 908e13b1970ce644e80f5fc311954240, type: 2}
+  - dialogue: {fileID: 11400000, guid: 9f8656febfccda04599f485cd36ee88c, type: 2}
+    requiredFlags:
+    - {fileID: 11400000, guid: 8c9823eacec837c4299e0acca9e31dad, type: 2}
+  - dialogue: {fileID: 11400000, guid: b7705bd6bd8add349aa0733a30a82676, type: 2}
+    requiredFlags:
+    - {fileID: 11400000, guid: 538da547a0d6177408bea1982f7e6116, type: 2}
+  - dialogue: {fileID: 11400000, guid: 651ec2fc10fd23d45bdb6e7e670990a0, type: 2}
     requiredFlags: []
 --- !u!70 &176805181648224533
 CapsuleCollider2D:
@@ -265,6 +289,52 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.1354127}
   m_Size: {x: 2, y: 2}
   m_Direction: 0
+--- !u!114 &8915959771875406831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2366997595347320042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8f839b2a196dda499b0ddcee75b1acb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  correctHypothesisFlag: {fileID: 11400000, guid: 8c9823eacec837c4299e0acca9e31dad, type: 2}
+  transformedFlag: {fileID: 11400000, guid: 5ee7935ae53503c41b0946528eeac02a, type: 2}
+  animator: {fileID: 2456334407320603034}
+--- !u!114 &1520429949953685024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2366997595347320042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -2475162
+      Data2: 1231565670
+      Data3: -351101549
+      Data4: -1296753959
+    Path: event:/PeanutsHumming
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &5306947319315896893
 GameObject:
   m_ObjectHideFlags: 0

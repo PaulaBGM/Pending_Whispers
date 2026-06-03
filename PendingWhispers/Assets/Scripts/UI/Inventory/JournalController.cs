@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Inventory.UI;
 using Inventory.Model;
+using FMODUnity;
+using FMOD.Studio;
 
 public class JournalController : MonoBehaviour
 {
@@ -20,6 +22,8 @@ public class JournalController : MonoBehaviour
     [SerializeField] private GameObject inventoryPage;
     [SerializeField] private GameObject peoplePage;
     [SerializeField] private GameObject casesPage;
+
+    private GameObject lastRequestedPage;
 
     [Header("Inventory Controller")]
     [SerializeField] private Inventory.InventoryController inventoryController;
@@ -41,6 +45,9 @@ public class JournalController : MonoBehaviour
 
     private InventoryAnimationEvents animationEvents;
     private GameObject pendingInitialPage;
+    
+    [Header("Audio")]
+    [SerializeField] private EventReference pageTurnSFX;
 
     private void Awake()
     {
@@ -136,7 +143,12 @@ public class JournalController : MonoBehaviour
             StartCoroutine(RefreshAfterOpen());
         else
             RefreshCurrentPage();
-        TutorialPopup.Instance.ShowTutorialOnce("journal", "Diario", "AquÌ encontrar·s pistas, testimonios, personas conocidas e hipÛtesis. Utiliza esta informaciÛn para reconstruir cada caso.");
+
+        TutorialPopup.Instance.ShowTutorialOnce(
+            "journal",
+            "Diario",
+            "Aqu√≠ encontrar√°s pistas, testimonios, personas conocidas e hip√≥tesis. Utiliza esta informaci√≥n para reconstruir cada caso."
+        );
     }
 
     private void HandleCloseFinished()
@@ -169,26 +181,42 @@ public class JournalController : MonoBehaviour
 
     private void HandleTabSelected(ItemType type)
     {
+        GameObject targetPage = GetPageFromType(type);
+
+        if (targetPage == null || !isOpen)
+            return;
+
+        // üî• FIX: si ya est√°s en la p√°gina, no haces nada
+        if (currentPage == targetPage)
+            return;
+
+        if (pendingPage == targetPage)
+            return;
+
         if (pageAnimation != null)
             pageAnimation.SetActive(true);
 
+        RequestPage(targetPage);
+    }
+
+    private GameObject GetPageFromType(ItemType type)
+    {
         switch (type)
         {
             case ItemType.Instructions:
-                RequestPage(instructionsPage);
-                break;
+                return instructionsPage;
 
             case ItemType.Clue:
-                RequestPage(inventoryPage);
-                break;
+                return inventoryPage;
 
             case ItemType.Testimony:
-                RequestPage(peoplePage);
-                break;
+                return peoplePage;
 
             case ItemType.Case:
-                RequestPage(casesPage);
-                break;
+                return casesPage;
+
+            default:
+                return null;
         }
     }
 
@@ -198,16 +226,10 @@ public class JournalController : MonoBehaviour
 
     private void RequestPage(GameObject page)
     {
-        if (!isOpen)
+        if (!isOpen || page == null)
             return;
 
-        if (isAnimating)
-            return;
-
-        if (page == null)
-            return;
-
-        if (currentPage == page)
+        if (currentPage == page || pendingPage == page)
             return;
 
         pendingPage = page;
@@ -217,15 +239,19 @@ public class JournalController : MonoBehaviour
 
         if (pageTurnAnimator != null)
             pageTurnAnimator.Play("PageTurnAnimation", 0, 0f);
+        
+        if (!pageTurnSFX.IsNull)
+        {
+            RuntimeManager.PlayOneShot(pageTurnSFX);
+        }
     }
 
     public void OnPageTurnFinished()
     {
+        isAnimating = false;
+
         if (pendingPage == null)
-        {
-            isAnimating = false;
             return;
-        }
 
         if (pageAnimation != null)
             pageAnimation.SetActive(false);
@@ -235,7 +261,7 @@ public class JournalController : MonoBehaviour
 
         currentPage = pendingPage;
         pendingPage = null;
-
+        
         currentPage.SetActive(true);
 
         StartCoroutine(RefreshPageNextFrame());
@@ -258,15 +284,15 @@ public class JournalController : MonoBehaviour
         if (currentPage == inventoryPage && inventoryController != null)
             inventoryController.RefreshUI();
 
-        if (currentPage == peoplePage && peoplePage != null)
+        if (currentPage == peoplePage)
             peoplePage.GetComponent<PeoplePageController>()?.RefreshUI();
 
-        if (currentPage == casesPage && casesPage != null)
+        if (currentPage == casesPage)
             casesPage.GetComponent<CasePageController>()?.RefreshUI();
     }
 
     // =========================
-    // PAGE HELPERS
+    // HELPERS
     // =========================
 
     private void SetPageImmediate(GameObject page)

@@ -1,5 +1,59 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8428816824187228819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: snapshot:/Catacombs
+  m_EditorClassIdentifier: 
+  Path: snapshot:/Catacombs
+  Guid:
+    Data1: -1596296711
+    Data2: 1107783330
+    Data3: -1764240505
+    Data4: -1194669457
+  Banks:
+  - {fileID: -5472793913269340691}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &-8374939845637214012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TurnPage
+  m_EditorClassIdentifier: 
+  Path: event:/TurnPage
+  Guid:
+    Data1: 1749137319
+    Data2: 1233726526
+    Data3: -1354475863
+    Data4: 278826754
+  Banks:
+  - {fileID: 7698760302699471641}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-7864056071029657983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,7 +171,7 @@ MonoBehaviour:
   Path: Assets/StreamingAssets/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639158242993112184
+  lastModified: 639161171289779587
   FileSizes: []
   Exists: 1
 --- !u!114 &-5441402171328562129
@@ -145,6 +199,33 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters:
   - {fileID: -7864056071029657983}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-4586125422363536092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/PeanutsHumming
+  m_EditorClassIdentifier: 
+  Path: event:/PeanutsHumming
+  Guid:
+    Data1: -2475162
+    Data2: 1231565670
+    Data3: -351101549
+    Data4: -1296753959
+  Banks:
+  - {fileID: 7698760302699471641}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
   MinDistance: 1
   MaxDistance: 20
   Length: 0
@@ -226,6 +307,10 @@ MonoBehaviour:
   - {fileID: -753788581847475533}
   - {fileID: -7033542550015514404}
   - {fileID: 6759123550494063477}
+  - {fileID: -8428816824187228819}
+  - {fileID: -4586125422363536092}
+  - {fileID: 3059949100787510262}
+  - {fileID: -8374939845637214012}
   EditorParameters:
   - {fileID: 5976444632201327814}
   MasterBanks:
@@ -233,7 +318,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 6213263654967855966}
   cacheVersion: 131859
-  cacheTime: 639158242993230696
+  cacheTime: 639161171290228602
   SerializableEventsDict:
   - key: event:/Footsteps_GroundTypes
     index: 0
@@ -247,6 +332,12 @@ MonoBehaviour:
     index: 4
   - key: event:/OpenMap
     index: 5
+  - key: snapshot:/Catacombs
+    index: 6
+  - key: event:/PeanutsHumming
+    index: 7
+  - key: event:/SpectralWave
+    index: 8
 --- !u!114 &1625284442751308127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,6 +365,33 @@ MonoBehaviour:
   - Carpet
   - Concrete
   Exists: 1
+--- !u!114 &3059949100787510262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SpectralWave
+  m_EditorClassIdentifier: 
+  Path: event:/SpectralWave
+  Guid:
+    Data1: -244600590
+    Data2: 1201229841
+    Data3: 1638770306
+    Data4: -973720375
+  Banks:
+  - {fileID: 7698760302699471641}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &3932837481481258498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,7 +505,7 @@ MonoBehaviour:
   Path: Assets/StreamingAssets/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639158242993161300
+  lastModified: 639161171289799597
   FileSizes: []
   Exists: 1
 --- !u!114 &6759123550494063477
@@ -432,7 +550,7 @@ MonoBehaviour:
   Path: Assets/StreamingAssets/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 639158242993230696
+  lastModified: 639161171290228602
   FileSizes: []
   Exists: 1
 --- !u!114 &9117803833762038673

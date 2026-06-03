@@ -515,6 +515,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpectralScanWave
       objectReference: {fileID: 0}
+    - target: {fileID: 2286042802219386439, guid: af100394e2f1476478d786845738797c, type: 3}
+      propertyPath: m_SortingOrder
+      value: -15000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2286042802219386439, guid: af100394e2f1476478d786845738797c, type: 3}
+      propertyPath: m_MaskInteraction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402381702231361241, guid: af100394e2f1476478d786845738797c, type: 3}
+      propertyPath: m_SortingOrder
+      value: -14999
+      objectReference: {fileID: 0}
     - target: {fileID: 4106488158361142186, guid: af100394e2f1476478d786845738797c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -555,14 +567,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9017066990258054697, guid: af100394e2f1476478d786845738797c, type: 3}
-      propertyPath: maxParticleSize
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 9017066990258054697, guid: af100394e2f1476478d786845738797c, type: 3}
-      propertyPath: startParticleSize
-      value: 4
-      objectReference: {fileID: 0}
+    - target: {fileID: 6326990540394921193, guid: af100394e2f1476478d786845738797c, type: 3}
+      propertyPath: playerRenderer
+      value: 
+      objectReference: {fileID: 6128921920891460897}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
