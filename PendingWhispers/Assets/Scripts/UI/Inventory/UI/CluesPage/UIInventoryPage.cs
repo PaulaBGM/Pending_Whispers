@@ -30,7 +30,9 @@ namespace Inventory.UI
         {
             Hide();
             mouseFollower.Toggle(false);
-            itemDescription.ResetDescription();
+
+            if (itemDescription != null)
+                itemDescription.ResetDescription();
 
             foreach (var tab in tabs)
             {
@@ -71,6 +73,8 @@ namespace Inventory.UI
                 item.ResetData();
                 item.Deselect();
             }
+
+            ResetSelection();
         }
 
         public void UpdateData(int index, Sprite sprite, int quantity)
@@ -82,6 +86,7 @@ namespace Inventory.UI
         private void HandleItemSelection(UIInventoryItem item)
         {
             int index = listOfUIItems.IndexOf(item);
+
             if (index != -1)
                 OnDescriptionRequested?.Invoke(index);
         }
@@ -89,6 +94,7 @@ namespace Inventory.UI
         private void HandleShowItemActions(UIInventoryItem item)
         {
             int index = listOfUIItems.IndexOf(item);
+
             if (index != -1)
                 OnItemActionRequested?.Invoke(index);
         }
@@ -96,7 +102,9 @@ namespace Inventory.UI
         private void HandleBeginDrag(UIInventoryItem item)
         {
             int index = listOfUIItems.IndexOf(item);
-            if (index == -1) return;
+
+            if (index == -1)
+                return;
 
             currentlyDraggedItemIndex = index;
             OnStartDragging?.Invoke(index);
@@ -111,7 +119,9 @@ namespace Inventory.UI
         private void HandleSwap(UIInventoryItem item)
         {
             int index = listOfUIItems.IndexOf(item);
-            if (index == -1) return;
+
+            if (index == -1)
+                return;
 
             OnSwapItems?.Invoke(currentlyDraggedItemIndex, index);
         }
@@ -146,7 +156,6 @@ namespace Inventory.UI
 
         public void Hide()
         {
-            actionPanel.Toggle(false);
             gameObject.SetActive(false);
         }
 

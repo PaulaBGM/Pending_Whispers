@@ -51,7 +51,6 @@ public class CaseJournalSystem : MonoBehaviour
     public CaseRuntime GetCase(string id)
     {
         cases.TryGetValue(id, out var c);
-
         return c;
     }
 }

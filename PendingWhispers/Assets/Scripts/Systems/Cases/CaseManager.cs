@@ -100,7 +100,9 @@ public class CaseManager : MonoBehaviour
             }
         }
 
-        UIFeedbackManager.Instance.ShowMessage("No has llegado a ninguna conclusión clara...");
+        UIFeedbackManager.Instance.ShowMessage(
+            "No has llegado a ninguna conclusión clara..."
+        );
     }
 
     void ApplyOutcome(CaseOutcome outcome)
@@ -109,9 +111,23 @@ public class CaseManager : MonoBehaviour
 
         currentCase.chosenOutcome = outcome.outcomeID;
 
-        foreach (var flag in outcome.resultingFlags)
+        if (outcome.resultingFlags != null)
         {
-            GameProgress.Instance.AddFlag(flag);
+            foreach (var flag in outcome.resultingFlags)
+            {
+                if (flag == null)
+                    continue;
+
+                GameProgress.Instance.AddFlag(flag);
+            }
+        }
+
+        if (ReputationManager.Instance != null &&
+            outcome.reputationReward != 0)
+        {
+            ReputationManager.Instance.AddReputation(
+                outcome.reputationReward
+            );
         }
 
         currentCase.Resolve();
@@ -124,8 +140,21 @@ public class CaseManager : MonoBehaviour
         }
 
         UIGameEvents.RaiseFeedback(outcome.feedbackText);
-    }
 
+        Debug.Log(
+            $"[Case] Resolved '{currentCase.data.caseTitle}' -> Outcome: {outcome.outcomeID}"
+        );
+    }
+    public void ResolveCurrentCase()
+    {
+        if (currentCase == null)
+            return;
+
+        if (currentCase.isResolved)
+            return;
+
+        TryResolveCase();
+    }
     public CaseRuntime GetCurrentCase()
     {
         return currentCase;

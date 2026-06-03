@@ -1,15 +1,16 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 [System.Serializable]
 public class CaseOutcome
 {
     public string outcomeID;
 
-    [TextArea]
+    public List<FlagSO> requiredFlags;
+    public List<FlagSO> resultingFlags;
+
     public string feedbackText;
 
-    public List<FlagSO> requiredFlags;
-
-    public List<FlagSO> resultingFlags;
+    [Header("Reputation")]
+    public int reputationReward;
 }

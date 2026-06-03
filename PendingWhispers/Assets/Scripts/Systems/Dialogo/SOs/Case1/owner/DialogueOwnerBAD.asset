@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772d907194c90e1499655d8cccb4f43c, type: 3}
+  m_Name: DialogueOwnerBAD
+  m_EditorClassIdentifier: 
+  characters:
+  - id: lyra
+    displayName: Lyra
+    portrait: {fileID: 0}
+    isLeftSide: 1
+    neutral: {fileID: 6795179555359847349, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
+    happy: {fileID: -1103926389690433412, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
+    sad: {fileID: 21300000, guid: 4e87995f190b23644b0192eb50e3ed75, type: 3}
+    angry: {fileID: 0}
+    surprised: {fileID: -8241981511714330664, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
+    thinking: {fileID: 3356771313395980172, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
+  - id: owner
+    displayName: "Ren\xE9 Venue"
+    portrait: {fileID: 7791214535279931073, guid: 3c236ddd44c220a4b91c8ae3d6bba2a4, type: 3}
+    isLeftSide: 0
+    neutral: {fileID: 3652085389764901965, guid: 8142a1ff8408e2c4189efa114d997a6e, type: 3}
+    happy: {fileID: 0}
+    sad: {fileID: 0}
+    angry: {fileID: -8236101453732318523, guid: 8142a1ff8408e2c4189efa114d997a6e, type: 3}
+    surprised: {fileID: 0}
+    thinking: {fileID: -4413838979861532499, guid: 8142a1ff8408e2c4189efa114d997a6e, type: 3}
+  nodes:
+  - id: start
+    speakerID: owner
+    text: YOU'VE RUINED MY BUSINESS!!! MY LIFE!!
+    nextNodeID: 1
+    choices: []
+    requiredFlags: []
+    onEnterFlags:
+    - {fileID: 11400000, guid: 8026d71d73230a548b720e9ed6b330cf, type: 2}
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 3
+  - id: 1
+    speakerID: owner
+    text: "\xBFHow will I ever recover from this? "
+    nextNodeID: 2
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 5
+  - id: 2
+    speakerID: owner
+    text: YOU'RE A FRAUD OF A MEDIUM!!!
+    nextNodeID: 3
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 3
+  - id: 3
+    speakerID: lyra
+    text: 'I''m so sorry, I didn''t mean to... '
+    nextNodeID: 
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 2

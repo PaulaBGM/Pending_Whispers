@@ -132,7 +132,11 @@ public class JournalController : MonoBehaviour
             SetPageImmediate(inventoryPage);
         }
 
-        StartCoroutine(RefreshAfterOpen());
+        if (isActiveAndEnabled)
+            StartCoroutine(RefreshAfterOpen());
+        else
+            RefreshCurrentPage();
+        TutorialPopup.Instance.ShowTutorialOnce("journal", "Diario", "Aquí encontrarás pistas, testimonios, personas conocidas e hipótesis. Utiliza esta información para reconstruir cada caso.");
     }
 
     private void HandleCloseFinished()
@@ -155,8 +159,8 @@ public class JournalController : MonoBehaviour
 
     private IEnumerator RefreshAfterOpen()
     {
-        yield return null;
         RefreshCurrentPage();
+        yield return null;
     }
 
     // =========================

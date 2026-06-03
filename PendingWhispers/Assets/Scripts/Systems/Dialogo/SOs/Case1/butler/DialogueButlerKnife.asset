@@ -15,61 +15,48 @@ MonoBehaviour:
   characters:
   - id: lyra
     displayName: Lyra
-    portrait: {fileID: -6159030981858838909, guid: ac86a53648c7c574986ea53d7179d5c8, type: 3}
+    portrait: {fileID: 0}
     isLeftSide: 1
-    neutral: {fileID: 2916416985251425419, guid: 5d81eb40a54230e4ba26665eb0b757d6, type: 3}
-    happy: {fileID: 0}
+    neutral: {fileID: 6795179555359847349, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
+    happy: {fileID: -1103926389690433412, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
     sad: {fileID: 0}
     angry: {fileID: 0}
-    surprised: {fileID: 0}
-    thinking: {fileID: 0}
+    surprised: {fileID: -8241981511714330664, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
+    thinking: {fileID: 3356771313395980172, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
   - id: butler
     displayName: "Desir\xE9e Cahu\xE8te"
-    portrait: {fileID: 7142518519572273488, guid: ad514fb12feb06641907c05812225daf, type: 3}
+    portrait: {fileID: 21300000, guid: 1d364f4b642932d40adc9cecbfeb71f5, type: 3}
     isLeftSide: 0
-    neutral: {fileID: -7806103805540087679, guid: 6c89d086796f9134f9345d60908d642e, type: 3}
-    happy: {fileID: 0}
-    sad: {fileID: 0}
+    neutral: {fileID: 21300000, guid: 1d364f4b642932d40adc9cecbfeb71f5, type: 3}
+    happy: {fileID: 21300000, guid: 6bd6f33d70437744fad8b2ac2c71ba16, type: 3}
+    sad: {fileID: 21300000, guid: 0e6fc337674431141907fae9306fa81a, type: 3}
     angry: {fileID: 0}
     surprised: {fileID: 0}
-    thinking: {fileID: 0}
+    thinking: {fileID: 21300000, guid: 1d364f4b642932d40adc9cecbfeb71f5, type: 3}
   nodes:
   - id: start
     speakerID: butler
-    text: "\u266A Oh, mistress Vivienne\u2026 Your voice was more beautiful than
-      the angels\u2019\u2026 \u266A"
-    nextNodeID: start
+    text: 'Oh, is that a knife? '
+    nextNodeID: 
     choices:
-    - text: Excuse me?
-      nextNodeID: 1
+    - text: Yes
+      nextNodeID: 
       addFlags: []
       requiredFlags: []
+      requiredReputation: 0
+      reputationChange: 0
       onSelectedEvent: {fileID: 0}
-      endsDialogue: 0
+      endsDialogue: 1
     - text: See you
       nextNodeID: 
       addFlags: []
       requiredFlags: []
+      requiredReputation: 0
+      reputationChange: 0
       onSelectedEvent: {fileID: 0}
       endsDialogue: 1
     requiredFlags:
     - {fileID: 0}
-    onEnterFlags: []
-    onEnterEvents: []
-    isImportantLine: 0
-    expression: 0
-  - id: 1
-    speakerID: butler
-    text: "Hm?\nOh\u2026 you\u2019re not her.\n\u2026Sorry."
-    nextNodeID: 1
-    choices:
-    - text: "I\u2019m Lyra. I\u2019m trying to understand what happened to Vivienne."
-      nextNodeID: 2
-      addFlags: []
-      requiredFlags: []
-      onSelectedEvent: {fileID: 0}
-      endsDialogue: 0
-    requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 0

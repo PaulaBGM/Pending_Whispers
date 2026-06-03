@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PlayerInventory
   m_EditorClassIdentifier: 
   inventoryItems:
-  - quantity: 0
-    item: {fileID: 0}
+  - quantity: 1
+    item: {fileID: 11400000, guid: 595d5f8fa8c75534383b81fc8b6040f4, type: 2}
     itemState: []
   - quantity: 0
     item: {fileID: 0}
@@ -28,7 +28,13 @@ MonoBehaviour:
   - quantity: 0
     item: {fileID: 0}
     itemState: []
-  <Size>k__BackingField: 5
+  - quantity: 0
+    item: {fileID: 0}
+    itemState: []
+  - quantity: 0
+    item: {fileID: 0}
+    itemState: []
+  <Size>k__BackingField: 7
   possibleLinks: []
   requiredClueIDs:
   - 1
@@ -36,4 +42,6 @@ MonoBehaviour:
   - 3
   - 4
   - 5
-  completedFlag: all_clues_case_1
+  - 6
+  - 7
+  completedFlag: {fileID: 11400000, guid: 0bd4ea81fb4c46f4b95fd4140e9cab7d, type: 2}

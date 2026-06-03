@@ -15,24 +15,24 @@ MonoBehaviour:
   characters:
   - id: lyra
     displayName: Lyra
-    portrait: {fileID: -6159030981858838909, guid: ac86a53648c7c574986ea53d7179d5c8, type: 3}
+    portrait: {fileID: 0}
     isLeftSide: 1
-    neutral: {fileID: 2916416985251425419, guid: 5d81eb40a54230e4ba26665eb0b757d6, type: 3}
-    happy: {fileID: 0}
+    neutral: {fileID: 6795179555359847349, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
+    happy: {fileID: -1103926389690433412, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
     sad: {fileID: 0}
     angry: {fileID: 0}
-    surprised: {fileID: 0}
-    thinking: {fileID: 0}
+    surprised: {fileID: -8241981511714330664, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
+    thinking: {fileID: 3356771313395980172, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
   - id: butler
     displayName: "Desir\xE9e Cahu\xE8te"
-    portrait: {fileID: 7142518519572273488, guid: ad514fb12feb06641907c05812225daf, type: 3}
+    portrait: {fileID: 21300000, guid: 1d364f4b642932d40adc9cecbfeb71f5, type: 3}
     isLeftSide: 0
-    neutral: {fileID: -7806103805540087679, guid: 6c89d086796f9134f9345d60908d642e, type: 3}
-    happy: {fileID: 0}
-    sad: {fileID: 0}
+    neutral: {fileID: 21300000, guid: 1d364f4b642932d40adc9cecbfeb71f5, type: 3}
+    happy: {fileID: 21300000, guid: 6bd6f33d70437744fad8b2ac2c71ba16, type: 3}
+    sad: {fileID: 21300000, guid: 0e6fc337674431141907fae9306fa81a, type: 3}
     angry: {fileID: 0}
     surprised: {fileID: 0}
-    thinking: {fileID: 0}
+    thinking: {fileID: 21300000, guid: 1d364f4b642932d40adc9cecbfeb71f5, type: 3}
   nodes:
   - id: start
     speakerID: butler
@@ -44,12 +44,16 @@ MonoBehaviour:
       nextNodeID: 1
       addFlags: []
       requiredFlags: []
+      requiredReputation: 0
+      reputationChange: 0
       onSelectedEvent: {fileID: 0}
       endsDialogue: 0
     - text: See you
       nextNodeID: 
       addFlags: []
       requiredFlags: []
+      requiredReputation: 0
+      reputationChange: 0
       onSelectedEvent: {fileID: 0}
       endsDialogue: 1
     requiredFlags: []
@@ -60,30 +64,18 @@ MonoBehaviour:
   - id: 1
     speakerID: butler
     text: "Hm?\nOh\u2026 you\u2019re not her.\n\u2026Sorry."
-    nextNodeID: 1
-    choices:
-    - text: "I\u2019m Lyra. I\u2019m trying to understand what happened to Vivienne."
-      nextNodeID: 2
-      addFlags: []
-      requiredFlags: []
-      onSelectedEvent: {fileID: 0}
-      endsDialogue: 0
+    nextNodeID: 2
+    choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 0
     expression: 0
   - id: 2
-    speakerID: butler
-    text: "Ah\u2026 my lady\u2026 Still radiant. Even now."
-    nextNodeID: 2
-    choices:
-    - text: You cared about her a lot.
-      nextNodeID: 3
-      addFlags: []
-      requiredFlags: []
-      onSelectedEvent: {fileID: 0}
-      endsDialogue: 0
+    speakerID: lyra
+    text: "I\u2019m Lyra. I\u2019m trying to understand what happened to Vivienne."
+    nextNodeID: 3
+    choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
@@ -91,51 +83,37 @@ MonoBehaviour:
     expression: 0
   - id: 3
     speakerID: butler
-    text: "More than anything. Well\u2026 perhaps equally to peanuts."
-    nextNodeID: 3
-    choices:
-    - text: "You were there the night she died, weren\u2019t you?"
-      nextNodeID: 4
-      addFlags: []
-      requiredFlags: []
-      onSelectedEvent: {fileID: 0}
-      endsDialogue: 0
+    text: "Ah\u2026 my lady\u2026 Still radiant. Even now."
+    nextNodeID: 4
+    choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 1
+    isImportantLine: 0
     expression: 0
   - id: 4
-    speakerID: butler
-    text: But Lady Vivienne was allergic, so I learned restraint.
+    speakerID: lyra
+    text: You cared about her a lot.
     nextNodeID: 5
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 1
+  - id: 5
+    speakerID: butler
+    text: "More than anything. Well\u2026 perhaps equally to peanuts."
+    nextNodeID: 6
     choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 1
     expression: 0
-  - id: 5
-    speakerID: butler
-    text: Yes.
-    nextNodeID: 5
-    choices:
-    - text: What happened?
-      nextNodeID: 6
-      addFlags: []
-      requiredFlags: []
-      onSelectedEvent: {fileID: 0}
-      endsDialogue: 0
-    requiredFlags: []
-    onEnterFlags: []
-    onEnterEvents: []
-    isImportantLine: 0
-    expression: 0
   - id: 6
     speakerID: butler
-    text: "The manor was full of guests. A grand celebration, all for her final performance.
-      She left during a short intermission before the last song\u2026 and never came
-      back."
+    text: But Lady Vivienne was allergic, so I learned restraint.
     nextNodeID: 7
     choices: []
     requiredFlags: []
@@ -144,33 +122,79 @@ MonoBehaviour:
     isImportantLine: 1
     expression: 0
   - id: 7
-    speakerID: butler
-    text: "Laurent went looking for her first. Then\u2026 the screaming started."
-    nextNodeID: 7
-    choices:
-    - text: Did you notice anything strange before that?
-      nextNodeID: 8
-      addFlags: []
-      requiredFlags: []
-      onSelectedEvent: {fileID: 0}
-      endsDialogue: 0
+    speakerID: lyra
+    text: "You were there the night she died, weren\u2019t you?"
+    nextNodeID: 8
+    choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 1
-    expression: 0
+    isImportantLine: 0
+    expression: 5
   - id: 8
     speakerID: butler
-    text: "Lady Vivienne was frightened lately. She believed people around her wished
-      her harm. \u2026But I would never let anything happen to her. "
+    text: Yes.
     nextNodeID: 9
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 2
+  - id: 9
+    speakerID: lyra
+    text: What happened?
+    nextNodeID: 10
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 5
+  - id: 10
+    speakerID: butler
+    text: "The manor was full of guests. A grand celebration, all for her final performance.
+      She left during a short intermission before the last song\u2026 and never came
+      back."
+    nextNodeID: 11
     choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 1
     expression: 0
-  - id: 9
+  - id: 11
+    speakerID: butler
+    text: "Laurent went looking for her first. Then\u2026 the screaming started."
+    nextNodeID: 12
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 1
+    expression: 0
+  - id: 12
+    speakerID: lyra
+    text: Did you notice anything strange before that?
+    nextNodeID: 13
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 5
+  - id: 13
+    speakerID: butler
+    text: "Lady Vivienne was frightened lately. She believed people around her wished
+      her harm. \u2026But I would never let anything happen to her. "
+    nextNodeID: 14
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 1
+    expression: 0
+  - id: 14
     speakerID: butler
     text: NEVER.
     nextNodeID: 
@@ -179,4 +203,4 @@ MonoBehaviour:
     onEnterFlags: []
     onEnterEvents: []
     isImportantLine: 0
-    expression: 0
+    expression: 2

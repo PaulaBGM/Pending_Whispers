@@ -95,6 +95,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Detection",
+                    "type": "Button",
+                    "id": "301b25e5-05b2-4147-826c-24c285175775",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -493,6 +502,17 @@
                     "action": "Click",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8b4c1729-aafc-4f74-a227-7eb08c22f88c",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Detection",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -612,15 +632,6 @@
                     "name": "Map",
                     "type": "Button",
                     "id": "a96808f4-5ac7-4a0a-9b06-463e3559be40",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Detection",
-                    "type": "Button",
-                    "id": "3340c4a9-c3e4-44a5-adce-036cbe833e91",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -1098,17 +1109,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Map",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "bed2ee49-dedf-4698-b3da-b83f3d576bd4",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Detection",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

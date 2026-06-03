@@ -19,6 +19,7 @@ public class CasePageController : MonoBehaviour
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private TMP_Text descriptionText;
     [SerializeField] private TMP_Text progressText;
+    [SerializeField] private TMP_Text reputationText;
     [SerializeField] private Image caseImage;
 
     [Header("Objectives")]
@@ -34,12 +35,18 @@ public class CasePageController : MonoBehaviour
     {
         if (CaseJournalSystem.Instance != null)
             CaseJournalSystem.Instance.OnCasesChanged += RefreshUI;
+
+        if (ReputationManager.Instance != null)
+            ReputationManager.Instance.OnReputationChanged += HandleReputationChanged;
     }
 
     private void OnDisable()
     {
         if (CaseJournalSystem.Instance != null)
             CaseJournalSystem.Instance.OnCasesChanged -= RefreshUI;
+
+        if (ReputationManager.Instance != null)
+            ReputationManager.Instance.OnReputationChanged -= HandleReputationChanged;
 
         if (selectedCase != null)
             selectedCase.OnCaseUpdated -= RefreshSelectedCase;
@@ -152,6 +159,14 @@ public class CasePageController : MonoBehaviour
         titleText.text = data.caseTitle;
         descriptionText.text = data.caseDescription;
 
+        if (reputationText != null)
+        {
+            if (ReputationManager.Instance != null)
+                reputationText.text = $"{ReputationManager.Instance.Reputation}%";
+            else
+                reputationText.text = "0%";
+        }
+
         UpdateObjectives(runtime);
 
         if (caseImage != null)
@@ -183,6 +198,12 @@ public class CasePageController : MonoBehaviour
 
             objectiveEntries.Add(text);
         }
+    }
+
+    private void HandleReputationChanged(int value)
+    {
+        if (reputationText != null)
+            reputationText.text = $"{value}%";
     }
 
     public void OnCreateHypothesis()

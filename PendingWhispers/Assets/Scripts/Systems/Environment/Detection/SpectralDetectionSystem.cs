@@ -2,128 +2,121 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-public enum SpectralTraceType
-{
-    Footprint,
-    BloodEcho,
-    EmotionalResidue,
-    MemoryFragment,
-    Corruption,
-    HiddenObject,
-    GhostPresence
-}
-
 public class SpectralDetectionSystem : MonoBehaviour
 {
     public static SpectralDetectionSystem Instance;
 
-    public static event Action<bool> OnDetectionChanged;
-
     public static event Action<float> OnEnergyChanged;
+    public static event Action<bool> OnCooldownStateChanged;
+    public static event Action<float> OnCooldownProgress;
 
     [Header("Energy")]
     [SerializeField] private float maxEnergy = 100f;
-
     [SerializeField] private float currentEnergy = 100f;
-
-    [SerializeField] private float drainPerSecond = 10f;
-
+    [SerializeField] private float scanCost = 25f;
     [SerializeField] private float regenPerSecond = 15f;
 
     [Header("Cooldown")]
+    [SerializeField] private float cooldownTime = 5f;
     [SerializeField] private float overloadCooldown = 4f;
 
-    private bool detectionActive;
+    [Header("Scan")]
+    [SerializeField] private SpectralScanWave scanWave;
+
     private bool overloaded;
+    private bool isCoolingDown;
+    private float cooldownTimer;
 
-    public bool DetectionActive => detectionActive;
-
-    public float EnergyNormalized =>
-        currentEnergy / maxEnergy;
+    public float EnergyNormalized => currentEnergy / maxEnergy;
 
     private void Awake()
     {
         if (Instance == null)
-        {
             Instance = this;
-        }
         else
-        {
             Destroy(gameObject);
-        }
     }
 
     private void OnEnable()
     {
         if (InputController.Instance != null)
-        {
-            InputController.Instance.OnDetectionPressed +=
-                ToggleDetection;
-        }
+            InputController.Instance.OnDetectionPressed += LaunchScan;
     }
 
     private void OnDisable()
     {
         if (InputController.Instance != null)
-        {
-            InputController.Instance.OnDetectionPressed -=
-                ToggleDetection;
-        }
+            InputController.Instance.OnDetectionPressed -= LaunchScan;
     }
 
     private void Update()
     {
-        HandleEnergy();
+        RegenerateEnergy();
     }
 
-    void ToggleDetection()
+    public void LaunchScan()
     {
-        if (overloaded)
+        if (overloaded || isCoolingDown)
             return;
 
-        detectionActive = !detectionActive;
+        if (currentEnergy < scanCost)
+            return;
 
-        OnDetectionChanged?.Invoke(detectionActive);
+        currentEnergy -= scanCost;
+        OnEnergyChanged?.Invoke(EnergyNormalized);
+
+        scanWave.transform.position = transform.position;
+        scanWave.gameObject.SetActive(true);
+
+        StartCooldown();
+
+        if (currentEnergy <= 0)
+            StartCoroutine(OverloadRoutine());
     }
 
-    void HandleEnergy()
+    private void StartCooldown()
     {
-        if (detectionActive)
-        {
-            currentEnergy -=
-                drainPerSecond * Time.deltaTime;
+        isCoolingDown = true;
+        cooldownTimer = cooldownTime;
 
-            if (currentEnergy <= 0)
-            {
-                currentEnergy = 0;
+        OnCooldownStateChanged?.Invoke(true);
 
-                StartCoroutine(OverloadRoutine());
-            }
-        }
-        else
-        {
-            currentEnergy +=
-                regenPerSecond * Time.deltaTime;
-
-            currentEnergy =
-                Mathf.Clamp(currentEnergy, 0, maxEnergy);
-        }
-
-        OnEnergyChanged?.Invoke(
-            currentEnergy / maxEnergy
-        );
+        StartCoroutine(CooldownRoutine());
     }
 
-    IEnumerator OverloadRoutine()
+    private IEnumerator CooldownRoutine()
+    {
+        while (cooldownTimer > 0f)
+        {
+            cooldownTimer -= Time.deltaTime;
+
+            OnCooldownProgress?.Invoke(1f - (cooldownTimer / cooldownTime));
+
+            yield return null;
+        }
+
+        cooldownTimer = 0f;
+        isCoolingDown = false;
+
+        OnCooldownStateChanged?.Invoke(false);
+        OnCooldownProgress?.Invoke(1f);
+    }
+
+    private IEnumerator OverloadRoutine()
     {
         overloaded = true;
-
-        detectionActive = false;
-
-        OnDetectionChanged?.Invoke(false);
-
         yield return new WaitForSeconds(overloadCooldown);
-
         overloaded = false;
+    }
+
+    private void RegenerateEnergy()
+    {
+        if (currentEnergy >= maxEnergy)
+            return;
+
+        currentEnergy += regenPerSecond * Time.deltaTime;
+        currentEnergy = Mathf.Clamp(currentEnergy, 0f, maxEnergy);
+
+        OnEnergyChanged?.Invoke(EnergyNormalized);
     }
 }

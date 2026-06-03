@@ -7,17 +7,15 @@ public class SpectralBarUI : MonoBehaviour
 
     private void OnEnable()
     {
-        SpectralDetectionSystem.OnEnergyChanged +=
-            UpdateBar;
+        SpectralDetectionSystem.OnEnergyChanged += UpdateBar;
     }
 
     private void OnDisable()
     {
-        SpectralDetectionSystem.OnEnergyChanged -=
-            UpdateBar;
+        SpectralDetectionSystem.OnEnergyChanged -= UpdateBar;
     }
 
-    void UpdateBar(float value)
+    private void UpdateBar(float value)
     {
         fillBar.fillAmount = value;
     }

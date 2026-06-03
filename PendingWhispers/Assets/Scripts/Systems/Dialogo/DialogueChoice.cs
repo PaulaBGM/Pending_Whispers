@@ -11,6 +11,10 @@ public class DialogueChoice
     public List<FlagSO> addFlags;
     public List<FlagSO> requiredFlags;
 
+    [Header("Reputation")]
+    public int requiredReputation;
+    public int reputationChange;
+
     [Header("Events")]
     public GameEventSO onSelectedEvent;
 

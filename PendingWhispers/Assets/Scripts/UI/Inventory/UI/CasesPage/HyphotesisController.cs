@@ -7,19 +7,15 @@ public class HypothesisController : MonoBehaviour
     [Header("UI")]
     [SerializeField] private HypothesisPanelUI panel;
 
+    [Header("Flags")]
+    [SerializeField] private FlagSO hypothesisReadyFlag;
+    [SerializeField] private FlagSO correctHypothesisFlag;
+    [SerializeField] private FlagSO wrongHypothesisFlag;
+
     private HypothesisData hypothesisData;
-    private string[] currentHypothesis;
 
-    public int TotalSlots
-    {
-        get
-        {
-            if (hypothesisData == null)
-                return 0;
-
-            return hypothesisData.slots.Count;
-        }
-    }
+    // NUNCA será null
+    private string[] currentHypothesis = System.Array.Empty<string>();
 
     private void Awake()
     {
@@ -29,30 +25,37 @@ public class HypothesisController : MonoBehaviour
 
     public void OpenHypothesis()
     {
-        var currentCase = CaseManager.Instance.GetCurrentCaseData();
+        var currentCase = CaseManager.Instance?.GetCurrentCaseData();
 
         if (currentCase == null)
         {
-            Debug.LogError("No active CaseData");
+            Debug.LogError("[Hypothesis] No active CaseData");
             return;
         }
 
         if (currentCase.hypothesis == null)
         {
-            Debug.LogError($"Case '{currentCase.caseTitle}' has no HypothesisData assigned");
+            Debug.LogError($"[Hypothesis] Case '{currentCase.caseTitle}' has no HypothesisData assigned");
             return;
         }
 
-        gameObject.SetActive(true);
-
         hypothesisData = currentCase.hypothesis;
 
-        currentHypothesis = new string[hypothesisData.slots.Count];
+        int slotCount = hypothesisData.slots != null
+            ? hypothesisData.slots.Count
+            : 0;
 
-        panel.Build(
-            hypothesisData.textParts,
-            BuildSlotOptions()
-        );
+        currentHypothesis = new string[slotCount];
+
+        gameObject.SetActive(true);
+
+        if (panel != null)
+        {
+            panel.Build(
+                hypothesisData.textParts,
+                BuildSlotOptions()
+            );
+        }
     }
 
     public void CloseHypothesis()
@@ -68,58 +71,101 @@ public class HypothesisController : MonoBehaviour
         if (index < 0 || index >= currentHypothesis.Length)
             return;
 
-        currentHypothesis[index] = value;
-
-        Debug.Log($"Hypothesis Slot {index}: {value}");
+        currentHypothesis[index] = value ?? string.Empty;
     }
 
-    public bool IsCorrect()
+    public void ConfirmHypothesis()
     {
-        if (hypothesisData == null)
-            return false;
-
-        if (currentHypothesis == null)
-            return false;
-
-        if (currentHypothesis.Length != hypothesisData.correctAnswers.Count)
-            return false;
-
-        for (int i = 0; i < currentHypothesis.Length; i++)
+        if (!IsHypothesisComplete())
         {
-            if (currentHypothesis[i] != hypothesisData.correctAnswers[i])
+            UIFeedbackManager.Instance?.ShowMessage(
+                "Complete the hypothesis before continuing."
+            );
+            return;
+        }
+
+        if (hypothesisReadyFlag != null)
+            GameProgress.Instance?.AddFlag(hypothesisReadyFlag);
+
+        if (IsCorrect())
+        {
+            if (correctHypothesisFlag != null)
+                GameProgress.Instance?.AddFlag(correctHypothesisFlag);
+        }
+        else
+        {
+            if (wrongHypothesisFlag != null)
+                GameProgress.Instance?.AddFlag(wrongHypothesisFlag);
+        }
+
+        UIFeedbackManager.Instance?.ShowMessage(
+            "Hypothesis recorded."
+        );
+    }
+
+    public bool IsHypothesisComplete()
+    {
+        if (currentHypothesis.Length == 0)
+            return false;
+
+        foreach (string answer in currentHypothesis)
+        {
+            if (string.IsNullOrWhiteSpace(answer))
                 return false;
         }
 
         return true;
     }
 
-    public int GetCorrectCount()
+    public bool IsCorrect()
     {
         if (hypothesisData == null)
-            return 0;
+        {
+            Debug.LogError("[Hypothesis] hypothesisData is NULL");
+            return false;
+        }
 
-        if (currentHypothesis == null)
-            return 0;
+        if (hypothesisData.correctAnswers == null)
+        {
+            Debug.LogError("[Hypothesis] correctAnswers is NULL");
+            return false;
+        }
 
-        int score = 0;
+        if (currentHypothesis.Length != hypothesisData.correctAnswers.Count)
+        {
+            Debug.LogError(
+                $"[Hypothesis] Slot mismatch. Player={currentHypothesis.Length} Correct={hypothesisData.correctAnswers.Count}"
+            );
+            return false;
+        }
 
         for (int i = 0; i < currentHypothesis.Length; i++)
         {
-            if (i >= hypothesisData.correctAnswers.Count)
-                continue;
+            string playerAnswer =
+                currentHypothesis[i]?.Trim().ToLowerInvariant() ?? "";
 
-            if (currentHypothesis[i] == hypothesisData.correctAnswers[i])
-                score++;
+            string correctAnswer =
+                hypothesisData.correctAnswers[i]?.Trim().ToLowerInvariant() ?? "";
+
+            Debug.Log(
+                $"Slot {i} | Player=[{playerAnswer}] | Correct=[{correctAnswer}]"
+            );
+
+            if (playerAnswer != correctAnswer)
+            {
+                Debug.Log($"FAILED SLOT {i}");
+                return false;
+            }
         }
 
-        return score;
+        return true;
     }
 
     private List<List<string>> BuildSlotOptions()
     {
         var slots = new List<List<string>>();
 
-        if (hypothesisData == null)
+        if (hypothesisData == null || hypothesisData.slots == null)
             return slots;
 
         foreach (var slot in hypothesisData.slots)
@@ -144,7 +190,8 @@ public class HypothesisController : MonoBehaviour
                 {
                     foreach (var person in PeopleJournalSystem.Instance.GetEntries())
                     {
-                        options.Add(person.personName);
+                        if (!string.IsNullOrEmpty(person.personName))
+                            options.Add(person.personName);
                     }
                 }
 
@@ -154,14 +201,17 @@ public class HypothesisController : MonoBehaviour
 
                 if (InventoryRuntime.Instance != null)
                 {
-                    var inventory = InventoryRuntime.Instance.GetInventory()
-                        .GetCurrentInventoryState();
+                    var inventory =
+                        InventoryRuntime.Instance
+                            .GetInventory()
+                            .GetCurrentInventoryState();
 
                     foreach (var kvp in inventory)
                     {
-                        if (!kvp.Value.IsEmpty)
+                        if (!kvp.Value.IsEmpty &&
+                            kvp.Value.item != null)
                         {
-                            options.Add(kvp.Value.item.name);
+                            options.Add(kvp.Value.item.NameHypothesis);
                         }
                     }
                 }
@@ -172,12 +222,15 @@ public class HypothesisController : MonoBehaviour
 
                 if (InventoryRuntime.Instance != null)
                 {
-                    var items = InventoryRuntime.Instance.GetInventory()
-                        .GetItemsByType(ItemType.Clue);
+                    var items =
+                        InventoryRuntime.Instance
+                            .GetInventory()
+                            .GetItemsByType(ItemType.Clue);
 
                     foreach (var item in items)
                     {
-                        options.Add(item.item.name);
+                        if (item.item != null)
+                            options.Add(item.item.name);
                     }
                 }
 
@@ -190,16 +243,21 @@ public class HypothesisController : MonoBehaviour
     public string GetHypothesisText()
     {
         if (hypothesisData == null)
-            return "";
+            return string.Empty;
 
-        if (currentHypothesis == null)
-            return "";
+        if (hypothesisData.textParts == null)
+            return string.Empty;
 
-        string result = "";
+        string result = string.Empty;
 
-        for (int i = 0; i < hypothesisData.slots.Count; i++)
+        int slotCount = hypothesisData.slots != null
+            ? hypothesisData.slots.Count
+            : 0;
+
+        for (int i = 0; i < slotCount; i++)
         {
-            result += hypothesisData.textParts[i];
+            if (i < hypothesisData.textParts.Count)
+                result += hypothesisData.textParts[i];
 
             if (i < currentHypothesis.Length &&
                 !string.IsNullOrEmpty(currentHypothesis[i]))
@@ -208,8 +266,14 @@ public class HypothesisController : MonoBehaviour
             }
         }
 
-        result += hypothesisData.textParts[^1];
+        if (hypothesisData.textParts.Count > 0)
+            result += hypothesisData.textParts[^1];
 
         return result;
+    }
+
+    public string[] GetCurrentHypothesis()
+    {
+        return currentHypothesis ?? System.Array.Empty<string>();
     }
 }

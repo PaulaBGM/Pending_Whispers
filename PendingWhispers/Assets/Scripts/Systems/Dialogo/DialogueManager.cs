@@ -1,16 +1,17 @@
-using UnityEngine;
-using System.Collections.Generic;
 using Inventory.Model;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
+    public static event Action<bool> OnDialogueStateChanged;
 
     private DialogueRunner runner;
     private DialogueData currentDialogue;
     private DialogueNode currentNode;
     private NPC currentNPC;
-
     private PlayerController_Actions player;
 
     void Awake()
@@ -48,6 +49,8 @@ public class DialogueManager : MonoBehaviour
             Debug.LogError("[DialogueManager] Dialogue es NULL");
             return;
         }
+
+        OnDialogueStateChanged?.Invoke(true);
 
         currentDialogue = dialogue;
         runner = new DialogueRunner(dialogue);
@@ -106,10 +109,12 @@ public class DialogueManager : MonoBehaviour
         }
 
         ApplyNodeEffects(node);
+
         var charData = currentDialogue.GetCharacter(node.speakerID);
 
-        string speakerName = charData != null ? charData.displayName : "???";
-
+        string speakerName = charData != null
+            ? charData.displayName
+            : "???";
 
         Sprite expressionSprite = null;
 
@@ -118,7 +123,12 @@ public class DialogueManager : MonoBehaviour
             expressionSprite = charData.GetExpression(node.expression);
         }
 
-        DialogueUI.Instance.ShowLine(charData,speakerName,node.text,expressionSprite);
+        DialogueUI.Instance.ShowLine(
+            charData,
+            speakerName,
+            node.text,
+            expressionSprite
+        );
 
         RegisterDialogueToJournal(charData, node);
 
@@ -128,7 +138,14 @@ public class DialogueManager : MonoBehaviour
 
             foreach (var choice in node.choices)
             {
-                if (GameProgress.Instance.HasAllFlags(choice.requiredFlags))
+                bool hasFlags =
+                    GameProgress.Instance.HasAllFlags(choice.requiredFlags);
+
+                bool hasReputation =
+                    ReputationManager.Instance == null ||
+                    ReputationManager.Instance.HasReputation(choice.requiredReputation);
+
+                if (hasFlags && hasReputation)
                 {
                     validChoices.Add(choice);
                 }
@@ -148,7 +165,11 @@ public class DialogueManager : MonoBehaviour
         {
             foreach (var flag in node.onEnterFlags)
             {
-                Debug.Log("[Dialogue] Añadiendo flag: " + flag.id);
+                if (flag == null)
+                    continue;
+
+                Debug.Log("[Dialogue] Adding flag: " + flag.id);
+
                 GameProgress.Instance.AddFlag(flag);
             }
         }
@@ -174,8 +195,16 @@ public class DialogueManager : MonoBehaviour
         {
             foreach (var flag in choice.addFlags)
             {
+                if (flag == null)
+                    continue;
+
                 GameProgress.Instance.AddFlag(flag);
             }
+        }
+
+        if (choice.reputationChange != 0)
+        {
+            ReputationManager.Instance?.AddReputation(choice.reputationChange);
         }
 
         if (choice.onSelectedEvent != null)
@@ -196,22 +225,28 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
+        OnDialogueStateChanged?.Invoke(false);
+
         if (DialogueUI.Instance != null)
             DialogueUI.Instance.Hide();
 
         if (player != null)
             player.canMove = true;
 
+        if (currentNPC != null)
+        {
+            currentNPC.TryTransform();
+        }
+
         runner = null;
         currentNode = null;
         currentDialogue = null;
         currentNPC = null;
-
-        if (JournalController.Instance != null)
-            JournalController.Instance.OpenToPeopleTab();
     }
 
-    void RegisterDialogueToJournal(DialogueCharacter charData, DialogueNode node)
+    void RegisterDialogueToJournal(
+        DialogueCharacter charData,
+        DialogueNode node)
     {
         if (charData == null || node == null)
             return;
@@ -226,10 +261,8 @@ public class DialogueManager : MonoBehaviour
         item.Description = node.text;
         item.ItemType = ItemType.Testimony;
 
-        PeopleJournalSystem.Instance.AddEntry(
-            charData.displayName,
-            charData.portrait,
-            node.text
-        );
+        PeopleJournalSystem.Instance.AddEntry(charData.displayName,charData.portrait,node.text);
+        FindFirstObjectByType<HUDController>()?.AddClueNotification();
+
     }
 }

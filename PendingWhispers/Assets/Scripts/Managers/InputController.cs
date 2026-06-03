@@ -23,6 +23,10 @@ public class InputController : BaseSingleton<InputController>
     protected override void Awake()
     {
         base.Awake();
+
+        Debug.Log($"[InputController] Awake {GetInstanceID()}");
+        Debug.Log($"[InputController] Instance = {Instance}");
+
         playerInput = GetComponent<PlayerInput>();
     }
 
@@ -54,6 +58,7 @@ public class InputController : BaseSingleton<InputController>
     }
 
     private void OnPause(InputAction.CallbackContext ctx) => OnPausePressed?.Invoke();
+   
     private void OnSubmit(InputAction.CallbackContext ctx) => OnSubmitPressed?.Invoke();
     private void OnClick(InputAction.CallbackContext ctx) => OnClickPressed?.Invoke();
     private void OnMap(InputAction.CallbackContext ctx) => OnMapPressed?.Invoke();

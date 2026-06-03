@@ -115,8 +115,7 @@ public class PlayerController_Actions : MonoBehaviour
         // Click sobre interactuable
         if (interactableHit != null)
         {
-            IInteractable interactable =
-                interactableHit.GetComponent<IInteractable>();
+            IInteractable interactable = interactableHit.GetComponent<IInteractable>();
 
             if (interactable != null)
             {
@@ -223,6 +222,10 @@ public class PlayerController_Actions : MonoBehaviour
     }
     public void ToggleInventory()
     {
+        if (PauseMenuController.Instance != null &&
+            PauseMenuController.Instance.IsPaused)
+            return;
+
         if (JournalController.Instance == null)
             return;
 
