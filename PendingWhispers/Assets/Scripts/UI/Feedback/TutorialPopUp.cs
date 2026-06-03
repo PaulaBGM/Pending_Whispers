@@ -10,7 +10,7 @@ public class TutorialPopup : MonoBehaviour
     [SerializeField] private GameObject panel;
     [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private TextMeshProUGUI bodyText;
-    [SerializeField] private Image icon;
+    //[SerializeField] private Image icon;
     [SerializeField] private Button continueButton;
 
     private System.Action onClose;
@@ -42,13 +42,13 @@ public class TutorialPopup : MonoBehaviour
         titleText.text = title;
         bodyText.text = description;
 
-        if (icon != null)
+       /* if (icon != null)
         {
             icon.gameObject.SetActive(tutorialIcon != null);
 
             if (tutorialIcon != null)
                 icon.sprite = tutorialIcon;
-        }
+        }*/
 
         onClose = callback;
 
