@@ -2,9 +2,15 @@ using UnityEngine;
 
 public class CatacombTutorial : MonoBehaviour
 {
+
+    [Header("Flags")]
+    [SerializeField] private FlagSO entercatacombs;
     private void Start()
     {
-        TutorialPopup.Instance.ShowTutorialOnce("tracking","Rastreo espectral","Pulsa el click izquierdo o el icono de la esquina inferior derecha para activar el rastreo espectral.\n\nEsta habilidad revela rastros y pistas ocultas relacionadas con los espíritus."
-        );
+        if (!GameProgress.Instance.HasFlag(entercatacombs))
+        {
+            GameProgress.Instance.AddFlag(entercatacombs); 
+        }
+        TutorialPopup.Instance.ShowTutorialOnce("tracking", "Spectral Wave", "Press the left mouse button or click the icon in the bottom-right corner to activate Spectral Tracking.\n\nUse it to uncover hidden traces and clues left behind by spirits.");        
     }
 }

@@ -30,7 +30,7 @@ public class MapManager : MonoBehaviour
     {
         InitializeMap();
         SetPlayerToCurrentNode();
-        TutorialPopup.Instance.ShowTutorialOnce("map","Mapa","Selecciona una localización para viajar.\n\nNuevos lugares se desbloquearán durante la investigación.");
+        TutorialPopup.Instance.ShowTutorialOnce("map", "Map", "Select a location to travel.\n\nNew places will be unlocked as the investigation progresses.");
     }
 
     void InitializeMap()

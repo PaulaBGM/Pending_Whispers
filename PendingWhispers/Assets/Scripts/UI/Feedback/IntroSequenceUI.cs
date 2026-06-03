@@ -56,8 +56,7 @@ public class IntroSequenceUI : MonoBehaviour
 
         if (player != null)
             player.canMove = true;
-        TutorialPopup.Instance.ShowTutorialOnce("intro","Controles básicos","Haz clic para moverte.Interactúa con objetos y personajes acercándote a ellos.\nTAB: Diario\nM: Mapa\nESC: Pausa"
-);
+        TutorialPopup.Instance.ShowTutorialOnce("intro", "Basic Controls", "Click to move.\nApproach objects and characters to interact with them.\n\nTAB: Journal\nM: Map\nESC: Pause");
         gameObject.SetActive(false);
     }
 

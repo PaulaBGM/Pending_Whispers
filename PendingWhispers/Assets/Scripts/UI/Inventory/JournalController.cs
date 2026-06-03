@@ -144,11 +144,7 @@ public class JournalController : MonoBehaviour
         else
             RefreshCurrentPage();
 
-        TutorialPopup.Instance.ShowTutorialOnce(
-            "journal",
-            "Diario",
-            "Aquí encontrarás pistas, testimonios, personas conocidas e hipótesis. Utiliza esta información para reconstruir cada caso."
-        );
+        TutorialPopup.Instance.ShowTutorialOnce("journal", "Journal", "Here you'll find clues, testimonies, known people, and hypotheses. Use this information to reconstruct each case.");
     }
 
     private void HandleCloseFinished()

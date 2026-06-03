@@ -1,0 +1,188 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772d907194c90e1499655d8cccb4f43c, type: 3}
+  m_Name: DialogueButlerNoCatacombs
+  m_EditorClassIdentifier: 
+  characters:
+  - id: lyra
+    displayName: Lyra
+    portrait: {fileID: 0}
+    isLeftSide: 1
+    neutral: {fileID: 6795179555359847349, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
+    happy: {fileID: -1103926389690433412, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
+    sad: {fileID: 0}
+    angry: {fileID: 0}
+    surprised: {fileID: -8241981511714330664, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
+    thinking: {fileID: 3356771313395980172, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
+  - id: butler
+    displayName: "Desir\xE9e Cahu\xE8te"
+    portrait: {fileID: 21300000, guid: 1d364f4b642932d40adc9cecbfeb71f5, type: 3}
+    isLeftSide: 0
+    neutral: {fileID: 21300000, guid: 1d364f4b642932d40adc9cecbfeb71f5, type: 3}
+    happy: {fileID: 21300000, guid: 6bd6f33d70437744fad8b2ac2c71ba16, type: 3}
+    sad: {fileID: 21300000, guid: 0e6fc337674431141907fae9306fa81a, type: 3}
+    angry: {fileID: 0}
+    surprised: {fileID: 0}
+    thinking: {fileID: 21300000, guid: 1d364f4b642932d40adc9cecbfeb71f5, type: 3}
+  nodes:
+  - id: start
+    speakerID: butler
+    text: Oh, mistress Vivienne... Such a beautiful voice...
+    nextNodeID: start
+    choices:
+    - text: "Excuse me. Are you Desir\xE9e Cahuete?"
+      nextNodeID: 1
+      addFlags: []
+      requiredFlags: []
+      requiredReputation: 0
+      reputationChange: 0
+      onSelectedEvent: {fileID: 0}
+      endsDialogue: 0
+    - text: See you
+      nextNodeID: 
+      addFlags: []
+      requiredFlags: []
+      requiredReputation: 0
+      reputationChange: 0
+      onSelectedEvent: {fileID: 0}
+      endsDialogue: 1
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 2
+  - id: 1
+    speakerID: butler
+    text: I am. And if you're here to gossip about Lady Vivienne, I have no interest
+      in helping.
+    nextNodeID: 2
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 0
+  - id: 2
+    speakerID: lyra
+    text: I'm trying to understand what happened to her.
+    nextNodeID: 3
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 0
+  - id: 3
+    speakerID: butler
+    text: ...Then you're already kinder than most visitors.
+    nextNodeID: 4
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 0
+  - id: 4
+    speakerID: lyra
+    text: You were with her the night she died?
+    nextNodeID: 5
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 5
+  - id: 5
+    speakerID: butler
+    text: Of course. There was a grand celebration in the manor. Music, guests, applause...
+      everything was for her.
+    nextNodeID: 6
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 1
+    expression: 1
+  - id: 6
+    speakerID: lyra
+    text: And her final performance?
+    nextNodeID: 7
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 5
+  - id: 7
+    speakerID: butler
+    text: She never got to sing it. There was a short intermission before the last
+      song. Ten minutes, perhaps. She left to prepare herself and never returned.
+    nextNodeID: 8
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 2
+  - id: 8
+    speakerID: lyra
+    text: Did anything seem unusual?
+    nextNodeID: 9
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 5
+  - id: 9
+    speakerID: butler
+    text: Lady Vivienne had become fearful. She believed people were plotting against
+      her. I told her she was worrying too much, but... she seemed convinced.
+    nextNodeID: 10
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 2
+  - id: 10
+    speakerID: lyra
+    text: Do you know who she suspected?
+    nextNodeID: 11
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 5
+  - id: 11
+    speakerID: butler
+    text: Laurent, sometimes. Certain guests. Even members of the staff. She trusted
+      fewer and fewer people as time went on.
+    nextNodeID: 12
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 2
+  - id: 12
+    speakerID: butler
+    text: I only know one thing for certain. Lady Vivienne deserved better than what
+      happened that night.
+    nextNodeID: 14
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 2

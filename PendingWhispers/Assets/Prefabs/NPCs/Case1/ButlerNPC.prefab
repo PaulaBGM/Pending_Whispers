@@ -247,10 +247,15 @@ MonoBehaviour:
   - dialogue: {fileID: 11400000, guid: 9f8656febfccda04599f485cd36ee88c, type: 2}
     requiredFlags:
     - {fileID: 11400000, guid: 8c9823eacec837c4299e0acca9e31dad, type: 2}
+    - {fileID: 11400000, guid: ea1d627ebee820a448438805c8496a2d, type: 2}
   - dialogue: {fileID: 11400000, guid: b7705bd6bd8add349aa0733a30a82676, type: 2}
     requiredFlags:
     - {fileID: 11400000, guid: 538da547a0d6177408bea1982f7e6116, type: 2}
+    - {fileID: 11400000, guid: ea1d627ebee820a448438805c8496a2d, type: 2}
   - dialogue: {fileID: 11400000, guid: 651ec2fc10fd23d45bdb6e7e670990a0, type: 2}
+    requiredFlags:
+    - {fileID: 11400000, guid: ea1d627ebee820a448438805c8496a2d, type: 2}
+  - dialogue: {fileID: 11400000, guid: 76b84ce87eaca99448b2174d9ecbadab, type: 2}
     requiredFlags: []
 --- !u!70 &176805181648224533
 CapsuleCollider2D:
