@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772d907194c90e1499655d8cccb4f43c, type: 3}
+  m_Name: DialogueTransform
+  m_EditorClassIdentifier: 
+  characters:
+  - id: lyra
+    displayName: Lyra
+    portrait: {fileID: 0}
+    isLeftSide: 1
+    neutral: {fileID: 6795179555359847349, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
+    happy: {fileID: -1103926389690433412, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
+    sad: {fileID: 21300000, guid: 4e87995f190b23644b0192eb50e3ed75, type: 3}
+    angry: {fileID: 0}
+    surprised: {fileID: -8241981511714330664, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
+    thinking: {fileID: 3356771313395980172, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
+  - id: ghost1
+    displayName: Vivienne Encore
+    portrait: {fileID: 21300000, guid: 4e5dab8e6a6f3824d8ece0e47d455a95, type: 3}
+    isLeftSide: 0
+    neutral: {fileID: 21300000, guid: 4e5dab8e6a6f3824d8ece0e47d455a95, type: 3}
+    happy: {fileID: 21300000, guid: a334d11cd64e6214c97c1423795e2535, type: 3}
+    sad: {fileID: 0}
+    angry: {fileID: 21300000, guid: 925cbf7b849ba1c4d802084e56eec740, type: 3}
+    surprised: {fileID: 0}
+    thinking: {fileID: 0}
+  nodes:
+  - id: start
+    speakerID: lyra
+    text: I've finally reached the truth.
+    nextNodeID: 1
+    choices: []
+    requiredFlags:
+    - {fileID: 11400000, guid: 9cc3d14b9dc651b4c8d197dcd5f6c5b9, type: 2}
+    - {fileID: 11400000, guid: 0bd4ea81fb4c46f4b95fd4140e9cab7d, type: 2}
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 0
+  - id: 1
+    speakerID: ghost1
+    text: Really? You found out who was the murderous fiend? The one who tried to
+      quiet my magnificent voice?
+    nextNodeID: 
+    choices:
+    - text: No one murdered you... you suffered an accident, and died because of
+        an allergy reaction
+      nextNodeID: 2
+      addFlags:
+      - {fileID: 11400000, guid: b20d31eec589dbb4fafd6102542a3f00, type: 2}
+      requiredFlags:
+      - {fileID: 11400000, guid: 8c9823eacec837c4299e0acca9e31dad, type: 2}
+      requiredReputation: 0
+      reputationChange: 0
+      onSelectedEvent: {fileID: 0}
+      endsDialogue: 1
+    - text: They murdered you because they wanted your precious necklace
+      nextNodeID: 3
+      addFlags: []
+      requiredFlags:
+      - {fileID: 11400000, guid: 62256de666409794a87f3313daea52e4, type: 2}
+      requiredReputation: 0
+      reputationChange: -5
+      onSelectedEvent: {fileID: 0}
+      endsDialogue: 0
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 0
+  - id: 3
+    speakerID: ghost1
+    text: So... IT WAS TRUE, THEY WANTED MY RICHES, MY POWER, MY FAME, MY VOICE!!
+    nextNodeID: 4
+    choices:
+    - text: Ahhh!! Sorry!!!
+      nextNodeID: 
+      addFlags: []
+      requiredFlags: []
+      requiredReputation: 0
+      reputationChange: -5
+      onSelectedEvent: {fileID: 0}
+      endsDialogue: 1
+    requiredFlags:
+    - {fileID: 11400000, guid: 62256de666409794a87f3313daea52e4, type: 2}
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 3

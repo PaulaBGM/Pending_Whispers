@@ -35,48 +35,6 @@ MonoBehaviour:
     thinking: {fileID: 0}
   nodes:
   - id: start
-    speakerID: lyra
-    text: I've finally reached the truth.
-    nextNodeID: 1
-    choices: []
-    requiredFlags:
-    - {fileID: 11400000, guid: 9cc3d14b9dc651b4c8d197dcd5f6c5b9, type: 2}
-    - {fileID: 11400000, guid: 0bd4ea81fb4c46f4b95fd4140e9cab7d, type: 2}
-    onEnterFlags: []
-    onEnterEvents: []
-    isImportantLine: 0
-    expression: 0
-  - id: 1
-    speakerID: ghost1
-    text: Really? You found out who was the murderous fiend? The one who tried to
-      quiet my magnificent voice?
-    nextNodeID: 
-    choices:
-    - text: No one murdered you... you suffered an accident, and died because of
-        an allergy reaction
-      nextNodeID: 2
-      addFlags: []
-      requiredFlags:
-      - {fileID: 11400000, guid: 8c9823eacec837c4299e0acca9e31dad, type: 2}
-      requiredReputation: 0
-      reputationChange: 0
-      onSelectedEvent: {fileID: 0}
-      endsDialogue: 0
-    - text: They murdered you because they wanted your precious necklace
-      nextNodeID: 3
-      addFlags: []
-      requiredFlags:
-      - {fileID: 11400000, guid: 62256de666409794a87f3313daea52e4, type: 2}
-      requiredReputation: 0
-      reputationChange: 0
-      onSelectedEvent: {fileID: 0}
-      endsDialogue: 0
-    requiredFlags: []
-    onEnterFlags: []
-    onEnterEvents: []
-    isImportantLine: 0
-    expression: 0
-  - id: 2
     speakerID: ghost1
     text: "Oh? Is that so? All of these years I've hold on to these grudge against
       the world who silenced me, when I was the one who didn't listen to others...
@@ -99,22 +57,3 @@ MonoBehaviour:
     onEnterEvents: []
     isImportantLine: 0
     expression: 1
-  - id: 3
-    speakerID: ghost1
-    text: So... IT WAS TRUE, THEY WANTED MY RICHES, MY POWER, MY FAME, MY VOICE!!
-    nextNodeID: 4
-    choices:
-    - text: Ahhh!! Sorry!!!
-      nextNodeID: 
-      addFlags: []
-      requiredFlags: []
-      requiredReputation: 0
-      reputationChange: -5
-      onSelectedEvent: {fileID: 0}
-      endsDialogue: 1
-    requiredFlags:
-    - {fileID: 11400000, guid: 62256de666409794a87f3313daea52e4, type: 2}
-    onEnterFlags: []
-    onEnterEvents: []
-    isImportantLine: 0
-    expression: 3

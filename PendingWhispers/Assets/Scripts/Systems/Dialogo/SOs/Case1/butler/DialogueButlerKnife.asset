@@ -37,16 +37,16 @@ MonoBehaviour:
   - id: start
     speakerID: butler
     text: 'Oh, is that a knife? '
-    nextNodeID: 
+    nextNodeID: 1
     choices:
-    - text: Yes
-      nextNodeID: 
+    - text: It is. There's a stain on it.
+      nextNodeID: 1
       addFlags: []
       requiredFlags: []
       requiredReputation: 0
       reputationChange: 0
       onSelectedEvent: {fileID: 0}
-      endsDialogue: 1
+      endsDialogue: 0
     - text: See you
       nextNodeID: 
       addFlags: []
@@ -61,3 +61,167 @@ MonoBehaviour:
     onEnterEvents: []
     isImportantLine: 0
     expression: 0
+  - id: 1
+    speakerID: butler
+    text: And?
+    nextNodeID: 2
+    choices: []
+    requiredFlags:
+    - {fileID: 0}
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 1
+  - id: 2
+    speakerID: lyra
+    text: It's not blood. Which is odd, considering the rest of the evidence.
+    nextNodeID: 3
+    choices: []
+    requiredFlags:
+    - {fileID: 0}
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 5
+  - id: 3
+    speakerID: butler
+    text: Well, that's a relief.
+    nextNodeID: 4
+    choices:
+    - text: Jam?
+      nextNodeID: 4
+      addFlags: []
+      requiredFlags: []
+      requiredReputation: 0
+      reputationChange: 0
+      onSelectedEvent: {fileID: 0}
+      endsDialogue: 0
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 5
+  - id: 4
+    speakerID: butler
+    text: Strawberry. I was making myself a peanut butter and jam sandwich.
+    nextNodeID: 5
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 5
+  - id: 5
+    speakerID: butler
+    text: Vivienne was allergic to peanuts.
+    nextNodeID: 6
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 0
+  - id: 6
+    speakerID: butler
+    text: I know. It wasn't for her.
+    nextNodeID: 7
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 2
+  - id: 7
+    speakerID: lyra
+    text: Then why is this important?
+    nextNodeID: 8
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 5
+  - id: 8
+    speakerID: butler
+    text: Because she ate it before I could stop her.
+    nextNodeID: 9
+    choices:
+    - text: She did?
+      nextNodeID: 9
+      addFlags: []
+      requiredFlags: []
+      requiredReputation: 0
+      reputationChange: 0
+      onSelectedEvent: {fileID: 0}
+      endsDialogue: 0
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 2
+  - id: 9
+    speakerID: butler
+    text: I tried to warn her, but she was faster than me.
+    nextNodeID: 10
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 2
+  - id: 10
+    speakerID: butler
+    text: Because she ate it before I could stop her.
+    nextNodeID: 11
+    choices:
+    - text: That must have been terrifying.
+      nextNodeID: 11
+      addFlags: []
+      requiredFlags: []
+      requiredReputation: 0
+      reputationChange: 0
+      onSelectedEvent: {fileID: 0}
+      endsDialogue: 0
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 2
+  - id: 11
+    speakerID: butler
+    text: ...Yes.
+    nextNodeID: 12
+    choices:
+    - text: That must have been terrifying.
+      nextNodeID: 11
+      addFlags: []
+      requiredFlags: []
+      requiredReputation: 0
+      reputationChange: 0
+      onSelectedEvent: {fileID: 0}
+      endsDialogue: 0
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 2
+  - id: 12
+    speakerID: lyra
+    text: You remember it clearly.
+    nextNodeID: 13
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 4
+  - id: 13
+    speakerID: lyra
+    text: I remember everything about Vivienne.
+    nextNodeID: 
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    isImportantLine: 0
+    expression: 4
