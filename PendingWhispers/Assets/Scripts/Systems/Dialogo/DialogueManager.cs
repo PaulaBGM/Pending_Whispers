@@ -269,8 +269,12 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         if (!node.isImportantLine)
             return;
 
-        onTestimonyRegistered?.Raise(
-            new TestimonyEntry(charData.displayName, charData.portrait, node.text)
+        PeopleJournalSystem.Instance?.AddEntry(
+            charData.displayName,
+            charData.portrait,
+            node.text
         );
+
+        FindFirstObjectByType<HUDController>()?.AddClueNotification();
     }
 }
