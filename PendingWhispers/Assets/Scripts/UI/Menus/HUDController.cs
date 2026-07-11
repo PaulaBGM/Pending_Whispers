@@ -10,6 +10,7 @@ public class HUDController : MonoBehaviour
     [SerializeField] private FlagSO unlockCatacombsFlag;
    
     [Header("Notifications")]
+    [SerializeField] private TestimonyEventChannelSO onTestimonyRegistered;
     [SerializeField] private GameObject clueNotification;
     [SerializeField] private TextMeshProUGUI clueNotificationText;
 
@@ -27,7 +28,6 @@ public class HUDController : MonoBehaviour
 
     private void Start()
     {
-        TrySubscribe();
         ResetClueNotifications();
 
         HandleDetectionCooldown(false);
@@ -38,6 +38,10 @@ public class HUDController : MonoBehaviour
     {
         DialogueManager.OnDialogueStateChanged += HandleDialogue;
         SpectralDetectionSystem.OnCooldownStateChanged += HandleDetectionCooldown;
+        SubscribeToUIManager();
+
+        if (onTestimonyRegistered != null)
+            onTestimonyRegistered.OnRaised += HandleTestimonyRegistered;
 
         if (GameProgress.Instance != null)
             GameProgress.Instance.OnFlagAdded += OnFlagAdded;
@@ -48,19 +52,22 @@ public class HUDController : MonoBehaviour
         DialogueManager.OnDialogueStateChanged -= HandleDialogue;
         SpectralDetectionSystem.OnCooldownStateChanged -= HandleDetectionCooldown;
 
+        if (onTestimonyRegistered != null)
+            onTestimonyRegistered.OnRaised -= HandleTestimonyRegistered;
+
         if (GameProgress.Instance != null)
             GameProgress.Instance.OnFlagAdded -= OnFlagAdded;
+
+        if (UIManager.Instance != null)
+            UIManager.Instance.OnJournalStateChanged -= HandleJournal;
     }
 
-    private void TrySubscribe()
+    private void SubscribeToUIManager()
     {
-        if (UIManager.Instance == null)
+        if (UIManager.Instance != null)
         {
-            Invoke(nameof(TrySubscribe), 0.1f);
-            return;
+            UIManager.Instance.OnJournalStateChanged += HandleJournal;
         }
-
-        UIManager.Instance.OnJournalStateChanged += HandleJournal;
     }
 
     // ---------------- DETECTION UI ----------------
@@ -98,6 +105,11 @@ public class HUDController : MonoBehaviour
     }
 
     // ---------------- CLUES ----------------
+
+    private void HandleTestimonyRegistered(TestimonyEntry entry)
+    {
+        AddClueNotification();
+    }
 
     public void AddClueNotification()
     {

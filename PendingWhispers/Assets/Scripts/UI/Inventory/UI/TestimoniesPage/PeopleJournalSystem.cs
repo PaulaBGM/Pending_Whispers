@@ -1,23 +1,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PeopleJournalSystem : MonoBehaviour
+public class PeopleJournalSystem : BaseSingleton<PeopleJournalSystem>
 {
-    public static PeopleJournalSystem Instance;
+    protected override bool PersistAcrossScenes => false;
+
+    [SerializeField] private TestimonyEventChannelSO onTestimonyRegistered;
 
     private List<PersonJournalEntry> entries = new();
 
     private HashSet<string> seenLines = new();
 
-    private void Awake()
+    private void OnEnable()
     {
-        if (Instance != null && Instance != this)
+        if (onTestimonyRegistered != null)
         {
-            Destroy(gameObject);
-            return;
+            onTestimonyRegistered.OnRaised += AddEntry;
         }
+    }
 
-        Instance = this;
+    private void OnDisable()
+    {
+        if (onTestimonyRegistered != null)
+        {
+            onTestimonyRegistered.OnRaised -= AddEntry;
+        }
+    }
+
+    private void AddEntry(TestimonyEntry entry)
+    {
+        AddEntry(entry.Name, entry.Portrait, entry.Dialogue);
     }
 
     public void AddEntry(string name, Sprite portrait, string dialogue)

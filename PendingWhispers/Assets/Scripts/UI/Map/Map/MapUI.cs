@@ -1,17 +1,12 @@
 using UnityEngine;
 using TMPro;
 
-public class MapUI : MonoBehaviour
+public class MapUI : BaseSingleton<MapUI>
 {
-    public static MapUI Instance;
+    protected override bool PersistAcrossScenes => false;
 
     public TextMeshProUGUI zoneTitle;
     public TextMeshProUGUI zoneDesc;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     public void UpdateTitle(string newTitle, string newDescription)
     {

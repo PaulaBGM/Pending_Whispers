@@ -1,10 +1,8 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIManager : BaseSingleton<UIManager>
 {
-    public static UIManager Instance { get; private set; }
 
     public event Action<bool> OnJournalStateChanged;
     public event Action<bool> OnPauseStateChanged;
@@ -16,39 +14,15 @@ public class UIManager : MonoBehaviour
 
     private bool subscribed;
 
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-
-        StartCoroutine(TestCoroutine());
-    }
-
-    private IEnumerator TestCoroutine()
-    {
-
-        yield return null;
-
-
-        yield return null;
-
-    }
-
     private void Start()
     {
-        StartCoroutine(SubscribeToInput());
+        SubscribeToInput();
     }
 
-    private IEnumerator SubscribeToInput()
+    private void SubscribeToInput()
     {
-        while (InputController.Instance == null)
-            yield return null;
+        if (subscribed || InputController.Instance == null)
+            return;
 
         InputController.Instance.OnPausePressed += HandlePause;
         InputController.Instance.OnSubmitPressed += HandleSubmit;
@@ -56,18 +30,19 @@ public class UIManager : MonoBehaviour
         InputController.Instance.OnInventoryPressed += HandleJournal;
 
         subscribed = true;
-
-    }
-    private void OnEnable()
-    {
     }
 
-    private void OnDisable()
+    protected override void OnDestroy()
     {
-    }
+        if (subscribed && InputController.Instance != null)
+        {
+            InputController.Instance.OnPausePressed -= HandlePause;
+            InputController.Instance.OnSubmitPressed -= HandleSubmit;
+            InputController.Instance.OnMapPressed -= HandleMap;
+            InputController.Instance.OnInventoryPressed -= HandleJournal;
+        }
 
-    private void OnDestroy()
-    {
+        base.OnDestroy();
     }
     private void HandlePause()
     {

@@ -1,9 +1,8 @@
 using System;
 using UnityEngine;
 
-public class ReputationManager : MonoBehaviour
+public class ReputationManager : BaseSingleton<ReputationManager>
 {
-    public static ReputationManager Instance;
 
     [SerializeField, Range(0, 100)]
     private int reputation = 50;
@@ -11,19 +10,6 @@ public class ReputationManager : MonoBehaviour
     public event Action<int> OnReputationChanged;
 
     public int Reputation => reputation;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     public void SetReputation(int value)
     {

@@ -1,11 +1,11 @@
-using Inventory.Model;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager : BaseSingleton<DialogueManager>
 {
-    public static DialogueManager Instance;
+    [SerializeField] private TestimonyEventChannelSO onTestimonyRegistered;
+
     public static event Action<bool> OnDialogueStateChanged;
 
     private DialogueRunner runner;
@@ -13,11 +13,6 @@ public class DialogueManager : MonoBehaviour
     private DialogueNode currentNode;
     private NPC currentNPC;
     private PlayerController_Actions player;
-
-    void Awake()
-    {
-        Instance = this;
-    }
 
     void OnEnable()
     {
@@ -50,13 +45,10 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        OnDialogueStateChanged?.Invoke(true);
+        SetDialogueActive(true);
 
         currentDialogue = dialogue;
         runner = new DialogueRunner(dialogue);
-
-        if (player != null)
-            player.canMove = false;
 
         currentNode = runner.Start();
 
@@ -102,11 +94,8 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        if (DialogueUI.Instance == null)
-        {
-            Debug.LogError("[DialogueManager] DialogueUI no existe en escena");
+        if (!TryGetDialogueUI(out DialogueUI dialogueUI))
             return;
-        }
 
         ApplyNodeEffects(node);
 
@@ -123,7 +112,7 @@ public class DialogueManager : MonoBehaviour
             expressionSprite = charData.GetExpression(node.expression);
         }
 
-        DialogueUI.Instance.ShowLine(
+        dialogueUI.ShowLine(
             charData,
             speakerName,
             node.text,
@@ -132,55 +121,18 @@ public class DialogueManager : MonoBehaviour
 
         RegisterDialogueToJournal(charData, node);
 
-        if (node.choices != null && node.choices.Count > 0)
+        List<DialogueChoice> validChoices = GetValidChoices(node);
+
+        if (validChoices.Count > 0)
         {
-            List<DialogueChoice> validChoices = new();
-
-            foreach (var choice in node.choices)
-            {
-                bool hasFlags =
-                    GameProgress.Instance.HasAllFlags(choice.requiredFlags);
-
-                bool hasReputation =
-                    ReputationManager.Instance == null ||
-                    ReputationManager.Instance.HasReputation(choice.requiredReputation);
-
-                if (hasFlags && hasReputation)
-                {
-                    validChoices.Add(choice);
-                }
-            }
-
-            if (validChoices.Count > 0)
-            {
-                DialogueUI.Instance.ShowChoices(validChoices);
-                return;
-            }
+            dialogueUI.ShowChoices(validChoices);
         }
     }
 
     void ApplyNodeEffects(DialogueNode node)
     {
-        if (node.onEnterFlags != null)
-        {
-            foreach (var flag in node.onEnterFlags)
-            {
-                if (flag == null)
-                    continue;
-
-                Debug.Log("[Dialogue] Adding flag: " + flag.id);
-
-                GameProgress.Instance.AddFlag(flag);
-            }
-        }
-
-        if (node.onEnterEvents != null)
-        {
-            foreach (var evt in node.onEnterEvents)
-            {
-                evt?.Raise();
-            }
-        }
+        AddFlags(node.onEnterFlags, true);
+        RaiseEvents(node.onEnterEvents);
     }
 
     public void ChooseChoice(DialogueChoice choice)
@@ -191,26 +143,14 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        if (choice.addFlags != null)
-        {
-            foreach (var flag in choice.addFlags)
-            {
-                if (flag == null)
-                    continue;
-
-                GameProgress.Instance.AddFlag(flag);
-            }
-        }
+        AddFlags(choice.addFlags);
 
         if (choice.reputationChange != 0)
         {
             ReputationManager.Instance?.AddReputation(choice.reputationChange);
         }
 
-        if (choice.onSelectedEvent != null)
-        {
-            choice.onSelectedEvent.Raise();
-        }
+        choice.onSelectedEvent?.Raise();
 
         if (choice.endsDialogue)
         {
@@ -218,20 +158,16 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        DialogueUI.Instance.ClearChoices();
+        DialogueUI.Instance?.ClearChoices();
 
         GoToNode(choice.nextNodeID);
     }
 
     public void EndDialogue()
     {
-        OnDialogueStateChanged?.Invoke(false);
+        SetDialogueActive(false);
 
-        if (DialogueUI.Instance != null)
-            DialogueUI.Instance.Hide();
-
-        if (player != null)
-            player.canMove = true;
+        DialogueUI.Instance?.Hide();
 
         if (currentNPC != null)
         {
@@ -244,6 +180,87 @@ public class DialogueManager : MonoBehaviour
         currentNPC = null;
     }
 
+    private void SetDialogueActive(bool isActive)
+    {
+        OnDialogueStateChanged?.Invoke(isActive);
+
+        if (player != null)
+        {
+            player.canMove = !isActive;
+        }
+    }
+
+    private bool TryGetDialogueUI(out DialogueUI dialogueUI)
+    {
+        dialogueUI = DialogueUI.Instance;
+
+        if (dialogueUI != null)
+            return true;
+
+        Debug.LogError("[DialogueManager] DialogueUI no existe en escena");
+        return false;
+    }
+
+    private List<DialogueChoice> GetValidChoices(DialogueNode node)
+    {
+        List<DialogueChoice> validChoices = new();
+
+        if (node.choices == null || node.choices.Count == 0)
+            return validChoices;
+
+        foreach (var choice in node.choices)
+        {
+            if (choice == null)
+                continue;
+
+            bool hasFlags = GameProgress.Instance == null ||
+                GameProgress.Instance.HasAllFlags(choice.requiredFlags);
+
+            if (hasFlags && HasRequiredReputation(choice))
+            {
+                validChoices.Add(choice);
+            }
+        }
+
+        return validChoices;
+    }
+
+    private bool HasRequiredReputation(DialogueChoice choice)
+    {
+        return ReputationManager.Instance == null ||
+            ReputationManager.Instance.HasReputation(choice.requiredReputation);
+    }
+
+    private void AddFlags(List<FlagSO> flags, bool logAddedFlags = false)
+    {
+        if (flags == null || GameProgress.Instance == null)
+            return;
+
+        foreach (var flag in flags)
+        {
+            if (flag == null)
+                continue;
+
+            if (logAddedFlags)
+            {
+                Debug.Log("[Dialogue] Adding flag: " + flag.id);
+            }
+
+            GameProgress.Instance.AddFlag(flag);
+        }
+    }
+
+    private void RaiseEvents(List<GameEventSO> events)
+    {
+        if (events == null)
+            return;
+
+        foreach (var evt in events)
+        {
+            evt?.Raise();
+        }
+    }
+
     void RegisterDialogueToJournal(DialogueCharacter charData, DialogueNode node)
     {
         if (charData == null || node == null)
@@ -252,14 +269,8 @@ public class DialogueManager : MonoBehaviour
         if (!node.isImportantLine)
             return;
 
-        var item = ScriptableObject.CreateInstance<TestimonyItemSO>();
-
-        item.Name = charData.displayName;
-        item.ItemImage = charData.portrait;
-        item.Description = node.text;
-        item.ItemType = ItemType.Testimony;
-
-        PeopleJournalSystem.Instance.AddEntry(charData.displayName,charData.portrait,node.text);
-        FindFirstObjectByType<HUDController>()?.AddClueNotification();
+        onTestimonyRegistered?.Raise(
+            new TestimonyEntry(charData.displayName, charData.portrait, node.text)
+        );
     }
 }
