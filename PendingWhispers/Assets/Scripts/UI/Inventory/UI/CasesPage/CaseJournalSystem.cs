@@ -2,26 +2,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CaseJournalSystem : MonoBehaviour
+public class CaseJournalSystem : BaseSingleton<CaseJournalSystem>
 {
-    public static CaseJournalSystem Instance;
 
     private Dictionary<string, CaseRuntime> cases = new();
 
     public event Action OnCasesChanged;
-
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-
-        DontDestroyOnLoad(gameObject);
-    }
 
     public bool TryAddCase(CaseRuntime runtime)
     {

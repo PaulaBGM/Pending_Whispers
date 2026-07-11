@@ -1,27 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapState : MonoBehaviour
+public class MapState : BaseSingleton<MapState>
 {
-    public static MapState Instance;
 
     private string currentNodeID;
 
     private HashSet<string> unlockedNodes = new HashSet<string>();
-
-    void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            Debug.Log("[MapState] Inicializado");
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     public void SetCurrentNode(string nodeID)
     {

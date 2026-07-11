@@ -1,23 +1,19 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class MapManager : MonoBehaviour
+public class MapManager : BaseSingleton<MapManager>
 {
-    public static MapManager Instance;
+    protected override bool PersistAcrossScenes => false;
 
     public List<MapNode> nodes;
     public PlayerIcon player;
 
     private MapNode currentNode;
 
-    private void Awake()
-    {
-        Instance = this;
-    }
-
     private void OnEnable()
     {
-        GameProgress.Instance.OnFlagAdded += OnFlagAdded;
+        if (GameProgress.Instance != null)
+            GameProgress.Instance.OnFlagAdded += OnFlagAdded;
     }
 
     private void OnDisable()
@@ -54,17 +50,10 @@ public class MapManager : MonoBehaviour
 
     void OnFlagAdded(FlagSO flag)
     {
-        Debug.Log("MAP flag recibido: " + flag.id);
-
         foreach (var node in nodes)
         {
-            Debug.Log("Nodo: " + node.data.nodeID +
-                      " | unlockFlag: " + (node.data.unlockFlag != null ? node.data.unlockFlag.id : "NULL"));
-
             if (node.data.unlockFlag == flag)
             {
-                Debug.Log("MATCH desbloqueando nodo");
-
                 UnlockNodeRuntime(node);
             }
         }
