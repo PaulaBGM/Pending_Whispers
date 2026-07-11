@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager : BaseSingleton<DialogueManager>
 {
-    public static DialogueManager Instance;
+    [SerializeField] private TestimonyEventChannelSO onTestimonyRegistered;
+
     public static event Action<bool> OnDialogueStateChanged;
 
     private DialogueRunner runner;
@@ -12,18 +13,6 @@ public class DialogueManager : MonoBehaviour
     private DialogueNode currentNode;
     private NPC currentNPC;
     private PlayerController_Actions player;
-
-    void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     void OnEnable()
     {

@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseMenuController : MonoBehaviour
+public class PauseMenuController : BaseSingleton<PauseMenuController>
 {
-    public static PauseMenuController Instance { get; private set; }
+    protected override bool PersistAcrossScenes => false;
 
     [SerializeField] private GameObject pauseMenuUI;
     [SerializeField] private PlayerController_Actions playerController;
@@ -13,9 +13,12 @@ public class PauseMenuController : MonoBehaviour
 
     public bool IsPaused => isPaused;
 
-    private void Awake()
+    protected override void Awake()
     {
-        Instance = this;
+        base.Awake();
+
+        if (Instance != this)
+            return;
 
         if (pauseMenuUI != null)
             pauseMenuUI.SetActive(false);
@@ -31,14 +34,11 @@ public class PauseMenuController : MonoBehaviour
         if (subscribed)
             return;
 
-        if (UIManager.Instance == null)
+        if (UIManager.Instance != null)
         {
-            Invoke(nameof(TrySubscribe), 0.1f);
-            return;
+            UIManager.Instance.OnPausePressed += TogglePause;
+            subscribed = true;
         }
-
-        UIManager.Instance.OnPausePressed += TogglePause;
-        subscribed = true;
     }
 
     private void OnDisable()

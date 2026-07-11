@@ -2,9 +2,8 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 
-public class UIFeedbackManager : MonoBehaviour
+public class UIFeedbackManager : BaseSingleton<UIFeedbackManager>
 {
-    public static UIFeedbackManager Instance;
 
     public GameObject panel;
     public TextMeshProUGUI text;
@@ -13,20 +12,15 @@ public class UIFeedbackManager : MonoBehaviour
 
     private Coroutine currentRoutine;
 
-    void Awake()
+    protected override void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-
         if (transform.parent != null)
             transform.SetParent(null);
 
-        DontDestroyOnLoad(gameObject);
+        base.Awake();
+
+        if (Instance != this)
+            return;
 
         if (panel != null)
             panel.SetActive(false);

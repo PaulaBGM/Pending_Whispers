@@ -3,26 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class GameProgress : MonoBehaviour
+public class GameProgress : BaseSingleton<GameProgress>
 {
-    public static GameProgress Instance;
+    [SerializeField] private FlagEventChannelSO onFlagAddedChannel;
 
     private HashSet<FlagSO> flags = new();
 
     public event Action<FlagSO> OnFlagAdded;
-
-    void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(transform.root.gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     public void AddFlag(FlagSO flag)
     {
@@ -33,6 +20,7 @@ public class GameProgress : MonoBehaviour
             Debug.Log("[GameProgress] Flag added: " + flag.id);
 
             OnFlagAdded?.Invoke(flag);
+            onFlagAddedChannel?.Raise(flag);
             UIGameEvents.RaiseFlagAdded(flag);
         }
     }

@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class CaseManager : MonoBehaviour
+public class CaseManager : BaseSingleton<CaseManager>
 {
-    public static CaseManager Instance;
 
     [SerializeField] private CaseData currentCaseData;
+    [SerializeField] private CaseOutcomeEventChannelSO onCaseResolved;
 
     private CaseRuntime currentCase;
 
-    void Awake()
+    protected override void Awake()
     {
-        Instance = this;
+        base.Awake();
+
+        if (Instance != this)
+            return;
 
         if (currentCaseData != null)
         {
@@ -26,12 +29,14 @@ public class CaseManager : MonoBehaviour
         }
     }
 
-    void OnDestroy()
+    protected override void OnDestroy()
     {
         if (GameProgress.Instance != null)
         {
             GameProgress.Instance.OnFlagAdded -= HandleFlagAdded;
         }
+
+        base.OnDestroy();
     }
 
     public void LoadCase(CaseData data)
@@ -59,14 +64,6 @@ public class CaseManager : MonoBehaviour
             if (clue.id == flag.id)
             {
                 currentCase.AddClue(clue);
-
-                var page = FindFirstObjectByType<CasePageController>();
-
-                if (page != null)
-                {
-                    page.RefreshUI();
-                }
-
                 break;
             }
         }
@@ -131,13 +128,7 @@ public class CaseManager : MonoBehaviour
         }
 
         currentCase.Resolve();
-
-        var page = FindFirstObjectByType<CasePageController>();
-
-        if (page != null)
-        {
-            page.RefreshUI();
-        }
+        onCaseResolved?.Raise(outcome);
 
         UIGameEvents.RaiseFeedback(outcome.feedbackText);
 
