@@ -1,19 +1,19 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class GameProgress : BaseSingleton<GameProgress>
 {
     [SerializeField] private FlagEventChannelSO onFlagAddedChannel;
 
-    private HashSet<FlagSO> flags = new();
+    private readonly HashSet<FlagSO> flags = new();
 
     public event Action<FlagSO> OnFlagAdded;
 
     public void AddFlag(FlagSO flag)
     {
-        if (flag == null) return;
+        if (flag == null)
+            return;
 
         if (flags.Add(flag))
         {
@@ -21,23 +21,26 @@ public class GameProgress : BaseSingleton<GameProgress>
 
             OnFlagAdded?.Invoke(flag);
             onFlagAddedChannel?.Raise(flag);
-            UIGameEvents.RaiseFlagAdded(flag);
         }
     }
 
     public bool HasFlag(FlagSO flag)
     {
-        if (flag == null) return false;
+        if (flag == null)
+            return false;
+
         return flags.Contains(flag);
     }
 
     public bool HasAllFlags(List<FlagSO> required)
     {
-        if (required == null || required.Count == 0) return true;
+        if (required == null || required.Count == 0)
+            return true;
 
         foreach (var flag in required)
         {
-            if (flag == null) continue;
+            if (flag == null)
+                continue;
 
             if (!flags.Contains(flag))
                 return false;

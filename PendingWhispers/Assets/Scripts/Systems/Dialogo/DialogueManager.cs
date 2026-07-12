@@ -269,12 +269,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         if (!node.isImportantLine)
             return;
 
-        PeopleJournalSystem.Instance?.AddEntry(
-            charData.displayName,
-            charData.portrait,
-            node.text
-        );
-
-        FindFirstObjectByType<HUDController>()?.AddClueNotification();
+        onTestimonyRegistered?.Raise(new TestimonyEntry(charData.displayName, charData.portrait, node.text));
     }
+
 }
