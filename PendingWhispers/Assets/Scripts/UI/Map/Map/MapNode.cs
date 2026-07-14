@@ -14,7 +14,9 @@ public class MapNode : MonoBehaviour
     public Color lockedColor;
     public Color unlockedColor;
     public Color completedColor;
+    [SerializeField] private PathNode pathNode;
 
+    public PathNode PathNode => pathNode;
     private void Start()
     {
         icon.sprite = data.icon;

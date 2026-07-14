@@ -10,14 +10,12 @@ public class Pathfinder : MonoBehaviour
         Instance = this;
     }
 
-    public List<Vector2> FindPath(PathNode start, PathNode goal)
+    public List<PathNode> FindPath(PathNode start, PathNode goal)
     {
         Queue<PathNode> frontier = new();
-
         Dictionary<PathNode, PathNode> cameFrom = new();
 
         frontier.Enqueue(start);
-
         cameFrom[start] = null;
 
         while (frontier.Count > 0)
@@ -33,23 +31,21 @@ public class Pathfinder : MonoBehaviour
                     continue;
 
                 frontier.Enqueue(next);
-
                 cameFrom[next] = current;
             }
         }
 
-        List<Vector2> path = new();
+        List<PathNode> path = new();
 
         if (!cameFrom.ContainsKey(goal))
             return path;
 
-        PathNode currentNode = goal;
+        PathNode node = goal;
 
-        while (currentNode != null)
+        while (node != null)
         {
-            path.Add(currentNode.transform.position);
-
-            currentNode = cameFrom[currentNode];
+            path.Add(node);
+            node = cameFrom[node];
         }
 
         path.Reverse();

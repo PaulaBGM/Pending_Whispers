@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
+using UnityEngine;
 
-public class CaseRuntime
+public class CaseRuntime : IJournalEntry
 {
     public CaseData data;
 
@@ -64,8 +64,10 @@ public class CaseRuntime
     {
         if (data.requiredClues == null || data.requiredClues.Count == 0)
             return 0;
-        
-        return data.requiredClues.Count(clue =>clue != null &&GameProgress.Instance.HasFlag(clue));
+
+        return data.requiredClues.Count(clue =>
+            clue != null &&
+            GameProgress.Instance.HasFlag(clue));
     }
 
     public bool IsObjectiveCompleted(CaseObjective objective)
@@ -93,7 +95,14 @@ public class CaseRuntime
     public void Resolve()
     {
         isResolved = true;
-
         OnCaseUpdated?.Invoke();
     }
+
+    // ---------- IJournalEntry ----------
+
+    public Sprite Icon => data != null ? data.caseIcon : null;
+
+    public string Title => data != null ? data.caseTitle : "";
+
+    public string Description => data != null ? data.caseDescription : "";
 }

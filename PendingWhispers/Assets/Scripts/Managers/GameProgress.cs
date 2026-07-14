@@ -10,39 +10,32 @@ public class GameProgress : BaseSingleton<GameProgress>
 
     public event Action<FlagSO> OnFlagAdded;
 
+    public int FlagCount => flags.Count;
+
     public void AddFlag(FlagSO flag)
     {
-        if (flag == null)
+        if (flag == null || !flags.Add(flag))
             return;
 
-        if (flags.Add(flag))
-        {
-            Debug.Log("[GameProgress] Flag added: " + flag.id);
+        Debug.Log($"[GameProgress] Flag added: {flag.id}");
 
-            OnFlagAdded?.Invoke(flag);
-            onFlagAddedChannel?.Raise(flag);
-        }
+        OnFlagAdded?.Invoke(flag);
+        onFlagAddedChannel?.Raise(flag);
     }
 
     public bool HasFlag(FlagSO flag)
     {
-        if (flag == null)
-            return false;
-
-        return flags.Contains(flag);
+        return flag != null && flags.Contains(flag);
     }
 
-    public bool HasAllFlags(List<FlagSO> required)
+    public bool HasAllFlags(List<FlagSO> requiredFlags)
     {
-        if (required == null || required.Count == 0)
+        if (requiredFlags == null || requiredFlags.Count == 0)
             return true;
 
-        foreach (var flag in required)
+        foreach (var flag in requiredFlags)
         {
-            if (flag == null)
-                continue;
-
-            if (!flags.Contains(flag))
+            if (flag != null && !flags.Contains(flag))
                 return false;
         }
 
@@ -52,10 +45,5 @@ public class GameProgress : BaseSingleton<GameProgress>
     public List<FlagSO> GetFlags()
     {
         return new List<FlagSO>(flags);
-    }
-
-    public int GetFlagCount()
-    {
-        return flags.Count;
     }
 }

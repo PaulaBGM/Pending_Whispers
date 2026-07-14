@@ -181,8 +181,7 @@ public class JournalController : MonoBehaviour
 
         if (targetPage == null || !isOpen)
             return;
-
-        // 🔥 FIX: si ya estás en la página, no haces nada
+        
         if (currentPage == targetPage)
             return;
 

@@ -7,6 +7,12 @@ public abstract class GameEventChannelSO<T> : ScriptableObject
 
     public void Raise(T payload)
     {
+        int listeners = OnRaised == null ? 0 : OnRaised.GetInvocationList().Length;
+
+        Debug.Log($"[{name}] Raise() -> Listeners: {listeners}");
+
         OnRaised?.Invoke(payload);
+
+        Debug.Log($"[{name}] Raise() finished");
     }
 }

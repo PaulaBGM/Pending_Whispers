@@ -1,24 +1,55 @@
-using UnityEngine;
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerIcon : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    [SerializeField] private float speed = 4f;
 
-    public void MoveTo(Vector3 targetPosition)
+    private readonly Queue<PathNode> path = new();
+
+    public bool IsMoving { get; private set; }
+
+    public event Action OnDestinationReached;
+
+    public void FollowPath(List<PathNode> newPath)
     {
         StopAllCoroutines();
-        StartCoroutine(MoveRoutine(targetPosition));
+
+        path.Clear();
+
+        for (int i = 1; i < newPath.Count; i++)
+            path.Enqueue(newPath[i]);
+
+        StartCoroutine(FollowRoutine());
     }
 
-    IEnumerator MoveRoutine(Vector3 target)
+    private IEnumerator FollowRoutine()
     {
-        while (Vector3.Distance(transform.position, target) > 0.05f)
+        IsMoving = true;
+
+        while (path.Count > 0)
         {
-            transform.position = Vector3.Lerp(transform.position, target, Time.deltaTime * moveSpeed);
-            yield return null;
+            Vector2 target = path.Peek().Position;
+
+            while (((Vector2)transform.position - target).sqrMagnitude > 0.0001f)
+            {
+                transform.position = Vector2.MoveTowards(
+                    transform.position,
+                    target,
+                    speed * Time.deltaTime);
+
+                yield return null;
+            }
+
+            transform.position = target;
+
+            path.Dequeue();
         }
 
-        transform.position = target;
+        IsMoving = false;
+
+        OnDestinationReached?.Invoke();
     }
 }

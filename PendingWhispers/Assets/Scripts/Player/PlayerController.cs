@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private UIInventoryPage inventoryUI;
-
     [SerializeField] private GameObject hudUI;
 
     [Header("Movement")]
@@ -25,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
     private Animator animator;
 
-    private readonly Queue<Vector2> currentPath = new();
+    private readonly Queue<PathNode> currentPath = new();
 
     private Vector2 lastDirection = Vector2.down;
 
@@ -47,7 +46,7 @@ public class PlayerController : MonoBehaviour
     {
         animator = GetComponentInChildren<Animator>();
 
-        // Cacheamos los nodos UNA SOLA VEZ
+        // Se cachean una sola vez
         cachedNodes = FindObjectsByType<PathNode>(FindObjectsSortMode.None);
     }
 
@@ -93,7 +92,6 @@ public class PlayerController : MonoBehaviour
         Collider2D interactableHit =
             Physics2D.OverlapPoint(mousePos, interactableLayer);
 
-        // CLICK EN INTERACTUABLE
         if (interactableHit != null)
         {
             IInteractable interactable =
@@ -102,16 +100,12 @@ public class PlayerController : MonoBehaviour
             if (interactable != null)
             {
                 currentTarget = interactable;
-
                 MoveTo(interactable.GetTransform().position);
-
                 return;
             }
         }
 
-        // CLICK EN SUELO
         currentTarget = null;
-
         MoveTo(mousePos);
     }
 
@@ -123,14 +117,15 @@ public class PlayerController : MonoBehaviour
         if (startNode == null || endNode == null)
             return;
 
-        List<Vector2> path =
+        List<PathNode> path =
             Pathfinder.Instance.FindPath(startNode, endNode);
 
         currentPath.Clear();
 
-        foreach (Vector2 point in path)
+        // Saltamos el primer nodo porque ya estamos encima
+        for (int i = 1; i < path.Count; i++)
         {
-            currentPath.Enqueue(point);
+            currentPath.Enqueue(path[i]);
         }
     }
 
@@ -149,24 +144,24 @@ public class PlayerController : MonoBehaviour
         }
 
         Vector2 currentPosition = transform.position;
-        Vector2 targetPosition = currentPath.Peek();
+        Vector2 targetPosition = currentPath.Peek().Position;
 
         Vector2 direction = (targetPosition - currentPosition).normalized;
 
-        Vector2 nextPosition = Vector2.MoveTowards(currentPosition, targetPosition, speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(
+            currentPosition,
+            targetPosition,
+            speed * Time.deltaTime);
 
-        transform.position = nextPosition;
-
-        if (Vector2.Distance(nextPosition, targetPosition)
-            <= waypointReachedDistance)
+        if (((Vector2)transform.position - targetPosition).sqrMagnitude <=
+            waypointReachedDistance * waypointReachedDistance)
         {
+            transform.position = targetPosition;
             currentPath.Dequeue();
         }
 
         if (direction.sqrMagnitude > 0.001f)
-        {
             lastDirection = direction;
-        }
 
         animator.SetFloat("moveX", lastDirection.x);
         animator.SetFloat("moveY", lastDirection.y);
@@ -180,8 +175,7 @@ public class PlayerController : MonoBehaviour
 
         float distance = Vector2.Distance(
             transform.position,
-            currentTarget.GetTransform().position
-        );
+            currentTarget.GetTransform().position);
 
         if (distance <= interactDistance)
         {
@@ -195,29 +189,25 @@ public class PlayerController : MonoBehaviour
 
     private void HandleHover()
     {
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousePos =
+            Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        Collider2D hit = Physics2D.OverlapPoint(mousePos, interactableLayer);
+        Collider2D hit =
+            Physics2D.OverlapPoint(mousePos, interactableLayer);
 
         IInteractable newHover = null;
 
         if (hit != null)
-        {
             newHover = hit.GetComponent<IInteractable>();
-        }
 
         if (hoveredInteractable == newHover)
             return;
 
         if (hoveredInteractable is Item oldItem)
-        {
             oldItem.SetHighlight(false);
-        }
 
         if (newHover is Item newItem)
-        {
             newItem.SetHighlight(true);
-        }
 
         hoveredInteractable = newHover;
     }
@@ -225,14 +215,12 @@ public class PlayerController : MonoBehaviour
     private PathNode GetClosestNode(Vector2 position)
     {
         PathNode closest = null;
-
         float minDistance = float.MaxValue;
 
-        // Sin FindObjectsOfType en runtime
         foreach (PathNode node in cachedNodes)
         {
             float distance =
-                ((Vector2)node.transform.position - position).sqrMagnitude;
+                (node.Position - position).sqrMagnitude;
 
             if (distance < minDistance)
             {
@@ -256,15 +244,11 @@ public class PlayerController : MonoBehaviour
 
             canMove = false;
 
-            if (InventoryController.Instance != null)
-            {
-                InventoryController.Instance.RefreshUI();
-            }
+            InventoryController.Instance?.RefreshUI();
         }
         else
         {
             inventoryUI.Hide();
-
             canMove = true;
         }
     }

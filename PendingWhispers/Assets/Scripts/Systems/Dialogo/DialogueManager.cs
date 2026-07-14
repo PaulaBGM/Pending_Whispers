@@ -14,42 +14,40 @@ public class DialogueManager : BaseSingleton<DialogueManager>
     private NPC currentNPC;
     private PlayerController_Actions player;
 
-    void OnEnable()
+    private void OnEnable()
     {
         PlayerController_Actions.OnPlayerSpawned += SetPlayer;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         PlayerController_Actions.OnPlayerSpawned -= SetPlayer;
     }
 
-    void Start()
+    private void Start()
     {
-        if (player == null)
-            player = FindFirstObjectByType<PlayerController_Actions>();
+        player ??= FindFirstObjectByType<PlayerController_Actions>();
     }
 
-    void SetPlayer(PlayerController_Actions p)
+    private void SetPlayer(PlayerController_Actions p)
     {
         player = p;
     }
 
     public void StartDialogue(DialogueData dialogue, NPC npc)
     {
-        currentNPC = npc;
-
         if (dialogue == null)
         {
             Debug.LogError("[DialogueManager] Dialogue es NULL");
             return;
         }
 
+        currentNPC = npc;
+
         SetDialogueActive(true);
 
         currentDialogue = dialogue;
         runner = new DialogueRunner(dialogue);
-
         currentNode = runner.Start();
 
         ShowNode(currentNode);
@@ -64,7 +62,6 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         }
 
         currentNode = runner.Next(nodeID);
-
         ShowNode(currentNode);
     }
 
@@ -77,16 +74,12 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         }
 
         if (!string.IsNullOrEmpty(currentNode.nextNodeID))
-        {
             GoToNode(currentNode.nextNodeID);
-        }
         else
-        {
             EndDialogue();
-        }
     }
 
-    void ShowNode(DialogueNode node)
+    private void ShowNode(DialogueNode node)
     {
         if (node == null)
         {
@@ -99,18 +92,13 @@ public class DialogueManager : BaseSingleton<DialogueManager>
 
         ApplyNodeEffects(node);
 
-        var charData = currentDialogue.GetCharacter(node.speakerID);
+        DialogueCharacter charData = currentDialogue.GetCharacter(node.speakerID);
 
         string speakerName = charData != null
             ? charData.displayName
             : "???";
 
-        Sprite expressionSprite = null;
-
-        if (charData != null)
-        {
-            expressionSprite = charData.GetExpression(node.expression);
-        }
+        Sprite expressionSprite = charData?.GetExpression(node.expression);
 
         dialogueUI.ShowLine(
             charData,
@@ -119,17 +107,39 @@ public class DialogueManager : BaseSingleton<DialogueManager>
             expressionSprite
         );
 
-        RegisterDialogueToJournal(charData, node);
+        Debug.Log($"[Dialogue] Node: {node.id}");
+        Debug.Log($"[Dialogue] Important: {node.isImportantLine}");
+        Debug.Log($"[Dialogue] Character: {(charData != null ? charData.displayName : "NULL")}");
 
-        List<DialogueChoice> validChoices = GetValidChoices(node);
+        if (node.isImportantLine && charData != null)
+        {
+            Debug.Log($"[Dialogue] Raising testimony: {charData.displayName}");
+
+            if (onTestimonyRegistered == null)
+            {
+                Debug.LogError("[Dialogue] Channel NULL");
+            }
+            else
+            {
+                Debug.Log($"[Dialogue] Channel InstanceID: {onTestimonyRegistered.GetInstanceID()}");
+
+                onTestimonyRegistered.Raise(
+                    new TestimonyEntry(
+                        charData.displayName,
+                        charData.portrait,
+                        node.text
+                    )
+                );
+            }
+        }
+
+        var validChoices = GetValidChoices(node);
 
         if (validChoices.Count > 0)
-        {
             dialogueUI.ShowChoices(validChoices);
-        }
     }
 
-    void ApplyNodeEffects(DialogueNode node)
+    private void ApplyNodeEffects(DialogueNode node)
     {
         AddFlags(node.onEnterFlags, true);
         RaiseEvents(node.onEnterEvents);
@@ -139,17 +149,13 @@ public class DialogueManager : BaseSingleton<DialogueManager>
     {
         if (choice == null)
         {
-            Debug.LogError("[DialogueManager] Choice NULL");
             return;
         }
 
         AddFlags(choice.addFlags);
 
         if (choice.reputationChange != 0)
-        {
             ReputationManager.Instance?.AddReputation(choice.reputationChange);
-        }
-
         choice.onSelectedEvent?.Raise();
 
         if (choice.endsDialogue)
@@ -159,7 +165,6 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         }
 
         DialogueUI.Instance?.ClearChoices();
-
         GoToNode(choice.nextNodeID);
     }
 
@@ -169,10 +174,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
 
         DialogueUI.Instance?.Hide();
 
-        if (currentNPC != null)
-        {
-            currentNPC.TryTransform();
-        }
+        currentNPC?.TryTransform();
 
         runner = null;
         currentNode = null;
@@ -185,9 +187,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         OnDialogueStateChanged?.Invoke(isActive);
 
         if (player != null)
-        {
             player.canMove = !isActive;
-        }
     }
 
     private bool TryGetDialogueUI(out DialogueUI dialogueUI)
@@ -197,7 +197,6 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         if (dialogueUI != null)
             return true;
 
-        Debug.LogError("[DialogueManager] DialogueUI no existe en escena");
         return false;
     }
 
@@ -208,27 +207,24 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         if (node.choices == null || node.choices.Count == 0)
             return validChoices;
 
-        foreach (var choice in node.choices)
+        foreach (DialogueChoice choice in node.choices)
         {
             if (choice == null)
                 continue;
 
-            bool hasFlags = GameProgress.Instance == null ||
+            bool hasFlags =
+                GameProgress.Instance == null ||
                 GameProgress.Instance.HasAllFlags(choice.requiredFlags);
 
-            if (hasFlags && HasRequiredReputation(choice))
-            {
+            bool hasReputation =
+                ReputationManager.Instance == null ||
+                ReputationManager.Instance.HasReputation(choice.requiredReputation);
+
+            if (hasFlags && hasReputation)
                 validChoices.Add(choice);
-            }
         }
 
         return validChoices;
-    }
-
-    private bool HasRequiredReputation(DialogueChoice choice)
-    {
-        return ReputationManager.Instance == null ||
-            ReputationManager.Instance.HasReputation(choice.requiredReputation);
     }
 
     private void AddFlags(List<FlagSO> flags, bool logAddedFlags = false)
@@ -236,15 +232,13 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         if (flags == null || GameProgress.Instance == null)
             return;
 
-        foreach (var flag in flags)
+        foreach (FlagSO flag in flags)
         {
             if (flag == null)
                 continue;
 
             if (logAddedFlags)
-            {
-                Debug.Log("[Dialogue] Adding flag: " + flag.id);
-            }
+                Debug.Log($"[Dialogue] Adding flag: {flag.id}");
 
             GameProgress.Instance.AddFlag(flag);
         }
@@ -255,21 +249,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         if (events == null)
             return;
 
-        foreach (var evt in events)
-        {
+        foreach (GameEventSO evt in events)
             evt?.Raise();
-        }
     }
-
-    void RegisterDialogueToJournal(DialogueCharacter charData, DialogueNode node)
-    {
-        if (charData == null || node == null)
-            return;
-
-        if (!node.isImportantLine)
-            return;
-
-        onTestimonyRegistered?.Raise(new TestimonyEntry(charData.displayName, charData.portrait, node.text));
-    }
-
 }

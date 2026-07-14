@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using Inventory.UI;
-using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PeoplePageController : MonoBehaviour
 {
@@ -14,27 +13,20 @@ public class PeoplePageController : MonoBehaviour
     [SerializeField] private Transform content;
     [SerializeField] private GameObject entryPrefab;
 
-    private List<PersonJournalEntry> cachedEntries = new();
-    private List<PeopleEntryUI> slots = new();
-    private List<int> filteredIndices = new();
-
-    private PersonJournalEntry selectedEntry;
-    private PeopleEntryUI selectedSlot;
+    private readonly List<PeopleEntryUI> slots = new();
 
     private void Start()
     {
         RefreshUI();
     }
 
-    // =========================
-    // REFRESH (tipo InventoryController)
-    // =========================
     public void RefreshUI()
     {
+        Debug.Log("Refresh People");
+
         var entries = PeopleJournalSystem.Instance.GetEntries();
 
-        filteredIndices.Clear();
-
+        Debug.Log("Entries: " + entries.Count);
         while (slots.Count < entries.Count)
         {
             var obj = Instantiate(entryPrefab, content);
@@ -48,45 +40,31 @@ public class PeoplePageController : MonoBehaviour
         {
             slots[i].ResetData();
             slots[i].Deselect();
-        }
 
-        int uiIndex = 0;
-
-        for (int i = 0; i < entries.Count; i++)
-        {
-            filteredIndices.Add(i);
-            slots[uiIndex].SetData(entries[i]);
-            uiIndex++;
+            if (i < entries.Count)
+            {
+                slots[i].SetData(entries[i]);
+            }
         }
 
         Canvas.ForceUpdateCanvases();
-        LayoutRebuilder.ForceRebuildLayoutImmediate(content.GetComponent<RectTransform>());
+        LayoutRebuilder.ForceRebuildLayoutImmediate(
+            content.GetComponent<RectTransform>());
     }
 
     private void HandleClick(PersonJournalEntry entry)
     {
-        for (int i = 0; i < cachedEntries.Count; i++)
+        foreach (var slot in slots)
         {
-            bool isSelected = cachedEntries[i] == entry;
-
-            if (isSelected)
-            {
-                slots[i].Select();
-                selectedSlot = slots[i];
-                selectedEntry = entry;
-            }
+            if (slot.GetData() == entry)
+                slot.Select();
             else
-            {
-                slots[i].Deselect();
-            }
+                slot.Deselect();
         }
 
         ShowDetail(entry);
     }
 
-    // =========================
-    // UI STATE
-    // =========================
     public void ShowList()
     {
         listPanel.SetActive(true);
@@ -104,7 +82,6 @@ public class PeoplePageController : MonoBehaviour
             return;
 
         detailPanel.SetActive(true);
-
         descriptionPanel.gameObject.SetActive(true);
 
         descriptionPanel.SetDescription(

@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de91c2dfedf814f4fbc8fdb0f7f9f93b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onFlagAddedChannel: {fileID: 11400000, guid: 1c34841b221bf1844a6cb155fab23cff, type: 2}
 --- !u!114 &4395396960806434001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,6 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCaseData: {fileID: 11400000, guid: 3e85a2fb99d126649871b389b4c96626, type: 2}
+  onCaseResolved: {fileID: 11400000, guid: 4fe5a37c2b1940543859d0bcdce94bd7, type: 2}
 --- !u!114 &8365675972222820050
 MonoBehaviour:
   m_ObjectHideFlags: 0

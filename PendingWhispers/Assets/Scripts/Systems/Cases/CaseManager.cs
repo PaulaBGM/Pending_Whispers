@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class CaseManager : BaseSingleton<CaseManager>
 {
-
     [SerializeField] private CaseData currentCaseData;
     [SerializeField] private CaseOutcomeEventChannelSO onCaseResolved;
 
@@ -16,25 +15,19 @@ public class CaseManager : BaseSingleton<CaseManager>
             return;
 
         if (currentCaseData != null)
-        {
             LoadCase(currentCaseData);
-        }
     }
 
-    void Start()
+    private void Start()
     {
         if (GameProgress.Instance != null)
-        {
             GameProgress.Instance.OnFlagAdded += HandleFlagAdded;
-        }
     }
 
     protected override void OnDestroy()
     {
         if (GameProgress.Instance != null)
-        {
             GameProgress.Instance.OnFlagAdded -= HandleFlagAdded;
-        }
 
         base.OnDestroy();
     }
@@ -45,23 +38,19 @@ public class CaseManager : BaseSingleton<CaseManager>
             return;
 
         currentCaseData = data;
-
         currentCase = new CaseRuntime(data);
 
-        if (CaseJournalSystem.Instance != null)
-        {
-            CaseJournalSystem.Instance.TryAddCase(currentCase);
-        }
+        CaseJournalSystem.Instance?.TryAddCase(currentCase);
     }
 
-    void HandleFlagAdded(FlagSO flag)
+    private void HandleFlagAdded(FlagSO flag)
     {
         if (currentCase == null || flag == null)
             return;
 
         foreach (var clue in currentCase.data.requiredClues)
         {
-            if (clue.id == flag.id)
+            if (clue == flag)
             {
                 currentCase.AddClue(clue);
                 break;
@@ -69,24 +58,26 @@ public class CaseManager : BaseSingleton<CaseManager>
         }
     }
 
+    public void ResolveCurrentCase()
+    {
+        TryResolveCase();
+    }
+
     public void TryResolveCase()
     {
-        if (currentCase == null)
-            return;
-
-        if (currentCase.isResolved)
+        if (currentCase == null || currentCase.isResolved)
             return;
 
         if (!currentCase.CanResolve())
         {
-            UIFeedbackManager.Instance.ShowMessage("Faltan pistas...");
+            UIGameEvents.RaiseFeedback("Faltan pistas...");
             return;
         }
 
         EvaluateOutcomes();
     }
 
-    void EvaluateOutcomes()
+    private void EvaluateOutcomes()
     {
         foreach (var outcome in currentCase.data.outcomes)
         {
@@ -97,62 +88,36 @@ public class CaseManager : BaseSingleton<CaseManager>
             }
         }
 
-        UIFeedbackManager.Instance.ShowMessage(
-            "No has llegado a ninguna conclusión clara..."
-        );
+        UIGameEvents.RaiseFeedback("No has llegado a ninguna conclusión clara...");
     }
 
-    void ApplyOutcome(CaseOutcome outcome)
+    private void ApplyOutcome(CaseOutcome outcome)
     {
         currentCase.isResolved = true;
-
         currentCase.chosenOutcome = outcome.outcomeID;
 
         if (outcome.resultingFlags != null)
         {
             foreach (var flag in outcome.resultingFlags)
             {
-                if (flag == null)
-                    continue;
-
-                GameProgress.Instance.AddFlag(flag);
+                if (flag != null)
+                    GameProgress.Instance.AddFlag(flag);
             }
         }
 
-        if (ReputationManager.Instance != null &&
-            outcome.reputationReward != 0)
-        {
-            ReputationManager.Instance.AddReputation(
-                outcome.reputationReward
-            );
-        }
+        if (outcome.reputationReward != 0)
+            ReputationManager.Instance?.AddReputation(outcome.reputationReward);
 
         currentCase.Resolve();
+
         onCaseResolved?.Raise(outcome);
 
         UIGameEvents.RaiseFeedback(outcome.feedbackText);
 
-        Debug.Log(
-            $"[Case] Resolved '{currentCase.data.caseTitle}' -> Outcome: {outcome.outcomeID}"
-        );
-    }
-    public void ResolveCurrentCase()
-    {
-        if (currentCase == null)
-            return;
-
-        if (currentCase.isResolved)
-            return;
-
-        TryResolveCase();
-    }
-    public CaseRuntime GetCurrentCase()
-    {
-        return currentCase;
+        Debug.Log($"[Case] Resolved '{currentCase.data.caseTitle}' -> Outcome: {outcome.outcomeID}");
     }
 
-    public CaseData GetCurrentCaseData()
-    {
-        return currentCaseData;
-    }
+    public CaseRuntime GetCurrentCase() => currentCase;
+
+    public CaseData GetCurrentCaseData() => currentCaseData;
 }

@@ -1,106 +1,79 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class MapManager : BaseSingleton<MapManager>
+public class MapManager : MonoBehaviour
 {
-    protected override bool PersistAcrossScenes => false;
+    public static MapManager Instance;
 
-    public List<MapNode> nodes;
-    public PlayerIcon player;
+    [SerializeField] private List<MapNode> nodes;
+    [SerializeField] private PlayerIcon player;
+
+    private readonly Dictionary<string, MapNode> nodeLookup = new();
 
     private MapNode currentNode;
 
-    private void OnEnable()
+    private void Awake()
     {
-        if (GameProgress.Instance != null)
-            GameProgress.Instance.OnFlagAdded += OnFlagAdded;
-    }
+        Instance = this;
 
-    private void OnDisable()
-    {
-        if (GameProgress.Instance != null)
-            GameProgress.Instance.OnFlagAdded -= OnFlagAdded;
+        foreach (var node in nodes)
+            nodeLookup.Add(node.data.nodeID, node);
     }
 
     private void Start()
     {
         InitializeMap();
         SetPlayerToCurrentNode();
-        TutorialPopup.Instance.ShowTutorialOnce("map", "Map", "Select a location to travel.\n\nNew places will be unlocked as the investigation progresses.");
+
+        player.OnDestinationReached += EnterNode;
+    }
+
+    private void OnDestroy()
+    {
+        player.OnDestinationReached -= EnterNode;
     }
 
     void InitializeMap()
     {
         foreach (var node in nodes)
-        {
-            // Nodo inicial
-            if (node.data.nodeID == "Start")
-                MapState.Instance.UnlockNode("Start");
-
-            // Flags existentes
-            if (node.data.unlockFlag != null &&
-                GameProgress.Instance.HasFlag(node.data.unlockFlag))
-            {
-                MapState.Instance.UnlockNode(node.data.nodeID);
-            }
-
             node.SetUnlocked(MapState.Instance.IsUnlocked(node.data.nodeID));
-        }
-    }
-
-    void OnFlagAdded(FlagSO flag)
-    {
-        foreach (var node in nodes)
-        {
-            if (node.data.unlockFlag == flag)
-            {
-                UnlockNodeRuntime(node);
-            }
-        }
-    }
-
-    void UnlockNodeRuntime(MapNode node)
-    {
-        Debug.Log("[Map] Desbloqueado: " + node.data.nodeID);
-
-        MapState.Instance.UnlockNode(node.data.nodeID);
-        node.SetUnlocked(true);
-
-        UIGameEvents.RaiseLocationUnlocked(node.GetName());
     }
 
     void SetPlayerToCurrentNode()
     {
-        string nodeID = MapState.Instance.GetCurrentNode();
+        string id = MapState.Instance.GetCurrentNode();
 
-        if (string.IsNullOrEmpty(nodeID))
-            nodeID = "Start";
+        if (string.IsNullOrEmpty(id))
+            id = "start";
 
-        MapNode node = nodes.Find(n => n.data.nodeID == nodeID);
+        currentNode = nodeLookup[id];
 
-        if (node != null)
-        {
-            currentNode = node;
-            player.transform.position = node.transform.position;
-        }
+        player.transform.position = currentNode.PathNode.Position;
     }
 
-    public void SelectNode(MapNode node)
+    public void SelectNode(MapNode destination)
     {
-        if (!MapState.Instance.IsUnlocked(node.data.nodeID))
+        if (player.IsMoving)
             return;
 
-        currentNode = node;
+        if (!destination.IsUnlocked())
+            return;
 
-        MapUI.Instance.UpdateTitle(node.GetName(), node.GetDescription());
-        player.MoveTo(node.transform.position);
+        List<PathNode> path =Pathfinder.Instance.FindPath(currentNode.PathNode,destination.PathNode);
 
-        Invoke(nameof(EnterNode), 0.5f);
+        if (path.Count == 0)
+            return;
+
+        currentNode = destination;
+
+        player.FollowPath(path);
     }
 
     void EnterNode()
     {
         MapState.Instance.SetCurrentNode(currentNode.data.nodeID);
-        SceneController.Instance.LoadScene(currentNode.GetScene());
+
+        SceneManager.LoadScene(currentNode.GetScene());
     }
 }
