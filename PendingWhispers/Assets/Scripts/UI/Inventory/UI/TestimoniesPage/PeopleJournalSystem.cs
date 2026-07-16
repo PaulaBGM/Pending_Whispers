@@ -13,28 +13,17 @@ public class PeopleJournalSystem : BaseSingleton<PeopleJournalSystem>
 
     private void OnEnable()
     {
-        Debug.Log("[PeopleJournal] Enabled");
-
         if (onTestimonyRegistered == null)
         {
-            Debug.LogError("[PeopleJournal] Channel NULL");
             return;
         }
 
-        Debug.Log($"[PeopleJournal] Channel InstanceID: {onTestimonyRegistered.GetInstanceID()}");
-
         onTestimonyRegistered.OnRaised += AddEntry;
-
-        Debug.Log("[PeopleJournal] SUBSCRIBED");
     }
 
     private void AddEntry(TestimonyEntry entry)
     {
-        Debug.Log($"[PeopleJournal] RECEIVED -> {entry.Name}");
-
         AddEntry(entry.Name, entry.Portrait, entry.Dialogue);
-
-        Debug.Log($"[PeopleJournal] Entries: {entries.Count}");
     }
 
     private void OnDisable()
@@ -43,10 +32,6 @@ public class PeopleJournalSystem : BaseSingleton<PeopleJournalSystem>
         {
             onTestimonyRegistered.OnRaised -= AddEntry;
         }
-    }
-    private void Start()
-    {
-        Debug.Log("[PeopleJournal] Start");
     }
     public void AddEntry(string name, Sprite portrait, string dialogue)
     {

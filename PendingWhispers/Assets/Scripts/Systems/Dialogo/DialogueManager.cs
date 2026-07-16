@@ -91,46 +91,14 @@ public class DialogueManager : BaseSingleton<DialogueManager>
             return;
 
         ApplyNodeEffects(node);
-
         DialogueCharacter charData = currentDialogue.GetCharacter(node.speakerID);
-
-        string speakerName = charData != null
-            ? charData.displayName
-            : "???";
-
+        string speakerName = charData != null? charData.displayName: "???";
         Sprite expressionSprite = charData?.GetExpression(node.expression);
-
-        dialogueUI.ShowLine(
-            charData,
-            speakerName,
-            node.text,
-            expressionSprite
-        );
-
-        Debug.Log($"[Dialogue] Node: {node.id}");
-        Debug.Log($"[Dialogue] Important: {node.isImportantLine}");
-        Debug.Log($"[Dialogue] Character: {(charData != null ? charData.displayName : "NULL")}");
+        dialogueUI.ShowLine(charData,speakerName,node.text,expressionSprite);
 
         if (node.isImportantLine && charData != null)
         {
-            Debug.Log($"[Dialogue] Raising testimony: {charData.displayName}");
-
-            if (onTestimonyRegistered == null)
-            {
-                Debug.LogError("[Dialogue] Channel NULL");
-            }
-            else
-            {
-                Debug.Log($"[Dialogue] Channel InstanceID: {onTestimonyRegistered.GetInstanceID()}");
-
-                onTestimonyRegistered.Raise(
-                    new TestimonyEntry(
-                        charData.displayName,
-                        charData.portrait,
-                        node.text
-                    )
-                );
-            }
+            onTestimonyRegistered.Raise(new TestimonyEntry(charData.displayName,charData.portrait,node.text ));          
         }
 
         var validChoices = GetValidChoices(node);

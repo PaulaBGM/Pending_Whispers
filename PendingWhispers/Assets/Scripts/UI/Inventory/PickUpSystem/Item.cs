@@ -49,33 +49,19 @@ public class Item : MonoBehaviour, IInteractable
     {
         if (alreadyRegistered)
         {
-            UIGameEvents.OnFeedback?.Invoke(
-                "You have already examined this evidence."
-            );
-
+            UIGameEvents.OnFeedback?.Invoke("You have already examined this evidence." );
             return;
         }
-
         alreadyRegistered = true;
-
-        string textToShow = string.IsNullOrEmpty(discoveryText) ? InventoryItem.name : discoveryText;
-
+        string textToShow = string.IsNullOrEmpty(discoveryText)? InventoryItem.name: discoveryText;
         UIGameEvents.OnDialogue?.Invoke(textToShow);
-
         player.Inventory.AddItem(InventoryItem, 1);
-
-        FindFirstObjectByType<HUDController>()?.AddClueNotification();
-
-        CameraFlash.Instance.PlayFlash();
-
-        UIGameEvents.OnFeedback?.Invoke(
-            "Evidence registered"
-        );
-
+        HUDController hud = FindFirstObjectByType<HUDController>();
+        hud?.AddClueNotification();
+        CameraFlash.Instance?.PlayFlash();
+        UIGameEvents.OnFeedback?.Invoke("Evidence registered");
         if (persistenceFlag != null)
             GameProgress.Instance.AddFlag(persistenceFlag);
-
-        //gameObject.SetActive(false);
     }
 
     public Transform GetTransform()

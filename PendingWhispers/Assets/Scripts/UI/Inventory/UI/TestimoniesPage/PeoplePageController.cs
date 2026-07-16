@@ -26,7 +26,6 @@ public class PeoplePageController : MonoBehaviour
 
         var entries = PeopleJournalSystem.Instance.GetEntries();
 
-        Debug.Log("Entries: " + entries.Count);
         while (slots.Count < entries.Count)
         {
             var obj = Instantiate(entryPrefab, content);
