@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CasePageController : MonoBehaviour
+public class CasePageController : JournalPageController
 {
     [Header("Panels")]
     [SerializeField] private GameObject listPanel;
@@ -31,36 +31,32 @@ public class CasePageController : MonoBehaviour
 
     private CaseRuntime selectedCase;
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+
         if (CaseJournalSystem.Instance != null)
-            CaseJournalSystem.Instance.OnCasesChanged += RefreshUI;
+            CaseJournalSystem.Instance.OnCasesChanged += Refresh;
 
         if (ReputationManager.Instance != null)
             ReputationManager.Instance.OnReputationChanged += HandleReputationChanged;
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
         if (CaseJournalSystem.Instance != null)
-            CaseJournalSystem.Instance.OnCasesChanged -= RefreshUI;
+            CaseJournalSystem.Instance.OnCasesChanged -= Refresh;
 
         if (ReputationManager.Instance != null)
             ReputationManager.Instance.OnReputationChanged -= HandleReputationChanged;
 
         if (selectedCase != null)
             selectedCase.OnCaseUpdated -= RefreshSelectedCase;
+
+        base.OnDisable();
     }
 
-    private void Start()
-    {
-        summaryPanel.SetActive(true);
-        hypothesisPanel.SetActive(false);
-
-        RefreshUI();
-    }
-
-    public void RefreshUI()
+    public override void Refresh()
     {
         if (CaseJournalSystem.Instance == null)
             return;
@@ -98,11 +94,9 @@ public class CasePageController : MonoBehaviour
         while (spawnedEntries.Count < count)
         {
             var obj = Instantiate(caseEntryPrefab, content);
-
             var ui = obj.GetComponent<CaseEntryUI>();
 
             ui.OnEntryClicked += HandleCaseClicked;
-
             spawnedEntries.Add(ui);
         }
     }
@@ -113,7 +107,6 @@ public class CasePageController : MonoBehaviour
             selectedCase.OnCaseUpdated -= RefreshSelectedCase;
 
         selectedCase = runtime;
-
         selectedCase.OnCaseUpdated += RefreshSelectedCase;
 
         foreach (var entry in spawnedEntries)
@@ -148,7 +141,6 @@ public class CasePageController : MonoBehaviour
     {
         summaryPanel.SetActive(true);
         hypothesisPanel.SetActive(false);
-
         UpdateSummary(runtime);
     }
 
@@ -209,25 +201,27 @@ public class CasePageController : MonoBehaviour
     public void OnCreateHypothesis()
     {
         hypothesisPanel.SetActive(true);
-
         hypothesis.OpenHypothesis();
-
         summaryPanel.SetActive(false);
     }
 
     public void CloseHypothesis()
     {
         hypothesis.CloseHypothesis();
-
         summaryPanel.SetActive(true);
-
         hypothesisPanel.SetActive(false);
     }
 
     public void BackToList()
     {
         summaryPanel.SetActive(true);
+        hypothesisPanel.SetActive(false);
+    }
 
+    public override void Show()
+    {
+        base.Show();
+        summaryPanel.SetActive(true);
         hypothesisPanel.SetActive(false);
     }
 }

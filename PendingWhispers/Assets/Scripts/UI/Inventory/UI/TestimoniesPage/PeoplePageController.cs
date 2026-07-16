@@ -3,7 +3,7 @@ using Inventory.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PeoplePageController : MonoBehaviour
+public class PeoplePageController : JournalPageController
 {
     [SerializeField] private GameObject listPanel;
     [SerializeField] private GameObject detailPanel;
@@ -15,14 +15,12 @@ public class PeoplePageController : MonoBehaviour
 
     private readonly List<PeopleEntryUI> slots = new();
 
-    private void Start()
-    {
-        RefreshUI();
-    }
-
-    public void RefreshUI()
+    public override void Refresh()
     {
         Debug.Log("Refresh People");
+
+        if (PeopleJournalSystem.Instance == null)
+            return;
 
         var entries = PeopleJournalSystem.Instance.GetEntries();
 
@@ -41,14 +39,11 @@ public class PeoplePageController : MonoBehaviour
             slots[i].Deselect();
 
             if (i < entries.Count)
-            {
                 slots[i].SetData(entries[i]);
-            }
         }
 
         Canvas.ForceUpdateCanvases();
-        LayoutRebuilder.ForceRebuildLayoutImmediate(
-            content.GetComponent<RectTransform>());
+        LayoutRebuilder.ForceRebuildLayoutImmediate(content.GetComponent<RectTransform>());
     }
 
     private void HandleClick(PersonJournalEntry entry)
@@ -88,5 +83,11 @@ public class PeoplePageController : MonoBehaviour
             entry.personName,
             entry.fullDialogue
         );
+    }
+
+    public override void Show()
+    {
+        base.Show();
+        ShowList();
     }
 }

@@ -7,7 +7,6 @@ public class PeopleEntryUI : JournalEntryUI<PersonJournalEntry>
     [Header("UI")]
     [SerializeField] private Image portrait;
     [SerializeField] private TMP_Text title;
-    [SerializeField] private Image borderImage;
 
     public void SetData(PersonJournalEntry entry)
     {
@@ -19,16 +18,9 @@ public class PeopleEntryUI : JournalEntryUI<PersonJournalEntry>
 
         SetEntry(entry);
 
-        if (portrait != null)
-        {
-            portrait.sprite = entry.portrait;
-            portrait.color = Color.white;
-            portrait.enabled = true;
-            portrait.gameObject.SetActive(true);
-        }
-
-        if (title != null)
-            title.text = entry.personName;
+        portrait.gameObject.SetActive(true);
+        portrait.sprite = entry.portrait;
+        portrait.color = Color.white;
     }
 
     public override void ResetData()

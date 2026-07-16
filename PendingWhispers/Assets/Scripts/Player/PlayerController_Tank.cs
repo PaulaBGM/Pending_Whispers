@@ -14,7 +14,7 @@ public class PlayerController_Tank : MonoBehaviour
     [SerializeField] private LayerMask collisionLayer;
 
     [Header("UI")]
-    [SerializeField] private UIInventoryPage inventoryUI;
+    [SerializeField] private CluePageController inventoryUI;
 
     [Header("Movement")]
     public float moveSpeed = 3f;

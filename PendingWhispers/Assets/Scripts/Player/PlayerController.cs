@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask interactableLayer;
 
     [Header("UI")]
-    [SerializeField] private UIInventoryPage inventoryUI;
+    [SerializeField] private CluePageController inventoryUI;
     [SerializeField] private GameObject hudUI;
 
     [Header("Movement")]

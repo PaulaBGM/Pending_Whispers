@@ -2,22 +2,11 @@ using Inventory;
 using Inventory.UI;
 using UnityEngine;
 
-public class InventoryPageController : MonoBehaviour
+public class InventoryPageController : JournalPageController
 {
-    [SerializeField] private UIInventoryPage ui;
+    [SerializeField] private CluePageController ui;
 
-    private void OnEnable()
-    {
-        ui.Show();
-        Refresh();
-    }
-
-    private void OnDisable()
-    {
-        ui.Hide();
-    }
-
-    public void Refresh()
+    public override void Refresh()
     {
         if (InventoryController.Instance == null)
         {
@@ -26,5 +15,17 @@ public class InventoryPageController : MonoBehaviour
         }
 
         InventoryController.Instance.RefreshUI();
+    }
+
+    public override void Show()
+    {
+        base.Show();
+        ui.Show();
+    }
+
+    public override void Hide()
+    {
+        ui.Hide();
+        base.Hide();
     }
 }

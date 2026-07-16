@@ -21,10 +21,9 @@ public class CaseEntryUI : JournalEntryUI<CaseRuntime>
 
         if (icon != null)
         {
+            icon.gameObject.SetActive(true);
             icon.sprite = runtime.data.caseIcon;
             icon.color = Color.white;
-            icon.enabled = true;
-            icon.gameObject.SetActive(true);
         }
 
         if (titleText != null)

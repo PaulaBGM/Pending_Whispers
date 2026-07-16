@@ -9,7 +9,7 @@ namespace Inventory
     {
         public static InventoryController Instance { get; private set; }
 
-        [SerializeField] private UIInventoryPage inventoryUI;
+        [SerializeField] private CluePageController inventoryUI;
 
         private InventorySO inventoryData;
 

@@ -4,9 +4,10 @@ using UnityEngine;
 
 namespace Inventory.UI
 {
-    public class UIInventoryPage : MonoBehaviour
+    public class CluePageController : JournalPageController
     {
-        [SerializeField] private UIInventoryItem itemPrefab;
+        [Header("Inventory")]
+        [SerializeField] private ClueEntryUI itemPrefab;
         [SerializeField] private RectTransform contentPanel;
         [SerializeField] private UIInventoryDescription itemDescription;
         [SerializeField] private MouseFollower mouseFollower;
@@ -15,29 +16,26 @@ namespace Inventory.UI
         [Header("Tabs")]
         [SerializeField] private List<InventoryTab> tabs;
 
-        private List<UIInventoryItem> listOfUIItems = new();
+        private readonly List<ClueEntryUI> listOfUIItems = new();
         private int currentlyDraggedItemIndex = -1;
 
-        public event Action<int> OnDescriptionRequested,
-                                 OnItemActionRequested,
-                                 OnStartDragging;
-
+        public event Action<int> OnDescriptionRequested;
+        public event Action<int> OnItemActionRequested;
+        public event Action<int> OnStartDragging;
         public event Action<int, int> OnSwapItems;
-
         public event Action<Inventory.Model.ItemType> OnTabChanged;
 
-        private void Awake()
+        protected override void Awake()
         {
-            Hide();
+            base.Awake();
+
             mouseFollower.Toggle(false);
 
             if (itemDescription != null)
                 itemDescription.ResetDescription();
 
             foreach (var tab in tabs)
-            {
                 tab.OnTabSelected += HandleTabChanged;
-            }
         }
 
         private void HandleTabChanged(Inventory.Model.ItemType type)
@@ -45,11 +43,16 @@ namespace Inventory.UI
             OnTabChanged?.Invoke(type);
         }
 
+        public override void Refresh()
+        {
+            ResetSelection();
+        }
+
         public void InitializeInventoryUI(int size)
         {
             for (int i = 0; i < size; i++)
             {
-                UIInventoryItem uiItem = Instantiate(itemPrefab, contentPanel);
+                ClueEntryUI uiItem = Instantiate(itemPrefab, contentPanel);
                 uiItem.transform.localScale = Vector3.one;
 
                 listOfUIItems.Add(uiItem);
@@ -68,8 +71,6 @@ namespace Inventory.UI
 
             foreach (var item in listOfUIItems)
             {
-                if (item == null) continue;
-
                 item.ResetData();
                 item.Deselect();
             }
@@ -83,7 +84,7 @@ namespace Inventory.UI
                 listOfUIItems[index].SetData(sprite, quantity);
         }
 
-        private void HandleItemSelection(UIInventoryItem item)
+        private void HandleItemSelection(ClueEntryUI item)
         {
             int index = listOfUIItems.IndexOf(item);
 
@@ -91,7 +92,7 @@ namespace Inventory.UI
                 OnDescriptionRequested?.Invoke(index);
         }
 
-        private void HandleShowItemActions(UIInventoryItem item)
+        private void HandleShowItemActions(ClueEntryUI item)
         {
             int index = listOfUIItems.IndexOf(item);
 
@@ -99,7 +100,7 @@ namespace Inventory.UI
                 OnItemActionRequested?.Invoke(index);
         }
 
-        private void HandleBeginDrag(UIInventoryItem item)
+        private void HandleBeginDrag(ClueEntryUI item)
         {
             int index = listOfUIItems.IndexOf(item);
 
@@ -110,13 +111,13 @@ namespace Inventory.UI
             OnStartDragging?.Invoke(index);
         }
 
-        private void HandleEndDrag(UIInventoryItem item)
+        private void HandleEndDrag(ClueEntryUI item)
         {
             mouseFollower.Toggle(false);
             currentlyDraggedItemIndex = -1;
         }
 
-        private void HandleSwap(UIInventoryItem item)
+        private void HandleSwap(ClueEntryUI item)
         {
             int index = listOfUIItems.IndexOf(item);
 
@@ -148,15 +149,16 @@ namespace Inventory.UI
             itemDescription.SetDescription(img, name, desc);
         }
 
-        public void Show()
+        public override void Show()
         {
-            gameObject.SetActive(true);
+            base.Show();
             ResetSelection();
         }
 
-        public void Hide()
+        public override void Hide()
         {
-            gameObject.SetActive(false);
+            actionPanel.Toggle(false);
+            base.Hide();
         }
 
         public void ResetSelection()

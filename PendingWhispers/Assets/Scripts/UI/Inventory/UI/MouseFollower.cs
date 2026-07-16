@@ -5,12 +5,12 @@ namespace Inventory.UI
     public class MouseFollower : MonoBehaviour
     {
         [SerializeField] private Canvas canvas;
-        [SerializeField] private UIInventoryItem item;
+        [SerializeField] private ClueEntryUI item;
 
         private void Awake()
         {
             canvas = transform.root.GetComponent<Canvas>();
-            item = GetComponentInChildren<UIInventoryItem>();
+            item = GetComponentInChildren<ClueEntryUI>();
         }
 
         public void SetData(Sprite sprite, int quantity)

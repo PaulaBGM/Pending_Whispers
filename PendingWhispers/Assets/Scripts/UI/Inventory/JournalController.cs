@@ -280,10 +280,10 @@ public class JournalController : MonoBehaviour
             inventoryController.RefreshUI();
 
         if (currentPage == peoplePage)
-            peoplePage.GetComponent<PeoplePageController>()?.RefreshUI();
+            peoplePage.GetComponent<PeoplePageController>()?.Refresh();
 
         if (currentPage == casesPage)
-            casesPage.GetComponent<CasePageController>()?.RefreshUI();
+            casesPage.GetComponent<CasePageController>()?.Refresh();
     }
 
     // =========================

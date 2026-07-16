@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public abstract class JournalEntryUI<T> : MonoBehaviour, IPointerClickHandler
-    where T : class
 {
     [Header("Selection")]
     [SerializeField] protected Image selectedBorder;
@@ -13,15 +12,22 @@ public abstract class JournalEntryUI<T> : MonoBehaviour, IPointerClickHandler
 
     public event Action<T> OnEntryClicked;
 
+    /// <summary>
+    /// Guarda el dato asociado al slot y lo activa.
+    /// </summary>
     protected void SetEntry(T entry)
     {
         data = entry;
         gameObject.SetActive(true);
     }
 
+    /// <summary>
+    /// Limpia el contenido del slot.
+    /// Cada clase hija se encarga de limpiar su propia UI.
+    /// </summary>
     public virtual void ResetData()
     {
-        data = null;
+        data = default;
 
         Deselect();
 
@@ -49,5 +55,10 @@ public abstract class JournalEntryUI<T> : MonoBehaviour, IPointerClickHandler
     public T GetData()
     {
         return data;
+    }
+
+    public bool HasData()
+    {
+        return data != null;
     }
 }
