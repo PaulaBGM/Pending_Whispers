@@ -53,7 +53,7 @@ public class Item : MonoBehaviour, IInteractable
             return;
         }
         alreadyRegistered = true;
-        string textToShow = string.IsNullOrEmpty(discoveryText)? InventoryItem.name: discoveryText;
+        string textToShow = string.IsNullOrEmpty(discoveryText)? InventoryItem.Name: discoveryText;
         UIGameEvents.OnDialogue?.Invoke(textToShow);
         player.Inventory.AddItem(InventoryItem, 1);
         UIGameEvents.RaiseEvidenceRegistered(InventoryItem);
