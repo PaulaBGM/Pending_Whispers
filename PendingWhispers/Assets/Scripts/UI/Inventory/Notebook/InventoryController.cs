@@ -5,12 +5,11 @@ using Inventory.UI;
 
 namespace Inventory
 {
-    public class InventoryController : MonoBehaviour
+    public class InventoryController : BaseSingleton<InventoryController>
     {
-        public static InventoryController Instance { get; private set; }
 
         [SerializeField] private CluePageController inventoryUI;
-
+        protected override bool PersistAcrossScenes => true;
         private InventorySO inventoryData;
 
         private ItemType currentTab = ItemType.Clue;
@@ -19,15 +18,11 @@ namespace Inventory
         private Dictionary<int, InventoryItem> lastState;
         private bool hasPendingUpdate;
 
-        private void Awake()
+        protected override void Awake()
         {
-            if (Instance != null && Instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
-
-            Instance = this;
+            base.Awake();
+            if (Instance != this)
+                return;            
 
             PrepareInventoryData();
             PrepareUI();
@@ -192,13 +187,11 @@ namespace Inventory
             );
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
             if (inventoryData != null)
                 inventoryData.OnInventoryUpdated -= QueueRefresh;
-
-            if (Instance == this)
-                Instance = null;
+            base.OnDestroy();
         }
     }
 }

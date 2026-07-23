@@ -14,7 +14,7 @@ public class HypothesisController : MonoBehaviour
 
     private HypothesisData hypothesisData;
 
-    // NUNCA ser� null
+    // NUNCA sera null
     private string[] currentHypothesis = System.Array.Empty<string>();
 
     private void Awake()
@@ -40,21 +40,13 @@ public class HypothesisController : MonoBehaviour
         }
 
         hypothesisData = currentCase.hypothesis;
-
-        int slotCount = hypothesisData.slots != null
-            ? hypothesisData.slots.Count
-            : 0;
-
+        int slotCount = hypothesisData.slots != null? hypothesisData.slots.Count: 0;
         currentHypothesis = new string[slotCount];
-
         gameObject.SetActive(true);
 
         if (panel != null)
         {
-            panel.Build(
-                hypothesisData.textParts,
-                BuildSlotOptions()
-            );
+            panel.Build(hypothesisData.textParts,BuildSlotOptions());
         }
     }
 
@@ -76,7 +68,6 @@ public class HypothesisController : MonoBehaviour
 
     public void ConfirmHypothesis()
     {
-        Debug.Log("CONFIRM HYPOTHESIS CALLED");
         if (!IsHypothesisComplete())
         {
             UIFeedbackManager.Instance?.ShowMessage("Complete the hypothesis before continuing.");
@@ -96,10 +87,7 @@ public class HypothesisController : MonoBehaviour
             if (wrongHypothesisFlag != null)
                 GameProgress.Instance?.AddFlag(wrongHypothesisFlag);
         }
-
-        UIFeedbackManager.Instance?.ShowMessage(
-            "Hypothesis recorded."
-        );
+        UIFeedbackManager.Instance?.ShowMessage("Hypothesis recorded.");
     }
 
     public bool IsHypothesisComplete()
@@ -132,24 +120,16 @@ public class HypothesisController : MonoBehaviour
 
         if (currentHypothesis.Length != hypothesisData.correctAnswers.Count)
         {
-            Debug.LogError(
-                $"[Hypothesis] Slot mismatch. Player={currentHypothesis.Length} Correct={hypothesisData.correctAnswers.Count}"
-            );
+            Debug.LogError( $"[Hypothesis] Slot mismatch. Player={currentHypothesis.Length} Correct={hypothesisData.correctAnswers.Count}");
             return false;
         }
 
         for (int i = 0; i < currentHypothesis.Length; i++)
         {
-            string playerAnswer =
-                currentHypothesis[i]?.Trim().ToLowerInvariant() ?? "";
-
+            string playerAnswer = currentHypothesis[i]?.Trim().ToLowerInvariant() ?? "";
             string correctAnswer = hypothesisData.correctAnswers[i]?.Trim().ToLowerInvariant() ?? "";
-
-            Debug.Log($"Slot {i} | Player=[{playerAnswer}] | Correct=[{correctAnswer}]");
-
             if (playerAnswer != correctAnswer)
             {
-                Debug.Log($"FAILED SLOT {i}");
                 return false;
             }
         }
@@ -179,9 +159,7 @@ public class HypothesisController : MonoBehaviour
         switch (type)
         {
             case HypothesisSlotType.Person:
-
                 options.Add("Nobody");
-
                 if (PeopleJournalSystem.Instance != null)
                 {
                     foreach (var person in PeopleJournalSystem.Instance.GetEntries())
@@ -215,21 +193,14 @@ public class HypothesisController : MonoBehaviour
                 break;
 
             case HypothesisSlotType.Clue:
-
                 if (InventoryRuntime.Instance != null)
                 {
-                    var items =
-                        InventoryRuntime.Instance
-                            .GetInventory()
-                            .GetItemsByType(ItemType.Clue);
-
+                    var items = InventoryRuntime.Instance.GetInventory().GetItemsByType(ItemType.Clue);
                     foreach (var item in items)
-                    {
+                    
                         if (item.item != null)
-                            options.Add(item.item.name);
-                    }
+                            options.Add(item.item.Name);
                 }
-
                 break;
         }
 

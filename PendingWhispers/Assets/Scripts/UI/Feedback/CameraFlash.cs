@@ -1,26 +1,25 @@
+using FMODUnity;
+using Inventory;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-using FMODUnity;
 
-public class CameraFlash : MonoBehaviour
+public class CameraFlash : BaseSingleton<CameraFlash>
 {
-    public static CameraFlash Instance;
-
     [Header("UI")]
     [SerializeField] private Image flashImage;
     [SerializeField] private float fadeDuration = 0.3f;
     [SerializeField] private float maxAlpha = 1f;
-
     [Header("FMOD")]
     [SerializeField] private EventReference flashEvent;
-
+    protected override bool PersistAcrossScenes => false;
     private Coroutine flashCoroutine;
 
-    private void Awake()
+    protected override void Awake()
     {
-        Instance = this;
-
+        base.Awake();
+        if (Instance != this)
+            return;
         SetAlpha(0f);
     }
 
@@ -36,22 +35,15 @@ public class CameraFlash : MonoBehaviour
 
     private IEnumerator FlashRoutine()
     {
-        // ⚡ subir instantáneo (flash)
         SetAlpha(maxAlpha);
-
         float t = 0f;
-
-        // 🌫️ fade out progresivo
         while (t < fadeDuration)
         {
             t += Time.deltaTime;
-
             float a = Mathf.Lerp(maxAlpha, 0f, t / fadeDuration);
             SetAlpha(a);
-
             yield return null;
         }
-
         SetAlpha(0f);
     }
 

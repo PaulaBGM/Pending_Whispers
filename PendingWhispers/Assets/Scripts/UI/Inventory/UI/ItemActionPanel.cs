@@ -8,7 +8,7 @@ namespace Inventory.UI
     {
         [SerializeField] private GameObject buttonPrefab;
 
-        public void AddButon(string name, Action onClickAction)
+        public void AddButton(string name, Action onClickAction)
         {
             GameObject button = Instantiate(buttonPrefab, transform);
 

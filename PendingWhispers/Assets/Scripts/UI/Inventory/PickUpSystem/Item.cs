@@ -56,8 +56,7 @@ public class Item : MonoBehaviour, IInteractable
         string textToShow = string.IsNullOrEmpty(discoveryText)? InventoryItem.name: discoveryText;
         UIGameEvents.OnDialogue?.Invoke(textToShow);
         player.Inventory.AddItem(InventoryItem, 1);
-        HUDController hud = FindFirstObjectByType<HUDController>();
-        hud?.AddClueNotification();
+        UIGameEvents.RaiseEvidenceRegistered(InventoryItem);
         CameraFlash.Instance?.PlayFlash();
         UIGameEvents.OnFeedback?.Invoke("Evidence registered");
         if (persistenceFlag != null)

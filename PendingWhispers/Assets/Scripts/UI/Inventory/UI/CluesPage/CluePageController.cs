@@ -135,7 +135,7 @@ namespace Inventory.UI
 
         public void AddAction(string name, Action action)
         {
-            actionPanel.AddButon(name, action);
+            actionPanel.AddButton(name, action);
         }
 
         public void ShowItemAction(int index)

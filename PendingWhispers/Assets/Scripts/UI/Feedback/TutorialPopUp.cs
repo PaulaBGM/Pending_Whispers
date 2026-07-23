@@ -3,10 +3,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class TutorialPopup : MonoBehaviour
+public class TutorialPopup : BaseSingleton<TutorialPopup>
 {
-    public static TutorialPopup Instance { get; private set; }
-
     [Header("UI")]
     [SerializeField] private GameObject panel;
     [SerializeField] private TextMeshProUGUI titleText;
@@ -18,20 +16,14 @@ public class TutorialPopup : MonoBehaviour
 
     public bool IsShowing { get; private set; }
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-
         if (transform.parent != null)
             transform.SetParent(null);
 
-        DontDestroyOnLoad(gameObject);
+        base.Awake();
+        if (Instance != this)
+            return;
 
         if (panel != null)
             panel.SetActive(false);
@@ -43,11 +35,7 @@ public class TutorialPopup : MonoBehaviour
         }
     }
 
-    public void ShowTutorial(
-        string title,
-        string description,
-        Sprite tutorialIcon = null,
-        Action callback = null)
+    public void ShowTutorial(string title,string description,Sprite tutorialIcon = null,Action callback = null)
     {
         if (IsShowing)
             return;
@@ -76,12 +64,7 @@ public class TutorialPopup : MonoBehaviour
         onClose = callback;
     }
 
-    public void ShowTutorialOnce(
-        string tutorialID,
-        string title,
-        string description,
-        Sprite tutorialIcon = null,
-        Action callback = null)
+    public void ShowTutorialOnce(string tutorialID,string title,string description,Sprite tutorialIcon = null,Action callback = null)
     {
         if (TutorialManager.Instance == null)
         {

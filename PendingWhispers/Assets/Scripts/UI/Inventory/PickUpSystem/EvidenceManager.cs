@@ -2,10 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Inventory.Model;
 
-public class EvidenceManager : MonoBehaviour
+public class EvidenceManager : BaseSingleton<EvidenceManager>
 {
-    public static EvidenceManager Instance;
-
     [SerializeField] private InventorySO inventory;
 
     [SerializeField] private List<ItemSO> requiredItems;
@@ -13,12 +11,16 @@ public class EvidenceManager : MonoBehaviour
 
     private bool completed;
 
-    private void Awake()
+    protected override void Awake()
     {
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
+        base.Awake();
     }
-
+    protected override void OnDestroy()
+    {
+        if (inventory != null)
+            inventory.OnInventoryChanged -= CheckCompletion;
+        base.OnDestroy();
+    }
     private void Start()
     {
         if (inventory == null)
@@ -55,9 +57,6 @@ public class EvidenceManager : MonoBehaviour
         }
 
         completed = true;
-
-        Debug.Log("[Evidence] COMPLETADO");
-
         GameProgress.Instance.AddFlag(completedFlag);
     }
 }

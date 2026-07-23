@@ -1,3 +1,4 @@
+using Inventory.Model;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ public class HUDController : MonoBehaviour
    
     [Header("Notifications")]
     [SerializeField] private TestimonyEventChannelSO onTestimonyRegistered;
+    [SerializeField] private BoolEventChannelSO dialogueStateChannel;
     [SerializeField] private GameObject clueNotification;
     [SerializeField] private TextMeshProUGUI clueNotificationText;
 
@@ -36,20 +38,20 @@ public class HUDController : MonoBehaviour
 
     private void OnEnable()
     {
-        DialogueManager.OnDialogueStateChanged += HandleDialogue;
+        dialogueStateChannel.OnRaised += HandleDialogue;
         SpectralDetectionSystem.OnCooldownStateChanged += HandleDetectionCooldown;
         SubscribeToUIManager();
-
         if (onTestimonyRegistered != null)
             onTestimonyRegistered.OnRaised += HandleTestimonyRegistered;
-
         if (GameProgress.Instance != null)
             GameProgress.Instance.OnFlagAdded += OnFlagAdded;
-    }
 
+        UIGameEvents.OnEvidenceRegistered += HandleEvidenceRegistered;
+    }
+    private void HandleEvidenceRegistered(ItemSO item) => AddClueNotification();
     private void OnDisable()
     {
-        DialogueManager.OnDialogueStateChanged -= HandleDialogue;
+        dialogueStateChannel.OnRaised -= HandleDialogue;
         SpectralDetectionSystem.OnCooldownStateChanged -= HandleDetectionCooldown;
 
         if (onTestimonyRegistered != null)
@@ -60,6 +62,8 @@ public class HUDController : MonoBehaviour
 
         if (UIManager.Instance != null)
             UIManager.Instance.OnJournalStateChanged -= HandleJournal;
+
+        UIGameEvents.OnEvidenceRegistered -= HandleEvidenceRegistered;
     }
 
     private void SubscribeToUIManager()

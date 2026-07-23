@@ -6,8 +6,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
 {
     [SerializeField] private TestimonyEventChannelSO onTestimonyRegistered;
 
-    public static event Action<bool> OnDialogueStateChanged;
-
+    [SerializeField] private BoolEventChannelSO onDialogueStateChannel;
     private DialogueRunner runner;
     private DialogueData currentDialogue;
     private DialogueNode currentNode;
@@ -152,8 +151,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
 
     private void SetDialogueActive(bool isActive)
     {
-        OnDialogueStateChanged?.Invoke(isActive);
-
+        onDialogueStateChannel?.Raise(isActive);
         if (player != null)
             player.canMove = !isActive;
     }

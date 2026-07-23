@@ -6,24 +6,9 @@ using System.Collections.Generic;
 public class HypothesisSlotUI : MonoBehaviour
 {
     [SerializeField] private TMP_Dropdown dropdown;
-
     public event Action<int, string> OnValueChanged;
-
     private int slotIndex;
 
-    public enum HypothesisSlotType
-    {
-        Item,
-        Person,
-        Clue
-    }
-    
-    [Serializable]
-    public class HypothesisSlotDefinition
-    {
-        public HypothesisSlotType type;
-    }
-    
     private void Start()
     {
         dropdown = GetComponent<TMP_Dropdown>();
@@ -32,10 +17,8 @@ public class HypothesisSlotUI : MonoBehaviour
     public void Init(int index, List<string> options)
     {
         slotIndex = index;
-
         dropdown.ClearOptions();
         dropdown.AddOptions(options);
-
         dropdown.onValueChanged.AddListener(OnChanged);
     }
 

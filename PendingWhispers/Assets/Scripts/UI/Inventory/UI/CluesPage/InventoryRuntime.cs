@@ -1,34 +1,21 @@
 using UnityEngine;
 using Inventory.Model;
 
-public class InventoryRuntime : MonoBehaviour
+public class InventoryRuntime : BaseSingleton<InventoryRuntime>
 {
-    public static InventoryRuntime Instance { get; private set; }
-
-    [SerializeField] private InventorySO inventory;
-    
+    [SerializeField] private InventorySO inventory;   
     [SerializeField] private PeopleJournalSystem peopleJournal;
     [SerializeField] private CaseJournalSystem caseJournal;
 
     private bool initialized = false;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            //DontDestroyOnLoad(gameObject);
+        base.Awake();
+        if (Instance != this)
+            return;
 
-            if (!initialized)
-            {
-                inventory.Initialize();
-                initialized = true;
-            }
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        inventory.Initialize(); 
     }
 
     public InventorySO GetInventory()

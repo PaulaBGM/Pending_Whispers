@@ -11,13 +11,8 @@ namespace Inventory.Model
         [SerializeField] private List<InventoryItem> inventoryItems;
 
         [field: SerializeField] public int Size { get; private set; } = 10;
-
         public event Action<Dictionary<int, InventoryItem>> OnInventoryUpdated;
-        public event Action<EvidenceLink> OnNewLinkDiscovered;
         public event Action OnInventoryChanged;
-
-        [SerializeField] private List<EvidenceLink> possibleLinks = new();
-        private List<EvidenceLink> discoveredLinks = new();
 
         [Header("Progression")]
         [SerializeField] private List<string> requiredClueIDs;
@@ -34,22 +29,10 @@ namespace Inventory.Model
 
         public int AddItem(ItemSO item, int quantity)
         {
-            /*while (quantity > 0 && !IsInventoryFull())
-            {
-                quantity -= AddItemToFirstFreeSlot(item, 1);
-            }
-
-            InformAboutChange();
-
-            CheckClueProgression();
-
-            return quantity;*/
-            
             if (item is ClueItemSO)
             {
                 if (Contains(item))
                     return 0;
-
                 quantity = 1;
             }
 
@@ -60,7 +43,6 @@ namespace Inventory.Model
 
             InformAboutChange();
             CheckClueProgression();
-
             return quantity;
         }
 
@@ -123,38 +105,6 @@ namespace Inventory.Model
             return inventoryItems.Any(i => !i.IsEmpty && i.item == item);
         }
         
-        public bool TryLinkItems(ItemSO a, ItemSO b)
-        {
-            foreach (var link in possibleLinks)
-            {
-                bool match =
-                    (link.ItemA == a && link.ItemB == b) ||
-                    (link.ItemA == b && link.ItemB == a);
-
-                if (!match)
-                    continue;
-
-                if (discoveredLinks.Contains(link))
-                {
-                    Debug.Log("[Deduction] Ya descubierto: " + link.Conclusion);
-                    return false;
-                }
-
-                // Nuevo descubrimiento
-                discoveredLinks.Add(link);
-
-                Debug.Log("[Deduction] Nueva conclusi�n: " + link.Conclusion);
-
-                OnNewLinkDiscovered?.Invoke(link);
-
-                return true;
-            }
-
-            Debug.Log("[Deduction] No hay relaci�n entre objetos");
-
-            return false;
-        }
-
         public void SwapItems(int indexA, int indexB)
         {
             if (indexA < 0 || indexA >= inventoryItems.Count) return;

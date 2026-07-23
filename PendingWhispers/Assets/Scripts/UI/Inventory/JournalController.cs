@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,10 +6,9 @@ using Inventory.Model;
 using FMODUnity;
 using FMOD.Studio;
 
-public class JournalController : MonoBehaviour
+public class JournalController : BaseSingleton<JournalController>
 {
-    public static JournalController Instance { get; private set; }
-    public static event Action<bool> OnJournalStateChanged;
+    protected override bool PersistAcrossScenes => false;
 
     public bool IsOpen => isOpen;
 
@@ -22,7 +20,6 @@ public class JournalController : MonoBehaviour
     [SerializeField] private GameObject inventoryPage;
     [SerializeField] private GameObject peoplePage;
     [SerializeField] private GameObject casesPage;
-
     private GameObject lastRequestedPage;
 
     [Header("Inventory Controller")]
@@ -39,25 +36,26 @@ public class JournalController : MonoBehaviour
 
     private GameObject currentPage;
     private GameObject pendingPage;
-
     private bool isOpen;
     private bool isAnimating;
 
     private InventoryAnimationEvents animationEvents;
     private GameObject pendingInitialPage;
-    
+
     [Header("Audio")]
     [SerializeField] private EventReference pageTurnSFX;
 
-    private void Awake()
+    [Header("Events")]
+    [SerializeField] private BoolEventChannelSO onJournalStateChannel;
+
+    protected override void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        base.Awake();
+        if (Instance != this)
+            return;
 
         root.SetActive(false);
-
         animationEvents = GetComponentInChildren<InventoryAnimationEvents>();
-
         if (animationEvents != null)
             animationEvents.SetUIVisible(false);
     }
@@ -71,19 +69,19 @@ public class JournalController : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
         if (animationEvents != null)
         {
             animationEvents.OnOpenFinished -= HandleOpenFinished;
             animationEvents.OnCloseFinished -= HandleCloseFinished;
         }
+        base.OnDestroy();
     }
 
     private void Start()
     {
         if (tabs == null) return;
-
         foreach (var tab in tabs)
             tab.OnTabSelected += HandleTabSelected;
     }
@@ -91,7 +89,6 @@ public class JournalController : MonoBehaviour
     // =========================
     // OPEN / CLOSE
     // =========================
-
     public void ToggleJournal()
     {
         if (isAnimating)
@@ -119,15 +116,13 @@ public class JournalController : MonoBehaviour
         isAnimating = false;
         isOpen = true;
 
-        UIManager.Instance.SetJournalOpen(true);
+        onJournalStateChannel?.Raise(true);
 
         if (animationEvents != null)
             animationEvents.SetUIVisible(true);
 
         currentPage = null;
         pendingPage = null;
-
-        OnJournalStateChanged?.Invoke(true);
 
         if (pendingInitialPage != null)
         {
@@ -151,16 +146,13 @@ public class JournalController : MonoBehaviour
     {
         currentPage = null;
         pendingPage = null;
-
         isOpen = false;
         isAnimating = false;
 
         if (pageAnimation != null)
             pageAnimation.SetActive(false);
 
-        UIManager.Instance.SetJournalOpen(false);
-
-        OnJournalStateChanged?.Invoke(false);
+        onJournalStateChannel?.Raise(false);
 
         gameObject.SetActive(false);
     }
@@ -174,17 +166,14 @@ public class JournalController : MonoBehaviour
     // =========================
     // TABS
     // =========================
-
     private void HandleTabSelected(ItemType type)
     {
         GameObject targetPage = GetPageFromType(type);
 
         if (targetPage == null || !isOpen)
             return;
-        
         if (currentPage == targetPage)
             return;
-
         if (pendingPage == targetPage)
             return;
 
@@ -200,16 +189,12 @@ public class JournalController : MonoBehaviour
         {
             case ItemType.Instructions:
                 return instructionsPage;
-
             case ItemType.Clue:
                 return inventoryPage;
-
             case ItemType.Testimony:
                 return peoplePage;
-
             case ItemType.Case:
                 return casesPage;
-
             default:
                 return null;
         }
@@ -218,12 +203,10 @@ public class JournalController : MonoBehaviour
     // =========================
     // PAGE REQUEST
     // =========================
-
     private void RequestPage(GameObject page)
     {
         if (!isOpen || page == null)
             return;
-
         if (currentPage == page || pendingPage == page)
             return;
 
@@ -234,7 +217,7 @@ public class JournalController : MonoBehaviour
 
         if (pageTurnAnimator != null)
             pageTurnAnimator.Play("PageTurnAnimation", 0, 0f);
-        
+
         if (!pageTurnSFX.IsNull)
         {
             RuntimeManager.PlayOneShot(pageTurnSFX);
@@ -256,11 +239,9 @@ public class JournalController : MonoBehaviour
 
         currentPage = pendingPage;
         pendingPage = null;
-        
         currentPage.SetActive(true);
 
         StartCoroutine(RefreshPageNextFrame());
-
         isAnimating = false;
     }
 
@@ -273,7 +254,6 @@ public class JournalController : MonoBehaviour
     // =========================
     // REFRESH
     // =========================
-
     private void RefreshCurrentPage()
     {
         if (currentPage == inventoryPage && inventoryController != null)
@@ -289,13 +269,10 @@ public class JournalController : MonoBehaviour
     // =========================
     // HELPERS
     // =========================
-
     private void SetPageImmediate(GameObject page)
     {
         HideAllPages();
-
         currentPage = page;
-
         if (currentPage != null)
             currentPage.SetActive(true);
     }
@@ -311,11 +288,9 @@ public class JournalController : MonoBehaviour
     // =========================
     // EXTERNAL OPENERS
     // =========================
-
     public void OpenToCluesTab()
     {
         pendingInitialPage = inventoryPage;
-
         if (!isOpen)
             ToggleJournal();
         else
@@ -325,7 +300,6 @@ public class JournalController : MonoBehaviour
     public void OpenToPeopleTab()
     {
         pendingInitialPage = peoplePage;
-
         if (!isOpen)
             ToggleJournal();
         else

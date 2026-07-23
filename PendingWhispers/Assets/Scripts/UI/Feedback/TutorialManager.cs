@@ -1,22 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialManager : MonoBehaviour
+public class TutorialManager : BaseSingleton<TutorialManager>
 {
-    public static TutorialManager Instance { get; private set; }
-
     private readonly HashSet<string> shownTutorials = new();
-
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
+        base.Awake();       
     }
 
     public bool HasSeen(string tutorialID)

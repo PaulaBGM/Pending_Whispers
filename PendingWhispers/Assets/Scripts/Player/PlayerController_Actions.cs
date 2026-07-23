@@ -26,7 +26,7 @@ public class PlayerController_Actions : MonoBehaviour
     public bool canMove = true;
     
     public InventorySO Inventory => InventoryRuntime.Instance.GetInventory();
-
+    [SerializeField] private BoolEventChannelSO journalStateChannel;
     private void Awake()
     {
         OnPlayerSpawned?.Invoke(this);
@@ -63,8 +63,8 @@ public class PlayerController_Actions : MonoBehaviour
             InputController.Instance.OnInventoryPressed += ToggleInventory;
             InputController.Instance.OnMapPressed += OpenMap;
         }
-        
-        JournalController.OnJournalStateChanged += HandleJournalStateChanged;
+
+        journalStateChannel.OnRaised += HandleJournalStateChanged;
     }
 
     private void OnDisable()
@@ -75,8 +75,7 @@ public class PlayerController_Actions : MonoBehaviour
             InputController.Instance.OnInventoryPressed -= ToggleInventory;
             InputController.Instance.OnMapPressed -= OpenMap;
         }
-        
-        JournalController.OnJournalStateChanged -= HandleJournalStateChanged;
+        journalStateChannel.OnRaised -= HandleJournalStateChanged;
     }
 
     private void Update()
