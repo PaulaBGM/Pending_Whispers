@@ -9,10 +9,11 @@ public class HUDController : MonoBehaviour
     [SerializeField] private GameObject hudRoot;
     [SerializeField] private Button mapButton;
     [SerializeField] private FlagSO unlockCatacombsFlag;
-   
+
     [Header("Notifications")]
     [SerializeField] private TestimonyEventChannelSO onTestimonyRegistered;
     [SerializeField] private BoolEventChannelSO dialogueStateChannel;
+    [SerializeField] private BoolEventChannelSO journalStateChannel; // nuevo
     [SerializeField] private GameObject clueNotification;
     [SerializeField] private TextMeshProUGUI clueNotificationText;
 
@@ -39,8 +40,8 @@ public class HUDController : MonoBehaviour
     private void OnEnable()
     {
         dialogueStateChannel.OnRaised += HandleDialogue;
+        journalStateChannel.OnRaised += HandleJournal; // antes: SubscribeToUIManager()
         SpectralDetectionSystem.OnCooldownStateChanged += HandleDetectionCooldown;
-        SubscribeToUIManager();
         if (onTestimonyRegistered != null)
             onTestimonyRegistered.OnRaised += HandleTestimonyRegistered;
         if (GameProgress.Instance != null)
@@ -48,10 +49,13 @@ public class HUDController : MonoBehaviour
 
         UIGameEvents.OnEvidenceRegistered += HandleEvidenceRegistered;
     }
+
     private void HandleEvidenceRegistered(ItemSO item) => AddClueNotification();
+
     private void OnDisable()
     {
         dialogueStateChannel.OnRaised -= HandleDialogue;
+        journalStateChannel.OnRaised -= HandleJournal; // antes: desuscripción de UIManager
         SpectralDetectionSystem.OnCooldownStateChanged -= HandleDetectionCooldown;
 
         if (onTestimonyRegistered != null)
@@ -60,18 +64,7 @@ public class HUDController : MonoBehaviour
         if (GameProgress.Instance != null)
             GameProgress.Instance.OnFlagAdded -= OnFlagAdded;
 
-        if (UIManager.Instance != null)
-            UIManager.Instance.OnJournalStateChanged -= HandleJournal;
-
         UIGameEvents.OnEvidenceRegistered -= HandleEvidenceRegistered;
-    }
-
-    private void SubscribeToUIManager()
-    {
-        if (UIManager.Instance != null)
-        {
-            UIManager.Instance.OnJournalStateChanged += HandleJournal;
-        }
     }
 
     // ---------------- DETECTION UI ----------------
@@ -136,6 +129,7 @@ public class HUDController : MonoBehaviour
         if (clueNotificationText != null)
             clueNotificationText.text = string.Empty;
     }
+
     private void OnFlagAdded(FlagSO flag)
     {
         if (flag == unlockCatacombsFlag)

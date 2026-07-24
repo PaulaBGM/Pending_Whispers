@@ -1356,6 +1356,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1099556842465178133}
     m_Modifications:
     - target: {fileID: 146460270624655480, guid: 977afc3c19a54f14c80660e6319b0e26, type: 3}
+      propertyPath: m_Size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 146460270624655480, guid: 977afc3c19a54f14c80660e6319b0e26, type: 3}
       propertyPath: m_Value
       value: 0
       objectReference: {fileID: 0}
@@ -1587,6 +1591,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1513189348887922081, guid: 977afc3c19a54f14c80660e6319b0e26, type: 3}
+      propertyPath: m_Size
+      value: 0.99999994
+      objectReference: {fileID: 0}
     - target: {fileID: 1676783675769209962, guid: 977afc3c19a54f14c80660e6319b0e26, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1811,6 +1819,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2845561397461686322, guid: 977afc3c19a54f14c80660e6319b0e26, type: 3}
+      propertyPath: journalStateChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: f2fa85d8ec6606849bfe046413a30a79, type: 2}
     - target: {fileID: 2845561397461686322, guid: 977afc3c19a54f14c80660e6319b0e26, type: 3}
       propertyPath: dialogueStateChannel
       value: 
@@ -2805,7 +2817,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8416391735450788699, guid: 977afc3c19a54f14c80660e6319b0e26, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -345.22998
+      value: -345.22992
       objectReference: {fileID: 0}
     - target: {fileID: 8423854967461481651, guid: 977afc3c19a54f14c80660e6319b0e26, type: 3}
       propertyPath: m_AnchorMax.x
