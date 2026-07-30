@@ -98,10 +98,9 @@ namespace Inventory
         {
             if (!hasPendingUpdate) return;
             if (inventoryUI == null) return;
-            if (!inventoryUI.gameObject.activeInHierarchy) return;
+            if (!inventoryUI.IsVisible) return;
 
             hasPendingUpdate = false;
-
             ApplyRefresh();
         }
 

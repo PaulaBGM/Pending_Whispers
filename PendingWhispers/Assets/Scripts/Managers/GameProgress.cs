@@ -22,7 +22,12 @@ public class GameProgress : BaseSingleton<GameProgress>
         OnFlagAdded?.Invoke(flag);
         onFlagAddedChannel?.Raise(flag);
     }
-
+    public void RemoveFlag(FlagSO flag)
+    {
+        if (flag == null) return;
+        if (flags.Remove(flag))
+            Debug.Log($"[GameProgress] Flag removed: {flag.id}");
+    }
     public bool HasFlag(FlagSO flag)
     {
         return flag != null && flags.Contains(flag);

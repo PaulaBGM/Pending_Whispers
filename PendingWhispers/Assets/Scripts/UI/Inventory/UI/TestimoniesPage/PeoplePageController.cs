@@ -44,6 +44,7 @@ public class PeoplePageController : JournalPageController
 
         Canvas.ForceUpdateCanvases();
         LayoutRebuilder.ForceRebuildLayoutImmediate(content.GetComponent<RectTransform>());
+        ResetSelection();
     }
 
     private void HandleClick(PersonJournalEntry entry)
@@ -64,7 +65,14 @@ public class PeoplePageController : JournalPageController
         listPanel.SetActive(true);
         detailPanel.SetActive(false);
     }
+    public void ResetSelection()
+    {
+        if (descriptionPanel != null)
+            descriptionPanel.ResetDescription();
 
+        detailPanel.SetActive(false);
+        listPanel.SetActive(true);
+    }
     public void ShowDetail()
     {
         detailPanel.SetActive(true);
@@ -88,6 +96,6 @@ public class PeoplePageController : JournalPageController
     public override void Show()
     {
         base.Show();
-        ShowList();
+        ResetSelection();
     }
 }

@@ -12,6 +12,7 @@ namespace Inventory.UI
         [SerializeField] private UIInventoryDescription itemDescription;
         [SerializeField] private MouseFollower mouseFollower;
         [SerializeField] private ItemActionPanel actionPanel;
+        public bool IsVisible { get; private set; }
 
         [Header("Tabs")]
         [SerializeField] private List<InventoryTab> tabs;
@@ -45,6 +46,7 @@ namespace Inventory.UI
 
         public override void Refresh()
         {
+            InventoryController.Instance?.RefreshUI();
             ResetSelection();
         }
 
@@ -152,11 +154,13 @@ namespace Inventory.UI
         public override void Show()
         {
             base.Show();
+            IsVisible = true;
             ResetSelection();
         }
 
         public override void Hide()
         {
+            IsVisible = false;
             actionPanel.Toggle(false);
             base.Hide();
         }
