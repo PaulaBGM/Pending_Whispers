@@ -11,6 +11,8 @@ public class MapManager : BaseSingleton<MapManager>
     [SerializeField] private string startNodeID = "start";
 
     private readonly Dictionary<string, MapNode> nodeLookup = new();
+    [SerializeField] private float inputCooldown = 0.15f;
+    private float inputUnlockTime;
     private MapNode currentNode;
 
     protected override void Awake()
@@ -21,11 +23,12 @@ public class MapManager : BaseSingleton<MapManager>
 
     private void Start()
     {
+        inputUnlockTime = Time.unscaledTime + inputCooldown;
         InitializeMap();
         SetPlayerToCurrentNode();
         player.OnDestinationReached += EnterNode;
     }
-
+    public bool CanAcceptInput => Time.unscaledTime >= inputUnlockTime;
     protected override void OnDestroy()
     {
         base.OnDestroy();
@@ -110,6 +113,8 @@ public class MapManager : BaseSingleton<MapManager>
             Debug.LogError("[MapManager] currentNode es null, el mapa no se inicializó correctamente.", this);
             return;
         }
+        if (destination == currentNode) // nuevo — ignora clicks sobre el nodo actual
+            return;
 
         List<PathNode> path = Pathfinder.Instance.FindPath(currentNode.PathNode, destination.PathNode);
         if (path.Count == 0)
