@@ -1,0 +1,1563 @@
+fileFormatVersion: 2
+guid: a399fca24295ae342978950ef53e8ac3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5666633986312569523
+    second: Ghost1House_Tilesheet_0
+  - first:
+      213: -3225716315441454299
+    second: Ghost1House_Tilesheet_1
+  - first:
+      213: 2149015710469735542
+    second: Ghost1House_Tilesheet_2
+  - first:
+      213: -4402431070805813634
+    second: Ghost1House_Tilesheet_3
+  - first:
+      213: 7043570191082916561
+    second: Ghost1House_Tilesheet_4
+  - first:
+      213: 6989693643750037966
+    second: Ghost1House_Tilesheet_5
+  - first:
+      213: -8326125771034251306
+    second: Ghost1House_Tilesheet_6
+  - first:
+      213: -5755025502123010663
+    second: Ghost1House_Tilesheet_7
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 512
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_8
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 4609
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0323f0ad24107941bd64955d1001c5b
+      internalID: -1674000026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_9
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 4609
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b94c570eaedf2364b800290da43c58ac
+      internalID: 1693897144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_10
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 4609
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f1f2757ed7f993419d9a3d278461063
+      internalID: -923604403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4097
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff8570975315f1249a083df5192e6e7b
+      internalID: -1476740886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_12
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 4097
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c73602349b9991b4799e2b51fad0936e
+      internalID: -435049599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_13
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 4097
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc1282e9a6db6174aaf27b94f0add1b9
+      internalID: -807451226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_16
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 4097
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4326d4922d9d4cc419d03071e45830d9
+      internalID: -98219667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_19
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 4097
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1f63b4fe0739984d9e1736314b24fbb
+      internalID: -39512900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_20
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 4097
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfdc8e6a02e54ea42ade012d81c9bcf0
+      internalID: 2072962917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_21
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 4097
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45fa92acbd3a9c44bb927500af7c6120
+      internalID: -47234830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3585
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79b2416d78a45474898ac4aa6dfeb51e
+      internalID: -1780194558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_23
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 3585
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01a85ad2081789943a857468404bad3e
+      internalID: 555522195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_24
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 3585
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 101ce201542b57847958beb936a7a3ec
+      internalID: 362281296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_30
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 3585
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c124b529c54e7148b044f3d2059c97f
+      internalID: 811426561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_31
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 3585
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e71119ae39c2f2343a9018c438cca73c
+      internalID: 1802488233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_32
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 3585
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f1dc5b5428ea354fa1921fb385dc468
+      internalID: -179414177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_33
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3073
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e11273f5a5b13745a9f6e4df63756dd
+      internalID: 1366443921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_34
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 3073
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e200430ca23aa34d9cb935f88d95eae
+      internalID: 823920581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_35
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 3073
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2192c591770cdd749855897a3551c2b8
+      internalID: 1708058467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_37
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 3073
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a83d8433f86e5b44a92f992ae2a16d97
+      internalID: -990161863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_38
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 3073
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b935ab8e4869b9c4eb0a22abd02a55cc
+      internalID: 1818935584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_39
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 3073
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69db837ae953e0848bfc0df5b1a9780c
+      internalID: 19961411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_48
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 2561
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8a9fcd2c1113f248b0cca6c49718672
+      internalID: 1506422988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_49
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 2561
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26d97a1bd8eb5d24d8f40f26c6f3f151
+      internalID: 1967417634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_50
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 2561
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c41f6e7cc435004c949778d2765454a
+      internalID: -424894215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_52
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 2561
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d67c32934456c104c9c2ac5d81741cb0
+      internalID: 1587029225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_53
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 2561
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1b6549e7a658e04c9e28d3135baa75e
+      internalID: 1869345764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_54
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 2561
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1aa37c65ffb7a424f9e1f70f0f2bad97
+      internalID: -1500215487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_56
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 2049
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce6601f5cea208a4cbe139e7b86a7ca4
+      internalID: 67211511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_57
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 2049
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a482434d6a4de6b4992dfec7e5cc5dfb
+      internalID: 1890282999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_58
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 2049
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a788f715236b7724eab80bea5b61f9f1
+      internalID: -1321808029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_60
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 2049
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 103576d53cf8a004382e738d123a8ef7
+      internalID: -1371782832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_61
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 2049
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd62bbd1c5870e245b309ae0ddd248fb
+      internalID: 1660339996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_62
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 2049
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 625416c6ac10f92439d69b5f4470e243
+      internalID: -1317537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_75
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1025
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 980d305b1fba26a4db03ad612fd8a5eb
+      internalID: 104336647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_76
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1025
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc81f52f4f4fbad4da9045ddb44b3f0b
+      internalID: 969430570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_77
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1025
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71499b0eb4b03e1408d6744e80bc60af
+      internalID: 90850920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_78
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1025
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f445732f3a4e9204387228cb9d22c39c
+      internalID: -1595479906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_79
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 1025
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c42edd9b7a685ee4c9aa19b0661cda5c
+      internalID: -2079761887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_80
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 1025
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0b828f89dbb4df4d8700ab18d0228c6
+      internalID: 880830831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_82
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 1025
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 461d0112177b4ab4186c35b11f2cbb8b
+      internalID: 2026976337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_84
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 1025
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68ee123914bf56641aef3e6f562b7380
+      internalID: -72703329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_86
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 513
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd76b01068f03fa469f492581e2b98bc
+      internalID: -1483241990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_87
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 513
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 554fd7a16f2eddd4d8c5c5504e49646e
+      internalID: -768688486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_88
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 513
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7aeb070ff4ff7204dabd27fb4dd580d2
+      internalID: -1768225631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_89
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 513
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c0cef8b83dbd6847aa0dab746b527ff
+      internalID: 2115887360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_90
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 513
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 395ecdc6b7cdae34f8bbc39c755e29f3
+      internalID: 1881972896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_91
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 513
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 573e22d44b74b824785b467ccd0363ba
+      internalID: 322615954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_93
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 513
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80aeed7c44983e54799c4133854fc3e1
+      internalID: 1368535927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_95
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 513
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7bc575c808bb9746838f75295e1337b
+      internalID: 1293605907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_97
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 655bc1ca1e7b84940b75a028df4b23a2
+      internalID: -658345510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_98
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5571c3d6fc9202543a23f4e03d831b3a
+      internalID: 560890034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_99
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dd0194cbcf38bc429534fe20a7ce883
+      internalID: -966192672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_100
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1431c9a491ac7d44fae48809e662f79d
+      internalID: 2075996801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_101
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 1
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89657934b5791184985a9a39fdd6ebad
+      internalID: 1361833705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_102
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 1
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bdb4ced146012c49a51508eedeca7c8
+      internalID: 847965296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_104
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 1
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfef6e83ee39dbf4eafeca73ca9375d0
+      internalID: -47055192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost1House_Tilesheet_106
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 1
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbe5a268b5ec98645a02d83f97c70a11
+      internalID: 1929081028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 4b66b6e5d60d8094e9f3e7e8afbf2ba2
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Ghost1House_Tilesheet_0: 5666633986312569523
+      Ghost1House_Tilesheet_1: -3225716315441454299
+      Ghost1House_Tilesheet_10: -923604403
+      Ghost1House_Tilesheet_100: 2075996801
+      Ghost1House_Tilesheet_101: 1361833705
+      Ghost1House_Tilesheet_102: 847965296
+      Ghost1House_Tilesheet_103: -1633344669
+      Ghost1House_Tilesheet_104: -47055192
+      Ghost1House_Tilesheet_105: -1568478048
+      Ghost1House_Tilesheet_106: 1929081028
+      Ghost1House_Tilesheet_11: -1476740886
+      Ghost1House_Tilesheet_12: -435049599
+      Ghost1House_Tilesheet_13: -807451226
+      Ghost1House_Tilesheet_14: 430110158
+      Ghost1House_Tilesheet_15: 82302741
+      Ghost1House_Tilesheet_16: -98219667
+      Ghost1House_Tilesheet_17: -954401994
+      Ghost1House_Tilesheet_18: 977286106
+      Ghost1House_Tilesheet_19: -39512900
+      Ghost1House_Tilesheet_2: 2149015710469735542
+      Ghost1House_Tilesheet_20: 2072962917
+      Ghost1House_Tilesheet_21: -47234830
+      Ghost1House_Tilesheet_22: -1780194558
+      Ghost1House_Tilesheet_23: 555522195
+      Ghost1House_Tilesheet_24: 362281296
+      Ghost1House_Tilesheet_25: 268764908
+      Ghost1House_Tilesheet_26: 1601589765
+      Ghost1House_Tilesheet_27: 1719022642
+      Ghost1House_Tilesheet_28: -1647474402
+      Ghost1House_Tilesheet_29: 1213220721
+      Ghost1House_Tilesheet_3: -4402431070805813634
+      Ghost1House_Tilesheet_30: 811426561
+      Ghost1House_Tilesheet_31: 1802488233
+      Ghost1House_Tilesheet_32: -179414177
+      Ghost1House_Tilesheet_33: 1366443921
+      Ghost1House_Tilesheet_34: 823920581
+      Ghost1House_Tilesheet_35: 1708058467
+      Ghost1House_Tilesheet_36: 87203899
+      Ghost1House_Tilesheet_37: -990161863
+      Ghost1House_Tilesheet_38: 1818935584
+      Ghost1House_Tilesheet_39: 19961411
+      Ghost1House_Tilesheet_4: 7043570191082916561
+      Ghost1House_Tilesheet_40: -1872284864
+      Ghost1House_Tilesheet_41: -537271645
+      Ghost1House_Tilesheet_42: 1575991386
+      Ghost1House_Tilesheet_43: 461605799
+      Ghost1House_Tilesheet_44: -222444633
+      Ghost1House_Tilesheet_45: 1910629982
+      Ghost1House_Tilesheet_46: -2122379849
+      Ghost1House_Tilesheet_47: -1374637027
+      Ghost1House_Tilesheet_48: 1506422988
+      Ghost1House_Tilesheet_49: 1967417634
+      Ghost1House_Tilesheet_5: 6989693643750037966
+      Ghost1House_Tilesheet_50: -424894215
+      Ghost1House_Tilesheet_51: 678162419
+      Ghost1House_Tilesheet_52: 1587029225
+      Ghost1House_Tilesheet_53: 1869345764
+      Ghost1House_Tilesheet_54: -1500215487
+      Ghost1House_Tilesheet_55: 954697341
+      Ghost1House_Tilesheet_56: 67211511
+      Ghost1House_Tilesheet_57: 1890282999
+      Ghost1House_Tilesheet_58: -1321808029
+      Ghost1House_Tilesheet_59: -1652549788
+      Ghost1House_Tilesheet_6: -8326125771034251306
+      Ghost1House_Tilesheet_60: -1371782832
+      Ghost1House_Tilesheet_61: 1660339996
+      Ghost1House_Tilesheet_62: -1317537
+      Ghost1House_Tilesheet_63: -1196940885
+      Ghost1House_Tilesheet_64: 506973911
+      Ghost1House_Tilesheet_65: -1704992879
+      Ghost1House_Tilesheet_66: 413832081
+      Ghost1House_Tilesheet_67: 1720554585
+      Ghost1House_Tilesheet_68: 385094784
+      Ghost1House_Tilesheet_69: -1568679076
+      Ghost1House_Tilesheet_7: -5755025502123010663
+      Ghost1House_Tilesheet_70: -981696697
+      Ghost1House_Tilesheet_71: -1803914808
+      Ghost1House_Tilesheet_72: -1649018988
+      Ghost1House_Tilesheet_73: -1449588038
+      Ghost1House_Tilesheet_74: 576415983
+      Ghost1House_Tilesheet_75: 104336647
+      Ghost1House_Tilesheet_76: 969430570
+      Ghost1House_Tilesheet_77: 90850920
+      Ghost1House_Tilesheet_78: -1595479906
+      Ghost1House_Tilesheet_79: -2079761887
+      Ghost1House_Tilesheet_8: -1674000026
+      Ghost1House_Tilesheet_80: 880830831
+      Ghost1House_Tilesheet_81: -1935713302
+      Ghost1House_Tilesheet_82: 2026976337
+      Ghost1House_Tilesheet_83: -381073998
+      Ghost1House_Tilesheet_84: -72703329
+      Ghost1House_Tilesheet_85: -2073788114
+      Ghost1House_Tilesheet_86: -1483241990
+      Ghost1House_Tilesheet_87: -768688486
+      Ghost1House_Tilesheet_88: -1768225631
+      Ghost1House_Tilesheet_89: 2115887360
+      Ghost1House_Tilesheet_9: 1693897144
+      Ghost1House_Tilesheet_90: 1881972896
+      Ghost1House_Tilesheet_91: 322615954
+      Ghost1House_Tilesheet_92: 2122730490
+      Ghost1House_Tilesheet_93: 1368535927
+      Ghost1House_Tilesheet_94: 957848513
+      Ghost1House_Tilesheet_95: 1293605907
+      Ghost1House_Tilesheet_96: -602253268
+      Ghost1House_Tilesheet_97: -658345510
+      Ghost1House_Tilesheet_98: 560890034
+      Ghost1House_Tilesheet_99: -966192672
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -80,12 +80,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5741321063430696138, guid: 0a84c68b0a6d28344ab5326488d7c023, type: 3}
+  m_Sprite: {fileID: 5009759636065556289, guid: bf732de3d7f47384f80eba51332d8b9d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 10.24, y: 10.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -244,6 +244,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogues:
+  - dialogue: {fileID: 11400000, guid: 22c3d0caac367cc478fa1e3d7f91c11f, type: 2}
+    requiredFlags:
+    - {fileID: 11400000, guid: b20d31eec589dbb4fafd6102542a3f00, type: 2}
   - dialogue: {fileID: 11400000, guid: 908e13b1970ce644e80f5fc311954240, type: 2}
     requiredFlags:
     - {fileID: 11400000, guid: bb90d7ec6dc321f4f8f5210a3b984557, type: 2}

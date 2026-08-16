@@ -3,74 +3,101 @@ using UnityEngine.UI;
 
 public class MapNode : MonoBehaviour
 {
-    public NodeData data;
+    [Header("Data")]
+    [SerializeField] public NodeData data;
 
-    public bool isUnlocked = false;
-    public bool isCompleted = false;
+    [Header("References")]
+    [SerializeField] private Button button;
+    [SerializeField] private Image icon;
+    [SerializeField] private MapWaypoint waypoint;
 
-    public Button button;
-    public Image icon;
+    [Header("Colors")]
+    [SerializeField] private Color lockedColor = Color.gray;
+    [SerializeField] private Color unlockedColor = Color.white;
+    [SerializeField] private Color completedColor = Color.green;
 
-    public Color lockedColor;
-    public Color unlockedColor;
-    public Color completedColor;
-    [SerializeField] private PathNode pathNode;
+    public NodeData Data => data;
+    public MapWaypoint Waypoint => waypoint;
 
-    public PathNode PathNode => pathNode;
-    private void Start()
+    public bool IsUnlocked { get; private set; }
+    public bool IsCompleted { get; private set; }
+
+    private void Awake()
     {
-        icon.sprite = data.icon;
-        UpdateVisual();
-        button.onClick.AddListener(OnNodeClicked);
+        if (button != null)
+            button.onClick.AddListener(OnNodeClicked);
     }
 
-    void OnNodeClicked()
+    private void Start()
     {
-        if (!isUnlocked) return;
+        UpdateVisual();
+    }
 
-        MapManager.Instance.SelectNode(this);
+    private void OnDestroy()
+    {
+        if (button != null)
+            button.onClick.RemoveListener(OnNodeClicked);
+    }
+
+    private void OnNodeClicked()
+    {
+        if (!IsUnlocked)
+            return;
+
+        if (MapManager.Instance == null)
+            return;
+
+        if (!MapManager.Instance.CanAcceptInput)
+            return;
+
+        MapManager.Instance.TravelTo(this);
+    }
+
+    public void SetUnlocked(bool value)
+    {
+        IsUnlocked = value;
+        UpdateVisual();
+    }
+
+    public void SetCompleted(bool value)
+    {
+        IsCompleted = value;
+        UpdateVisual();
+    }
+
+    private void UpdateVisual()
+    {
+        if (icon != null)
+        {
+            if (!IsUnlocked)
+                icon.color = lockedColor;
+            else if (IsCompleted)
+                icon.color = completedColor;
+            else
+                icon.color = unlockedColor;
+        }
+
+        if (button != null)
+            button.interactable = IsUnlocked;
     }
 
     public string GetName()
     {
-        return data.displayName;
+        return data != null ? data.displayName : "";
     }
+
     public string GetDescription()
     {
-        return data.description;
+        return data != null ? data.description : "";
     }
 
     public string GetScene()
     {
-        return data.sceneName;
+        return data != null ? data.sceneName : "";
     }
 
-    void UpdateVisual()
+    public string GetID()
     {
-        if (!isUnlocked)
-        {
-            icon.color = lockedColor;
-            button.interactable = false;
-        }
-        else if (isCompleted)
-        {
-            icon.color = completedColor;
-            button.interactable = true;
-        }
-        else
-        {
-            icon.color = unlockedColor;
-            button.interactable = true;
-        }
-    }
-    public void SetUnlocked(bool value)
-    {
-        isUnlocked = value;
-        UpdateVisual();
-    }
-
-    public bool IsUnlocked()
-    {
-        return isUnlocked;
+        return data != null ? data.nodeID : "";
     }
 }
