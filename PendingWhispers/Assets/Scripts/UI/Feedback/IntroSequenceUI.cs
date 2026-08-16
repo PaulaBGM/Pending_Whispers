@@ -19,7 +19,7 @@ public class IntroSequenceUI : MonoBehaviour
     [SerializeField] private float fadeDuration = 1f;
     [SerializeField] private float textDuration = 4f;
 
-    private PlayerController player;
+    private PlayerController_Actions player;
 
     void Start()
     {
@@ -30,7 +30,7 @@ public class IntroSequenceUI : MonoBehaviour
             return;
         }
 
-        player = FindFirstObjectByType<PlayerController>();
+        player = FindFirstObjectByType<PlayerController_Actions>();
 
         if (player != null)
             player.canMove = false;

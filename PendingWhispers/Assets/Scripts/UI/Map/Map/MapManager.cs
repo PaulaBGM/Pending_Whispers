@@ -1,136 +1,303 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MapManager : BaseSingleton<MapManager>
 {
-    protected override bool PersistAcrossScenes => false; 
-
+    [Header("Map")]
     [SerializeField] private List<MapNode> nodes;
-    [SerializeField] private PlayerIcon player;
+
+    [Header("Player")]
+    [SerializeField] private MapAvatar avatar;
+
+    [Header("Start")]
     [SerializeField] private string startNodeID = "start";
 
-    private readonly Dictionary<string, MapNode> nodeLookup = new();
+    [Header("Input")]
     [SerializeField] private float inputCooldown = 0.15f;
-    private float inputUnlockTime;
+
+    protected override bool PersistAcrossScenes => false;
+
+    private readonly Dictionary<string, MapNode> nodeLookup = new();
+
     private MapNode currentNode;
+
+    private float inputUnlockTime;
+
+    public bool CanAcceptInput =>
+        Time.unscaledTime >= inputUnlockTime;
 
     protected override void Awake()
     {
         base.Awake();
+
+        if (Instance != this)
+            return;
+
         BuildNodeLookup();
     }
 
     private void Start()
     {
-        inputUnlockTime = Time.unscaledTime + inputCooldown;
+        if (Instance != this)
+            return;
+
+        inputUnlockTime =
+            Time.unscaledTime + inputCooldown;
+
         InitializeMap();
-        SetPlayerToCurrentNode();
-        player.OnDestinationReached += EnterNode;
+
+        SetAvatarToCurrentNode();
+
+        if (avatar != null)
+            avatar.OnDestinationReached += EnterNode;
     }
-    public bool CanAcceptInput => Time.unscaledTime >= inputUnlockTime;
+
     protected override void OnDestroy()
     {
+        if (avatar != null)
+            avatar.OnDestinationReached -= EnterNode;
+
         base.OnDestroy();
-        player.OnDestinationReached -= EnterNode;
     }
+
+    // =========================================================
+    // INITIALIZATION
+    // =========================================================
 
     private void BuildNodeLookup()
     {
-        foreach (var node in nodes)
+        nodeLookup.Clear();
+
+        foreach (MapNode node in nodes)
         {
-            if (node == null || node.data == null)
+            if (node == null)
+                continue;
+
+            if (node.Data == null)
             {
-                Debug.LogWarning("[MapManager] Hay un MapNode en la lista sin asignar o sin NodeData.", this);
+                Debug.LogWarning(
+                    $"[MapManager] {node.name} no tiene NodeData.",
+                    node
+                );
+
                 continue;
             }
 
-            string id = node.data.nodeID;
+            string id = node.Data.nodeID;
+
             if (string.IsNullOrEmpty(id))
             {
-                Debug.LogWarning($"[MapManager] El NodeData '{node.data.name}' no tiene nodeID asignado.", node);
+                Debug.LogWarning(
+                    $"[MapManager] {node.name} no tiene nodeID.",
+                    node
+                );
+
                 continue;
             }
 
             if (!nodeLookup.TryAdd(id, node))
             {
-                Debug.LogError($"[MapManager] nodeID duplicado: '{id}'. Ya estaba asignado a '{nodeLookup[id].data.name}', " +
-                                $"conflicto con '{node.data.name}'. Corrige uno de los dos NodeData.", node);
+                Debug.LogError(
+                    $"[MapManager] nodeID duplicado: {id}",
+                    node
+                );
             }
         }
     }
 
-    // Desbloqueo basado en GameProgress/FlagSO. Un nodo sin unlockFlag asignado
-    // se considera siempre desbloqueado (útil para el nodo "start").
-    void InitializeMap()
+    private void InitializeMap()
     {
-        foreach (var node in nodes)
+        if (GameProgress.Instance == null)
         {
-            if (node == null || node.data == null) continue;
+            Debug.LogError("[MapManager] GameProgress.Instance es NULL.");
+            return;
+        }
 
-            bool unlocked = node.data.unlockFlag == null
-                             || GameProgress.Instance.HasFlag(node.data.unlockFlag);
+        foreach (MapNode node in nodes)
+        {
+            if (node == null || node.Data == null)
+                continue;
+
+            FlagSO unlockFlag = node.Data.unlockFlag;
+
+            bool unlocked =
+                unlockFlag == null ||
+                GameProgress.Instance.HasFlag(unlockFlag);
 
             node.SetUnlocked(unlocked);
         }
     }
 
-    void SetPlayerToCurrentNode()
+    // =========================================================
+    // CURRENT NODE
+    // =========================================================
+
+    private void SetAvatarToCurrentNode()
     {
-        string id = MapState.Instance.GetCurrentNode();
-        if (string.IsNullOrEmpty(id))
-            id = startNodeID;
-
-        if (!nodeLookup.TryGetValue(id, out currentNode))
+        if (MapState.Instance == null)
         {
-            Debug.LogError($"[MapManager] No existe ningún nodo con ID '{id}'. " +
-                            $"Revisa que algún NodeData tenga nodeID = \"{id}\", o cambia 'Start Node ID' en el Inspector.", this);
+            Debug.LogError(
+                "[MapManager] MapState.Instance es NULL."
+            );
 
-            foreach (var kvp in nodeLookup)
-            {
-                currentNode = kvp.Value;
-                break;
-            }
+            return;
+        }
 
-            if (currentNode == null)
+        string currentID =
+            MapState.Instance.GetCurrentNode();
+
+        if (string.IsNullOrEmpty(currentID))
+            currentID = startNodeID;
+
+        if (!nodeLookup.TryGetValue(currentID, out currentNode))
+        {
+            Debug.LogWarning(
+                $"[MapManager] No existe el nodo '{currentID}'. " +
+                $"Se utilizará '{startNodeID}'."
+            );
+
+            if (!nodeLookup.TryGetValue(
+                    startNodeID,
+                    out currentNode))
             {
-                Debug.LogError("[MapManager] No hay ningún nodo válido en la lista. El mapa no puede inicializarse.", this);
+                Debug.LogError(
+                    "[MapManager] Tampoco existe el nodo inicial."
+                );
+
                 return;
             }
         }
 
-        player.transform.position = currentNode.PathNode.Position;
+        if (avatar == null)
+        {
+            Debug.LogError(
+                "[MapManager] Avatar no asignado."
+            );
+
+            return;
+        }
+
+        avatar.SetPosition(currentNode.Waypoint);
     }
 
-    public void SelectNode(MapNode destination)
+    // =========================================================
+    // TRAVEL
+    // =========================================================
+
+    public void TravelTo(MapNode destination)
     {
-        if (player.IsMoving)
+        if (avatar == null)
             return;
-        if (destination == null || !destination.IsUnlocked())
+
+        if (avatar.IsMoving)
             return;
+
+        if (destination == null)
+            return;
+
+        if (!destination.IsUnlocked)
+            return;
+
         if (currentNode == null)
-        {
-            Debug.LogError("[MapManager] currentNode es null, el mapa no se inicializó correctamente.", this);
-            return;
-        }
-        if (destination == currentNode) // nuevo — ignora clicks sobre el nodo actual
             return;
 
-        List<PathNode> path = Pathfinder.Instance.FindPath(currentNode.PathNode, destination.PathNode);
-        if (path.Count == 0)
+        if (destination == currentNode)
+            return;
+
+        if (destination.Waypoint == null)
         {
-            Debug.LogWarning($"[MapManager] No se encontró ruta entre '{currentNode.data.nodeID}' y '{destination.data.nodeID}'. " +
-                              $"¿Están conectados sus PathNode?", this);
+            Debug.LogError(
+                $"[MapManager] '{destination.name}' " +
+                "no tiene Waypoint.",
+                destination
+            );
+
             return;
         }
 
+        List<MapWaypoint> path =
+            MapRoute.FindPath(
+                currentNode.Waypoint,
+                destination.Waypoint
+            );
+
+        if (path == null || path.Count == 0)
+        {
+            Debug.LogWarning(
+                $"[MapManager] No existe ruta entre " +
+                $"'{currentNode.GetID()}' y " +
+                $"'{destination.GetID()}'.",
+                this
+            );
+
+            return;
+        }
+
+        Debug.Log(
+            $"[MapManager] Viajando de " +
+            $"{currentNode.GetID()} -> " +
+            $"{destination.GetID()}"
+        );
+
+        // Guardamos el destino inmediatamente.
         currentNode = destination;
-        player.FollowPath(path);
+
+        // Bloqueamos nuevos clicks durante el movimiento.
+        inputUnlockTime =
+            Time.unscaledTime + inputCooldown;
+
+        avatar.FollowPath(path);
     }
 
-    void EnterNode()
+    // =========================================================
+    // ARRIVAL
+    // =========================================================
+
+    private void EnterNode()
     {
-        MapState.Instance.SetCurrentNode(currentNode.data.nodeID);
-        SceneManager.LoadScene(currentNode.GetScene());
+        if (currentNode == null)
+            return;
+
+        if (MapState.Instance == null)
+        {
+            Debug.LogError(
+                "[MapManager] MapState.Instance es NULL."
+            );
+
+            return;
+        }
+
+        string nodeID =
+            currentNode.GetID();
+
+        Debug.Log(
+            $"[MapManager] Llegamos a: {nodeID}"
+        );
+
+        MapState.Instance.SetCurrentNode(nodeID);
+
+        string sceneName =
+            currentNode.GetScene();
+
+        if (string.IsNullOrEmpty(sceneName))
+        {
+            Debug.LogError(
+                $"[MapManager] El nodo '{nodeID}' " +
+                "no tiene sceneName."
+            );
+
+            return;
+        }
+
+        if (SceneController.Instance == null)
+        {
+            Debug.LogError(
+                "[MapManager] SceneController.Instance es NULL."
+            );
+
+            return;
+        }
+
+        SceneController.Instance.LoadScene(sceneName);
     }
 }
