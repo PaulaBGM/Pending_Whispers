@@ -6,6 +6,9 @@ public class InventoryRuntime : BaseSingleton<InventoryRuntime>
     [SerializeField] private InventorySO inventory;   
     [SerializeField] private PeopleJournalSystem peopleJournal;
     [SerializeField] private CaseJournalSystem caseJournal;
+
+    private bool initialized = false;
+
     protected override void Awake()
     {
         base.Awake();

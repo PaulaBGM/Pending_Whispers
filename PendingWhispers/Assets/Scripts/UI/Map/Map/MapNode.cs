@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class MapNode : MonoBehaviour
 {
     [Header("Data")]
-    [SerializeField] public NodeData data;
+    [SerializeField] private NodeData data;
 
     [Header("References")]
     [SerializeField] private Button button;

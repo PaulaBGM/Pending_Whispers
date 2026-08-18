@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2456334407320603034}
   - component: {fileID: 8975404625304830374}
   m_Layer: 6
-  m_Name: Visual
+  m_Name: OVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,12 +78,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 40
-  m_Sprite: {fileID: 8186938708035040425, guid: 4d309bd6b710d134f9e5bb515036c026, type: 3}
+  m_Sprite: {fileID: 8186938708035040425, guid: d5593f9ba027a9c42a6d202fa0663daa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 2.2755556, y: 2.2755556}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -175,6 +175,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogues:
+  - dialogue: {fileID: 11400000, guid: 16c01d27caee0a240a7b846bed5d723f, type: 2}
+    requiredFlags:
+    - {fileID: 11400000, guid: 8c9823eacec837c4299e0acca9e31dad, type: 2}
+    - {fileID: 11400000, guid: bb90d7ec6dc321f4f8f5210a3b984557, type: 2}
+  - dialogue: {fileID: 11400000, guid: 3ddae05c8df5c6e47b95c2b8e64ab061, type: 2}
+    requiredFlags:
+    - {fileID: 11400000, guid: 62256de666409794a87f3313daea52e4, type: 2}
+    - {fileID: 11400000, guid: bb90d7ec6dc321f4f8f5210a3b984557, type: 2}
   - dialogue: {fileID: 11400000, guid: 26e3b1fe34fe67546bab460f58b7b58e, type: 2}
     requiredFlags: []
 --- !u!70 &176805181648224533

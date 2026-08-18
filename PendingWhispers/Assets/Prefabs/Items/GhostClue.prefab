@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3330209453353105178, guid: 231ddd6769e8d22449c05253b21e00c4, type: 3}
+  m_Sprite: {fileID: 3330209453353105178, guid: b77faa6bb4ada3a40b294d9e1f4ae9f4, type: 3}
   m_Color: {r: 0.5294118, g: 0.9948052, b: 1, a: 0.79607844}
   m_FlipX: 0
   m_FlipY: 0
@@ -187,6 +187,13 @@ MonoBehaviour:
   spriteRenderer: {fileID: 692194896236172794}
   highlightColor: {r: 0.6968409, g: 0.4198113, b: 1, a: 1}
   persistenceFlag: {fileID: 11400000, guid: 538da547a0d6177408bea1982f7e6116, type: 2}
+  highlightEvent:
+    Guid:
+      Data1: -244600590
+      Data2: 1201229841
+      Data3: 1638770306
+      Data4: -973720375
+    Path: event:/SpectralWave
 --- !u!114 &-3889464237674218480
 MonoBehaviour:
   m_ObjectHideFlags: 0
