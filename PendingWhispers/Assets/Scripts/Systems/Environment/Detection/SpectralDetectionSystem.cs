@@ -22,6 +22,8 @@ public class SpectralDetectionSystem : MonoBehaviour
 
     [Header("Scan")]
     [SerializeField] private SpectralScanWave scanWave;
+    [Header("Requisitos")]
+    [SerializeField] private FlagSO requiredFlag;
 
     private bool overloaded;
     private bool isCoolingDown;
@@ -56,6 +58,9 @@ public class SpectralDetectionSystem : MonoBehaviour
 
     public void LaunchScan()
     {
+         if (requiredFlag != null && !GameProgress.Instance.HasFlag(requiredFlag))
+            return; 
+
         if (overloaded || isCoolingDown)
             return;
 

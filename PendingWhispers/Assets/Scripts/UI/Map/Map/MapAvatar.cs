@@ -7,7 +7,7 @@ using UnityEngine;
 public class MapAvatar : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] private float speed = 3000f;
+    [SerializeField] private float speed = 10000f;
 
     [Header("Animation")]
     [SerializeField] private Animator animator;
@@ -35,15 +35,11 @@ public class MapAvatar : MonoBehaviour
     {
         if (waypoint == null)
         {
-            Debug.LogError(
-                "[MapAvatar] Waypoint NULL."
-            );
-
+            Debug.LogError("[MapAvatar] Waypoint NULL.",this);
             return;
         }
 
-        rectTransform.anchoredPosition =
-            GetLocalPositionOfWaypoint(waypoint);
+        rectTransform.position = waypoint.RectTransform.position;
 
         StopAnimation();
     }
@@ -95,19 +91,22 @@ public class MapAvatar : MonoBehaviour
             if (waypoint == null)
                 continue;
 
-            Vector2 target =
-                GetLocalPositionOfWaypoint(waypoint);
+            Vector3 target =
+                waypoint.RectTransform.position;
 
             while (
-                (rectTransform.anchoredPosition - target).sqrMagnitude
+                (rectTransform.position - target).sqrMagnitude
                 > 0.01f
             )
             {
-                Vector2 current =
-                    rectTransform.anchoredPosition;
+                Vector3 current =
+                    rectTransform.position;
 
                 Vector2 direction =
-                    (target - current).normalized;
+                    (target - current);
+
+                if (direction.sqrMagnitude > 0.001f)
+                    direction.Normalize();
 
                 // -----------------------------
                 // ANIMATION
@@ -119,8 +118,8 @@ public class MapAvatar : MonoBehaviour
                 // MOVEMENT
                 // -----------------------------
 
-                rectTransform.anchoredPosition =
-                    Vector2.MoveTowards(
+                rectTransform.position =
+                    Vector3.MoveTowards(
                         current,
                         target,
                         speed * Time.unscaledDeltaTime
@@ -129,7 +128,7 @@ public class MapAvatar : MonoBehaviour
                 yield return null;
             }
 
-            rectTransform.anchoredPosition = target;
+            rectTransform.position = target;
         }
 
         IsMoving = false;
@@ -171,7 +170,6 @@ public class MapAvatar : MonoBehaviour
             true
         );
     }
-
     private void StopAnimation()
     {
         if (animator == null)
@@ -181,25 +179,5 @@ public class MapAvatar : MonoBehaviour
             "isMoving",
             false
         );
-    }
-
-    // =========================================================
-    // COORDINATES
-    // =========================================================
-
-    private Vector2 GetLocalPositionOfWaypoint(
-        MapWaypoint waypoint)
-    {
-        Vector3 worldPosition =
-            waypoint.RectTransform.TransformPoint(
-                waypoint.RectTransform.rect.center
-            );
-
-        Vector3 localPosition =
-            rectTransform.parent.InverseTransformPoint(
-                worldPosition
-            );
-
-        return localPosition;
     }
 }

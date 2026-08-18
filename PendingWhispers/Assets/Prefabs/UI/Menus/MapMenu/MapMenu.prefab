@@ -532,7 +532,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9d6702ae735dfd845bc01ef4c3b9334f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: da1d8b90163ae3f46a962a17eae5edab, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1536,6 +1536,7 @@ GameObject:
   - component: {fileID: 4657942687081356996}
   - component: {fileID: 1894777254710137858}
   - component: {fileID: 3740189207666179827}
+  - component: {fileID: 8348898024618173937}
   m_Layer: 5
   m_Name: PlayerIcon
   m_TagString: Untagged
@@ -1559,7 +1560,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -345, y: 242}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3530046805992340026
@@ -1624,7 +1625,7 @@ Animator:
   m_GameObject: {fileID: 8516732704290714796}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 79c105a5f0b3c1548977634917e7a788, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1e845e41b645661438bb4051ccc7cb6e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1636,6 +1637,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8348898024618173937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8516732704290714796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ef62899c273bf3408209e94960bb9a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepEvent:
+    Guid:
+      Data1: -1853116506
+      Data2: 1178338955
+      Data3: 1004099458
+      Data4: -1304522252
+    Path: event:/Footsteps_GroundTypes
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &8527944690945245580
 GameObject:
   m_ObjectHideFlags: 0
@@ -1702,7 +1725,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9d6702ae735dfd845bc01ef4c3b9334f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: da1d8b90163ae3f46a962a17eae5edab, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
