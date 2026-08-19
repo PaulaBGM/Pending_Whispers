@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WalkDiagonalUpLeft_anim
+  m_Name: OwnerCase1_anim
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,13 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -367220714989878239, guid: 82dd6afcca9d890458aece575f5b3a1a, type: 3}
+      value: {fileID: 8186938708035040425, guid: d5593f9ba027a9c42a6d202fa0663daa, type: 3}
     - time: 0.2
-      value: {fileID: -930054264441962579, guid: 82dd6afcca9d890458aece575f5b3a1a, type: 3}
+      value: {fileID: 653636924698091387, guid: d5593f9ba027a9c42a6d202fa0663daa, type: 3}
     - time: 0.4
-      value: {fileID: -2573655535493176247, guid: 82dd6afcca9d890458aece575f5b3a1a, type: 3}
+      value: {fileID: 1401435674679353131, guid: d5593f9ba027a9c42a6d202fa0663daa, type: 3}
     - time: 0.6
-      value: {fileID: -6825754314475941030, guid: 82dd6afcca9d890458aece575f5b3a1a, type: 3}
+      value: {fileID: 6924151422274845630, guid: d5593f9ba027a9c42a6d202fa0663daa, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -50,10 +50,10 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -367220714989878239, guid: 82dd6afcca9d890458aece575f5b3a1a, type: 3}
-    - {fileID: -930054264441962579, guid: 82dd6afcca9d890458aece575f5b3a1a, type: 3}
-    - {fileID: -2573655535493176247, guid: 82dd6afcca9d890458aece575f5b3a1a, type: 3}
-    - {fileID: -6825754314475941030, guid: 82dd6afcca9d890458aece575f5b3a1a, type: 3}
+    - {fileID: 8186938708035040425, guid: d5593f9ba027a9c42a6d202fa0663daa, type: 3}
+    - {fileID: 653636924698091387, guid: d5593f9ba027a9c42a6d202fa0663daa, type: 3}
+    - {fileID: 1401435674679353131, guid: d5593f9ba027a9c42a6d202fa0663daa, type: 3}
+    - {fileID: 6924151422274845630, guid: d5593f9ba027a9c42a6d202fa0663daa, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -78,18 +78,4 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events:
-  - time: 0.2
-    functionName: PlayFootstep
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.6
-    functionName: PlayFootstep
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
+  m_Events: []

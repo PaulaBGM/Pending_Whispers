@@ -39,7 +39,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 401748403974980852}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
   m_Name: 
@@ -272,7 +272,7 @@ Animator:
   m_GameObject: {fileID: 2228694621081910136}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9bfe28bba6f34ef479767dc22734afdb, type: 2}
+  m_Controller: {fileID: 9100000, guid: 79c105a5f0b3c1548977634917e7a788, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -474,6 +474,7 @@ MonoBehaviour:
   cooldownTime: 10
   overloadCooldown: 10
   scanWave: {fileID: 3302292732733241594}
+  requiredFlag: {fileID: 11400000, guid: ea1d627ebee820a448438805c8496a2d, type: 2}
 --- !u!1 &8020407692079477077
 GameObject:
   m_ObjectHideFlags: 0

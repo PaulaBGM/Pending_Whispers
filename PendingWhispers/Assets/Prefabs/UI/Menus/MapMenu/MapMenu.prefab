@@ -277,7 +277,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 5e1785044c83751459c7d2bcf9f6adc0, type: 2}
   button: {fileID: 174368173154826402}
   icon: {fileID: 1587151763675949072}
-  waypoint: {fileID: 5512104605220179793}
+  waypoint: {fileID: 2892781347484703357}
   lockedColor: {r: 0, g: 0, b: 0, a: 0.48235294}
   unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   completedColor: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
@@ -323,7 +323,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3467095112415449847}
-  - component: {fileID: 687742980121062650}
+  - component: {fileID: 8855606403223923771}
   m_Layer: 5
   m_Name: Waypoint
   m_TagString: Untagged
@@ -347,10 +347,10 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 889.3999, y: -331.59998}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &687742980121062650
+--- !u!114 &8855606403223923771
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -359,11 +359,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2100577756297764286}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18a635f64dcf06e46b7f2d495b191707, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c721087fc5669f43bef8292d3f2ea34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   connections:
-  - {fileID: 6761158867954780847}
+  - {fileID: 2035405377102623178}
 --- !u!1 &2372474197218136701
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,7 +373,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794882907215086642}
-  - component: {fileID: 8766486580619890731}
+  - component: {fileID: 147975160134003494}
   m_Layer: 0
   m_Name: PathNode (4)
   m_TagString: Untagged
@@ -400,7 +400,7 @@ RectTransform:
   m_AnchoredPosition: {x: 3001, y: 602.72003}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8766486580619890731
+--- !u!114 &147975160134003494
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -409,12 +409,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2372474197218136701}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18a635f64dcf06e46b7f2d495b191707, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c721087fc5669f43bef8292d3f2ea34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   connections:
-  - {fileID: 8903836556092982861}
-  - {fileID: 5512104605220179793}
+  - {fileID: 6802192852769232187}
+  - {fileID: 2892781347484703357}
 --- !u!1 &2767593382189876080
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,7 +424,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5655900656404224416}
-  - component: {fileID: 8055989443150970109}
+  - component: {fileID: 2208698976047186723}
   m_Layer: 0
   m_Name: PathNode (2)
   m_TagString: Untagged
@@ -451,7 +451,7 @@ RectTransform:
   m_AnchoredPosition: {x: 2542, y: 1232}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8055989443150970109
+--- !u!114 &2208698976047186723
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -460,12 +460,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2767593382189876080}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18a635f64dcf06e46b7f2d495b191707, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c721087fc5669f43bef8292d3f2ea34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   connections:
-  - {fileID: 6761158867954780847}
-  - {fileID: 8903836556092982861}
+  - {fileID: 2035405377102623178}
+  - {fileID: 6802192852769232187}
 --- !u!1 &2847955977487687474
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,7 +681,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: fa8ea3c058e22f54da5faa0630a75c87, type: 2}
   button: {fileID: 4297888863439100054}
   icon: {fileID: 4390295600257508320}
-  waypoint: {fileID: 687742980121062650}
+  waypoint: {fileID: 8855606403223923771}
   lockedColor: {r: 0, g: 0, b: 0, a: 0}
   unlockedColor: {r: 1, g: 1, b: 1, a: 0.64705884}
   completedColor: {r: 0.43529412, g: 0.43529412, b: 0.43529412, a: 0.70980394}
@@ -1076,7 +1076,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5160393167709553734}
-  - component: {fileID: 8903836556092982861}
+  - component: {fileID: 6802192852769232187}
   m_Layer: 0
   m_Name: PathNode (3)
   m_TagString: Untagged
@@ -1103,7 +1103,7 @@ RectTransform:
   m_AnchoredPosition: {x: 2542, y: 602.72003}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8903836556092982861
+--- !u!114 &6802192852769232187
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1112,12 +1112,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5451349737495158206}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18a635f64dcf06e46b7f2d495b191707, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c721087fc5669f43bef8292d3f2ea34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   connections:
-  - {fileID: 8055989443150970109}
-  - {fileID: 8766486580619890731}
+  - {fileID: 2208698976047186723}
+  - {fileID: 147975160134003494}
 --- !u!1 &5798201207381895535
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,7 +1127,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7500654510923216106}
-  - component: {fileID: 6761158867954780847}
+  - component: {fileID: 2035405377102623178}
   m_Layer: 0
   m_Name: PathNode (1)
   m_TagString: Untagged
@@ -1154,7 +1154,7 @@ RectTransform:
   m_AnchoredPosition: {x: 1230, y: 1219}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6761158867954780847
+--- !u!114 &2035405377102623178
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1163,12 +1163,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5798201207381895535}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18a635f64dcf06e46b7f2d495b191707, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c721087fc5669f43bef8292d3f2ea34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   connections:
-  - {fileID: 687742980121062650}
-  - {fileID: 8055989443150970109}
+  - {fileID: 8855606403223923771}
 --- !u!1 &6823854340183050800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1377,13 +1376,13 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1699006544343775078}
   - {fileID: 3284392940339437028}
   - {fileID: 5768326603553362204}
   - {fileID: 1223209541434303610}
   - {fileID: 5314790672548234327}
   - {fileID: 3596736994572639369}
   - {fileID: 2542939433935566655}
-  - {fileID: 1699006544343775078}
   - {fileID: 1263555134106240865}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1560,7 +1559,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -341, y: 254}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3530046805992340026
@@ -1613,7 +1612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89d723a1241fcbd4e83235086a9f62f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 200
   animator: {fileID: 3740189207666179827}
 --- !u!95 &3740189207666179827
 Animator:
@@ -1744,7 +1743,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1410216850222967044}
-  - component: {fileID: 5512104605220179793}
+  - component: {fileID: 2892781347484703357}
   m_Layer: 5
   m_Name: Waypoint
   m_TagString: Untagged
@@ -1771,7 +1770,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5512104605220179793
+--- !u!114 &2892781347484703357
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1780,8 +1779,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8582402231879179799}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18a635f64dcf06e46b7f2d495b191707, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c721087fc5669f43bef8292d3f2ea34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   connections:
-  - {fileID: 8766486580619890731}
+  - {fileID: 147975160134003494}
