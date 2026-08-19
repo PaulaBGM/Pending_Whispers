@@ -95,15 +95,24 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         Sprite expressionSprite = charData?.GetExpression(node.expression);
         dialogueUI.ShowLine(charData,speakerName,node.text,expressionSprite);
 
-        if (node.isImportantLine && charData != null)
+        if (ShouldRegisterImportantLine(node, charData))
         {
-            onTestimonyRegistered.Raise(new TestimonyEntry(charData.displayName,charData.portrait,node.text ));          
+            onTestimonyRegistered?.Raise(new TestimonyEntry(charData.displayName, charData.portrait, node.text));
         }
 
         var validChoices = GetValidChoices(node);
 
         if (validChoices.Count > 0)
             dialogueUI.ShowChoices(validChoices);
+    }
+
+
+    private bool ShouldRegisterImportantLine(DialogueNode node, DialogueCharacter character)
+    {
+        if (!node.isImportantLine || character == null)
+            return false;
+
+        return PeopleJournalSystem.Instance == null || !PeopleJournalSystem.Instance.HasEntry(character.displayName, node.text);
     }
 
     private void ApplyNodeEffects(DialogueNode node)

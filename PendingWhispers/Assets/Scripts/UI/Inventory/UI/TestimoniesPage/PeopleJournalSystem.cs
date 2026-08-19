@@ -7,9 +7,9 @@ public class PeopleJournalSystem : BaseSingleton<PeopleJournalSystem>
 
     [SerializeField] private TestimonyEventChannelSO onTestimonyRegistered;
 
-    private List<PersonJournalEntry> entries = new();
-
-    private HashSet<string> seenLines = new();
+    private readonly List<PersonJournalEntry> entries = new();
+    private readonly Dictionary<string, PersonJournalEntry> entriesByName = new();
+    private readonly HashSet<string> seenLines = new();
 
     private void OnEnable()
     {
@@ -39,22 +39,17 @@ public class PeopleJournalSystem : BaseSingleton<PeopleJournalSystem>
             return;
 
         string npcId = name;
-        string lineKey = name + "|" + dialogue.Trim();
+        string lineKey = GetLineKey(name, dialogue);
 
-        if (seenLines.Contains(lineKey))
+        if (!seenLines.Add(lineKey))
             return;
 
-        seenLines.Add(lineKey);
-
-        PersonJournalEntry existing = entries.Find(e => e.personName == name);
-
-        if (existing != null)
+        if (entriesByName.TryGetValue(name, out PersonJournalEntry existing))
         {
             if (existing.dialogues == null)
                 existing.dialogues = new List<string>();
 
-            if (!existing.dialogues.Contains(dialogue))
-                existing.dialogues.Add(dialogue);
+            existing.dialogues.Add(dialogue);
 
             existing.shortDialogue = Trim(dialogue);
             existing.fullDialogue = BuildFullDialogue(existing.dialogues);
@@ -73,6 +68,20 @@ public class PeopleJournalSystem : BaseSingleton<PeopleJournalSystem>
         };
 
         entries.Add(entry);
+        entriesByName[name] = entry;
+    }
+
+    public bool HasEntry(string name, string dialogue)
+    {
+        if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(dialogue))
+            return false;
+
+        return seenLines.Contains(GetLineKey(name, dialogue));
+    }
+
+    private string GetLineKey(string name, string dialogue)
+    {
+        return name + "|" + dialogue.Trim();
     }
 
     private string BuildFullDialogue(List<string> dialogues)
