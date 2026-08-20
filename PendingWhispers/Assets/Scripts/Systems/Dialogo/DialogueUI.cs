@@ -99,7 +99,7 @@ public class DialogueUI : MonoBehaviour
         {
             dialogueText.text += c;
             
-            if (c != ' ' && Random.value < 0.35f)
+            if (c != ' ' && UnityEngine.Random.value < 0.35f)
             {
                 RuntimeManager.PlayOneShot(dialogueEventPath);
             }

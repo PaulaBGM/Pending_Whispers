@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PeopleJournalSystem : BaseSingleton<PeopleJournalSystem>
 {
-    protected override bool PersistAcrossScenes => false;
+    protected override bool PersistAcrossScenes => true;
 
     [SerializeField] private TestimonyEventChannelSO onTestimonyRegistered;
 

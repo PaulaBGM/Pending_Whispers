@@ -243,18 +243,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e66da9ea65fd894fa0adb9c8bb1eae6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcId: case01_victim_singer
   dialogues:
   - dialogue: {fileID: 11400000, guid: 22c3d0caac367cc478fa1e3d7f91c11f, type: 2}
+    topicTitle: End
+    topicId: case1_singer_end
+    hideSeenCheckmark: 0
     requiredFlags:
     - {fileID: 11400000, guid: b20d31eec589dbb4fafd6102542a3f00, type: 2}
   - dialogue: {fileID: 11400000, guid: 908e13b1970ce644e80f5fc311954240, type: 2}
+    topicTitle: Revelation
+    topicId: case1_singer_revealtruth
+    hideSeenCheckmark: 0
     requiredFlags:
     - {fileID: 11400000, guid: bb90d7ec6dc321f4f8f5210a3b984557, type: 2}
   - dialogue: {fileID: 11400000, guid: b07ca4c0950716a40b2e536c07a6bb07, type: 2}
+    topicTitle: Fancy Bottle
+    topicId: singer_bottledialogue
+    hideSeenCheckmark: 0
     requiredFlags:
     - {fileID: 11400000, guid: 1b75c72b9eb796b48bd430228ed4bc8e, type: 2}
     - {fileID: 11400000, guid: 9cc3d14b9dc651b4c8d197dcd5f6c5b9, type: 2}
   - dialogue: {fileID: 11400000, guid: 89acab41a7b5d1f478a950bdaf56c456, type: 2}
+    topicTitle: Vivienne Encore
+    topicId: singer_initialdialogue
+    hideSeenCheckmark: 0
     requiredFlags: []
 --- !u!70 &176805181648224533
 CapsuleCollider2D:
