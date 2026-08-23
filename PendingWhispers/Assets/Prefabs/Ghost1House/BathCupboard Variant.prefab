@@ -69,9 +69,21 @@ PrefabInstance:
       value: BathCupboard Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5253787237032911566, guid: 076129c1b98f57247bc3bbccecdfe0c9, type: 3}
+      propertyPath: m_Size.x
+      value: 2.8114285
+      objectReference: {fileID: 0}
+    - target: {fileID: 5253787237032911566, guid: 076129c1b98f57247bc3bbccecdfe0c9, type: 3}
+      propertyPath: m_Size.y
+      value: 2.7142856
+      objectReference: {fileID: 0}
+    - target: {fileID: 5253787237032911566, guid: 076129c1b98f57247bc3bbccecdfe0c9, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -3475353225444839846, guid: cde2b5bb06d59ef46aed77d8aa22a04c, type: 3}
+      objectReference: {fileID: -3475353225444839846, guid: 4b87f40c6d8c5b642ab5cf8087176ca9, type: 3}
+    - target: {fileID: 5253787237032911566, guid: 076129c1b98f57247bc3bbccecdfe0c9, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8803239374043694122, guid: 076129c1b98f57247bc3bbccecdfe0c9, type: 3}
       propertyPath: m_Size.x
       value: 2.6234422

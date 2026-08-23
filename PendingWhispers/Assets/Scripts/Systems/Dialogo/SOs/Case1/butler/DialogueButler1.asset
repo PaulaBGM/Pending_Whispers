@@ -17,22 +17,22 @@ MonoBehaviour:
     displayName: Lyra
     portrait: {fileID: 0}
     isLeftSide: 1
-    neutral: {fileID: 6795179555359847349, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
-    happy: {fileID: -1103926389690433412, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
-    sad: {fileID: 0}
+    neutral: {fileID: 6795179555359847349, guid: 00ff245776357fc46a8b254b2d49247b, type: 3}
+    happy: {fileID: -1103926389690433412, guid: 00ff245776357fc46a8b254b2d49247b, type: 3}
+    sad: {fileID: 21300000, guid: 764ed2f7a9e6b7e44b9c940723993a26, type: 3}
     angry: {fileID: 0}
-    surprised: {fileID: -8241981511714330664, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
-    thinking: {fileID: 3356771313395980172, guid: d56940b44bd4cfb4a97fc35dec51029f, type: 3}
+    surprised: {fileID: -8241981511714330664, guid: 00ff245776357fc46a8b254b2d49247b, type: 3}
+    thinking: {fileID: 3356771313395980172, guid: 00ff245776357fc46a8b254b2d49247b, type: 3}
   - id: butler
     displayName: "Desir\xE9e Cahu\xE8te"
-    portrait: {fileID: 21300000, guid: 1d364f4b642932d40adc9cecbfeb71f5, type: 3}
+    portrait: {fileID: -12939543, guid: 51229c26bc36aa846b8aacb409a164bf, type: 3}
     isLeftSide: 0
-    neutral: {fileID: 21300000, guid: 1d364f4b642932d40adc9cecbfeb71f5, type: 3}
-    happy: {fileID: 21300000, guid: 6bd6f33d70437744fad8b2ac2c71ba16, type: 3}
-    sad: {fileID: 21300000, guid: 0e6fc337674431141907fae9306fa81a, type: 3}
+    neutral: {fileID: 21300000, guid: 9a56983349582bc47a5c7bbb93fcf64c, type: 3}
+    happy: {fileID: 21300000, guid: d6441488147ff884da72b7b2bef33b32, type: 3}
+    sad: {fileID: 21300000, guid: a3a809104499e50479059a32aedd4a89, type: 3}
     angry: {fileID: 0}
     surprised: {fileID: 0}
-    thinking: {fileID: 21300000, guid: 1d364f4b642932d40adc9cecbfeb71f5, type: 3}
+    thinking: {fileID: 21300000, guid: 9a56983349582bc47a5c7bbb93fcf64c, type: 3}
   nodes:
   - id: start
     speakerID: butler

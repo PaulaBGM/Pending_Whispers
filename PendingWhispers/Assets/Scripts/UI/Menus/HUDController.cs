@@ -23,6 +23,9 @@ public class HUDController : MonoBehaviour
 
     [SerializeField] private Color readyColor = Color.white;
     [SerializeField] private Color cooldownColor = Color.gray;
+    
+    [Header("Spectral Detection")]
+    [SerializeField] private FlagSO catacombsEnteredFlag;
 
     private int pendingClues;
 
@@ -35,6 +38,7 @@ public class HUDController : MonoBehaviour
 
         HandleDetectionCooldown(false);
         RefreshMapButton();
+        RefreshDetectionAvailability();
     }
 
     private void OnEnable()
@@ -88,7 +92,13 @@ public class HUDController : MonoBehaviour
         if (open)
             ResetClueNotifications();
     }
+    private void RefreshDetectionAvailability()
+    {
+        bool available = catacombsEnteredFlag == null || GameProgress.Instance.HasFlag(catacombsEnteredFlag);
 
+        if (detectionButton != null)
+            detectionButton.gameObject.SetActive(available);
+    }
     private void HandleDialogue(bool open)
     {
         dialogueOpen = open;
@@ -134,6 +144,9 @@ public class HUDController : MonoBehaviour
     {
         if (flag == unlockCatacombsFlag)
             RefreshMapButton();
+
+        if (flag == catacombsEnteredFlag) 
+            RefreshDetectionAvailability();
     }
 
     private void RefreshMapButton()

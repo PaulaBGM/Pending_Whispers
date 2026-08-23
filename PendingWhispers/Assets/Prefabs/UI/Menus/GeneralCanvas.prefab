@@ -854,7 +854,6 @@ MonoBehaviour:
   inventoryPage: {fileID: 2892918938365971628}
   peoplePage: {fileID: 2663857178613989384}
   casesPage: {fileID: 1736185235386937086}
-  inventoryController: {fileID: 6254038743544098047}
   tabs:
   - {fileID: 2688393497420240567}
   - {fileID: 5200457491687648452}
@@ -1128,6 +1127,8 @@ MonoBehaviour:
   mapButton: {fileID: 1221202946719176391}
   unlockCatacombsFlag: {fileID: 11400000, guid: 9cc3d14b9dc651b4c8d197dcd5f6c5b9, type: 2}
   onTestimonyRegistered: {fileID: 11400000, guid: 11ab5f6cdba954e4d9500a03e274a911, type: 2}
+  dialogueStateChannel: {fileID: 0}
+  journalStateChannel: {fileID: 0}
   clueNotification: {fileID: 8647359964842673043}
   clueNotificationText: {fileID: 8310218978983033140}
   detectionButtonImage: {fileID: 2906716922083118996}
@@ -1598,7 +1599,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 8460820676929457078, guid: a2df0e8bacc007c49b81ad685d1a90de, type: 3}
+  m_Sprite: {fileID: -1160788962551953147, guid: 24728f8eef9ce75498ca24cd4d9dcbb7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4626,17 +4627,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1209179854287096213, guid: f7bf76d2b31d5534a93f29364faa09c9, type: 3}
   m_PrefabInstance: {fileID: 4498061447398018541}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6254038743544098047 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7540886252542763282, guid: f7bf76d2b31d5534a93f29364faa09c9, type: 3}
-  m_PrefabInstance: {fileID: 4498061447398018541}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2892918938365971628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ec60bae2f466b14e8203fd22eb4a7f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5163990087551164535
 PrefabInstance:
   m_ObjectHideFlags: 0

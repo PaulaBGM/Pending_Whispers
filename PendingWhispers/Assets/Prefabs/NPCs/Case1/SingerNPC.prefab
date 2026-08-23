@@ -80,12 +80,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5741321063430696138, guid: 0a84c68b0a6d28344ab5326488d7c023, type: 3}
+  m_Sprite: {fileID: -5741321063430696138, guid: 3c51f40ce78952a49b25b20df065ed41, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 10.24, y: 10.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -101,7 +101,7 @@ Animator:
   m_GameObject: {fileID: 413082295712665338}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1c0f91c11c027ec4db61365101828e1e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 269e3dacf88fb5641a84c6bbf4d956bd, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -243,15 +243,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e66da9ea65fd894fa0adb9c8bb1eae6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcId: case01_victim_singer
   dialogues:
+  - dialogue: {fileID: 11400000, guid: 22c3d0caac367cc478fa1e3d7f91c11f, type: 2}
+    topicTitle: End
+    topicId: case1_singer_end
+    hideSeenCheckmark: 0
+    requiredFlags:
+    - {fileID: 11400000, guid: b20d31eec589dbb4fafd6102542a3f00, type: 2}
   - dialogue: {fileID: 11400000, guid: 908e13b1970ce644e80f5fc311954240, type: 2}
+    topicTitle: Revelation
+    topicId: case1_singer_revealtruth
+    hideSeenCheckmark: 0
     requiredFlags:
     - {fileID: 11400000, guid: bb90d7ec6dc321f4f8f5210a3b984557, type: 2}
   - dialogue: {fileID: 11400000, guid: b07ca4c0950716a40b2e536c07a6bb07, type: 2}
+    topicTitle: Fancy Bottle
+    topicId: singer_bottledialogue
+    hideSeenCheckmark: 0
     requiredFlags:
     - {fileID: 11400000, guid: 1b75c72b9eb796b48bd430228ed4bc8e, type: 2}
     - {fileID: 11400000, guid: 9cc3d14b9dc651b4c8d197dcd5f6c5b9, type: 2}
   - dialogue: {fileID: 11400000, guid: 89acab41a7b5d1f478a950bdaf56c456, type: 2}
+    topicTitle: Vivienne Encore
+    topicId: singer_initialdialogue
+    hideSeenCheckmark: 0
     requiredFlags: []
 --- !u!70 &176805181648224533
 CapsuleCollider2D:

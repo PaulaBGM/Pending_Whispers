@@ -23,6 +23,7 @@ public class InputController : BaseSingleton<InputController>
     protected override void Awake()
     {
         base.Awake();
+        if (Instance != this) return; // nuevo
         playerInput = GetComponent<PlayerInput>();
     }
 

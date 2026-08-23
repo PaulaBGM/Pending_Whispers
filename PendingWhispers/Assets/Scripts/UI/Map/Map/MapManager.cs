@@ -109,7 +109,10 @@ public class MapManager : BaseSingleton<MapManager>
     {
         if (GameProgress.Instance == null)
         {
-            Debug.LogError("[MapManager] GameProgress.Instance es NULL.");
+            Debug.LogError(
+                "[MapManager] GameProgress.Instance es NULL."
+            );
+
             return;
         }
 

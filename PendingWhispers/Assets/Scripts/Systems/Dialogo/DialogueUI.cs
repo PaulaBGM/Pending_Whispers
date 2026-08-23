@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,9 +23,17 @@ public class DialogueUI : MonoBehaviour
     [Header("Typewriter")]
     public float typingSpeed = 0.03f;
 
+    [Header("Topic Selector")]
+    [SerializeField] private string topicSelectorSpeaker = "Talk";
+    [SerializeField] private string seenTopicPrefix = "✓  ";
+    [SerializeField] private Color seenTopicColor = new Color(0.55f, 0.12f, 0.24f, 1f);
+    [SerializeField] private Color unseenTopicColor = Color.white;
+
+    private readonly List<GameObject> choiceButtonPool = new();
     private Coroutine typingCoroutine;
     private bool isTyping;
     private string fullText;
+    private int visibleChoiceCount;
     
     [Header("FMOD")]
     public string dialogueEventPath = "event:/Dialogue";
@@ -49,7 +59,7 @@ public class DialogueUI : MonoBehaviour
             }
 
             // Si hay elecciones visibles, no avanzar
-            if (choicesContainer.childCount > 0)
+            if (visibleChoiceCount > 0)
                 return;
 
             // Avanzar al siguiente nodo
@@ -89,7 +99,7 @@ public class DialogueUI : MonoBehaviour
         {
             dialogueText.text += c;
             
-            if (c != ' ' && Random.value < 0.35f)
+            if (c != ' ' && UnityEngine.Random.value < 0.35f)
             {
                 RuntimeManager.PlayOneShot(dialogueEventPath);
             }
@@ -115,13 +125,43 @@ public class DialogueUI : MonoBehaviour
 
         foreach (var choice in choices)
         {
-            GameObject btn = Instantiate(choiceButtonPrefab, choicesContainer);
+            GameObject btn = GetChoiceButton();
 
             btn.GetComponentInChildren<TextMeshProUGUI>().text = choice.text;
 
-            btn.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() =>
+            btn.GetComponent<Button>().onClick.AddListener(() =>
             {
                 DialogueManager.Instance.ChooseChoice(choice);
+            });
+        }
+    }
+
+    public void ShowDialogueSelector(List<DialogueCondition> topics, Func<DialogueCondition, bool> isTopicSeen, Action<DialogueCondition> onTopicSelected)
+    {
+        panel.SetActive(true);
+        speakerText.text = topicSelectorSpeaker;
+        dialogueText.text = string.Empty;
+
+        if (CharacterUIController.Instance != null)
+            CharacterUIController.Instance.ResetCharacters();
+
+        ClearChoices();
+
+        foreach (DialogueCondition topic in topics)
+        {
+            GameObject btn = GetChoiceButton();
+            TextMeshProUGUI topicText = btn.GetComponentInChildren<TextMeshProUGUI>();
+            bool wasSeen = !topic.hideSeenCheckmark && (isTopicSeen?.Invoke(topic) ?? false);
+
+            if (topicText != null)
+            {
+                topicText.text = wasSeen ? $"{seenTopicPrefix}{topic.DisplayTitle}" : topic.DisplayTitle;
+                topicText.color = wasSeen ? seenTopicColor : unseenTopicColor;
+            }
+
+            btn.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                onTopicSelected?.Invoke(topic);
             });
         }
     }
@@ -138,9 +178,38 @@ public class DialogueUI : MonoBehaviour
 
     public void ClearChoices()
     {
-        for (int i = choicesContainer.childCount - 1; i >= 0; i--)
+        for (int i = 0; i < visibleChoiceCount; i++)
         {
-            Destroy(choicesContainer.GetChild(i).gameObject);
+            if (choiceButtonPool[i].TryGetComponent(out Button button))
+                button.onClick.RemoveAllListeners();
+
+            choiceButtonPool[i].SetActive(false);
         }
+
+        visibleChoiceCount = 0;
+    }
+
+    private GameObject GetChoiceButton()
+    {
+        GameObject buttonObject;
+
+        if (visibleChoiceCount < choiceButtonPool.Count)
+        {
+            buttonObject = choiceButtonPool[visibleChoiceCount];
+        }
+        else
+        {
+            buttonObject = Instantiate(choiceButtonPrefab, choicesContainer);
+            choiceButtonPool.Add(buttonObject);
+        }
+
+        buttonObject.SetActive(true);
+        buttonObject.transform.SetSiblingIndex(visibleChoiceCount);
+        visibleChoiceCount++;
+
+        if (buttonObject.TryGetComponent(out Button button))
+            button.onClick.RemoveAllListeners();
+
+        return buttonObject;
     }
 }

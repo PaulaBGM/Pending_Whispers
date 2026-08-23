@@ -11,6 +11,8 @@ public class DialogueManager : BaseSingleton<DialogueManager>
     private DialogueData currentDialogue;
     private DialogueNode currentNode;
     private NPC currentNPC;
+    private DialogueCondition currentDialogueTopic;
+    private readonly HashSet<string> seenDialogueTopicKeys = new();
     private PlayerController_Actions player;
 
     private void OnEnable()
@@ -33,7 +35,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         player = p;
     }
 
-    public void StartDialogue(DialogueData dialogue, NPC npc)
+    public void StartDialogue(DialogueData dialogue, NPC npc, DialogueCondition dialogueTopic = null)
     {
         if (dialogue == null)
         {
@@ -42,6 +44,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         }
 
         currentNPC = npc;
+        currentDialogueTopic = dialogueTopic;
 
         SetDialogueActive(true);
 
@@ -95,15 +98,24 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         Sprite expressionSprite = charData?.GetExpression(node.expression);
         dialogueUI.ShowLine(charData,speakerName,node.text,expressionSprite);
 
-        if (node.isImportantLine && charData != null)
+        if (ShouldRegisterImportantLine(node, charData))
         {
-            onTestimonyRegistered.Raise(new TestimonyEntry(charData.displayName,charData.portrait,node.text ));          
+            onTestimonyRegistered?.Raise(new TestimonyEntry(charData.displayName, charData.portrait, node.text));
         }
 
         var validChoices = GetValidChoices(node);
 
         if (validChoices.Count > 0)
             dialogueUI.ShowChoices(validChoices);
+    }
+
+
+    private bool ShouldRegisterImportantLine(DialogueNode node, DialogueCharacter character)
+    {
+        if (!node.isImportantLine || character == null)
+            return false;
+
+        return PeopleJournalSystem.Instance == null || !PeopleJournalSystem.Instance.HasEntry(character.displayName, node.text);
     }
 
     private void ApplyNodeEffects(DialogueNode node)
@@ -137,6 +149,8 @@ public class DialogueManager : BaseSingleton<DialogueManager>
 
     public void EndDialogue()
     {
+        MarkCurrentDialogueTopicAsSeen();
+
         SetDialogueActive(false);
 
         DialogueUI.Instance?.Hide();
@@ -147,6 +161,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         currentNode = null;
         currentDialogue = null;
         currentNPC = null;
+        currentDialogueTopic = null;
     }
 
     private void SetDialogueActive(bool isActive)
@@ -191,6 +206,73 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         }
 
         return validChoices;
+    }
+
+    public void ShowDialogueSelector(List<DialogueCondition> topics, NPC npc)
+    {
+        if (topics == null || topics.Count == 0)
+            return;
+
+        currentNPC = npc;
+        SetDialogueActive(true);
+
+        if (!TryGetDialogueUI(out DialogueUI dialogueUI))
+            return;
+
+        dialogueUI.ShowDialogueSelector(topics, HasSeenDialogueTopic, SelectDialogueTopic);
+    }
+
+    private void SelectDialogueTopic(DialogueCondition topic)
+    {
+        if (topic?.dialogue == null)
+            return;
+
+        DialogueUI.Instance?.ClearChoices();
+        StartDialogue(topic.dialogue, currentNPC, topic);
+    }
+
+    private bool HasSeenDialogueTopic(DialogueCondition topic)
+    {
+        string key = GetDialogueTopicKey(topic);
+        return !string.IsNullOrEmpty(key) && seenDialogueTopicKeys.Contains(key);
+    }
+
+    private void MarkCurrentDialogueTopicAsSeen()
+    {
+        string key = GetDialogueTopicKey(currentDialogueTopic);
+
+        if (!string.IsNullOrEmpty(key))
+            seenDialogueTopicKeys.Add(key);
+    }
+
+    private string GetDialogueTopicKey(DialogueCondition topic)
+    {
+        string caseId = GetCurrentCaseId();
+        string npcId = currentNPC != null ? currentNPC.DialogueId : "global";
+
+        if (topic == null)
+        {
+            string dialogueId = currentDialogue != null ? currentDialogue.name : string.Empty;
+            return string.IsNullOrEmpty(dialogueId) ? string.Empty : $"{caseId}|{npcId}|{dialogueId}";
+        }
+
+        string topicId = !string.IsNullOrWhiteSpace(topic.topicId)
+            ? topic.topicId.Trim()
+            : topic.dialogue != null ? topic.dialogue.name : string.Empty;
+
+        return string.IsNullOrEmpty(topicId) ? string.Empty : $"{caseId}|{npcId}|{topicId}";
+    }
+
+    private string GetCurrentCaseId()
+    {
+        CaseData currentCaseData = CaseManager.Instance != null ? CaseManager.Instance.GetCurrentCaseData() : null;
+
+        if (currentCaseData == null)
+            return "global";
+
+        return !string.IsNullOrWhiteSpace(currentCaseData.caseID)
+            ? currentCaseData.caseID.Trim()
+            : currentCaseData.name;
     }
 
     private void AddFlags(List<FlagSO> flags, bool logAddedFlags = false)
