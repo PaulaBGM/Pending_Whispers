@@ -15,10 +15,14 @@ PrefabInstance:
     - target: {fileID: 1044115353584122974, guid: d5d078ad989a0c84da4e7f4c70255d70, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -6502518018305562863, guid: 4ff72b09f9bc3f343a9e040a656c2dbc, type: 3}
+      objectReference: {fileID: -6502518018305562863, guid: 8895b57395eaf3d4fbab3fb790868e07, type: 3}
     - target: {fileID: 1044115353584122974, guid: d5d078ad989a0c84da4e7f4c70255d70, type: 3}
       propertyPath: m_SortingOrder
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1044115353584122974, guid: d5d078ad989a0c84da4e7f4c70255d70, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4283469320806091971, guid: d5d078ad989a0c84da4e7f4c70255d70, type: 3}
       propertyPath: m_Size.x

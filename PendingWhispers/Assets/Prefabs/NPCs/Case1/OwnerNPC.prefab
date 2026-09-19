@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 40
-  m_Sprite: {fileID: 8186938708035040425, guid: d5593f9ba027a9c42a6d202fa0663daa, type: 3}
+  m_Sprite: {fileID: 8186938708035040425, guid: f33d8c1150fccfa45815afb0fd157b81, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,7 +99,7 @@ Animator:
   m_GameObject: {fileID: 413082295712665338}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d1685f40b4ad0994cb6b25dd6b89c7e1, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9b023976153d52b458ede1441afb9a6f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -174,16 +174,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e66da9ea65fd894fa0adb9c8bb1eae6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcId: 
   dialogues:
   - dialogue: {fileID: 11400000, guid: 16c01d27caee0a240a7b846bed5d723f, type: 2}
+    topicTitle: 
+    topicId: 
+    hideSeenCheckmark: 0
     requiredFlags:
     - {fileID: 11400000, guid: 8c9823eacec837c4299e0acca9e31dad, type: 2}
     - {fileID: 11400000, guid: bb90d7ec6dc321f4f8f5210a3b984557, type: 2}
   - dialogue: {fileID: 11400000, guid: 3ddae05c8df5c6e47b95c2b8e64ab061, type: 2}
+    topicTitle: 
+    topicId: 
+    hideSeenCheckmark: 0
     requiredFlags:
     - {fileID: 11400000, guid: 62256de666409794a87f3313daea52e4, type: 2}
     - {fileID: 11400000, guid: bb90d7ec6dc321f4f8f5210a3b984557, type: 2}
   - dialogue: {fileID: 11400000, guid: 26e3b1fe34fe67546bab460f58b7b58e, type: 2}
+    topicTitle: 
+    topicId: 
+    hideSeenCheckmark: 0
     requiredFlags: []
 --- !u!70 &176805181648224533
 CapsuleCollider2D:

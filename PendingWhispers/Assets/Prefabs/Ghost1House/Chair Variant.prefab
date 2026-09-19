@@ -110,7 +110,11 @@ PrefabInstance:
     - target: {fileID: 5653429907450614293, guid: cd83b8c77127d3b4aa9b61b6a01d052f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -4514385531269371068, guid: 4b87f40c6d8c5b642ab5cf8087176ca9, type: 3}
+      objectReference: {fileID: -4514385531269371068, guid: 71f142891e5fb25409b167c3288e8105, type: 3}
+    - target: {fileID: 5653429907450614293, guid: cd83b8c77127d3b4aa9b61b6a01d052f, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7578573138732952052, guid: cd83b8c77127d3b4aa9b61b6a01d052f, type: 3}
       propertyPath: m_Name
       value: Chair Variant

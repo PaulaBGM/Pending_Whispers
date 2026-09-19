@@ -80,12 +80,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7806103805540087679, guid: 66b2a23fc1b9b7144b9bf6d05938d515, type: 3}
+  m_Sprite: {fileID: -7806103805540087679, guid: 6695729665cb91d4d92cc65d413c5986, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 10.24, y: 10.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -243,19 +243,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e66da9ea65fd894fa0adb9c8bb1eae6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcId: 
   dialogues:
   - dialogue: {fileID: 11400000, guid: 9f8656febfccda04599f485cd36ee88c, type: 2}
+    topicTitle: 
+    topicId: 
+    hideSeenCheckmark: 0
     requiredFlags:
     - {fileID: 11400000, guid: 8c9823eacec837c4299e0acca9e31dad, type: 2}
     - {fileID: 11400000, guid: ea1d627ebee820a448438805c8496a2d, type: 2}
   - dialogue: {fileID: 11400000, guid: b7705bd6bd8add349aa0733a30a82676, type: 2}
+    topicTitle: 
+    topicId: 
+    hideSeenCheckmark: 0
     requiredFlags:
     - {fileID: 11400000, guid: 538da547a0d6177408bea1982f7e6116, type: 2}
     - {fileID: 11400000, guid: ea1d627ebee820a448438805c8496a2d, type: 2}
   - dialogue: {fileID: 11400000, guid: 651ec2fc10fd23d45bdb6e7e670990a0, type: 2}
+    topicTitle: 
+    topicId: 
+    hideSeenCheckmark: 0
     requiredFlags:
     - {fileID: 11400000, guid: ea1d627ebee820a448438805c8496a2d, type: 2}
   - dialogue: {fileID: 11400000, guid: 76b84ce87eaca99448b2174d9ecbadab, type: 2}
+    topicTitle: 
+    topicId: 
+    hideSeenCheckmark: 0
     requiredFlags: []
 --- !u!70 &176805181648224533
 CapsuleCollider2D:

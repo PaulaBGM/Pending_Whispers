@@ -34,7 +34,11 @@ public class DialogueUI : MonoBehaviour
     private bool isTyping;
     private string fullText;
     private int visibleChoiceCount;
-    
+
+    [Header("Evidence Presentation")]
+    [SerializeField] private GameObject presentEvidenceButton;
+    [SerializeField] private EvidencePickerUI evidencePicker;
+
     [Header("FMOD")]
     public string dialogueEventPath = "event:/Dialogue";
 
@@ -46,23 +50,13 @@ public class DialogueUI : MonoBehaviour
 
     void Update()
     {
-        if (!panel.activeSelf)
-            return;
+        if (!panel.activeSelf) return;
 
         if (Input.GetMouseButtonDown(0))
         {
-            // Si el texto se est� escribiendo, completarlo
-            if (isTyping)
-            {
-                SkipTyping();
-                return;
-            }
-
-            // Si hay elecciones visibles, no avanzar
-            if (visibleChoiceCount > 0)
-                return;
-
-            // Avanzar al siguiente nodo
+            if (isTyping) { SkipTyping(); return; }
+            if (visibleChoiceCount > 0) return;
+            if (evidencePicker != null && evidencePicker.IsShowing) return; // NUEVO
             DialogueManager.Instance.Next();
         }
     }
@@ -169,9 +163,9 @@ public class DialogueUI : MonoBehaviour
     public void Hide()
     {
         panel.SetActive(false);
-
         ClearChoices();
-
+        SetEvidenceButtonVisible(false);
+        evidencePicker?.Hide();
         if (CharacterUIController.Instance != null)
             CharacterUIController.Instance.ResetCharacters();
     }
