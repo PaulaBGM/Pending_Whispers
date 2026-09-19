@@ -1,19 +1,24 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Inventory.Model;
 
 public class DialogueManager : BaseSingleton<DialogueManager>
 {
     [SerializeField] private TestimonyEventChannelSO onTestimonyRegistered;
-
     [SerializeField] private BoolEventChannelSO onDialogueStateChannel;
+
     private DialogueRunner runner;
     private DialogueData currentDialogue;
     private DialogueNode currentNode;
     private NPC currentNPC;
     private DialogueCondition currentDialogueTopic;
+
     private readonly HashSet<string> seenDialogueTopicKeys = new();
+
     private PlayerController_Actions player;
+
+    private bool subscribedToEvidenceUI;
 
     private void OnEnable()
     {
@@ -93,10 +98,12 @@ public class DialogueManager : BaseSingleton<DialogueManager>
             return;
 
         ApplyNodeEffects(node);
+
         DialogueCharacter charData = currentDialogue.GetCharacter(node.speakerID);
-        string speakerName = charData != null? charData.displayName: "???";
+        string speakerName = charData != null ? charData.displayName : "???";
         Sprite expressionSprite = charData?.GetExpression(node.expression);
-        dialogueUI.ShowLine(charData,speakerName,node.text,expressionSprite);
+
+        dialogueUI.ShowLine(charData, speakerName, node.text, expressionSprite);
 
         if (ShouldRegisterImportantLine(node, charData))
         {
@@ -104,11 +111,12 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         }
 
         var validChoices = GetValidChoices(node);
-
         if (validChoices.Count > 0)
             dialogueUI.ShowChoices(validChoices);
-    }
 
+        TrySubscribeToEvidenceUI();
+        dialogueUI.SetEvidenceButtonVisible(node.allowsEvidencePresentation);
+    }
 
     private bool ShouldRegisterImportantLine(DialogueNode node, DialogueCharacter character)
     {
@@ -135,6 +143,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
 
         if (choice.reputationChange != 0)
             ReputationManager.Instance?.AddReputation(choice.reputationChange);
+
         choice.onSelectedEvent?.Raise();
 
         if (choice.endsDialogue)
@@ -152,7 +161,6 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         MarkCurrentDialogueTopicAsSeen();
 
         SetDialogueActive(false);
-
         DialogueUI.Instance?.Hide();
 
         currentNPC?.TryTransform();
@@ -167,6 +175,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
     private void SetDialogueActive(bool isActive)
     {
         onDialogueStateChannel?.Raise(isActive);
+
         if (player != null)
             player.canMove = !isActive;
     }
@@ -174,11 +183,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
     private bool TryGetDialogueUI(out DialogueUI dialogueUI)
     {
         dialogueUI = DialogueUI.Instance;
-
-        if (dialogueUI != null)
-            return true;
-
-        return false;
+        return dialogueUI != null;
     }
 
     private List<DialogueChoice> GetValidChoices(DialogueNode node)
@@ -240,7 +245,6 @@ public class DialogueManager : BaseSingleton<DialogueManager>
     private void MarkCurrentDialogueTopicAsSeen()
     {
         string key = GetDialogueTopicKey(currentDialogueTopic);
-
         if (!string.IsNullOrEmpty(key))
             seenDialogueTopicKeys.Add(key);
     }
@@ -299,5 +303,57 @@ public class DialogueManager : BaseSingleton<DialogueManager>
 
         foreach (GameEventSO evt in events)
             evt?.Raise();
+    }
+
+    // ---------------- EVIDENCE PRESENTATION ----------------
+
+    private void TrySubscribeToEvidenceUI()
+    {
+        if (subscribedToEvidenceUI || DialogueUI.Instance == null)
+            return;
+
+        DialogueUI.Instance.OnEvidenceItemSelected += HandlePresentedItem;
+        subscribedToEvidenceUI = true;
+    }
+
+    public void OpenEvidencePicker()
+    {
+        if (currentNode == null || !currentNode.allowsEvidencePresentation)
+            return;
+
+        DialogueUI.Instance?.OpenEvidencePicker();
+    }
+
+    private void HandlePresentedItem(ItemSO item)
+    {
+        if (currentNode == null || !currentNode.allowsEvidencePresentation)
+            return;
+
+        DialogueEvidenceOption match = currentNode.evidenceOptions?.Find(o => o.item == item);
+
+        if (match != null)
+        {
+            AddFlags(match.addFlags, true);
+            match.onSelectedEvent?.Raise();
+            DialogueUI.Instance?.SetEvidenceButtonVisible(false);
+            GoToNode(match.nextNodeID);
+            return;
+        }
+
+        UIFeedbackManager.Instance?.ShowMessage(currentNode.wrongEvidenceFeedback);
+
+        if (!string.IsNullOrEmpty(currentNode.wrongEvidenceNodeID))
+        {
+            DialogueUI.Instance?.SetEvidenceButtonVisible(false);
+            GoToNode(currentNode.wrongEvidenceNodeID);
+        }
+    }
+
+    protected override void OnDestroy()
+    {
+        if (subscribedToEvidenceUI && DialogueUI.Instance != null)
+            DialogueUI.Instance.OnEvidenceItemSelected -= HandlePresentedItem;
+
+        base.OnDestroy();
     }
 }

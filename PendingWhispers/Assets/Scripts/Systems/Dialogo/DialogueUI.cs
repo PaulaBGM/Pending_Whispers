@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using FMOD.Studio;
 using FMODUnity;
+using Inventory.Model;
 
 public class DialogueUI : MonoBehaviour
 {
@@ -39,6 +40,8 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private GameObject presentEvidenceButton;
     [SerializeField] private EvidencePickerUI evidencePicker;
 
+    public event Action<ItemSO> OnEvidenceItemSelected;
+
     [Header("FMOD")]
     public string dialogueEventPath = "event:/Dialogue";
 
@@ -46,6 +49,9 @@ public class DialogueUI : MonoBehaviour
     {
         Instance = this;
         panel.SetActive(false);
+
+        if (evidencePicker != null)
+            evidencePicker.OnItemSelected += HandleEvidenceSelected;
     }
 
     void Update()
@@ -56,12 +62,12 @@ public class DialogueUI : MonoBehaviour
         {
             if (isTyping) { SkipTyping(); return; }
             if (visibleChoiceCount > 0) return;
-            if (evidencePicker != null && evidencePicker.IsShowing) return; // NUEVO
+            if (evidencePicker != null && evidencePicker.IsShowing) return;
             DialogueManager.Instance.Next();
         }
     }
 
-    public void ShowLine(DialogueCharacter character, string speaker, string text, Sprite expressionSprite )
+    public void ShowLine(DialogueCharacter character, string speaker, string text, Sprite expressionSprite)
     {
         panel.SetActive(true);
 
@@ -69,9 +75,9 @@ public class DialogueUI : MonoBehaviour
 
         if (CharacterUIController.Instance != null)
         {
-            CharacterUIController.Instance.SetCharacter(character,expressionSprite);
+            CharacterUIController.Instance.SetCharacter(character, expressionSprite);
         }
-        
+
         StartTyping(text);
     }
 
@@ -92,7 +98,7 @@ public class DialogueUI : MonoBehaviour
         foreach (char c in text)
         {
             dialogueText.text += c;
-            
+
             if (c != ' ' && UnityEngine.Random.value < 0.35f)
             {
                 RuntimeManager.PlayOneShot(dialogueEventPath);
@@ -205,5 +211,30 @@ public class DialogueUI : MonoBehaviour
             button.onClick.RemoveAllListeners();
 
         return buttonObject;
+    }
+
+    // ---------------- EVIDENCE PRESENTATION ----------------
+
+    private void HandleEvidenceSelected(ItemSO item)
+    {
+        evidencePicker.Hide();
+        OnEvidenceItemSelected?.Invoke(item);
+    }
+
+    public void SetEvidenceButtonVisible(bool visible)
+    {
+        if (presentEvidenceButton != null)
+            presentEvidenceButton.SetActive(visible);
+    }
+
+    public void OpenEvidencePicker()
+    {
+        evidencePicker?.Show();
+    }
+
+    // Enganchado en el Inspector al OnClick() del botón "Presentar"
+    public void OnPresentEvidenceButtonClicked()
+    {
+        DialogueManager.Instance.OpenEvidencePicker();
     }
 }
