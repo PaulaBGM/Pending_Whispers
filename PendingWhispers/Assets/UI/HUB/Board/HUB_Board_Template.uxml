@@ -1,0 +1,122 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/HUB/Board/HUB_Board_USS.uss?fileID=7433441132597879392&amp;guid=619e26b32d3994c4ca3f4fb2a7163146&amp;type=3#HUB_Board_USS" />
+    <ui:VisualElement name="HUB_Board_Root" class="boardRoot containerRoot">
+        <ui:VisualElement name="HUB_Board_BG" class="hubBoardBG">
+            <ui:GroupBox name="HUB_Board_Postit_Container" class="postitContainer hubPostitBG" style="flex-direction: row; flex-basis: auto;">
+                <ui:Button name="HUB_Board_Postit_BG_1" selectable="true" class="hubPostItBG" style="translate: -60px -60px;">
+                    <ui:Label name="T_Postit_CaseName" text="Lorem Ipsum" picking-mode="Ignore" class="postitTextCaseName" />
+                    <ui:VisualElement name="VE_Postit_Line" class="postitLine" style="flex-grow: 1; min-width: auto; min-height: auto; max-width: none; max-height: none; -unity-background-image-tint-color: rgb(241, 194, 194);" />
+                    <ui:Label name="T_Postit_Information" text="- Lorem Ipsum&#10;&#10;&#10;- Lorem Ipsum" picking-mode="Ignore" class="postitInformation postitTextInformation" />
+                    <ui:VisualElement name="HUB_Board_Postit_ReputationLabel" enabled="true" picking-mode="Ignore" focusable="false" class="reputationLabel" style="flex-grow: 1; align-content: center; justify-content: center;">
+                        <ui:Label text="Reputation: +100%" name="T_ReputationLabel" picking-mode="Ignore" class="reputationLabelText" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="HUB_Board_Postit_CaseState" picking-mode="Ignore" enabled="true" focusable="true" class="reputationLabel" style="flex-grow: 1; align-content: center; justify-content: center;">
+                        <ui:Label text="Active" name="T_ReputationLabel" picking-mode="Ignore" class="reputationLabelText" />
+                    </ui:VisualElement>
+                </ui:Button>
+                <ui:Button name="HUB_Board_Postit_BG_2" class="hubPostItBG" style="translate: -130px 105px;">
+                    <ui:Label name="T_Postit_CaseName" text="Lorem Ipsum" picking-mode="Ignore" class="postitTextCaseName" />
+                    <ui:VisualElement name="VE_Postit_Line" class="postitLine" style="flex-grow: 1; min-width: auto; min-height: auto; max-width: none; max-height: none; -unity-background-image-tint-color: rgb(241, 194, 194);" />
+                    <ui:Label name="T_Postit_Information" text="- Lorem Ipsum&#10;&#10;&#10;- Lorem Ipsum" picking-mode="Ignore" class="postitInformation postitTextInformation" />
+                    <ui:VisualElement name="HUB_Board_Postit_ReputationLabel" enabled="true" picking-mode="Ignore" focusable="false" class="reputationLabel" style="flex-grow: 1; align-content: center; justify-content: center;">
+                        <ui:Label text="Reputation: +100%" name="T_ReputationLabel" picking-mode="Ignore" class="reputationLabelText" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="HUB_Board_Postit_CaseState" picking-mode="Ignore" enabled="true" focusable="true" class="reputationLabel" style="flex-grow: 1; align-content: center; justify-content: center;">
+                        <ui:Label text="Active" name="T_ReputationLabel" picking-mode="Ignore" class="reputationLabelText" />
+                    </ui:VisualElement>
+                </ui:Button>
+                <ui:Button name="HUB_Board_Postit_BG_3" class="hubPostItBG">
+                    <ui:Label name="T_Postit_CaseName" text="Lorem Ipsum" picking-mode="Ignore" class="postitTextCaseName" />
+                    <ui:VisualElement name="VE_Postit_Line" class="postitLine" style="flex-grow: 1; min-width: auto; min-height: auto; max-width: none; max-height: none; -unity-background-image-tint-color: rgb(241, 194, 194);" />
+                    <ui:Label name="T_Postit_Information" text="- Lorem Ipsum&#10;&#10;&#10;- Lorem Ipsum" picking-mode="Ignore" class="postitInformation postitTextInformation" />
+                    <ui:VisualElement name="HUB_Board_Postit_ReputationLabel" enabled="true" picking-mode="Ignore" focusable="false" class="reputationLabel" style="flex-grow: 1; align-content: center; justify-content: center;">
+                        <ui:Label text="Reputation: +100%" name="T_ReputationLabel" picking-mode="Ignore" class="reputationLabelText" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="HUB_Board_Postit_CaseState" picking-mode="Ignore" enabled="true" focusable="true" class="reputationLabel" style="flex-grow: 1; align-content: center; justify-content: center;">
+                        <ui:Label text="Active" name="T_ReputationLabel" picking-mode="Ignore" class="reputationLabelText" />
+                    </ui:VisualElement>
+                </ui:Button>
+                <ui:Button name="HUB_Board_Postit_BG_4" class="hubPostItBG" style="translate: 0 -90px;">
+                    <ui:Label name="T_Postit_CaseName" text="Lorem Ipsum" picking-mode="Ignore" class="postitTextCaseName" />
+                    <ui:VisualElement name="VE_Postit_Line" class="postitLine" style="flex-grow: 1; min-width: auto; min-height: auto; max-width: none; max-height: none; -unity-background-image-tint-color: rgb(241, 194, 194);" />
+                    <ui:Label name="T_Postit_Information" text="- Lorem Ipsum&#10;&#10;&#10;- Lorem Ipsum" picking-mode="Ignore" class="postitInformation postitTextInformation" />
+                    <ui:VisualElement name="HUB_Board_Postit_ReputationLabel" enabled="true" picking-mode="Ignore" focusable="false" class="reputationLabel" style="flex-grow: 1; align-content: center; justify-content: center;">
+                        <ui:Label text="Reputation: +100%" name="T_ReputationLabel" picking-mode="Ignore" class="reputationLabelText" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="HUB_Board_Postit_CaseState" picking-mode="Ignore" enabled="true" focusable="true" class="reputationLabel" style="flex-grow: 1; align-content: center; justify-content: center;">
+                        <ui:Label text="Active" name="T_ReputationLabel" picking-mode="Ignore" class="reputationLabelText" />
+                    </ui:VisualElement>
+                </ui:Button>
+                <ui:Button name="HUB_Board_Postit_BG_5" class="hubPostItBG" style="translate: -67px 0;">
+                    <ui:Label name="T_Postit_CaseName" text="Lorem Ipsum" picking-mode="Ignore" class="postitTextCaseName" />
+                    <ui:VisualElement name="VE_Postit_Line" class="postitLine" style="flex-grow: 1; min-width: auto; min-height: auto; max-width: none; max-height: none; -unity-background-image-tint-color: rgb(241, 194, 194);" />
+                    <ui:Label name="T_Postit_Information" text="- Lorem Ipsum&#10;&#10;&#10;- Lorem Ipsum" picking-mode="Ignore" class="postitInformation postitTextInformation" />
+                    <ui:VisualElement name="HUB_Board_Postit_ReputationLabel" enabled="true" picking-mode="Ignore" focusable="false" class="reputationLabel" style="flex-grow: 1; align-content: center; justify-content: center;">
+                        <ui:Label text="Reputation: +100%" name="T_ReputationLabel" picking-mode="Ignore" class="reputationLabelText" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="HUB_Board_Postit_CaseState" picking-mode="Ignore" enabled="true" focusable="true" class="reputationLabel" style="flex-grow: 1; align-content: center; justify-content: center;">
+                        <ui:Label text="Active" name="T_ReputationLabel" picking-mode="Ignore" class="reputationLabelText" />
+                    </ui:VisualElement>
+                </ui:Button>
+                <ui:Button name="HUB_Board_Postit_BG_6" class="hubPostItBG" style="translate: 0 37px;">
+                    <ui:Label name="T_Postit_CaseName" text="Lorem Ipsum" picking-mode="Ignore" class="postitTextCaseName" />
+                    <ui:VisualElement name="VE_Postit_Line" class="postitLine" style="flex-grow: 1; min-width: auto; min-height: auto; max-width: none; max-height: none; -unity-background-image-tint-color: rgb(241, 194, 194);" />
+                    <ui:Label name="T_Postit_Information" text="- Lorem Ipsum&#10;&#10;&#10;- Lorem Ipsum" picking-mode="Ignore" class="postitInformation postitTextInformation" />
+                    <ui:VisualElement name="HUB_Board_Postit_ReputationLabel" enabled="true" picking-mode="Ignore" focusable="false" class="reputationLabel" style="flex-grow: 1; align-content: center; justify-content: center;">
+                        <ui:Label text="Reputation: +100%" name="T_ReputationLabel" picking-mode="Ignore" class="reputationLabelText" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="HUB_Board_Postit_CaseState" picking-mode="Ignore" enabled="true" focusable="true" class="reputationLabel" style="flex-grow: 1; align-content: center; justify-content: center;">
+                        <ui:Label text="Active" name="T_ReputationLabel" picking-mode="Ignore" class="reputationLabelText" />
+                    </ui:VisualElement>
+                </ui:Button>
+                <ui:Button name="HUB_Board_Postit_BG_7" class="hubPostItBG" style="translate: 118px 0;">
+                    <ui:Label name="T_Postit_CaseName" text="Lorem Ipsum" picking-mode="Ignore" class="postitTextCaseName" />
+                    <ui:VisualElement name="VE_Postit_Line" class="postitLine" style="flex-grow: 1; min-width: auto; min-height: auto; max-width: none; max-height: none; -unity-background-image-tint-color: rgb(241, 194, 194);" />
+                    <ui:Label name="T_Postit_Information" text="- Lorem Ipsum&#10;&#10;&#10;- Lorem Ipsum" picking-mode="Ignore" class="postitInformation postitTextInformation" />
+                    <ui:VisualElement name="HUB_Board_Postit_ReputationLabel" enabled="true" picking-mode="Ignore" focusable="false" class="reputationLabel" style="flex-grow: 1; align-content: center; justify-content: center;">
+                        <ui:Label text="Reputation: +100%" name="T_ReputationLabel" picking-mode="Ignore" class="reputationLabelText" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="HUB_Board_Postit_CaseState" picking-mode="Ignore" enabled="true" focusable="true" class="reputationLabel" style="flex-grow: 1; align-content: center; justify-content: center;">
+                        <ui:Label text="Active" name="T_ReputationLabel" picking-mode="Ignore" class="reputationLabelText" />
+                    </ui:VisualElement>
+                </ui:Button>
+                <ui:Button name="HUB_Board_Postit_BG_8" class="hubPostItBG" style="translate: 61px 66px;">
+                    <ui:Label name="T_Postit_CaseName" text="Lorem Ipsum" picking-mode="Ignore" class="postitTextCaseName" />
+                    <ui:VisualElement name="VE_Postit_Line" class="postitLine" style="flex-grow: 1; min-width: auto; min-height: auto; max-width: none; max-height: none; -unity-background-image-tint-color: rgb(241, 194, 194);" />
+                    <ui:Label name="T_Postit_Information" text="- Lorem Ipsum&#10;&#10;&#10;- Lorem Ipsum" picking-mode="Ignore" class="postitInformation postitTextInformation" />
+                    <ui:VisualElement name="HUB_Board_Postit_ReputationLabel" enabled="true" picking-mode="Ignore" focusable="false" class="reputationLabel" style="flex-grow: 1; align-content: center; justify-content: center;">
+                        <ui:Label text="Reputation: +100%" name="T_ReputationLabel" picking-mode="Ignore" class="reputationLabelText" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="HUB_Board_Postit_CaseState" picking-mode="Ignore" enabled="true" focusable="true" class="reputationLabel" style="flex-grow: 1; align-content: center; justify-content: center;">
+                        <ui:Label text="Active" name="T_ReputationLabel" picking-mode="Ignore" class="reputationLabelText" />
+                    </ui:VisualElement>
+                </ui:Button>
+            </ui:GroupBox>
+        </ui:VisualElement>
+        <ui:VisualElement name="HUB_ScaledPostit_BG" enabled="true" class="scaledPostitBG" style="flex-grow: 1;">
+            <ui:Label text="Label" name="T_ScaledPostit_CaseName" picking-mode="Ignore" class="scaledPostit_CaseName" />
+            <ui:VisualElement name="VE_Postit_Line" class="scaledPostitLine" style="flex-grow: 1;" />
+            <ui:VisualElement name="HUB_ScaledPostit_Applicant" class="applicantInformationContainer" style="flex-grow: 1;">
+                <ui:VisualElement name="HUB_ScaledPostit_ApplicantDetailsLabel" class="titleSectionContainer" style="flex-grow: 1;">
+                    <ui:Label text="Applicant Details" name="T_ContainerDescription" picking-mode="Ignore" class="TitleSectionInformation titleSectionInformation titleSectionInformationText" />
+                </ui:VisualElement>
+                <ui:VisualElement name="VE_Applicant_Name" class="textContainer_ScaledPostit" style="flex-grow: 1;">
+                    <ui:Label text="Name:" name="T_Applicant_NameTitle" picking-mode="Ignore" class="applicantText" />
+                    <ui:Label text="Lorem Ipsum" name="T_Applicant_Name" picking-mode="Ignore" class="applicantText" />
+                </ui:VisualElement>
+                <ui:VisualElement name="VE_Applicant_Location" class="textContainer_ScaledPostit" style="flex-grow: 1;">
+                    <ui:Label text="Location:" name="T_Applicant_LocationTitle" picking-mode="Ignore" class="applicantText" />
+                    <ui:Label text="Lorem Ipsum" name="T_Applicant_Location" picking-mode="Ignore" class="applicantText" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="HUB_ScaledPostit_GeneralDescription" class="applicantInformationContainer" style="flex-grow: 1;">
+                <ui:VisualElement name="HUB_ScaledPostit_ApplicantDetailsLabel" class="titleSectionContainer" style="flex-grow: 1;">
+                    <ui:Label text="Description Of The Request" name="T_ContainerDescription" picking-mode="Ignore" class="TitleSectionInformation titleSectionInformation titleSectionInformationText" />
+                </ui:VisualElement>
+                <ui:VisualElement class="descriptionContainer" style="flex-grow: 1;">
+                    <ui:Label text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dictum enim nibh, viverra bibendum eros tristique a. Suspendisse potenti. Donec quis lectus a urna malesuada porttitor vitae ac tellus. Phasellus molestie facilisis justo. Praesent faucibus porttitor elit eget ultricies. Maecenas eget odio elit. Aenean in erat ut risus posuere volutpat non et turpis. Curabitur sit amet est odio. Suspendisse et lacus eget nibh tincidunt lacinia eget in lectus. Nunc eleifend nisi risus, id tempus purus elementum sed. Nam rutrum vitae lorem at scelerisque. Etiam commodo magna in metus condimentum tincidunt." name="T_RequestDescription" picking-mode="Ignore" emoji-fallback-support="false" class="descriptionRequestText" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
