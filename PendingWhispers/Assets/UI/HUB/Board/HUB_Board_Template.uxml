@@ -2,7 +2,7 @@
     <Style src="project://database/Assets/UI/HUB/Board/HUB_Board_USS.uss?fileID=7433441132597879392&amp;guid=619e26b32d3994c4ca3f4fb2a7163146&amp;type=3#HUB_Board_USS" />
     <ui:VisualElement name="HUB_Board_Root" class="boardRoot containerRoot">
         <ui:VisualElement name="HUB_Board_BG" class="hubBoardBG">
-            <ui:GroupBox name="HUB_Board_Postit_Container" class="postitContainer hubPostitBG" style="flex-direction: row; flex-basis: auto;">
+            <ui:GroupBox name="HUB_Board_Postit_Container" class="postitContainer" style="flex-direction: row; flex-basis: auto;">
                 <ui:Button name="HUB_Board_Postit_BG_1" selectable="true" class="hubPostItBG" style="translate: -60px -60px;">
                     <ui:Label name="T_Postit_CaseName" text="Lorem Ipsum" picking-mode="Ignore" class="postitTextCaseName" />
                     <ui:VisualElement name="VE_Postit_Line" class="postitLine" style="flex-grow: 1; min-width: auto; min-height: auto; max-width: none; max-height: none; -unity-background-image-tint-color: rgb(241, 194, 194);" />
@@ -93,28 +93,38 @@
                 </ui:Button>
             </ui:GroupBox>
         </ui:VisualElement>
-        <ui:VisualElement name="HUB_ScaledPostit_BG" enabled="true" class="scaledPostitBG" style="flex-grow: 1;">
-            <ui:Label text="Label" name="T_ScaledPostit_CaseName" picking-mode="Ignore" class="scaledPostit_CaseName" />
+        <ui:VisualElement name="HUB_ScaledPostit_BG" enabled="true" class="scaledPostitBG" style="flex-grow: 1; display: flex;">
+            <ui:VisualElement name="VE_CancelButton" class="containerButton" style="flex-grow: 1;">
+                <ui:Button name="BT_Cancel_Button" enable-rich-text="true" class="cancelButtonScaledPostit" />
+            </ui:VisualElement>
+            <ui:Label text="Lorem Ipsum" name="T_ScaledPostit_CaseName" picking-mode="Ignore" double-click-selects-word="false" class="scaledPostit_CaseName" />
             <ui:VisualElement name="VE_Postit_Line" class="scaledPostitLine" style="flex-grow: 1;" />
-            <ui:VisualElement name="HUB_ScaledPostit_Applicant" class="applicantInformationContainer" style="flex-grow: 1;">
+            <ui:VisualElement name="HUB_ScaledPostit_Applicant" class="applicantInformationContainer" style="flex-grow: 1; margin-bottom: 0; margin-top: 0; margin-right: 0; margin-left: 0; padding-right: 0; padding-left: 5px; max-height: 35%;">
                 <ui:VisualElement name="HUB_ScaledPostit_ApplicantDetailsLabel" class="titleSectionContainer" style="flex-grow: 1;">
                     <ui:Label text="Applicant Details" name="T_ContainerDescription" picking-mode="Ignore" class="TitleSectionInformation titleSectionInformation titleSectionInformationText" />
                 </ui:VisualElement>
                 <ui:VisualElement name="VE_Applicant_Name" class="textContainer_ScaledPostit" style="flex-grow: 1;">
-                    <ui:Label text="Name:" name="T_Applicant_NameTitle" picking-mode="Ignore" class="applicantText" />
+                    <ui:Label text="Name:" name="T_Applicant_NameTitle" picking-mode="Ignore" class="applicantText boldText" />
                     <ui:Label text="Lorem Ipsum" name="T_Applicant_Name" picking-mode="Ignore" class="applicantText" />
                 </ui:VisualElement>
                 <ui:VisualElement name="VE_Applicant_Location" class="textContainer_ScaledPostit" style="flex-grow: 1;">
-                    <ui:Label text="Location:" name="T_Applicant_LocationTitle" picking-mode="Ignore" class="applicantText" />
+                    <ui:Label text="Location:" name="T_Applicant_LocationTitle" picking-mode="Ignore" class="applicantText boldText" />
                     <ui:Label text="Lorem Ipsum" name="T_Applicant_Location" picking-mode="Ignore" class="applicantText" />
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="HUB_ScaledPostit_GeneralDescription" class="applicantInformationContainer" style="flex-grow: 1;">
-                <ui:VisualElement name="HUB_ScaledPostit_ApplicantDetailsLabel" class="titleSectionContainer" style="flex-grow: 1;">
+            <ui:VisualElement name="HUB_ScaledPostit_GeneralDescription" class="applicantInformationContainer" style="flex-grow: 1; height: 30%; max-height: 50%;">
+                <ui:VisualElement name="HUB_ScaledPostit_ApplicantDetailsLabel" class="titleSectionContainer" style="flex-grow: 1; margin-bottom: 10px; max-height: 20%;">
                     <ui:Label text="Description Of The Request" name="T_ContainerDescription" picking-mode="Ignore" class="TitleSectionInformation titleSectionInformation titleSectionInformationText" />
                 </ui:VisualElement>
-                <ui:VisualElement class="descriptionContainer" style="flex-grow: 1;">
-                    <ui:Label text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dictum enim nibh, viverra bibendum eros tristique a. Suspendisse potenti. Donec quis lectus a urna malesuada porttitor vitae ac tellus. Phasellus molestie facilisis justo. Praesent faucibus porttitor elit eget ultricies. Maecenas eget odio elit. Aenean in erat ut risus posuere volutpat non et turpis. Curabitur sit amet est odio. Suspendisse et lacus eget nibh tincidunt lacinia eget in lectus. Nunc eleifend nisi risus, id tempus purus elementum sed. Nam rutrum vitae lorem at scelerisque. Etiam commodo magna in metus condimentum tincidunt." name="T_RequestDescription" picking-mode="Ignore" emoji-fallback-support="false" class="descriptionRequestText" />
+                <ui:ScrollView usage-hints="-1" horizontal-scroller-visibility="Hidden" horizontal-page-size="0" name="SV_DescriptionRequest_Container" class="descriptionContainer scrollViewScaledPostit">
+                    <ui:Label text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dictum enim nibh, viverra bibendum eros tristique a. Suspendisse potenti. Donec quis lectus a urna malesuada porttitor vitae ac tellus. Phasellus molestie facilisis justo. Praesent faucibus porttitor elit eget ultricies. Maecenas eget odio elit. Aenean in erat ut risus posuere volutpat non et turpis. Curabitur sit amet est odio. Suspendisse et lacus eget nibh tincidunt lacinia eget in lectus. Nunc eleifend nisi risus, id tempus purus elementum sed. Nam rutrum vitae lorem at scelerisque. Etiam commodo magna in metus condimentum tincidunt.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dictum enim nibh, viverra bibendum eros tristique a. Suspendisse potenti. Donec quis lectus a urna malesuada porttitor vitae ac tellus. Phasellus molestie facilisis justo. Praesent faucibus porttitor elit eget ultricies. Maecenas eget odio elit. Aenean in erat ut risus posuere volutpat non et turpis. Curabitur sit amet est odio. Suspendisse et lacus eget nibh tincidunt lacinia eget in lectus. Nunc eleifend nisi risus, id tempus purus elementum sed. Nam rutrum vitae lorem at scelerisque. Etiam commodo magna in metus condimentum tincidunt.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dictum enim nibh, viverra bibendum eros tristique a. Suspendisse potenti. Donec quis lectus a urna malesuada porttitor vitae ac tellus. Phasellus molestie facilisis justo. Praesent faucibus porttitor elit eget ultricies. Maecenas eget odio elit. Aenean in erat ut risus posuere volutpat non et turpis. Curabitur sit amet est odio. Suspendisse et lacus eget nibh tincidunt lacinia eget in lectus. Nunc eleifend nisi risus, id tempus purus elementum sed. Nam rutrum vitae lorem at scelerisque. Etiam commodo magna in metus condimentum tincidunt.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dictum enim nibh, viverra bibendum eros tristique a. Suspendisse potenti. Donec quis lectus a urna malesuada porttitor vitae ac tellus. Phasellus molestie facilisis justo. Praesent faucibus porttitor elit eget ultricies. Maecenas eget odio elit. Aenean in erat ut risus posuere volutpat non et turpis. Curabitur sit amet est odio. Suspendisse et lacus eget nibh tincidunt lacinia eget in lectus. Nunc eleifend nisi risus, id tempus purus elementum sed. Nam rutrum vitae lorem at scelerisque. Etiam commodo magna in metus condimentum tincidunt." name="T_RequestDescription" picking-mode="Ignore" emoji-fallback-support="false" class="descriptionRequestText" />
+                </ui:ScrollView>
+                <ui:VisualElement name="VE_Postit_Footer" class="textContainer_ScaledPostit postitFooter" style="flex-grow: 1;">
+                    <ui:VisualElement name="VE_Reward_TextContainer" class="footerText footerTextContainer" style="flex-grow: 1;">
+                        <ui:Label text="Reward:" name="T_Reward_Title" picking-mode="Ignore" class="applicantText footerText boldText" />
+                        <ui:Label text="Lorem Ipsum" name="T_Reward_Description" picking-mode="Ignore" class="applicantText footerText" />
+                    </ui:VisualElement>
+                    <ui:Button text="Accept" name="BT_AcceptCase" class="footerButton" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
