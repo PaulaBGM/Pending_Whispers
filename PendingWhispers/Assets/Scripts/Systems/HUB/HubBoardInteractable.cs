@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class HubBoardInteractable : MonoBehaviour, IInteractable
 {
-    [SerializeField] private CaseBoardPanelUI boardPanel;
+    [SerializeField] private HubBoardUIToolkitController boardPanel;
 
     public void Interact(PlayerController_Actions player)
     {

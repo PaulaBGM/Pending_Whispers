@@ -812,6 +812,7 @@ GameObject:
   m_Component:
   - component: {fileID: 179451480}
   - component: {fileID: 179451481}
+  - component: {fileID: 179451482}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -853,6 +854,19 @@ MonoBehaviour:
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
+--- !u!114 &179451482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179451479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c8452c24c544b4b8bc6d6384fa2685d, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  database: {fileID: 11400000, guid: 3e0b3cf73e3c40558ce20b531521a271, type: 2}
 --- !u!1 &260650552
 GameObject:
   m_ObjectHideFlags: 0
