@@ -34,15 +34,16 @@ VisualElement {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    align-self: center;
 }
 
 .hubPostItBG {
     background-image: url("project://database/Assets/Sprites/UI/HUB/HUB_Postit.png?fileID=-771178016512510283&guid=2fee190bb300629448013bbd72862d77&type=3#HUB_Postit");
     width: 20%;
-    height: 30%;
+    height: 35%;
     position: relative;
-    top: auto;
-    left: auto;
+    top: 0;
+    left: 0;
     flex-direction: column;
     flex-grow: 0;
     align-self: center;
@@ -54,7 +55,7 @@ VisualElement {
     margin-bottom: 10px;
     margin-left: 10px;
     flex-wrap: wrap;
-    align-content: stretch;
+    align-content: flex-end;
     justify-content: center;
     align-items: flex-start;
     text-overflow: clip;
@@ -63,12 +64,24 @@ VisualElement {
     padding-right: 50px;
     padding-bottom: 20px;
     padding-left: 50px;
-    min-width: 20%;
-    min-height: 35%;
+    min-width: auto;
+    min-height: auto;
     max-width: 20%;
     max-height: 35%;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(108, 77, 78);
     -unity-background-image-tint-color: rgb(248, 200, 200);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
 }
 
 .hubPostItBG:hover {
@@ -109,7 +122,7 @@ VisualElement {
 
 .reputationLabel {
     background-color: rgba(132, 88, 94, 0.6);
-    width: 80%;
+    width: 100%;
     height: 15%;
     right: 0;
     left: 0;
@@ -121,6 +134,11 @@ VisualElement {
     margin-left: 5px;
     overflow: hidden;
     visibility: visible;
+    flex-direction: row;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 16px;
 }
 
 .reputationLabelText {
@@ -139,7 +157,7 @@ VisualElement {
     min-width: auto;
     min-height: auto;
     max-width: none;
-    max-height: none;
+    max-height: 2%;
 }
 
 .unity-button {
@@ -151,8 +169,8 @@ VisualElement {
     background-image: url("project://database/Assets/Sprites/UI/HUB/HUB_Postit.png?fileID=-771178016512510283&guid=2fee190bb300629448013bbd72862d77&type=3#HUB_Postit");
     position: absolute;
     align-self: center;
-    align-items: flex-start;
-    align-content: center;
+    align-items: center;
+    align-content: stretch;
     justify-content: space-between;
     flex-wrap: wrap;
     overflow: hidden;
@@ -161,6 +179,7 @@ VisualElement {
     padding-right: 50px;
     padding-bottom: 50px;
     padding-left: 50px;
+    transition-duration: 0.5s;
 }
 
 .scaledPostitBG:disabled {
@@ -183,7 +202,7 @@ VisualElement {
     scale: 0 0;
     display: flex;
     visibility: visible;
-    translate: 0 500px;
+    translate: 0 0;
 }
 
 .scaledPostit_CaseName {
@@ -198,23 +217,27 @@ VisualElement {
     max-height: 15px;
     min-height: 5px;
     -unity-background-image-tint-color: rgb(248, 200, 200);
+    border-top-left-radius: 39px;
+    border-top-right-radius: 39px;
+    border-bottom-right-radius: 39px;
+    border-bottom-left-radius: 39px;
 }
 
 .textContainer_ScaledPostit {
     flex-direction: row;
     width: 100%;
-    height: 40%;
+    height: 10%;
     -unity-text-align: upper-left;
-    align-self: center;
+    align-self: flex-start;
     align-items: center;
     min-height: 20%;
     max-height: 30%;
 }
 
 .applicantInformationContainer {
-    margin-top: 5px;
+    margin-top: 0;
     margin-right: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 0;
     margin-left: 5px;
     align-items: center;
     flex-wrap: wrap;
@@ -223,6 +246,7 @@ VisualElement {
     height: 50%;
     max-height: 60%;
     min-height: 30%;
+    justify-content: flex-start;
 }
 
 .titleSectionInformationText {
@@ -237,7 +261,7 @@ VisualElement {
 }
 
 .titleSectionContainer {
-    background-color: rgb(132, 88, 94);
+    background-color: rgba(132, 88, 94, 0.6);
     width: 100%;
     height: 20%;
     align-items: center;
@@ -250,6 +274,10 @@ VisualElement {
     padding-right: 20px;
     padding-left: 20px;
     margin-bottom: 5px;
+    border-top-left-radius: 13px;
+    border-top-right-radius: 13px;
+    border-bottom-right-radius: 13px;
+    border-bottom-left-radius: 13px;
 }
 
 .descriptionRequestText {
@@ -273,14 +301,15 @@ VisualElement {
 }
 
 .scrollViewScaledPostit {
-    height: 40%;
+    height: 70%;
     width: 100%;
-    max-height: 50%;
+    max-height: 70%;
     min-height: 40%;
     padding-top: 0;
     padding-right: 15px;
     padding-bottom: 0;
     padding-left: 15px;
+    margin-bottom: 20px;
 }
 
 .unity-scroller__low-button {
@@ -361,25 +390,46 @@ VisualElement {
 
 .postitFooter {
     flex-direction: row;
-    padding-top: 25px;
+    padding-top: 0;
     padding-right: 25px;
     padding-bottom: 0;
     padding-left: 25px;
+    align-self: flex-start;
+    align-items: center;
 }
 
 .footerTextContainer {
-    width: 50%;
+    width: 13%;
     flex-direction: row;
+    background-color: rgb(132, 88, 94);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    justify-content: center;
+    height: 50%;
+    align-items: center;
 }
 
 .footerButton {
     width: 30%;
-    font-size: 25px;
+    font-size: 30px;
     -unity-font-definition: url("project://database/Assets/TextMesh%20Pro/Namdhinggo/Namdhinggo-Bold.ttf?fileID=12800000&guid=95d4e510a4bd39a43b903579841fa8c5&type=3#Namdhinggo-Bold");
+    background-image: none;
+    background-color: rgb(149, 106, 111);
+    border-top-left-radius: 17px;
+    border-top-right-radius: 17px;
+    border-bottom-right-radius: 17px;
+    border-bottom-left-radius: 17px;
+    color: rgb(255, 255, 255);
+    height: 50%;
+    transition-duration: 0.25s;
 }
 
 .footerText {
-    font-size: 25px;
+    font-size: 28px;
+    -unity-font-definition: url("project://database/Assets/TextMesh%20Pro/Namdhinggo/Namdhinggo-Regular.ttf?fileID=12800000&guid=78f42b1dfd248c340a87959678417eb8&type=3#Namdhinggo-Regular");
+    color: rgb(255, 255, 255);
 }
 
 .boldText {
@@ -443,4 +493,90 @@ VisualElement {
     background-color: rgba(0, 0, 0, 0);
     -unity-background-image-tint-color: rgb(164, 129, 129);
     scale: 2.5 1;
+    width: 94%;
+    height: 70%;
+}
+
+.postitInformationPartitionUpContainer {
+    width: 100%;
+    height: 15%;
+}
+
+.postitInformationPartitionDownContainer {
+    height: 70%;
+    width: 100%;
+}
+
+.littlePostitInformationContainer {
+    height: 50%;
+    width: 100%;
+    align-self: auto;
+    align-items: flex-start;
+}
+
+.scaledPostitUpQuarter {
+    width: 100%;
+    height: 5%;
+}
+
+.scaledPostitDownQuarter {
+    width: 100%;
+    height: 80%;
+    justify-content: flex-start;
+    align-content: stretch;
+}
+
+.generalDescriptionContainer {
+    width: 100%;
+    height: 50%;
+    justify-content: flex-start;
+    max-height: 50%;
+}
+
+.footerButton:hover {
+    background-color: rgb(123, 80, 80);
+    scale: 0.9 0.8;
+    rotate: 0;
+    transition-duration: 0.25s;
+    -unity-font-style: normal;
+    -unity-font-definition: url("project://database/Assets/TextMesh%20Pro/Namdhinggo/Namdhinggo-Bold.ttf?fileID=12800000&guid=95d4e510a4bd39a43b903579841fa8c5&type=3#Namdhinggo-Bold");
+    transition-timing-function: ease;
+}
+
+.footerButton:active {
+    rotate: 2deg;
+    scale: 0.7 0.6;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-out;
+}
+
+.pinPostitDecoration {
+    position: absolute;
+    background-image: url("project://database/Assets/Sprites/UI/HUB/HUB_Postit_Deco.png?fileID=4784993897573154025&guid=b88bab61c1daef94a8bf654b8429c920&type=3#HUB_Postit_Deco");
+    width: 15%;
+    height: 15%;
+    border-left-color: rgb(134, 101, 44);
+    border-right-color: rgb(134, 101, 44);
+    border-top-color: rgb(134, 101, 44);
+    border-bottom-color: rgb(134, 101, 44);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    top: 0;
+    right: 0%;
+    translate: 0 -11px;
+    left: 23%;
+    bottom: 0%;
+}
+
+.littlePostItComplete {
+    width: 20%;
+    height: 46%;
+    max-width: 20%;
+    max-height: 35%;
+    align-items: flex-start;
+    align-self: center;
+    flex-wrap: wrap;
+    align-content: center;
 }
