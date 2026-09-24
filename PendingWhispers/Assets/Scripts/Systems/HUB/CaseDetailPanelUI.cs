@@ -1,43 +1,53 @@
-using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CaseDetailPanelUI : MonoBehaviour
 {
-    [SerializeField] private GameObject panelRoot;
-    [SerializeField] private TMP_Text caseNumberText;
-    [SerializeField] private TMP_Text requesterNameText;
-    [SerializeField] private TMP_Text requesterLocationText;
-    [SerializeField] private TMP_Text requestSummaryText;
-    [SerializeField] private TMP_Text rewardText;
+    [SerializeField] private UIDocument document;
 
+    private VisualElement root;
+    private Label caseNumber, requesterName, requesterLocation, summary, reward;
     private CaseData currentData;
     private CaseBoardPanelUI boardPanel;
+
+    private void Awake()
+    {
+        root = document.rootVisualElement.Q<VisualElement>("case-detail-panel");
+        caseNumber = root.Q<Label>("case-number");
+        requesterName = root.Q<Label>("requester-name");
+        requesterLocation = root.Q<Label>("requester-location");
+        summary = root.Q<Label>("summary");
+        reward = root.Q<Label>("reward");
+
+        root.Q<Button>("accept-button").clicked += OnAcceptClicked;
+        root.Q<Button>("close-button").clicked += Close;
+        Close();
+    }
 
     public void Open(CaseData data, CaseBoardPanelUI board)
     {
         currentData = data;
         boardPanel = board;
 
-        caseNumberText.text = data.caseID;
-        requesterNameText.text = data.requesterName;
-        requesterLocationText.text = data.requesterLocation;
-        requestSummaryText.text = data.requestSummary;
-        rewardText.text = $"Resompensa: +{data.baseReputationReward}% de reputación";
+        caseNumber.text = data.caseID;
+        requesterName.text = data.requesterName;
+        requesterLocation.text = data.requesterLocation;
+        summary.text = data.requestSummary;
+        reward.text = $"Resompensa: +{data.baseReputationReward}% de reputación";
 
-        panelRoot.SetActive(true);
+        root.style.display = DisplayStyle.Flex;
     }
 
-    public void Close() => panelRoot.SetActive(false);
+    public void Close() => root.style.display = DisplayStyle.None;
 
-    public void OnAcceptClicked()
+    private void OnAcceptClicked()
     {
         if (currentData == null) return;
 
         if (currentData.startedFlag != null)
-            GameProgress.Instance.AddFlag(currentData.startedFlag);   // esto ya desbloquea el nodo del mapa si comparte flag
+            GameProgress.Instance.AddFlag(currentData.startedFlag);
 
-        CaseManager.Instance.LoadCase(currentData);                   // ya actualiza CaseJournalSystem -> diario
-
+        CaseManager.Instance.LoadCase(currentData);
         UIGameEvents.RaiseFeedback($"Caso aceptado: {currentData.caseTitle}");
 
         Close();

@@ -1,34 +1,45 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CaseBoardPanelUI : MonoBehaviour
 {
+    [SerializeField] private UIDocument document;
+    [SerializeField] private VisualTreeAsset cardTemplate;
     [SerializeField] private CaseDatabaseSO database;
-    [SerializeField] private CaseBoardCardUI cardPrefab;
-    [SerializeField] private Transform cardContainer;
     [SerializeField] private CaseDetailPanelUI detailPanel;
-    [SerializeField] private GameObject panelRoot;
+
+    private VisualElement root;
+    private VisualElement cardContainer;
+
+    private void Awake()
+    {
+        root = document.rootVisualElement.Q<VisualElement>("case-board-panel");
+        cardContainer = root.Q<VisualElement>("card-container");
+        root.Q<Button>("close-button").clicked += Close;
+        Close();
+    }
 
     public void Open()
     {
-        panelRoot.SetActive(true);
+        root.style.display = DisplayStyle.Flex;
         Refresh();
     }
 
-    public void Close() => panelRoot.SetActive(false);
+    public void Close() => root.style.display = DisplayStyle.None;
 
     private void Refresh()
     {
-        foreach (Transform child in cardContainer) Destroy(child.gameObject);
+        cardContainer.Clear();
 
         foreach (var data in database.allCases)
         {
             bool unlocked = data.unlockFlag == null || GameProgress.Instance.HasFlag(data.unlockFlag);
-            bool alreadyStarted = data.startedFlag != null && GameProgress.Instance.HasFlag(data.startedFlag);
+            bool started = data.startedFlag != null && GameProgress.Instance.HasFlag(data.startedFlag);
+            if (!unlocked || started) continue;
 
-            if (!unlocked || alreadyStarted) continue;
-
-            var card = Instantiate(cardPrefab, cardContainer);
-            card.Setup(data, OnCardSelected);
+            VisualElement card = cardTemplate.CloneTree();
+            new CaseBoardCard(card, data, OnCardSelected);
+            cardContainer.Add(card);
         }
     }
 

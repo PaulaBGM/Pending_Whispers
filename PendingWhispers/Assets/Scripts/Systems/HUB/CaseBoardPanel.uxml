@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:VisualElement name="case-board-panel" class="board-panel">
+        <ui:Button name="close-button" text="X" class="close-button" />
+        <ui:ScrollView>
+            <ui:VisualElement name="card-container" class="card-container" />
+        </ui:ScrollView>
+    </ui:VisualElement>
+</ui:UXML>

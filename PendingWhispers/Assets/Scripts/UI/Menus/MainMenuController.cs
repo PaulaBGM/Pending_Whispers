@@ -16,7 +16,7 @@ public class MainMenuController : MonoBehaviour
 
     public void StartGame()
     {
-        SceneController.Instance.LoadScene("HouseOfPhantom1");
+        SceneController.Instance.LoadScene("SC_House_Phantom1");
     }
 
     public void ExitGame()

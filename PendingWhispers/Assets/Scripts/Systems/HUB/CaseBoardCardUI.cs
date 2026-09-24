@@ -1,40 +1,17 @@
 using System;
-using TMPro;
-using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 
-public class CaseBoardCardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class CaseBoardCard
 {
-    [SerializeField] private TMP_Text titleText;
-    [SerializeField] private TMP_Text characterText;
-    [SerializeField] private TMP_Text locationText;
-    [SerializeField] private TMP_Text reputationText;
-    [SerializeField] private Image background;
-
-    private CaseData data;
-    private Action<CaseData> onSelect;
-    private const float HOVER_SCALE = 1.08f;
-
-    public void Setup(CaseData caseData, Action<CaseData> callback)
+    public CaseBoardCard(VisualElement root, CaseData data, Action<CaseData> onSelect)
     {
-        data = caseData;
-        onSelect = callback;
+        root.Q<Label>("title").text = data.caseTitle;
+        root.Q<Label>("character").text = data.requesterName;
+        root.Q<Label>("location").text = data.requesterLocation;
+        root.Q<Label>("reputation").text = $"Reputación: +{data.baseReputationReward}%";
+        root.style.backgroundColor = data.cardColor;
 
-        titleText.text = data.caseTitle;
-        characterText.text = data.requesterName;
-        locationText.text = data.requesterLocation;
-        reputationText.text = $"Reputación: +{data.baseReputationReward}%";
-        background.color = data.cardColor;
+        root.RegisterCallback<PointerEnterEvent>(_ => root.BringToFront());
+        root.RegisterCallback<ClickEvent>(_ => onSelect(data));
     }
-
-    public void OnPointerEnter(PointerEventData e)
-    {
-        transform.SetAsLastSibling();
-        transform.localScale = Vector3.one * HOVER_SCALE;
-    }
-
-    public void OnPointerExit(PointerEventData e) => transform.localScale = Vector3.one;
-
-    public void OnPointerClick(PointerEventData e) => onSelect(data);
 }

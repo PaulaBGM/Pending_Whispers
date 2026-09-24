@@ -235,6 +235,6 @@ public class PlayerController_Actions : MonoBehaviour
         if (!GameProgress.Instance.HasFlag(unlockCatacombsFlag))
             return;
 
-        SceneController.Instance.LoadScene("Map");
+        SceneController.Instance.LoadScene("SC_ParisMap");
     }
 }
