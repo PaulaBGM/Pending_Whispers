@@ -7,43 +7,80 @@ public class HubBoardController : MonoBehaviour
 {
     [SerializeField] private UIDocument document;
     [SerializeField] private CaseDatabaseSO database;
-    [SerializeField] private CaseDetailPanelController detailPanel; // campo nuevo
+    [SerializeField] private CaseDetailPanelController detailPanel;
 
     private VisualElement boardRoot;
     private readonly List<PostitSlot> slots = new();
 
     private void Awake()
     {
+        if (document == null)
+        {
+            Debug.LogError("[HubBoardController] Document no asignado en el Inspector.");
+            return;
+        }
+
         boardRoot = document.rootVisualElement.Q<VisualElement>("HUB_Board_Root");
+        if (boardRoot == null)
+        {
+            Debug.LogError("[HubBoardController] No se encontró 'HUB_Board_Root' en el UXML asignado.");
+            return;
+        }
+
         var boardBG = boardRoot.Q<VisualElement>("HUB_Board_BG");
 
-        boardBG.Q<Button>("BT_Cancel_Button").clicked += Close;
+        var cancelButton = boardBG?.Q<Button>("BT_Cancel_Button");
+        if (cancelButton != null)
+            cancelButton.clicked += Close;
+        else
+            Debug.LogWarning("[HubBoardController] No se encontró BT_Cancel_Button en HUB_Board_BG.");
 
         for (int i = 1; i <= 8; i++)
         {
-            var postit = boardBG.Q<VisualElement>($"HUB_Board_Postit_BG_{i}");
+            var postit = boardBG?.Q<VisualElement>($"HUB_Board_Postit_BG_{i}");
             if (postit != null)
                 slots.Add(new PostitSlot(postit, OnPostitClicked));
         }
 
-        Close();
+        // Importante: en Awake() solo se oculta la propia pizarra.
+        // El orden de Awake() entre distintos GameObjects no está garantizado,
+        // así que NO se toca detailPanel aquí (se oculta solo, en su propio Awake).
+        boardRoot.style.display = DisplayStyle.None;
     }
 
     public void Open()
     {
+        if (boardRoot == null) return;
+
         boardRoot.style.display = DisplayStyle.Flex;
         Refresh();
     }
 
     public void Close()
     {
-        boardRoot.style.display = DisplayStyle.None;
+        if (boardRoot != null)
+            boardRoot.style.display = DisplayStyle.None;
+
         detailPanel?.Close();
     }
 
     private void Refresh()
     {
+        if (database == null)
+        {
+            Debug.LogError("[HubBoardController] CaseDatabase no asignada en el Inspector.");
+            return;
+        }
+
+        if (GameProgress.Instance == null)
+        {
+            Debug.LogError("[HubBoardController] GameProgress.Instance es null. " +
+                "¿Se está lanzando esta escena directamente sin pasar antes por la escena de managers persistentes?");
+            return;
+        }
+
         var available = database.allCases.Where(c =>
+            c != null &&
             (c.unlockFlag == null || GameProgress.Instance.HasFlag(c.unlockFlag)) &&
             (c.startedFlag == null || !GameProgress.Instance.HasFlag(c.startedFlag))
         ).ToList();

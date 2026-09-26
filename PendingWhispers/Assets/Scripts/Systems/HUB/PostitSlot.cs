@@ -20,22 +20,28 @@ public class PostitSlot
         applicantName = root.Q<Label>("T_LittlePostit_Name");
         applicantLocation = root.Q<Label>("T_LittlePostit_Localization");
 
-        // Escopamos por contenedor porque "T_ReputationLabel" está duplicado
-        // dentro del mismo post-it (reputación vs. estado del caso).
-        reputationValue = root.Q<VisualElement>("HUB_Board_Postit_ReputationLabel").Q<Label>("T_ReputationLabel");
-        stateLabel = root.Q<VisualElement>("HUB_Board_Postit_CaseState").Q<Label>("T_ReputationLabel");
+        // "T_ReputationLabel" está duplicado dentro del mismo post-it
+        // (reputación vs. estado del caso), por eso se acota por contenedor.
+        var reputationContainer = root.Q<VisualElement>("HUB_Board_Postit_ReputationLabel");
+        var stateContainer = root.Q<VisualElement>("HUB_Board_Postit_CaseState");
 
-        (root as Button).clicked += () => onClick(data);
+        reputationValue = reputationContainer?.Q<Label>("T_ReputationLabel");
+        stateLabel = stateContainer?.Q<Label>("T_ReputationLabel");
+
+        if (root is Button button)
+            button.clicked += () => onClick(data);
     }
 
     public void Bind(CaseData caseData)
     {
         data = caseData;
-        caseName.text = data.caseTitle;
-        applicantName.text = data.requesterName;
-        applicantLocation.text = data.requesterLocation;
-        reputationValue.text = $"{data.baseReputationReward}%";
-        stateLabel.text = "Available";
+
+        if (caseName != null) caseName.text = data.caseTitle;
+        if (applicantName != null) applicantName.text = data.requesterName;
+        if (applicantLocation != null) applicantLocation.text = data.requesterLocation;
+        if (reputationValue != null) reputationValue.text = $"{data.baseReputationReward}%";
+        if (stateLabel != null) stateLabel.text = "Available";
+
         root.style.display = DisplayStyle.Flex;
     }
 
