@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e974ed1c0e907eb4aa0fe8b14b64cfbd, type: 3}
   m_Name: Case2
   m_EditorClassIdentifier: 
+  caseTitle: 
+  caseDescription: 
+  caseIcon: {fileID: 0}
+  objectives: []
+  hypothesis: {fileID: 11400000, guid: c37d2d3938d040245bec8dfc8fabe8fa, type: 2}
   caseID: 'Case 2 - '
-  unlockFlag: {fileID: 11400000, guid: 6c5bdc2491f13214c838eb1520ab17f4, type: 2}
+  unlockFlag: {fileID: 11400000, guid: dc4c1bf252451fc40ae424878cff7de7, type: 2}
   startedFlag: {fileID: 0}
   completedFlag: {fileID: 0}
   requiredClues:
@@ -30,3 +35,9 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 0bd4ea81fb4c46f4b95fd4140e9cab7d, type: 2}
     resultingFlags: []
     feedbackText: you did it!!
+    reputationReward: 0
+  requesterName: 
+  requesterLocation: 
+  requestSummary: 
+  baseReputationReward: 100
+  cardColor: {r: 1, g: 1, b: 1, a: 1}

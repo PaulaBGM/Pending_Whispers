@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+Ôªøusing System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -23,7 +23,7 @@ public class HubBoardController : MonoBehaviour
         boardRoot = document.rootVisualElement.Q<VisualElement>("HUB_Board_Root");
         if (boardRoot == null)
         {
-            Debug.LogError("[HubBoardController] No se encontrÛ 'HUB_Board_Root' en el UXML asignado.");
+            Debug.LogError("[HubBoardController] No se encontr√≥ 'HUB_Board_Root' en el UXML asignado.");
             return;
         }
 
@@ -33,7 +33,7 @@ public class HubBoardController : MonoBehaviour
         if (cancelButton != null)
             cancelButton.clicked += Close;
         else
-            Debug.LogWarning("[HubBoardController] No se encontrÛ BT_Cancel_Button en HUB_Board_BG.");
+            Debug.LogWarning("[HubBoardController] No se encontr√≥ BT_Cancel_Button en HUB_Board_BG.");
 
         for (int i = 1; i <= 8; i++)
         {
@@ -43,8 +43,8 @@ public class HubBoardController : MonoBehaviour
         }
 
         // Importante: en Awake() solo se oculta la propia pizarra.
-        // El orden de Awake() entre distintos GameObjects no est· garantizado,
-        // asÌ que NO se toca detailPanel aquÌ (se oculta solo, en su propio Awake).
+        // El orden de Awake() entre distintos GameObjects no est√° garantizado,
+        // as√≠ que NO se toca detailPanel aqu√≠ (se oculta solo, en su propio Awake).
         boardRoot.style.display = DisplayStyle.None;
     }
 
@@ -72,18 +72,33 @@ public class HubBoardController : MonoBehaviour
             return;
         }
 
-        if (GameProgress.Instance == null)
-        {
-            Debug.LogError("[HubBoardController] GameProgress.Instance es null. " +
-                "øSe est· lanzando esta escena directamente sin pasar antes por la escena de managers persistentes?");
-            return;
-        }
+        Debug.Log($"[HubBoardController] Refresh: {slots.Count} slots encontrados en el UXML, " +
+            $"{database.allCases?.Count ?? 0} casos en la CaseDatabase.");
 
-        var available = database.allCases.Where(c =>
-            c != null &&
-            (c.unlockFlag == null || GameProgress.Instance.HasFlag(c.unlockFlag)) &&
-            (c.startedFlag == null || !GameProgress.Instance.HasFlag(c.startedFlag))
-        ).ToList();
+        bool hasProgress = GameProgress.Instance != null;
+        Debug.Log($"[HubBoardController] GameProgress.Instance {(hasProgress ? "S√ç existe" : "es NULL")}.");
+
+        var available = new List<CaseData>();
+
+        foreach (var c in database.allCases)
+        {
+            if (c == null)
+            {
+                Debug.LogWarning("[HubBoardController] Hay un hueco (null) en la lista allCases de la CaseDatabase.");
+                continue;
+            }
+
+            bool unlockedByFlag = c.unlockFlag == null || (hasProgress && GameProgress.Instance.HasFlag(c.unlockFlag));
+            bool notStartedYet = c.startedFlag == null || !(hasProgress && GameProgress.Instance.HasFlag(c.startedFlag));
+            bool show = unlockedByFlag || notStartedYet;
+
+            Debug.Log($"[HubBoardController] Caso '{c.caseTitle}' (id={c.caseID}): " +
+                $"unlockFlag={(c.unlockFlag == null ? "null" : c.unlockFlag.id)}, " +
+                $"startedFlag={(c.startedFlag == null ? "null" : c.startedFlag.id)}, " +
+                $"unlockedByFlag={unlockedByFlag}, notStartedYet={notStartedYet} ‚Üí {(show ? "SE MUESTRA" : "oculto")}");
+
+            if (show) available.Add(c);
+        }
 
         for (int i = 0; i < slots.Count; i++)
         {
