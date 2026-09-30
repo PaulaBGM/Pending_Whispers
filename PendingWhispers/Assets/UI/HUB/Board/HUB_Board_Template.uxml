@@ -192,7 +192,7 @@
                 </ui:Button>
             </ui:GroupBox>
         </ui:VisualElement>
-        <ui:VisualElement name="HUB_ScaledPostit_BG" enabled="false" class="scaledPostitBG" style="flex-grow: 1; display: flex;">
+        <ui:VisualElement name="HUB_ScaledPostit_BG" enabled="true" class="scaledPostitBG" style="flex-grow: 1; display: flex;">
             <ui:VisualElement name="VE_CancelButton" class="containerButton" style="flex-grow: 1;">
                 <ui:Button name="BT_Cancel_Button" enable-rich-text="true" class="cancelButtonScaledPostit" />
             </ui:VisualElement>
