@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 public class PostitSlot
@@ -28,8 +29,29 @@ public class PostitSlot
         reputationValue = reputationContainer?.Q<Label>("T_ReputationLabel");
         stateLabel = stateContainer?.Q<Label>("T_ReputationLabel");
 
+        // Diagnóstico: confirma si este elemento es realmente un Button
+        // (y por tanto puede recibir "clicked") y si le llegan eventos
+        // de puntero en absoluto.
+        Debug.Log($"[PostitSlot] '{root.name}' creado. ¿Es Button? {root is Button}. " +
+            $"pickingMode={root.pickingMode}, visible={root.resolvedStyle.display}.");
+
         if (root is Button button)
-            button.clicked += () => onClick(data);
+        {
+            button.clicked += () =>
+            {
+                Debug.Log($"[PostitSlot] CLICK recibido en '{root.name}' (caso: {data?.caseTitle}).");
+                onClick(data);
+            };
+        }
+        else
+        {
+            Debug.LogWarning($"[PostitSlot] '{root.name}' NO es un Button — el UXML puede haber cambiado su tipo.");
+        }
+
+        // Fallback de diagnóstico: esto se dispara con cualquier puntero
+        // que baje sobre el elemento, exista o no un Button real debajo.
+        root.RegisterCallback<PointerDownEvent>(evt =>
+            Debug.Log($"[PostitSlot] PointerDownEvent en '{root.name}' (target real: {evt.target})."));
     }
 
     public void Bind(CaseData caseData)

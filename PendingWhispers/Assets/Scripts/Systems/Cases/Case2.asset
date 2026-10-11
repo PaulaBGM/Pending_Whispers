@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e974ed1c0e907eb4aa0fe8b14b64cfbd, type: 3}
   m_Name: Case2
   m_EditorClassIdentifier: 
-  caseTitle: 
+  caseTitle: The Unknown Man
   caseDescription: 
   caseIcon: {fileID: 0}
   objectives: []
@@ -28,7 +28,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 00be787a9656e9f45abdc79fef64c949, type: 2}
   - {fileID: 11400000, guid: 08bf42f2103682f4c994e59e5de5aedd, type: 2}
   unlockedNodeID: 
-  nextCase: {fileID: 0}
+  nextCase: {fileID: 11400000, guid: 62d66ef3e4493274b87f7a638a9f8ce1, type: 2}
   outcomes:
   - outcomeID: goodcase1
     requiredFlags:

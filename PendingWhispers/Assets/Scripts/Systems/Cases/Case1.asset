@@ -24,7 +24,7 @@ MonoBehaviour:
   hypothesis: {fileID: 11400000, guid: c37d2d3938d040245bec8dfc8fabe8fa, type: 2}
   caseID: Case 1 - The Singer
   unlockFlag: {fileID: 11400000, guid: 8026d71d73230a548b720e9ed6b330cf, type: 2}
-  startedFlag: {fileID: 11400000, guid: 8026d71d73230a548b720e9ed6b330cf, type: 2}
+  startedFlag: {fileID: 0}
   completedFlag: {fileID: 11400000, guid: dc4c1bf252451fc40ae424878cff7de7, type: 2}
   requiredClues:
   - {fileID: 11400000, guid: 1b75c72b9eb796b48bd430228ed4bc8e, type: 2}
@@ -56,5 +56,5 @@ MonoBehaviour:
   requesterName: "Ren\xE9 Venue"
   requesterLocation: Encore Mansion
   requestSummary: gdgdgetdgedge
-  baseReputationReward: 100
+  baseReputationReward: 35
   cardColor: {r: 0.5853909, g: 0.9716981, b: 0.55460125, a: 1}
