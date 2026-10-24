@@ -1,0 +1,105 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Journal/Journal_USS.uss?fileID=7433441132597879392&amp;guid=45e93706c5f2de34ea94fca174aa5cca&amp;type=3#Journal_USS" />
+    <ui:VisualElement name="Journal_Root" style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement name="Journal_BG_Anim" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/UI/Notebook/Notebook_Spritesheet.png?fileID=-1160788962551953147&amp;guid=24728f8eef9ce75498ca24cd4d9dcbb7&amp;type=3#OpenNotebook_5&quot;); position: absolute; width: 100%; height: 100%;" />
+        <ui:VisualElement name="Journal_UpTabs" style="flex-grow: 1; position: absolute; top: 0; left: 0; flex-direction: row; align-items: flex-start; align-self: flex-start; width: 100%; height: 12%; transform-origin: center;">
+            <ui:VisualElement name="Empty" style="flex-grow: 1; width: 60%; height: 100%;" />
+            <ui:VisualElement name="Empty" style="flex-grow: 1; width: 60%; height: 100%;" />
+            <ui:VisualElement name="Tab_Inventory" style="flex-grow: 1; height: 100%; width: 40%; background-image: url(&quot;project://database/Assets/Sprites/UI/Notebook/NotebookTabs_Spritesheet.png?fileID=-1904048764201810715&amp;guid=bebcd201ec90a844f8e141ce45e89d28&amp;type=3#Journal_Tab_BG&quot;); rotate: -90deg; -unity-background-image-tint-color: rgb(236, 150, 225);">
+                <ui:VisualElement name="Tab_Icon" style="flex-grow: 1; background-image: none; background-color: rgba(0, 0, 0, 0); -unity-background-image-tint-color: rgb(60, 60, 60); width: 100%; height: 100%;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Empty" style="flex-grow: 1; width: 60%; height: 100%;" />
+            <ui:VisualElement name="Empty" style="flex-grow: 1; width: 60%; height: 100%;" />
+            <ui:VisualElement name="Empty" style="flex-grow: 1; width: 60%; height: 100%;" />
+            <ui:VisualElement name="Empty" style="flex-grow: 1; width: 60%; height: 100%;" />
+            <ui:VisualElement name="Empty" style="flex-grow: 1; width: 60%; height: 100%;" />
+            <ui:VisualElement name="Empty" style="flex-grow: 1; width: 60%; height: 100%;" />
+            <ui:VisualElement name="Empty" style="flex-grow: 1; width: 60%; height: 100%;" />
+            <ui:VisualElement name="Empty" style="flex-grow: 1; width: 60%; height: 100%;" />
+            <ui:VisualElement name="Empty" style="flex-grow: 1; width: 60%; height: 100%;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Screen_1Portion" style="flex-grow: 1; flex-direction: row; width: 45%; height: 100%;">
+            <ui:VisualElement name="Screen_1Portion_2" style="flex-grow: 1; height: 100%; width: 15%;" />
+            <ui:VisualElement name="Screen_1Portion_1" style="flex-grow: 1; width: 46%; height: 100%;">
+                <ui:VisualElement name="VE_InformationPageLeft" enabled="true" focusable="false" style="flex-grow: 1; width: 100%; height: 100%; display: none;">
+                    <ui:VisualElement name="Empty" style="flex-grow: 1; width: 100%; height: 30%;" />
+                    <ui:VisualElement name="Page_Section_Name" style="flex-grow: 1; width: 100%; height: 20%; align-items: center; align-self: center;">
+                        <ui:Label text="Information" name="T_Title" style="align-self: center; align-items: center; width: 100%; height: 31%; -unity-text-align: middle-center; padding-bottom: 0; padding-top: 0; margin-bottom: 0; margin-top: 0; font-size: 30%; -unity-font-definition: url(&quot;project://database/Assets/TextMesh%20Pro/Namdhinggo/Namdhinggo-ExtraBold.ttf?fileID=12800000&amp;guid=8053a2bebcfda524aa6050fe55a05a14&amp;type=3#Namdhinggo-ExtraBold&quot;);" />
+                        <ui:VisualElement name="VE_Title_Separation" style="flex-grow: 1; width: 100%; height: 15%; background-image: url(&quot;project://database/Assets/Sprites/UI/Notebook/UIDiary_Elements.png?fileID=526357406121864647&amp;guid=413f6adb4505abd428f86e1684b86808&amp;type=3#UIDiary_Elements 1_7&quot;); align-self: center; align-content: center; justify-content: center; align-items: center;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="VE_Page_ChapterTitle" style="flex-grow: 1; width: 100%; height: 10%;">
+                        <ui:Label text="Tabs Explanation" name="T_Page_ChapterName" style="-unity-text-align: middle-center; width: 50%; height: 100%; background-image: url(&quot;project://database/Assets/Sprites/UI/Notebook/UIDiary_Elements.png?fileID=59966049275295046&amp;guid=413f6adb4505abd428f86e1684b86808&amp;type=3#UIDiary_Elements 1_9&quot;); align-self: center; align-content: center; font-size: 20%; margin-top: 0; padding-top: 0; padding-bottom: 0; margin-bottom: 0; -unity-font-definition: url(&quot;project://database/Assets/TextMesh%20Pro/Namdhinggo/Namdhinggo-Bold.ttf?fileID=12800000&amp;guid=95d4e510a4bd39a43b903579841fa8c5&amp;type=3#Namdhinggo-Bold&quot;);" />
+                    </ui:VisualElement>
+                    <ui:ScrollView name="SV_SelectorContainer" style="width: 100%; height: 100%; margin-top: 5%;" />
+                    <ui:VisualElement name="Empty" style="flex-grow: 1; width: 100%; height: 20%;" />
+                    <ui:VisualElement name="Empty" style="flex-grow: 1; width: 100%; height: 20%;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="VE_ClueInventory" enabled="true" style="flex-grow: 1; width: 100%; height: 100%; display: flex;">
+                    <ui:VisualElement name="Empty" style="flex-grow: 1; width: 100%; height: 30%;" />
+                    <ui:VisualElement name="Page_Section_Name" style="flex-grow: 1; width: 100%; height: 20%; align-items: center; align-self: center;">
+                        <ui:Label text="Objects Clues" name="T_Title" style="align-self: center; align-items: center; width: 100%; height: 31%; -unity-text-align: middle-center; padding-bottom: 0; padding-top: 0; margin-bottom: 0; margin-top: 0; font-size: 30%; -unity-font-definition: url(&quot;project://database/Assets/TextMesh%20Pro/Namdhinggo/Namdhinggo-ExtraBold.ttf?fileID=12800000&amp;guid=8053a2bebcfda524aa6050fe55a05a14&amp;type=3#Namdhinggo-ExtraBold&quot;);" />
+                        <ui:VisualElement name="VE_Title_Separation" style="flex-grow: 1; width: 100%; height: 15%; background-image: url(&quot;project://database/Assets/Sprites/UI/Notebook/UIDiary_Elements.png?fileID=3860362007435755665&amp;guid=413f6adb4505abd428f86e1684b86808&amp;type=3#UIDiary_Elements 1_3&quot;); align-self: center; align-content: center; justify-content: center; align-items: center;" />
+                    </ui:VisualElement>
+                    <ui:ScrollView name="SV_SelectorContainer" style="width: 100%; height: 125%; margin-top: 5%;" />
+                    <ui:VisualElement name="Empty" style="flex-grow: 1; width: 100%; height: 20%;" />
+                    <ui:VisualElement name="Empty" style="flex-grow: 1; width: 100%; height: 20%;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Screen_2Portion" style="flex-grow: 1; width: 5%; height: 100%;" />
+        <ui:VisualElement name="Screen_3Portion" style="flex-grow: 1; flex-direction: row; width: 45%; height: 100%;">
+            <ui:VisualElement name="Screen_3Portion_1" style="flex-grow: 1; flex-direction: row; width: 50%; height: 100%;">
+                <ui:VisualElement name="VE_InformationPageRight" enabled="true" style="flex-grow: 1; width: 100%; height: 100%; flex-wrap: nowrap; display: none; visibility: visible;">
+                    <ui:VisualElement name="Empty" style="flex-grow: 1; width: 100%; height: 30%;" />
+                    <ui:VisualElement name="VE_Page_ChapterTitle" style="flex-grow: 1; width: 100%; height: 10%;">
+                        <ui:Label text="How to make an hyphotesis" name="T_Page_ChapterName" style="-unity-text-align: middle-center; width: 55%; height: 100%; background-image: url(&quot;project://database/Assets/Sprites/UI/Notebook/UIDiary_Elements.png?fileID=59966049275295046&amp;guid=413f6adb4505abd428f86e1684b86808&amp;type=3#UIDiary_Elements 1_9&quot;); align-self: center; align-content: center; font-size: 20%; margin-top: 0; padding-top: 0; padding-bottom: 0; margin-bottom: 0; -unity-font-definition: url(&quot;project://database/Assets/TextMesh%20Pro/Namdhinggo/Namdhinggo-Bold.ttf?fileID=12800000&amp;guid=95d4e510a4bd39a43b903579841fa8c5&amp;type=3#Namdhinggo-Bold&quot;);" />
+                    </ui:VisualElement>
+                    <ui:Label text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada diam nec diam lacinia, in suscipit mauris rhoncus. In scelerisque felis in tempor mollis. Sed purus quam, aliquet vel sollicitudin non, aliquam sed lorem. Phasellus nec ornare nulla, nec pretium urna. Sed ut laoreet purus. Vestibulum nec mauris et dui viverra convallis quis eu nibh. Etiam commodo varius lacus nec dapibus. Sed purus justo, efficitur a dictum vitae, dignissim et lorem. Sed eu ante id libero posuere mollis.&#10;&#10;Donec finibus nisl vel mi rutrum placerat. Pellentesque vehicula imperdiet purus nec finibus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec ultricies hendrerit tellus, at cursus odio pharetra in. Vivamus condimentum ipsum sed nulla facilisis ultricies. Fusce tempus tristique rutrum. Suspendisse imperdiet, felis rhoncus feugiat pulvinar, nulla massa fringilla massa, ultrices finibus sapien turpis at felis. Aliquam tempus iaculis erat eu placerat." name="T_Hyphotesis_Explanation" style="width: 100%; height: 57%; margin-top: 3%; flex-wrap: wrap; white-space: normal; font-size: 15px; -unity-font-definition: url(&quot;project://database/Assets/TextMesh%20Pro/Namdhinggo/Namdhinggo-Regular.ttf?fileID=12800000&amp;guid=78f42b1dfd248c340a87959678417eb8&amp;type=3#Namdhinggo-Regular&quot;); word-spacing: 23px; -unity-paragraph-spacing: 5px;" />
+                    <ui:VisualElement name="Empty" style="flex-grow: 1; width: 100%; height: 20%;" />
+                    <ui:VisualElement name="Empty" style="flex-grow: 1; width: 100%; height: 20%;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="VE_ClueInformation" enabled="true" style="flex-grow: 1; width: 100%; height: 100%; flex-wrap: nowrap;">
+                    <ui:VisualElement name="Empty" style="flex-grow: 1; width: 100%; height: 30%;" />
+                    <ui:VisualElement name="Page_Section_Name" style="flex-grow: 1; width: 100%; height: 20%; align-items: center; align-self: center;">
+                        <ui:Label text="Observations" name="T_Title" style="align-self: center; align-items: center; width: 100%; height: 31%; -unity-text-align: middle-center; padding-bottom: 0; padding-top: 0; margin-bottom: 0; margin-top: 0; font-size: 30%; -unity-font-definition: url(&quot;project://database/Assets/TextMesh%20Pro/Namdhinggo/Namdhinggo-ExtraBold.ttf?fileID=12800000&amp;guid=8053a2bebcfda524aa6050fe55a05a14&amp;type=3#Namdhinggo-ExtraBold&quot;);" />
+                        <ui:VisualElement name="VE_Title_Separation" style="flex-grow: 1; width: 100%; height: 15%; background-image: url(&quot;project://database/Assets/Sprites/UI/Notebook/UIDiary_Elements.png?fileID=3860362007435755665&amp;guid=413f6adb4505abd428f86e1684b86808&amp;type=3#UIDiary_Elements 1_3&quot;); align-self: center; align-content: center; justify-content: center; align-items: center;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="VE_ClueImage_Container" style="flex-grow: 1; width: 100%; height: 49%; align-self: center;">
+                        <ui:VisualElement name="VE_Image_BG" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/UI/Notebook/UIDiary_Elements.png?fileID=4629252640188110188&amp;guid=413f6adb4505abd428f86e1684b86808&amp;type=3#UIDiary_Elements 1_2&quot;); width: 80%; height: 49%; align-self: center; margin-top: 0%; margin-right: 0%; margin-bottom: 0%; margin-left: 0%; padding-top: 10%; padding-right: 15%; padding-bottom: 10%; padding-left: 15%;">
+                            <ui:VisualElement name="VE_ClueImage" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/Case1/ItemsCase1_SpriteSheet.png?fileID=-2279307563218064573&amp;guid=da2d0d866ce4663468e166eea4f8b855&amp;type=3#ClueAllergy_Case1&quot;); width: 100%; height: 100%; padding-top: 0%; padding-right: 0%; padding-bottom: 0%;" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="VE_Page_ChapterTitle" style="flex-grow: 1; width: 100%; height: 10%; margin-top: 5%;">
+                        <ui:Label text="How to make an hyphotesis" name="T_ClueName" style="-unity-text-align: middle-center; width: 55%; height: 100%; background-image: url(&quot;project://database/Assets/Sprites/UI/Notebook/UIDiary_Elements.png?fileID=59966049275295046&amp;guid=413f6adb4505abd428f86e1684b86808&amp;type=3#UIDiary_Elements 1_9&quot;); align-self: center; align-content: center; font-size: 20%; margin-top: 0; padding-top: 0; padding-bottom: 0; margin-bottom: 0; -unity-font-definition: url(&quot;project://database/Assets/TextMesh%20Pro/Namdhinggo/Namdhinggo-Bold.ttf?fileID=12800000&amp;guid=95d4e510a4bd39a43b903579841fa8c5&amp;type=3#Namdhinggo-Bold&quot;);" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="Empty" style="flex-grow: 1; width: 100%; height: 20%;" />
+                    <ui:VisualElement name="Empty" style="flex-grow: 1; width: 100%; height: 20%;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Screen_3Portion_2" style="flex-grow: 1; flex-direction: row; width: 20%; height: 100%;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Journal_Tabs" style="flex-grow: 1; align-items: flex-start; height: 100%; width: 14%; position: absolute; top: 0; right: 0; translate: -3% 0;">
+            <ui:VisualElement name="Journal_RightTabs" style="flex-grow: 1; position: absolute; right: 0; height: 100%; width: 85%; margin-top: 0; margin-bottom: 0; margin-right: 25px; top: 0;">
+                <ui:VisualElement name="Empty" style="flex-grow: 1; width: 60%; height: 12%;" />
+                <ui:Button name="Tab_Information" style="margin-top: 20px; margin-bottom: 0; background-image: url(&quot;project://database/Assets/Sprites/UI/Notebook/NotebookTabs_Spritesheet.png?fileID=-1904048764201810715&amp;guid=bebcd201ec90a844f8e141ce45e89d28&amp;type=3#Journal_Tab_BG&quot;); width: 60%; height: 12%; background-color: rgba(188, 188, 188, 0); -unity-background-image-tint-color: rgb(201, 147, 79); padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
+                    <ui:VisualElement name="Tab_Icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/UI/Notebook/Notebook_Instructions.png?fileID=21300000&amp;guid=feec4bdee92de22439dfcc944aaa2e5d&amp;type=3#Notebook_Instructions&quot;); background-color: rgba(0, 0, 0, 0); -unity-background-image-tint-color: rgb(160, 117, 63); width: 100%; height: 100%;" />
+                </ui:Button>
+                <ui:Button name="Tab_ObjectClue" style="margin-top: 0; margin-bottom: 0; background-image: url(&quot;project://database/Assets/Sprites/UI/Notebook/NotebookTabs_Spritesheet.png?fileID=-1904048764201810715&amp;guid=bebcd201ec90a844f8e141ce45e89d28&amp;type=3#Journal_Tab_BG&quot;); width: 60%; height: 12%; background-color: rgba(188, 188, 188, 0); -unity-background-image-tint-color: rgb(78, 170, 201); padding-left: 0; padding-right: 0;">
+                    <ui:VisualElement name="Tab_Icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/UI/Notebook/NotebookTabs_Spritesheet.png?fileID=1054661238&amp;guid=bebcd201ec90a844f8e141ce45e89d28&amp;type=3#Journal_ObjectClue_Icon&quot;); background-color: rgba(0, 0, 0, 0); -unity-background-image-tint-color: rgb(73, 163, 195); width: 100%; height: 100%;" />
+                </ui:Button>
+                <ui:Button name="Tab_DialogueClue" style="margin-top: 0; margin-bottom: 0; background-image: url(&quot;project://database/Assets/Sprites/UI/Notebook/NotebookTabs_Spritesheet.png?fileID=-1904048764201810715&amp;guid=bebcd201ec90a844f8e141ce45e89d28&amp;type=3#Journal_Tab_BG&quot;); width: 60%; height: 12%; background-color: rgba(188, 188, 188, 0); -unity-background-image-tint-color: rgb(146, 97, 203); padding-left: 0; padding-right: 0;">
+                    <ui:VisualElement name="Tab_Icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/UI/Notebook/NotebookTabs_Spritesheet.png?fileID=1555123635&amp;guid=bebcd201ec90a844f8e141ce45e89d28&amp;type=3#Journal_DialogueClue_Icon&quot;); background-color: rgba(0, 0, 0, 0); -unity-background-image-tint-color: rgb(135, 89, 190); width: 100%; height: 100%;" />
+                </ui:Button>
+                <ui:Button name="Tab_CaseState" style="margin-top: 0; margin-bottom: 0; background-image: url(&quot;project://database/Assets/Sprites/UI/Notebook/NotebookTabs_Spritesheet.png?fileID=-1904048764201810715&amp;guid=bebcd201ec90a844f8e141ce45e89d28&amp;type=3#Journal_Tab_BG&quot;); width: 60%; height: 12%; background-color: rgba(188, 188, 188, 0); -unity-background-image-tint-color: rgb(101, 188, 109); padding-left: 0; padding-right: 0;">
+                    <ui:VisualElement name="Tab_Icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/UI/Notebook/NotebookTabs_Spritesheet.png?fileID=1697173927&amp;guid=bebcd201ec90a844f8e141ce45e89d28&amp;type=3#Journal_CaseState_Icon&quot;); background-color: rgba(0, 0, 0, 0); -unity-background-image-tint-color: rgb(88, 197, 98); width: 100%; height: 100%;" />
+                </ui:Button>
+                <ui:VisualElement name="Empty" style="flex-grow: 1; width: 60%; height: 12%;" />
+                <ui:Button name="Tab_Settings" style="margin-top: 0; margin-bottom: 0; background-image: url(&quot;project://database/Assets/Sprites/UI/Notebook/NotebookTabs_Spritesheet.png?fileID=-1904048764201810715&amp;guid=bebcd201ec90a844f8e141ce45e89d28&amp;type=3#Journal_Tab_BG&quot;); width: 60%; height: 12%; background-color: rgba(188, 188, 188, 0); -unity-background-image-tint-color: rgb(137, 137, 137); padding-left: 0; padding-right: 0;">
+                    <ui:VisualElement name="Tab_Icon" style="flex-grow: 1; background-image: none; background-color: rgba(0, 0, 0, 0); -unity-background-image-tint-color: rgb(60, 60, 60); width: 100%; height: 100%;" />
+                </ui:Button>
+                <ui:VisualElement name="Empty" style="flex-grow: 1; width: 60%; height: 12%;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Journal_Pages_Anim" enabled="false" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/UI/Notebook/Notebook_Spritesheet.png?fileID=733326393944995004&amp;guid=24728f8eef9ce75498ca24cd4d9dcbb7&amp;type=3#ChangePage_1&quot;); position: absolute; height: 100%; width: 100%;" />
+    </ui:VisualElement>
+</ui:UXML>

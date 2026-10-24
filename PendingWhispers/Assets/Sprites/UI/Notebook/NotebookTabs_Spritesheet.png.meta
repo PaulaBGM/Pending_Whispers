@@ -151,15 +151,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: NotebookTab_Sprite
+      name: Journal_Tab_BG
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 256
-        height: 256
+        x: 24
+        y: 32
+        width: 200
+        height: 200
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -173,67 +173,67 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Textimonies_Icon
+      name: Journal_DialogueClue_Icon
       rect:
         serializedVersion: 2
-        x: 256
-        y: 0
-        width: 256
-        height: 256
+        x: 273
+        y: 32
+        width: 200
+        height: 200
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e174a22ede60f5f20800000000000000
-      internalID: 3413454661341562654
+      spriteID: eee9e13edf3c71c46b32d1e263aa9d86
+      internalID: 1555123635
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cases_Icon
+      name: Journal_CaseState_Icon
       rect:
         serializedVersion: 2
-        x: 512
-        y: 0
-        width: 256
-        height: 256
+        x: 538
+        y: 32
+        width: 200
+        height: 200
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9d93bbf78cb903450800000000000000
-      internalID: 6066519983506799065
+      spriteID: 4a6157422cd37884cb1ca308d192d01a
+      internalID: 1697173927
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clues_Icon
+      name: Journal_ObjectClue_Icon
       rect:
         serializedVersion: 2
-        x: 768
-        y: 0
-        width: 256
-        height: 256
+        x: 786
+        y: 32
+        width: 200
+        height: 200
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 45245d48f27cd5790800000000000000
-      internalID: -7539651194242383276
+      spriteID: 2d31a94c08b5d7d41942db551e75f484
+      internalID: 1054661238
       vertices: []
       indices: 
       edges: []
@@ -254,7 +254,10 @@ TextureImporter:
     nameFileIdTable:
       Cases_Icon: 6066519983506799065
       Clues_Icon: -7539651194242383276
-      NotebookTab_Sprite: -1904048764201810715
+      Journal_CaseState_Icon: 1697173927
+      Journal_DialogueClue_Icon: 1555123635
+      Journal_ObjectClue_Icon: 1054661238
+      Journal_Tab_BG: -1904048764201810715
       Textimonies_Icon: 3413454661341562654
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
