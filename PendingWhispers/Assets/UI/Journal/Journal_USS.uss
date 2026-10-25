@@ -1,1 +1,13 @@
-VisualElement {}
+VisualElement {
+}
+
+.close-journal-button:hover {
+    -unity-background-image-tint-color: rgb(91, 91, 91);
+}
+
+.close-journal-button:active {
+    scale: 0.9 0.9;
+}
+
+.close-journal-button {
+}

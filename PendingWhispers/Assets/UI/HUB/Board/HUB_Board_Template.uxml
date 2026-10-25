@@ -3,7 +3,7 @@
     <ui:VisualElement name="HUB_Board_Root" class="boardRoot containerRoot">
         <ui:VisualElement name="HUB_Board_BG" class="hubBoardBG">
             <ui:VisualElement name="VE_CancelButton" class="containerButton" style="flex-grow: 1;">
-                <ui:Button name="BT_Cancel_Button" enable-rich-text="true" class="cancelButtonScaledPostit" />
+                <ui:Button name="BT_Cancel_Button" enable-rich-text="true" class="cancelButtonScaledPostit" style="width: 90%;" />
             </ui:VisualElement>
             <ui:GroupBox name="HUB_Board_Postit_Container" class="postitContainer" style="flex-direction: row; flex-basis: auto;">
                 <ui:Button name="HUB_Board_Postit_BG_1" selectable="true" class="hubPostItBG" style="translate: -69px -86px;">
@@ -194,7 +194,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="HUB_ScaledPostit_BG" enabled="true" class="scaledPostitBG" style="flex-grow: 1; display: flex;">
             <ui:VisualElement name="VE_CancelButton" class="containerButton" style="flex-grow: 1;">
-                <ui:Button name="BT_Cancel_Button" enable-rich-text="true" class="cancelButtonScaledPostit" />
+                <ui:Button name="BT_Cancel_Button" enable-rich-text="true" class="cancelButtonScaledPostit" style="height: 90%;" />
             </ui:VisualElement>
             <ui:VisualElement name="VE_ScaledPostit_UpQuarter" class="scaledPostitUpQuarter" style="flex-grow: 1;">
                 <ui:Label text="Lorem Ipsum" name="T_ScaledPostit_CaseName" picking-mode="Ignore" double-click-selects-word="false" class="scaledPostit_CaseName" />

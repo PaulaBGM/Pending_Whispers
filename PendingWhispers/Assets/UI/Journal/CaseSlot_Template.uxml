@@ -1,0 +1,8 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Journal/CaseSlot_USS.uss?fileID=7433441132597879392&amp;guid=f3a403434ddb6784888eab0385b4c4ef&amp;type=3#CaseSlot_USS" />
+    <ui:VisualElement name="CaseSlot_Root" style="flex-grow: 1;">
+        <ui:Button name="CaseSlot_BG" class="inventory-slot" style="width: 100%; height: 100%; margin-top: 0%; margin-right: 0%; margin-bottom: 0%; margin-left: 0%; padding-top: 3%; padding-right: 3%; padding-bottom: 3%; padding-left: 3%; right: auto; left: auto; background-color: rgba(99, 69, 38, 0.79); border-top-left-radius: 0%; border-top-right-radius: 0%; border-bottom-right-radius: 0%; border-bottom-left-radius: 0%; -unity-text-align: upper-left; font-size: 20px; -unity-font-definition: url(&quot;project://database/Assets/TextMesh%20Pro/Namdhinggo/Namdhinggo-Bold.ttf?fileID=12800000&amp;guid=95d4e510a4bd39a43b903579841fa8c5&amp;type=3#Namdhinggo-Bold&quot;); white-space: normal;">
+            <ui:Label text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in orci efficitur metus pulvinar pharetra. Praesent vehicula nec urna vitae vulputate. " name="T_CaseResume" style="width: 100%; height: 100%; align-self: center; white-space: normal; word-spacing: 10px; font-size: 25px; color: rgb(255, 255, 255);" />
+        </ui:Button>
+    </ui:VisualElement>
+</ui:UXML>

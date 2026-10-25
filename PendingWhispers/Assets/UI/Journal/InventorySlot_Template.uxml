@@ -1,0 +1,8 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Journal/ItemSlot_USS.uss?fileID=7433441132597879392&amp;guid=66bf403630a66e94ab201025672fc173&amp;type=3#ItemSlot_USS" />
+    <ui:VisualElement name="ItemSlot_Root" style="flex-grow: 1;">
+        <ui:Button name="ItemSlot_BG" class="inventory-slot" style="width: 100%; height: 100%; margin-top: 0%; margin-right: 0%; margin-bottom: 0%; margin-left: 0%; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; right: auto; left: auto; background-color: rgba(99, 69, 38, 0.79); border-top-left-radius: 15%; border-top-right-radius: 15%; border-bottom-right-radius: 15%; border-bottom-left-radius: 15%;">
+            <ui:VisualElement name="VE_Item_Image" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/Case1/ItemsCase1_SpriteSheet.png?fileID=3330209453353105178&amp;guid=da2d0d866ce4663468e166eea4f8b855&amp;type=3#ClueKnife_Case1&quot;); position: absolute; align-self: center; top: auto; left: auto; right: auto; bottom: auto; width: 100%; height: 100%; -unity-background-image-tint-color: rgb(159, 159, 159);" />
+        </ui:Button>
+    </ui:VisualElement>
+</ui:UXML>
