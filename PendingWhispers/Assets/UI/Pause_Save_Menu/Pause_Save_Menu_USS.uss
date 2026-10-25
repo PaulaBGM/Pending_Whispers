@@ -1,0 +1,33 @@
+VisualElement {
+}
+
+.confirmationMenu:disabled {
+    scale: 0 0;
+    opacity: 0;
+    transition-duration: 0.2s, 0.5s;
+    transition-timing-function: ease-out-back, ease;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    transition-property: all, opacity;
+}
+
+.pauseSaveMenu:disabled {
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+    translate: 0 -1000px;
+    transition-property: all;
+    transition-delay: 0s;
+    scale: 0.9 0.9;
+}
+
+.unity-button:hover {
+    scale: 1.1 1.1;
+    transition-timing-function: ease-in-out-sine;
+    transition-duration: 0.3s;
+}
+
+.unity-button:active {
+    transition-timing-function: ease-in-out-sine;
+    scale: 0.9 0.9;
+    transition-duration: 0.2s;
+    -unity-background-image-tint-color: rgb(180, 178, 178);
+}

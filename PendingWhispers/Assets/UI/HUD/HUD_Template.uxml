@@ -2,16 +2,16 @@
     <Style src="project://database/Assets/UI/HUD/HUD_USS.uss?fileID=7433441132597879392&amp;guid=d3218a8b23d4fa2498a0df8c1f323300&amp;type=3#HUD_USS" />
     <ui:VisualElement name="HUD_Root" class="root" style="flex-grow: 1; flex-direction: row;">
         <ui:VisualElement name="HUD_WindownQuarter_1" class="windowQuarterContainer windowQuarterContainerLeft" style="flex-grow: 1;">
-            <ui:VisualElement name="HUD_Notebook_Container" class="notebookContainer" style="flex-grow: 1;">
+            <ui:VisualElement name="HUD_Notebook_Container" class="notebookContainer" style="flex-grow: 1; width: 25%;">
                 <ui:VisualElement name="HUD_Notebook_Notification" class="notebookNotification" style="flex-grow: 1;">
                     <ui:Label text="100" name="T_AddedClues_Notification" picking-mode="Ignore" class="notificationText" />
                 </ui:VisualElement>
-                <ui:Button name="HUD_Notebook_Button" class="notebookButton" />
+                <ui:Button name="HUD_Notebook_Button" class="notebookButton" style="height: 40%;" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="HUD_WindownQuarter_2" class="windowQuarterContainerRight" style="flex-grow: 1;">
             <ui:VisualElement name="HUD_Map_Container" class="mapContainer" style="flex-grow: 1;">
-                <ui:Button name="HUD_Map_Button" class="mapButton" />
+                <ui:Button name="HUD_Map_Button" class="mapButton" style="height: 40%;" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="HUD_WindownQuarter_3" class="windowQuarterContainer windowQuarterContainerLeft" style="flex-grow: 1;" />
