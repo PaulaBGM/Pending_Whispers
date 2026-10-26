@@ -1,0 +1,6 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Map/MapButton_USS.uss?fileID=7433441132597879392&amp;guid=195ea7d4814be8742baeaf4da6bab6ae&amp;type=3#MapButton_USS" />
+    <ui:VisualElement name="MapButton_Root" style="flex-grow: 1;">
+        <ui:Button text="&#10;" name="BT_Map" enabled="true" style="background-color: rgba(188, 188, 188, 0); background-image: url(&quot;project://database/Assets/Sprites/Map/TilesMap.png?fileID=-1106261606&amp;guid=86d3d10bdb7eef04582ced39fcb3c1fb&amp;type=3#Map_Slector&quot;); width: 100%; height: 100%;" />
+    </ui:VisualElement>
+</ui:UXML>

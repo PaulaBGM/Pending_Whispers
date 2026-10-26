@@ -1,0 +1,22 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Map/Map_USS.uss?fileID=7433441132597879392&amp;guid=ce1862086a493dd49a63bd51d657f3a6&amp;type=3#Map_USS" />
+    <ui:VisualElement name="Map_Root" style="flex-grow: 1;">
+        <ui:VisualElement name="VE_UpSection" style="flex-grow: 1; flex-direction: row;">
+            <ui:VisualElement name="VE_UpSection_Left" enabled="true" class="nameOfSite" style="flex-grow: 1; align-items: flex-start; justify-content: flex-start; transition-duration: 0.3s; transition-timing-function: ease-out-back;">
+                <ui:VisualElement name="Empty" style="flex-grow: 1; flex-direction: row; height: 10%; width: 100%;" />
+                <ui:VisualElement name="VE_NameOfSiteContainer" enabled="true" style="flex-grow: 1; flex-direction: row; background-image: url(&quot;project://database/Assets/Sprites/UI/Recuadros.png?fileID=21300000&amp;guid=da1d8b90163ae3f46a962a17eae5edab&amp;type=3#Recuadros&quot;); width: 64%; height: 40%; align-content: flex-start; align-self: center; margin-top: 0%; margin-right: 21%; margin-bottom: 0%; margin-left: 0%; justify-content: flex-start; align-items: center; translate: 0 0; transition-timing-function: ease-in-bounce; opacity: 1; transition-duration: 0.3s;">
+                    <ui:Label text="Lorem ipsum dolor sit amet" name="T_NameOfSite" style="width: 100%; height: 100%; -unity-text-align: middle-center; white-space: normal; font-size: 30%; color: rgb(255, 255, 255); -unity-font-definition: url(&quot;project://database/Assets/TextMesh%20Pro/Alegreya_SC/AlegreyaSC-Medium.ttf?fileID=12800000&amp;guid=63b71c41ba570ed4f9c4f67b8f630c64&amp;type=3#AlegreyaSC-Medium&quot;);" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Empty" style="flex-grow: 1; flex-direction: row; height: 30%; width: 100%;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="VE_UpSection_Middle" style="flex-grow: 1;" />
+            <ui:VisualElement name="VE_UpSection_Right" style="flex-grow: 1;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="VE_MiddleSection" style="flex-grow: 1; height: auto; width: 100%;" />
+        <ui:VisualElement name="VE_DownSection" style="flex-grow: 1;">
+            <ui:VisualElement name="VE_MissionInstructionsContainer" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/UI/Recuadros.png?fileID=21300000&amp;guid=da1d8b90163ae3f46a962a17eae5edab&amp;type=3#Recuadros&quot;); translate: 0 109px;">
+                <ui:Label text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis lectus ipsum. Donec ultrices nibh tortor, sed cursus justo fringilla at. Nulla blandit fringilla dui. Integer sit amet leo nec orci porta finibus. Aenean vestibulum tincidunt elit quis mattis. Suspendisse potenti. Ut eros metus, aliquam eu sagittis quis, dignissim et purus. Phasellus condimentum quis purus nec iaculis. Morbi vestibulum ligula a nulla consequat, non tincidunt ex volutpat. Morbi augue lectus, ultricies vitae turpis ut, facilisis fermentum justo. In bibendum non nisl nec gravida." name="T_MissionInstructions" style="font-size: 30%; -unity-font-definition: url(&quot;project://database/Assets/TextMesh%20Pro/Namdhinggo/Namdhinggo-Regular.ttf?fileID=12800000&amp;guid=78f42b1dfd248c340a87959678417eb8&amp;type=3#Namdhinggo-Regular&quot;); -unity-text-align: middle-left; width: 100%; height: 90%; padding-top: 0%; padding-right: 7%; padding-bottom: 0%; padding-left: 7%; white-space: normal; color: rgb(255, 255, 255);" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
