@@ -53,7 +53,7 @@ VisualElement {
     background-size: 100% 100%;
     background-image: url("project://database/Assets/Sprites/UI/HUDNotebook_Icon.png?fileID=21300000&guid=bd90ade5dedf13144816e4a66d51ed1b&type=3#HUDNotebook_Icon");
     background-repeat: no-repeat no-repeat;
-    scale: 0.98 0.98;
+    scale: 1 1;
     transition-duration: 0.2s;
 }
 
@@ -138,7 +138,7 @@ VisualElement {
     width: 20%;
     height: 10%;
     max-height: 20%;
-    translate: -50px -369px;
+    translate: -50px -288px;
     background-position-x: center -6px;
     padding-right: 0;
     padding-left: 0;
@@ -169,6 +169,7 @@ VisualElement {
     justify-content: center;
     padding-top: 0;
     padding-bottom: 0;
+    display: flex;
 }
 
 .notificationText {
@@ -182,14 +183,14 @@ VisualElement {
 .mapButton:hover {
     -unity-background-image-tint-color: rgb(183, 183, 183);
     transition-duration: 0.2s;
-    scale: 0.95 0.95;
+    scale: 1 1;
 }
 
 .abilityButton:hover {
     -unity-background-image-tint-color: rgb(197, 197, 197);
     background-color: rgba(183, 183, 183, 0);
     transition-duration: 0s;
-    scale: 0.95 0.95;
+    scale: 1 1;
 }
 
 .gameNotification {
@@ -265,4 +266,16 @@ VisualElement {
     flex-wrap: wrap;
     white-space: pre-wrap;
     -unity-text-align: middle-left;
+}
+
+.mapButton:active {
+    scale: 0.98 0.98;
+}
+
+.abilityButton:active {
+    scale: 0.98 0.98;
+}
+
+.notebookButton:active {
+    scale: 0.98 0.98;
 }

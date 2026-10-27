@@ -1,7 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Map/Map_USS.uss?fileID=7433441132597879392&amp;guid=ce1862086a493dd49a63bd51d657f3a6&amp;type=3#Map_USS" />
     <ui:VisualElement name="Map_Root" style="flex-grow: 1;">
-        <ui:VisualElement name="VE_UpSection" style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement name="VE_UpSection" enabled="true" style="flex-grow: 1; flex-direction: row;">
             <ui:VisualElement name="VE_UpSection_Left" enabled="true" class="nameOfSite" style="flex-grow: 1; align-items: flex-start; justify-content: flex-start; transition-duration: 0.3s; transition-timing-function: ease-out-back;">
                 <ui:VisualElement name="Empty" style="flex-grow: 1; flex-direction: row; height: 10%; width: 100%;" />
                 <ui:VisualElement name="VE_NameOfSiteContainer" enabled="true" style="flex-grow: 1; flex-direction: row; background-image: url(&quot;project://database/Assets/Sprites/UI/Recuadros.png?fileID=21300000&amp;guid=da1d8b90163ae3f46a962a17eae5edab&amp;type=3#Recuadros&quot;); width: 64%; height: 40%; align-content: flex-start; align-self: center; margin-top: 0%; margin-right: 21%; margin-bottom: 0%; margin-left: 0%; justify-content: flex-start; align-items: center; translate: 0 0; transition-timing-function: ease-in-bounce; opacity: 1; transition-duration: 0.3s;">

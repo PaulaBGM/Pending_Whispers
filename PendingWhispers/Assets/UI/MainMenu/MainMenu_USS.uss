@@ -1,0 +1,16 @@
+VisualElement {
+}
+
+.unity-button:hover {
+    background-image: url("project://database/Assets/Sprites/UI/Buttons_SpriteSheet.png?fileID=-205010913&guid=ce8b0d13eac7db94da6ae819d77ff9da&type=3#Buttons_7");
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out-back;
+}
+
+.unity-button:active {
+    scale: 0.9 0.9;
+}
+
+.titleGame-MainMenu:focus {
+}

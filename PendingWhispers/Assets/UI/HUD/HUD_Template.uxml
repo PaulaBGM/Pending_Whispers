@@ -3,8 +3,8 @@
     <ui:VisualElement name="HUD_Root" class="root" style="flex-grow: 1; flex-direction: row;">
         <ui:VisualElement name="HUD_WindownQuarter_1" class="windowQuarterContainer windowQuarterContainerLeft" style="flex-grow: 1;">
             <ui:VisualElement name="HUD_Notebook_Container" class="notebookContainer" style="flex-grow: 1; width: 25%;">
-                <ui:VisualElement name="HUD_Notebook_Notification" class="notebookNotification" style="flex-grow: 1;">
-                    <ui:Label text="100" name="T_AddedClues_Notification" picking-mode="Ignore" class="notificationText" />
+                <ui:VisualElement name="HUD_Notebook_Notification" enabled="true" class="notebookNotification" style="flex-grow: 1; visibility: visible;">
+                    <ui:Label text="100" name="T_AddedClues_Notification" picking-mode="Ignore" class="notificationText" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; -unity-text-align: upper-left; align-self: center; padding-left: 2px;" />
                 </ui:VisualElement>
                 <ui:Button name="HUD_Notebook_Button" class="notebookButton" style="height: 40%;" />
             </ui:VisualElement>
@@ -21,7 +21,7 @@
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="HUD_GameNotification" class="gameNotification" style="flex-grow: 1;">
+    <ui:VisualElement name="HUD_GameNotification" enabled="false" class="gameNotification" style="flex-grow: 1;">
         <ui:Label text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sed euismod orci. Maecenas egestas nibh sed tortor sagittis volutpat. " name="T_GameNotification" class="gameNotificationText" />
     </ui:VisualElement>
 </ui:UXML>
