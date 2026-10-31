@@ -5,6 +5,7 @@ namespace Inventory.Model
         Instructions,
         Testimony,
         Clue,
+        Item,
         Case
     }
 }

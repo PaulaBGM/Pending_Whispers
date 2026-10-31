@@ -23,6 +23,6 @@ public class InventoryPageAnimEvent : MonoBehaviour
     public void OnAnimationFinished()
     {
         Debug.Log("ANIMATION FINISHED");
-        JournalController.Instance.OnPageTurnFinished();
+     //   JournalController.Instance.OnPageTurnFinished();
     }
 }
