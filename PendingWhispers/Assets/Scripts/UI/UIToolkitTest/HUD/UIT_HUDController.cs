@@ -2,6 +2,7 @@ using System.Collections;
 using Inventory.Model;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(UIDocument))]
@@ -24,13 +25,16 @@ public class UIT_HUDController : MonoBehaviour
     [SerializeField] private UIDocument uiDocument;
 
     [Header("Progress Flags")]
-    [SerializeField] private FlagSO unlockCatacombsFlag;
+    [Tooltip("Flag que desbloquea el mapa. Debe añadirse al terminar la conversación con el primer fantasma del Caso 1.")]
+    [FormerlySerializedAs("unlockCatacombsFlag")]
+    [SerializeField] private FlagSO mapUnlockedFlag;
     [SerializeField] private FlagSO catacombsEnteredFlag;
 
     [Header("Event Channels")]
     [SerializeField] private TestimonyEventChannelSO onTestimonyRegistered;
     [SerializeField] private BoolEventChannelSO dialogueStateChannel;
     [SerializeField] private BoolEventChannelSO journalStateChannel;
+    [SerializeField] private BoolEventChannelSO pauseStateChannel;
 
     [Header("Button Actions")]
     [SerializeField] private UnityEvent onNotebookClicked;
@@ -42,8 +46,18 @@ public class UIT_HUDController : MonoBehaviour
 
     [Header("Game Notification")]
     [SerializeField] private float gameNotificationDuration = 3f;
-    [SerializeField] private BoolEventChannelSO pauseStateChannel;
-    private bool pauseOpen;
+
+    [Header("Map Reveal Animation")]
+    [Tooltip("Espera tras reaparecer el HUD antes de mostrar el botón, para que el jugador lo vea aparecer.")]
+    [SerializeField] private float mapRevealDelay = 0.25f;
+    [SerializeField] private float mapRevealDuration = 0.5f;
+    [SerializeField] private float mapRevealOvershoot = 1.3f;
+
+    [Header("Map Tutorial (opcional)")]
+    [SerializeField] private string mapTutorialID = "map";
+    [SerializeField] private string mapTutorialTitle = "Map";
+    [TextArea(2, 4)]
+    [SerializeField] private string mapTutorialText = "";
 
     // Elementos
     private VisualElement hudRoot;
@@ -58,9 +72,15 @@ public class UIT_HUDController : MonoBehaviour
     private int pendingClues;
     private bool journalOpen;
     private bool dialogueOpen;
+    private bool pauseOpen;
     private bool isDetectionCooldown;
 
+    private bool mapRevealPending;
+
     private Coroutine gameNotificationRoutine;
+    private Coroutine mapRevealRoutine;
+
+    private bool IsHudVisible => !journalOpen && !dialogueOpen && !pauseOpen;
 
     private void Reset()
     {
@@ -82,6 +102,9 @@ public class UIT_HUDController : MonoBehaviour
         journalStateChannel.OnRaised += HandleJournal;
         SpectralDetectionSystem.OnCooldownStateChanged += HandleDetectionCooldown;
 
+        if (pauseStateChannel != null)
+            pauseStateChannel.OnRaised += HandlePause;
+
         if (onTestimonyRegistered != null)
             onTestimonyRegistered.OnRaised += HandleTestimonyRegistered;
 
@@ -89,7 +112,6 @@ public class UIT_HUDController : MonoBehaviour
             GameProgress.Instance.OnFlagAdded += OnFlagAdded;
 
         UIGameEvents.OnEvidenceRegistered += HandleEvidenceRegistered;
-        if (pauseStateChannel != null) pauseStateChannel.OnRaised += HandlePause;
 
         ApplyCurrentState();
     }
@@ -101,6 +123,9 @@ public class UIT_HUDController : MonoBehaviour
         dialogueStateChannel.OnRaised -= HandleDialogue;
         journalStateChannel.OnRaised -= HandleJournal;
         SpectralDetectionSystem.OnCooldownStateChanged -= HandleDetectionCooldown;
+
+        if (pauseStateChannel != null)
+            pauseStateChannel.OnRaised -= HandlePause;
 
         if (onTestimonyRegistered != null)
             onTestimonyRegistered.OnRaised -= HandleTestimonyRegistered;
@@ -115,7 +140,14 @@ public class UIT_HUDController : MonoBehaviour
             StopCoroutine(gameNotificationRoutine);
             gameNotificationRoutine = null;
         }
-        if (pauseStateChannel != null) pauseStateChannel.OnRaised -= HandlePause;
+
+        // Si se desactiva a mitad de la animación del mapa, se repetirá al reactivarse.
+        if (mapRevealRoutine != null)
+        {
+            StopCoroutine(mapRevealRoutine);
+            mapRevealRoutine = null;
+            mapRevealPending = true;
+        }
     }
 
     private void Start()
@@ -124,7 +156,6 @@ public class UIT_HUDController : MonoBehaviour
         HandleDetectionCooldown(false);
         ApplyCurrentState();
     }
-    private void HandlePause(bool open) { pauseOpen = open; RefreshHUD(); }
 
     // ---------------- BINDING ----------------
 
@@ -167,10 +198,10 @@ public class UIT_HUDController : MonoBehaviour
 
     private void ApplyCurrentState()
     {
+        RefreshMapButton();
         RefreshHUD();
         RefreshClueNotification();
         ApplyDetectionCooldown();
-        RefreshMapButton();
         RefreshDetectionAvailability();
     }
 
@@ -224,11 +255,22 @@ public class UIT_HUDController : MonoBehaviour
         RefreshHUD();
     }
 
+    private void HandlePause(bool open)
+    {
+        pauseOpen = open;
+        RefreshHUD();
+    }
+
     private void RefreshHUD()
     {
-        hudRoot.style.display = (!journalOpen && !dialogueOpen && !pauseOpen) ? DisplayStyle.Flex : DisplayStyle.None;
-        if (hudRoot != null)
-            hudRoot.style.display = (!journalOpen && !dialogueOpen) ? DisplayStyle.Flex : DisplayStyle.None;
+        if (hudRoot == null)
+            return;
+
+        hudRoot.style.display = IsHudVisible ? DisplayStyle.Flex : DisplayStyle.None;
+
+        // El flag del mapa llega durante el diálogo del fantasma, con el HUD oculto.
+        // La animación espera a que el HUD vuelva a verse.
+        TryPlayPendingMapReveal();
     }
 
     // ---------------- CLUES ----------------
@@ -263,20 +305,94 @@ public class UIT_HUDController : MonoBehaviour
 
     private void OnFlagAdded(FlagSO flag)
     {
-        if (flag == unlockCatacombsFlag)
+        if (flag == mapUnlockedFlag)
+        {
+            mapRevealPending = true;
             RefreshMapButton();
+            TryPlayPendingMapReveal();
+        }
 
         if (flag == catacombsEnteredFlag)
             RefreshDetectionAvailability();
     }
 
+    private bool IsMapUnlocked()
+    {
+        return GameProgress.Instance != null && GameProgress.Instance.HasFlag(mapUnlockedFlag);
+    }
+
     private void RefreshMapButton()
     {
-        if (mapButton == null || GameProgress.Instance == null)
+        if (mapButton == null || mapRevealRoutine != null)
             return;
 
-        mapButton.SetEnabled(GameProgress.Instance.HasFlag(unlockCatacombsFlag));
+        // Mientras la revelación esté pendiente, el botón sigue oculto.
+        SetMapButtonVisible(IsMapUnlocked() && !mapRevealPending);
     }
+
+    private void SetMapButtonVisible(bool visible)
+    {
+        // visibility (no display) para que el resto de botones del HUD no se recoloquen al aparecer.
+        // Un elemento con visibility: hidden tampoco recibe clics.
+        mapButton.style.visibility = visible ? Visibility.Visible : Visibility.Hidden;
+        mapButton.SetEnabled(visible);
+        mapButton.style.scale = new StyleScale(StyleKeyword.Null);
+    }
+
+    private void TryPlayPendingMapReveal()
+    {
+        if (!mapRevealPending || !IsHudVisible || mapButton == null || mapRevealRoutine != null)
+            return;
+
+        mapRevealPending = false;
+        mapRevealRoutine = StartCoroutine(MapRevealRoutine());
+    }
+
+    private IEnumerator MapRevealRoutine()
+    {
+        mapButton.style.visibility = Visibility.Hidden;
+
+        if (mapRevealDelay > 0f)
+            yield return new WaitForSeconds(mapRevealDelay);
+
+        SetMapScale(0f);
+        mapButton.style.visibility = Visibility.Visible;
+        mapButton.SetEnabled(true);
+
+        // Fase 1 (60%): 0 -> overshoot con ease-out. Fase 2 (40%): overshoot -> 1.
+        float growTime = mapRevealDuration * 0.6f;
+        float settleTime = mapRevealDuration - growTime;
+
+        yield return ScaleRoutine(0f, mapRevealOvershoot, growTime, EaseOutCubic);
+        yield return ScaleRoutine(mapRevealOvershoot, 1f, settleTime, EaseInOutQuad);
+
+        // Se limpia el inline para que vuelva a mandar el USS (p. ej. escala en :hover).
+        mapButton.style.scale = new StyleScale(StyleKeyword.Null);
+        mapRevealRoutine = null;
+
+        if (!string.IsNullOrEmpty(mapTutorialText) && TutorialPopup.Instance != null)
+            TutorialPopup.Instance.ShowTutorialOnce(mapTutorialID, mapTutorialTitle, mapTutorialText);
+    }
+
+    private IEnumerator ScaleRoutine(float from, float to, float duration, System.Func<float, float> ease)
+    {
+        float t = 0f;
+        while (t < duration)
+        {
+            // Tiempo escalado: si se pausa el juego, la animación se congela.
+            t += Time.deltaTime;
+            SetMapScale(Mathf.LerpUnclamped(from, to, ease(Mathf.Clamp01(t / duration))));
+            yield return null;
+        }
+    }
+
+    private void SetMapScale(float s)
+    {
+        mapButton.style.scale = new StyleScale(new Scale(new Vector2(s, s)));
+    }
+
+    private static float EaseOutCubic(float x) => 1f - Mathf.Pow(1f - x, 3f);
+    private static float EaseInOutQuad(float x) => x < 0.5f ? 2f * x * x : 1f - Mathf.Pow(-2f * x + 2f, 2f) / 2f;
 
     // ---------------- GAME NOTIFICATION ----------------
 
