@@ -1,15 +1,17 @@
 .inventory-slot {
+    width: 80px;
+    height: 80px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin-right: 8px;
+    margin-bottom: 8px;
 }
 
 .inventory-slot:hover {
-    border-left-color: rgb(255, 255, 255);
-    border-right-color: rgb(255, 255, 255);
-    border-top-color: rgb(255, 255, 255);
-    border-bottom-color: rgb(255, 255, 255);
-    border-top-width: 5px;
-    border-right-width: 5px;
-    border-bottom-width: 5px;
-    border-left-width: 5px;
+    border-left-color: white;
+    border-right-color: white;
+    border-top-color: white;
+    border-bottom-color: white;
 }
 
 .inventory-slot:active {

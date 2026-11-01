@@ -14,3 +14,10 @@ VisualElement {
     transition-timing-function: ease-in-out;
     transition-duration: 0.2s;
 }
+
+.inventory-scroll .unity-scroll-view__content-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+}

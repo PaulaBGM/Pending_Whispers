@@ -1,0 +1,27 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Dialogue/Dialogue_USS.uss?fileID=7433441132597879392&amp;guid=5ad4deb4f52ac6a4f8ac31dc2eb07049&amp;type=3#Dialogue_USS" />
+    <ui:VisualElement name="Dialogue_Root" style="flex-grow: 1;">
+        <ui:VisualElement name="VE_CharacterPicture_Container" style="flex-grow: 1; flex-direction: column;">
+            <ui:VisualElement name="VE_UpSection" style="flex-grow: 1; height: 60%; width: 100%; flex-direction: row; align-self: center; align-items: flex-end; justify-content: space-between;">
+                <ui:VisualElement name="Empty" style="flex-grow: 1; width: 10%; height: 100%;" />
+                <ui:VisualElement name="VE_LeftCharacter" style="flex-grow: 1; width: 35%; height: 100%; background-image: url(&quot;project://database/Assets/Sprites/Case1/Expresions/Expresions/LyraExpressions_SpriteSheet.png?fileID=-1103926389690433412&amp;guid=40d62a340747ee84c8946e698480bdf6&amp;type=3#LyraExpressions_Happy&quot;); align-content: flex-end; translate: 0 5%;" />
+                <ui:VisualElement name="Empty" style="flex-grow: 1; width: 10%; height: 100%;" />
+                <ui:VisualElement name="VE_RightCharacter" style="flex-grow: 1; width: 35%; height: 100%; background-image: url(&quot;project://database/Assets/Sprites/Case1/Expresions/Expresions/ReneExpresions_SpriteSheet.png?fileID=3652085389764901965&amp;guid=5f1cfb08ed764c4418e9fd13b523bedb&amp;type=3#ReneExpresions_Neutral&quot;); align-content: flex-end; translate: 0 5%;" />
+                <ui:VisualElement name="Empty" style="flex-grow: 1; width: 10%; height: 100%;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="VE_DownSection" style="flex-grow: 1; height: 40%; width: 100%;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="VE_DialogueContainer" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/UI/Recuadros.png?fileID=21300000&amp;guid=da1d8b90163ae3f46a962a17eae5edab&amp;type=3#Recuadros&quot;); translate: 0 5%; position: absolute; width: 100%; height: 50%; bottom: 0; background-size: 104% 104%;">
+            <ui:VisualElement name="Empty" style="flex-grow: 1; width: 100%; height: 5%;" />
+            <ui:Label text="Lorem ipsum" name="T_SpeakerName" style="font-size: 50%; -unity-font-definition: url(&quot;project://database/Assets/TextMesh%20Pro/Namdhinggo/Namdhinggo-Bold.ttf?fileID=12800000&amp;guid=95d4e510a4bd39a43b903579841fa8c5&amp;type=3#Namdhinggo-Bold&quot;); -unity-text-align: middle-left; width: 100%; height: 20%; padding-top: 0%; padding-right: 7%; padding-bottom: 0%; padding-left: 7%; white-space: normal; color: rgb(255, 255, 255); -unity-font-style: normal;" />
+            <ui:VisualElement name="VE_DialogueText_Container" style="flex-grow: 1; width: 100%; height: 50%; align-items: center; justify-content: center;">
+                <ui:Label text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis lectus ipsum. a consequat, non tincidunt ex volutpat. Morbi augue lectus, ultricies vitae turpis ut, facilisis fermentum justo. In bibendum non nisl nec gravida." name="T_DialogueText" style="font-size: 35%; -unity-font-definition: url(&quot;project://database/Assets/TextMesh%20Pro/Namdhinggo/Namdhinggo-Regular.ttf?fileID=12800000&amp;guid=78f42b1dfd248c340a87959678417eb8&amp;type=3#Namdhinggo-Regular&quot;); -unity-text-align: upper-left; width: 90%; height: auto; padding-top: 0%; padding-right: 0%; padding-bottom: 0%; padding-left: 0%; white-space: normal; color: rgb(255, 255, 255); margin-top: 0; align-self: center; display: flex; flex-wrap: wrap; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+                <ui:ListView name="LV_ButtonsContainer" enabled="true" style="height: 50%; width: 90%; align-self: center; display: flex; min-height: 86%;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Empty" style="flex-grow: 1; width: 100%; height: 5%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:Button name="BT_JournalButton" parse-escape-sequences="true" class="openJournalButton" style="position: absolute; width: 10%; height: 15%; bottom: 0; right: 0; translate: -75% 84%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; background-image: none;">
+        <ui:VisualElement name="VE_JournalIcon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/UI/Notebook/HUD_notebook.png?fileID=21300000&amp;guid=cf701c2ac1ac51c48bc57f2528147d0a&amp;type=3#HUD_notebook&quot;); width: 100%; height: 100%; background-size: 100% 120%;" />
+    </ui:Button>
+</ui:UXML>

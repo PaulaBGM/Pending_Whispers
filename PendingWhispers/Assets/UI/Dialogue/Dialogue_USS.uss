@@ -1,0 +1,10 @@
+VisualElement {
+}
+
+.openJournalButton:hover {
+    translate: 0 4%;
+    scale: 1 1;
+    transition-property: translate;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+}
