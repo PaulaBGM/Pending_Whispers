@@ -4302,13 +4302,14 @@ GameObject:
   m_Component:
   - component: {fileID: 436197233}
   - component: {fileID: 436197234}
+  - component: {fileID: 436197235}
   m_Layer: 0
   m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &436197233
 Transform:
   m_ObjectHideFlags: 0
@@ -4343,6 +4344,71 @@ MonoBehaviour:
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
+--- !u!114 &436197235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436197232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddbce20a582f1a54ea32673e385b9350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDocument: {fileID: 436197234}
+  unlockCatacombsFlag: {fileID: 11400000, guid: 9cc3d14b9dc651b4c8d197dcd5f6c5b9, type: 2}
+  catacombsEnteredFlag: {fileID: 11400000, guid: ea1d627ebee820a448438805c8496a2d, type: 2}
+  onTestimonyRegistered: {fileID: 11400000, guid: 11ab5f6cdba954e4d9500a03e274a911, type: 2}
+  dialogueStateChannel: {fileID: 11400000, guid: 983c7fe0404ee5f4abf7f477fe1c0487, type: 2}
+  journalStateChannel: {fileID: 11400000, guid: f2fa85d8ec6606849bfe046413a30a79, type: 2}
+  onNotebookClicked:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 692250241}
+        m_TargetAssemblyTypeName: UIT_JournalController, Assembly-CSharp
+        m_MethodName: ToggleJournal
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onMapClicked:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1407904370}
+        m_TargetAssemblyTypeName: PlayerController_Actions, Assembly-CSharp
+        m_MethodName: OpenMap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onAbilityClicked:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1407904365}
+        m_TargetAssemblyTypeName: SpectralDetectionSystem, Assembly-CSharp
+        m_MethodName: LaunchScan
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  cooldownColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  gameNotificationDuration: 3
 --- !u!1 &456599353
 GameObject:
   m_ObjectHideFlags: 0
@@ -9902,7 +9968,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1348518474
 Transform:
   m_ObjectHideFlags: 0

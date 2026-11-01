@@ -33,7 +33,14 @@ public class CaseJournalSystem : BaseSingleton<CaseJournalSystem>
     {
         return new List<CaseRuntime>(cases.Values);
     }
+    public void Clear()
+    {
+        if (cases.Count == 0)
+            return;
 
+        cases.Clear();
+        OnCasesChanged?.Invoke();
+    }
     public CaseRuntime GetCase(string id)
     {
         cases.TryGetValue(id, out var c);

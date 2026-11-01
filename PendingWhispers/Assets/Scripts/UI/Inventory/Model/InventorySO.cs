@@ -159,6 +159,29 @@ namespace Inventory.Model
 
             GameProgress.Instance.AddFlag(completedFlag);
         }
+        public void RestoreSlots(IEnumerable<(int index, ItemSO item, int quantity)> slots)
+        {
+            Initialize();
+            progressionCompleted = false;
+
+            if (slots != null)
+            {
+                foreach (var (index, item, quantity) in slots)
+                {
+                    if (item == null || index < 0 || index >= inventoryItems.Count)
+                        continue;
+
+                    inventoryItems[index] = new InventoryItem
+                    {
+                        item = item,
+                        quantity = quantity,
+                        itemState = new List<ItemParameter>()
+                    };
+                }
+            }
+
+            InformAboutChange();
+        }
     }
 
     [Serializable]

@@ -46,7 +46,17 @@ public class GameProgress : BaseSingleton<GameProgress>
 
         return true;
     }
+    public void RestoreFlags(IEnumerable<FlagSO> savedFlags)
+    {
+        flags.Clear();
 
+        if (savedFlags != null)
+            foreach (var flag in savedFlags)
+                if (flag != null)
+                    flags.Add(flag);
+
+        Debug.Log($"[GameProgress] Restored {flags.Count} flags");
+    }
     public List<FlagSO> GetFlags()
     {
         return new List<FlagSO>(flags);

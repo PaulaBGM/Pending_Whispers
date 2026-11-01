@@ -116,7 +116,17 @@ public class CaseManager : BaseSingleton<CaseManager>
 
         Debug.Log($"[Case] Resolved '{currentCase.data.caseTitle}' -> Outcome: {outcome.outcomeID}");
     }
+    public void RestoreCurrentCase(CaseData data, CaseRuntime runtime)
+    {
+        currentCaseData = data;
+        currentCase = runtime;
 
+        if (currentCase == null && data != null)
+        {
+            currentCase = new CaseRuntime(data);
+            CaseJournalSystem.Instance?.TryAddCase(currentCase);
+        }
+    }
     public CaseRuntime GetCurrentCase() => currentCase;
 
     public CaseData GetCurrentCaseData() => currentCaseData;
