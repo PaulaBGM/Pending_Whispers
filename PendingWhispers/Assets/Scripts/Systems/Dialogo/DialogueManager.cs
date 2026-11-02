@@ -18,7 +18,8 @@ public class DialogueManager : BaseSingleton<DialogueManager>
 
     private PlayerController_Actions player;
 
-    private bool subscribedToEvidenceUI;
+    // Vista a la que estamos suscritos para OnEvidenceItemSelected (puede cambiar al cambiar de escena).
+    private IDialogueView subscribedView;
 
     private void OnEnable()
     {
@@ -94,7 +95,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
             return;
         }
 
-        if (!TryGetDialogueUI(out DialogueUI dialogueUI))
+        if (!TryGetDialogueUI(out IDialogueView dialogueUI))
             return;
 
         ApplyNodeEffects(node);
@@ -114,7 +115,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         if (validChoices.Count > 0)
             dialogueUI.ShowChoices(validChoices);
 
-        TrySubscribeToEvidenceUI();
+        TrySubscribeToEvidenceUI(dialogueUI);
         dialogueUI.SetEvidenceButtonVisible(node.allowsEvidencePresentation);
     }
 
@@ -152,7 +153,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
             return;
         }
 
-        DialogueUI.Instance?.ClearChoices();
+        CurrentView?.ClearChoices();
         GoToNode(choice.nextNodeID);
     }
 
@@ -161,7 +162,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         MarkCurrentDialogueTopicAsSeen();
 
         SetDialogueActive(false);
-        DialogueUI.Instance?.Hide();
+        CurrentView?.Hide();
 
         currentNPC?.TryTransform();
 
@@ -180,10 +181,39 @@ public class DialogueManager : BaseSingleton<DialogueManager>
             player.canMove = !isActive;
     }
 
-    private bool TryGetDialogueUI(out DialogueUI dialogueUI)
+    /// <summary>
+    /// Vista activa: la de UI Toolkit si está en la escena; si no, la uGUI de respaldo.
+    /// Se comprueba con el tipo concreto para que funcione el null de Unity (objetos destruidos).
+    /// </summary>
+    private static IDialogueView CurrentView
     {
-        dialogueUI = DialogueUI.Instance;
-        return dialogueUI != null;
+        get
+        {
+            if (UIT_DialogueUI.Instance != null)
+                return UIT_DialogueUI.Instance;
+            if (DialogueUI.Instance != null)
+                return DialogueUI.Instance;
+            return null;
+        }
+    }
+
+    private bool TryGetDialogueUI(out IDialogueView dialogueUI)
+    {
+        dialogueUI = CurrentView;
+        if (dialogueUI != null)
+            return true;
+
+        // Diagnóstico: ¿existe pero está desactivada (y por eso nunca hizo Awake)?
+        var inactiveView = FindFirstObjectByType<UIT_DialogueUI>(FindObjectsInactive.Include);
+        if (inactiveView != null)
+            Debug.LogError($"[DialogueManager] '{inactiveView.name}' tiene UIT_DialogueUI pero está desactivado " +
+                           "(el GameObject, un padre o el componente). Actívalo en la escena.", inactiveView);
+        else
+            Debug.LogError("[DialogueManager] No hay vista de diálogo en la escena (UIT_DialogueUI ni DialogueUI).");
+
+        // Sin vista no hay forma de avanzar: se libera al jugador en vez de dejarlo bloqueado.
+        SetDialogueActive(false);
+        return false;
     }
 
     private List<DialogueChoice> GetValidChoices(DialogueNode node)
@@ -221,7 +251,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         currentNPC = npc;
         SetDialogueActive(true);
 
-        if (!TryGetDialogueUI(out DialogueUI dialogueUI))
+        if (!TryGetDialogueUI(out IDialogueView dialogueUI))
             return;
 
         dialogueUI.ShowDialogueSelector(topics, HasSeenDialogueTopic, SelectDialogueTopic);
@@ -232,7 +262,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         if (topic?.dialogue == null)
             return;
 
-        DialogueUI.Instance?.ClearChoices();
+        CurrentView?.ClearChoices();
         StartDialogue(topic.dialogue, currentNPC, topic);
     }
 
@@ -307,13 +337,25 @@ public class DialogueManager : BaseSingleton<DialogueManager>
 
     // ---------------- EVIDENCE PRESENTATION ----------------
 
-    private void TrySubscribeToEvidenceUI()
+    private void TrySubscribeToEvidenceUI(IDialogueView view)
     {
-        if (subscribedToEvidenceUI || DialogueUI.Instance == null)
+        if (view == null || ReferenceEquals(view, subscribedView))
             return;
 
-        DialogueUI.Instance.OnEvidenceItemSelected += HandlePresentedItem;
-        subscribedToEvidenceUI = true;
+        // Al cambiar de escena la vista anterior se destruye: se suelta y se engancha la nueva.
+        UnsubscribeFromEvidenceUI();
+
+        view.OnEvidenceItemSelected += HandlePresentedItem;
+        subscribedView = view;
+    }
+
+    private void UnsubscribeFromEvidenceUI()
+    {
+        if (subscribedView == null)
+            return;
+
+        subscribedView.OnEvidenceItemSelected -= HandlePresentedItem;
+        subscribedView = null;
     }
 
     public void OpenEvidencePicker()
@@ -321,7 +363,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         if (currentNode == null || !currentNode.allowsEvidencePresentation)
             return;
 
-        DialogueUI.Instance?.OpenEvidencePicker();
+        CurrentView?.OpenEvidencePicker();
     }
 
     private void HandlePresentedItem(ItemSO item)
@@ -335,7 +377,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         {
             AddFlags(match.addFlags, true);
             match.onSelectedEvent?.Raise();
-            DialogueUI.Instance?.SetEvidenceButtonVisible(false);
+            CurrentView?.SetEvidenceButtonVisible(false);
             GoToNode(match.nextNodeID);
             return;
         }
@@ -344,15 +386,14 @@ public class DialogueManager : BaseSingleton<DialogueManager>
 
         if (!string.IsNullOrEmpty(currentNode.wrongEvidenceNodeID))
         {
-            DialogueUI.Instance?.SetEvidenceButtonVisible(false);
+            CurrentView?.SetEvidenceButtonVisible(false);
             GoToNode(currentNode.wrongEvidenceNodeID);
         }
     }
 
     protected override void OnDestroy()
     {
-        if (subscribedToEvidenceUI && DialogueUI.Instance != null)
-            DialogueUI.Instance.OnEvidenceItemSelected -= HandlePresentedItem;
+        UnsubscribeFromEvidenceUI();
 
         base.OnDestroy();
     }

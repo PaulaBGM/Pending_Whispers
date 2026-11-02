@@ -47,8 +47,10 @@ namespace Inventory.UI
         [Header("Slots (hoja izquierda)")]
         [SerializeField] private VisualTreeAsset slotTemplate;
         [SerializeField] private string slotContainerName = "SV_SelectorContainer";
-        [SerializeField] private string slotIconName = "ItemIcon";
-        [SerializeField] private string slotQuantityName = "T_Quantity";
+        [Tooltip("Elemento del slotTemplate que muestra la miniatura del item.")]
+        [SerializeField] private string slotIconName = "VE_Item_Image";
+        [Tooltip("Opcional. Label del slotTemplate con la cantidad. Vacío si el slot no la muestra.")]
+        [SerializeField] private string slotQuantityName = "";
         [SerializeField] private string sectionTitleLabelName = "T_Title_Inventory";
 
         [Header("Paneles de detalle (hoja derecha)")]
@@ -243,7 +245,8 @@ namespace Inventory.UI
             {
                 action?.Invoke();
                 HideActions();
-            }) { text = label };
+            })
+            { text = label };
             button.AddToClassList(ActionButtonClass);
             actionPanel.Add(button);
         }
@@ -317,8 +320,18 @@ namespace Inventory.UI
             {
                 Element = element,
                 Icon = element.Q<VisualElement>(slotIconName),
-                Quantity = element.Q<Label>(slotQuantityName)
+                Quantity = string.IsNullOrEmpty(slotQuantityName) ? null : element.Q<Label>(slotQuantityName)
             };
+
+            // Aviso una sola vez si los nombres no coinciden con el slotTemplate.
+            if (index == 0)
+            {
+                if (slot.Icon == null)
+                    Debug.LogWarning($"{name}: el slotTemplate no tiene ningún elemento '{slotIconName}'. Revisa 'Slot Icon Name'.", this);
+
+                if (!string.IsNullOrEmpty(slotQuantityName) && slot.Quantity == null)
+                    Debug.LogWarning($"{name}: el slotTemplate no tiene ningún Label '{slotQuantityName}'. Revisa 'Slot Quantity Name' o déjalo vacío.", this);
+            }
 
             element.RegisterCallback<ClickEvent>(evt => HandleClick(index, evt));
             element.RegisterCallback<PointerDownEvent>(evt => HandlePointerDown(index, evt));

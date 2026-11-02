@@ -8,7 +8,7 @@ using FMOD.Studio;
 using FMODUnity;
 using Inventory.Model;
 
-public class DialogueUI : MonoBehaviour
+public class DialogueUI : MonoBehaviour, IDialogueView
 {
     public static DialogueUI Instance;
 
