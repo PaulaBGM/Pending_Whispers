@@ -96,7 +96,7 @@ MonoBehaviour:
   - VE_TestimonyInformation
   slotTemplate: {fileID: 9197481963319205126, guid: 37aedc4c4554b714fa117c54ec018e7c, type: 3}
   listContainerName: SV_PeopleList
-  slotIconName: ItemIcon
+  slotIconName: VE_Item_Image
   portraitName: VE_PersonImage
   nameLabelName: T_PersonName
   dialogueScrollName: SV_PersonDialogue
@@ -110,7 +110,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4118239692008340358}
-  - component: {fileID: 1633366855890919618}
   - component: {fileID: 8036601350750889508}
   m_Layer: 0
   m_Name: Journal_Pages
@@ -139,26 +138,6 @@ Transform:
   - {fileID: 6298859895174591102}
   m_Father: {fileID: 4543488561300539358}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1633366855890919618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2801484176166185756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ea6acf88819174eacc90ad3c675263, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  elementNames: []
-  slotTemplate: {fileID: 9197481963319205126, guid: 37aedc4c4554b714fa117c54ec018e7c, type: 3}
-  listContainerName: SV_PeopleList
-  slotIconName: ItemIcon
-  portraitName: VE_PersonImage
-  nameLabelName: T_PersonName
-  dialogueScrollName: SV_PersonDialogue
-  dialogueLabelName: T_PersonDialogue
 --- !u!114 &8036601350750889508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -721,7 +700,6 @@ GameObject:
   - component: {fileID: 8363983173477165376}
   - component: {fileID: 6859236302733710352}
   - component: {fileID: 5847755991826289455}
-  - component: {fileID: 5567797720706873096}
   - component: {fileID: 9164072629459276821}
   m_Layer: 0
   m_Name: Dialogue
@@ -791,23 +769,8 @@ MonoBehaviour:
   topicSelectorSpeaker: Talk
   seenTopicPrefix: "\u2713  "
   advanceAction: {fileID: 3001919216989983466, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  evidencePicker: {fileID: 5567797720706873096}
+  evidencePicker: {fileID: 0}
   dialogueEventPath: event:/Dialogue
---- !u!114 &5567797720706873096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8132552447720638924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bb6b3ef62e740146bb35e25665c7ec0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  root: {fileID: 4668501307054832765}
-  content: {fileID: 8363983173477165376}
-  slotPrefab: {fileID: 0}
 --- !u!114 &9164072629459276821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -939,7 +902,13 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   cooldownColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  maxDisplayedClues: 9
+  bumpDuration: 0.2
+  notifiedItemTypes: 0200000003000000
   gameNotificationDuration: 3
+  gameNotificationHideTime: 0.3
+  testimonyMessage: 'New testimony: {0}'
+  evidenceMessage: 'New evidence: {0}'
   mapRevealDelay: 0.25
   mapRevealDuration: 0.5
   mapRevealOvershoot: 1.3

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Inventory.Model;
 using UnityEngine;
 using UnityEngine.Events;
@@ -18,8 +19,9 @@ public class UIT_HUDController : MonoBehaviour
     private const string GameNotifName = "HUD_GameNotification";
     private const string GameNotifTextName = "T_GameNotification";
 
-    // Clase USS que activa las transiciones
+    // Clases USS que activan las transiciones
     private const string VisibleClass = "visible";
+    private const string BumpClass = "bump";
 
     [Header("UI Document")]
     [SerializeField] private UIDocument uiDocument;
@@ -44,8 +46,24 @@ public class UIT_HUDController : MonoBehaviour
     [Header("Detection Button")]
     [SerializeField] private Color cooldownColor = Color.gray;
 
+    [Header("Clue Notifications (lengüeta)")]
+    [Tooltip("A partir de este número se muestra 'N+'.")]
+    [SerializeField] private int maxDisplayedClues = 9;
+    [Tooltip("Duración del pulso (.bump) cuando sube el contador.")]
+    [SerializeField] private float bumpDuration = 0.2f;
+
+    [Header("Pruebas (inventario)")]
+    [Tooltip("Tipos de objeto que cuentan como 'cosa nueva' al entrar en el inventario.")]
+    [SerializeField] private List<ItemType> notifiedItemTypes = new() { ItemType.Clue, ItemType.Item };
+
     [Header("Game Notification")]
     [SerializeField] private float gameNotificationDuration = 3f;
+    [Tooltip("Lo que dura la transición de salida en el USS antes de ocultarla con display: none.")]
+    [SerializeField] private float gameNotificationHideTime = 0.3f;
+    [Tooltip("{0} = nombre de la persona.")]
+    [SerializeField] private string testimonyMessage = "New testimony: {0}";
+    [Tooltip("{0} = nombre de la prueba.")]
+    [SerializeField] private string evidenceMessage = "New evidence: {0}";
 
     [Header("Map Reveal Animation")]
     [Tooltip("Espera tras reaparecer el HUD antes de mostrar el botón, para que el jugador lo vea aparecer.")]
@@ -77,8 +95,16 @@ public class UIT_HUDController : MonoBehaviour
 
     private bool mapRevealPending;
 
+    // Mensajes que esperan a que el HUD vuelva a verse (p. ej. testimonios recogidos durante un diálogo).
+    private readonly Queue<string> gameNotificationQueue = new();
+
+    // Objetos que ya estaban en el inventario: solo los que no estén aquí cuentan como nuevos.
+    private readonly HashSet<ItemSO> knownItems = new();
+    private InventorySO watchedInventory;
+
     private Coroutine gameNotificationRoutine;
     private Coroutine mapRevealRoutine;
+    private IVisualElementScheduledItem bumpReset;
 
     private bool IsHudVisible => !journalOpen && !dialogueOpen && !pauseOpen;
 
@@ -112,6 +138,7 @@ public class UIT_HUDController : MonoBehaviour
             GameProgress.Instance.OnFlagAdded += OnFlagAdded;
 
         UIGameEvents.OnEvidenceRegistered += HandleEvidenceRegistered;
+        WatchInventory();
 
         ApplyCurrentState();
     }
@@ -134,6 +161,7 @@ public class UIT_HUDController : MonoBehaviour
             GameProgress.Instance.OnFlagAdded -= OnFlagAdded;
 
         UIGameEvents.OnEvidenceRegistered -= HandleEvidenceRegistered;
+        UnwatchInventory();
 
         if (gameNotificationRoutine != null)
         {
@@ -152,6 +180,8 @@ public class UIT_HUDController : MonoBehaviour
 
     private void Start()
     {
+        // Por si InventoryRuntime no existía aún en OnEnable.
+        WatchInventory();
         ResetClueNotifications();
         HandleDetectionCooldown(false);
         ApplyCurrentState();
@@ -179,6 +209,24 @@ public class UIT_HUDController : MonoBehaviour
             if (e is not Button)
                 e.pickingMode = PickingMode.Ignore;
         });
+
+        // Como el HUDController antiguo (SetActive): la lengüeta empieza escondida.
+        // Se usa display en vez de clases USS para que no dependa de estilos.
+        if (clueNotification != null)
+        {
+            clueNotification.style.visibility = Visibility.Visible;
+            clueNotification.style.display = DisplayStyle.None;
+
+            // En el UXML la lengüeta va ANTES que el botón del cuaderno, así que el botón se pinta
+            // encima y la tapa. Se pasa al final de su contenedor para que se dibuje por delante.
+            clueNotification.BringToFront();
+        }
+
+        if (gameNotification != null)
+        {
+            gameNotification.style.display = DisplayStyle.None;
+            gameNotification.RemoveFromClassList(VisibleClass);
+        }
 
         if (notebookButton != null) notebookButton.clicked += OnNotebookClicked;
         if (mapButton != null) mapButton.clicked += OnMapClicked;
@@ -243,10 +291,17 @@ public class UIT_HUDController : MonoBehaviour
     private void HandleJournal(bool open)
     {
         journalOpen = open;
-        RefreshHUD();
 
+        // Abrir el diario = el jugador ya ha ido a ver lo nuevo: se reinicia la cuenta
+        // y se descartan los avisos que estaban esperando (ya no aportan nada).
         if (open)
+        {
             ResetClueNotifications();
+            gameNotificationQueue.Clear();
+            HideGameNotificationImmediate();
+        }
+
+        RefreshHUD();
     }
 
     private void HandleDialogue(bool open)
@@ -271,18 +326,101 @@ public class UIT_HUDController : MonoBehaviour
         // El flag del mapa llega durante el diálogo del fantasma, con el HUD oculto.
         // La animación espera a que el HUD vuelva a verse.
         TryPlayPendingMapReveal();
+
+        // Igual con los avisos: los testimonios llegan durante el diálogo.
+        TryPlayNextGameNotification();
     }
 
-    // ---------------- CLUES ----------------
+    // ---------------- CLUES (lengüeta + contador) ----------------
 
-    private void HandleTestimonyRegistered(TestimonyEntry entry) => AddClueNotification();
+    private void HandleTestimonyRegistered(TestimonyEntry entry)
+    {
+        Debug.Log($"[HUD] Nuevo testimonio: {entry.Name}");
+        AddClueNotification();
+        ShowGameNotification(string.Format(testimonyMessage, entry.Name));
+    }
 
-    private void HandleEvidenceRegistered(ItemSO item) => AddClueNotification();
+    private void HandleEvidenceRegistered(ItemSO item) => RegisterNewItem(item);
+
+    /// <summary>
+    /// Una prueba nueva. Llega por el inventario (siempre) o por UIGameEvents (si algo lo lanza);
+    /// knownItems evita contarla dos veces.
+    /// </summary>
+    private void RegisterNewItem(ItemSO item)
+    {
+        if (item == null || !knownItems.Add(item))
+            return;
+
+        if (!notifiedItemTypes.Contains(item.ItemType))
+            return;
+
+        Debug.Log($"[HUD] Nueva prueba: {item.Name}");
+        AddClueNotification();
+        ShowGameNotification(string.Format(evidenceMessage, item.Name));
+    }
+
+    // ---------------- INVENTORY WATCH ----------------
+
+    private void WatchInventory()
+    {
+        if (watchedInventory != null)
+            return;
+
+        InventorySO inventory = InventoryRuntime.Instance != null ? InventoryRuntime.Instance.GetInventory() : null;
+        if (inventory == null)
+            return;
+
+        watchedInventory = inventory;
+
+        // Lo que ya hay al entrar en la escena (partida cargada, escena anterior) no es nuevo.
+        knownItems.Clear();
+        foreach (var kvp in inventory.GetCurrentInventoryState())
+        {
+            if (!kvp.Value.IsEmpty && kvp.Value.item != null)
+                knownItems.Add(kvp.Value.item);
+        }
+
+        watchedInventory.OnInventoryUpdated += HandleInventoryUpdated;
+    }
+
+    private void UnwatchInventory()
+    {
+        if (watchedInventory != null)
+            watchedInventory.OnInventoryUpdated -= HandleInventoryUpdated;
+
+        watchedInventory = null;
+    }
+
+    private void HandleInventoryUpdated(Dictionary<int, InventoryItem> state)
+    {
+        if (state == null)
+            return;
+
+        foreach (var kvp in state)
+        {
+            if (!kvp.Value.IsEmpty && kvp.Value.item != null)
+                RegisterNewItem(kvp.Value.item);
+        }
+    }
 
     public void AddClueNotification()
     {
+        // Si el diario está abierto, el jugador ya lo está viendo: no cuenta como pendiente.
+        if (journalOpen)
+            return;
+
         pendingClues++;
         RefreshClueNotification();
+
+        if (clueNotification == null)
+        {
+            Debug.LogWarning($"[HUD] No se encontró '{NotebookNotifName}' en el UXML: la lengüeta no se puede mostrar.", this);
+            return;
+        }
+
+        // Diagnóstico: un frame después (con el layout ya calculado) dice cómo se está pintando.
+        clueNotification.schedule.Execute(LogClueNotificationState).StartingIn(50);
+        PlayBump();
     }
 
     public void ResetClueNotifications()
@@ -295,10 +433,54 @@ public class UIT_HUDController : MonoBehaviour
     {
         bool hasClues = pendingClues > 0;
 
-        clueNotification?.EnableInClassList(VisibleClass, hasClues);
+        // Equivalente a clueNotification.SetActive(hasClues) del HUD antiguo.
+        if (clueNotification != null)
+        {
+            clueNotification.style.display = hasClues ? DisplayStyle.Flex : DisplayStyle.None;
+            clueNotification.EnableInClassList(VisibleClass, hasClues); // por si el USS quiere animarla
+        }
 
         if (clueNotificationText != null)
-            clueNotificationText.text = hasClues ? pendingClues.ToString() : string.Empty;
+        {
+            clueNotificationText.text = !hasClues
+                ? string.Empty
+                : pendingClues > maxDisplayedClues
+                    ? $"{maxDisplayedClues}+"
+                    : pendingClues.ToString();
+        }
+    }
+
+    private void LogClueNotificationState()
+    {
+        if (clueNotification == null)
+            return;
+
+        var s = clueNotification.resolvedStyle;
+        string chain = "";
+        for (var e = clueNotification; e != null; e = e.parent)
+        {
+            var rs = e.resolvedStyle;
+            if (rs.display == DisplayStyle.None || rs.visibility == Visibility.Hidden || rs.opacity <= 0.01f)
+                chain += $"\n   - '{e.name}' display={rs.display} visibility={rs.visibility} opacity={rs.opacity}";
+        }
+
+        Debug.Log($"[HUD] Lengüeta: display={s.display}, visibility={s.visibility}, opacity={s.opacity}, " +
+                  $"tamaño={s.width}x{s.height}, posición={clueNotification.worldBound.position}, texto='{clueNotificationText?.text}', " +
+                  $"clases=[{string.Join(" ", clueNotification.GetClasses())}]" +
+                  (chain.Length > 0 ? $"\n  Elementos que la ocultan:{chain}" : "\n  Ningún padre la oculta."), this);
+    }
+
+    /// <summary>Pulso de la lengüeta al sumar una pista (clase .bump un instante).</summary>
+    private void PlayBump()
+    {
+        if (clueNotification == null || bumpDuration <= 0f)
+            return;
+
+        bumpReset?.Pause();
+        clueNotification.AddToClassList(BumpClass);
+        bumpReset = clueNotification.schedule
+            .Execute(() => clueNotification.RemoveFromClassList(BumpClass))
+            .StartingIn((long)(bumpDuration * 1000f));
     }
 
     // ---------------- MAP ----------------
@@ -396,25 +578,61 @@ public class UIT_HUDController : MonoBehaviour
 
     // ---------------- GAME NOTIFICATION ----------------
 
+    /// <summary>
+    /// Pone un aviso en cola. Se muestran de uno en uno, y solo con el HUD visible:
+    /// los que llegan durante un diálogo esperan a que termine.
+    /// </summary>
     public void ShowGameNotification(string message)
     {
-        if (gameNotification == null)
+        if (gameNotification == null || string.IsNullOrWhiteSpace(message))
             return;
 
+        gameNotificationQueue.Enqueue(message);
+        TryPlayNextGameNotification();
+    }
+
+    private void TryPlayNextGameNotification()
+    {
+        if (gameNotificationRoutine != null || gameNotificationQueue.Count == 0 || !IsHudVisible)
+            return;
+
+        gameNotificationRoutine = StartCoroutine(GameNotificationRoutine(gameNotificationQueue.Dequeue()));
+    }
+
+    private IEnumerator GameNotificationRoutine(string message)
+    {
         if (gameNotificationText != null)
             gameNotificationText.text = message;
 
-        if (gameNotificationRoutine != null)
-            StopCoroutine(gameNotificationRoutine);
+        // display primero, la clase un frame después: si no, la transición de entrada no se ve.
+        gameNotification.style.display = DisplayStyle.Flex;
+        gameNotification.SetEnabled(true);
+        yield return null;
+        gameNotification.AddToClassList(VisibleClass);
 
-        gameNotificationRoutine = StartCoroutine(GameNotificationRoutine());
+        yield return new WaitForSeconds(gameNotificationDuration);
+
+        gameNotification.RemoveFromClassList(VisibleClass);
+        yield return new WaitForSeconds(gameNotificationHideTime);
+
+        gameNotification.style.display = DisplayStyle.None;
+        gameNotificationRoutine = null;
+
+        TryPlayNextGameNotification();
     }
 
-    private IEnumerator GameNotificationRoutine()
+    private void HideGameNotificationImmediate()
     {
-        gameNotification.AddToClassList(VisibleClass);
-        yield return new WaitForSeconds(gameNotificationDuration);
+        if (gameNotificationRoutine != null)
+        {
+            StopCoroutine(gameNotificationRoutine);
+            gameNotificationRoutine = null;
+        }
+
+        if (gameNotification == null)
+            return;
+
         gameNotification.RemoveFromClassList(VisibleClass);
-        gameNotificationRoutine = null;
+        gameNotification.style.display = DisplayStyle.None;
     }
 }

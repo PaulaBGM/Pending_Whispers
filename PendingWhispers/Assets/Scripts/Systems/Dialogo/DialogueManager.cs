@@ -108,7 +108,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
 
         if (ShouldRegisterImportantLine(node, charData))
         {
-            onTestimonyRegistered?.Raise(new TestimonyEntry(charData.displayName, charData.portrait, node.text));
+            onTestimonyRegistered?.Raise(new TestimonyEntry(charData.displayName, GetTestimonyPortrait(charData, expressionSprite), node.text));
         }
 
         var validChoices = GetValidChoices(node);
@@ -117,6 +117,16 @@ public class DialogueManager : BaseSingleton<DialogueManager>
 
         TrySubscribeToEvidenceUI(dialogueUI);
         dialogueUI.SetEvidenceButtonVisible(node.allowsEvidencePresentation);
+    }
+
+    /// <summary>Retrato del diario: Portrait; si no hay, la expresión neutral; si no, la de esta línea.</summary>
+    private static Sprite GetTestimonyPortrait(DialogueCharacter character, Sprite expressionSprite)
+    {
+        if (character.portrait != null)
+            return character.portrait;
+        if (character.neutral != null)
+            return character.neutral;
+        return expressionSprite;
     }
 
     private bool ShouldRegisterImportantLine(DialogueNode node, DialogueCharacter character)

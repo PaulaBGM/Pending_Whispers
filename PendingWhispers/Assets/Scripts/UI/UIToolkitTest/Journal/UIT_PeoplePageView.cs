@@ -16,9 +16,12 @@ public class UIT_PeoplePageView : UIT_JournalPageView
     [Header("Lista (hoja izquierda)")]
     [SerializeField] private VisualTreeAsset slotTemplate;
     [SerializeField] private string listContainerName = "SV_PeopleList";
-    [SerializeField] private string slotIconName = "ItemIcon";
+    [Tooltip("Elemento del slotTemplate que muestra la miniatura (el mismo que 'Slot Icon Name' de Page_Items).")]
+    [SerializeField] private string slotIconName = "VE_Item_Image";
 
     [Header("Detalle (hoja derecha)")]
+    [Tooltip("Elemento donde va el retrato grande. Si duplicaste VE_ObjectClueInformation, " +
+             "es el equivalente al 'Image Name' del panel de pistas de Page_Items.")]
     [SerializeField] private string portraitName = "VE_PersonImage";
     [SerializeField] private string nameLabelName = "T_PersonName";
     [SerializeField] private string dialogueScrollName = "SV_PersonDialogue";
@@ -41,9 +44,18 @@ public class UIT_PeoplePageView : UIT_JournalPageView
     protected override void OnBind(VisualElement journalRoot)
     {
         listContainer = FindInPage<VisualElement>(listContainerName);
-        listContainer?.AddToClassList(GridClass);
+        if (listContainer != null)
+        {
+            listContainer.AddToClassList(GridClass);
+            // Al duplicar la página en UI Builder se copian los huecos de ejemplo (p. ej. el cuchillo):
+            // se quitan para que solo queden los que crea el código.
+            (listContainer is ScrollView scroll ? scroll.contentContainer : listContainer).Clear();
+        }
 
         portrait = FindInPage<VisualElement>(portraitName);
+        if (portrait == null)
+            Debug.LogWarning($"{name}: sin '{portraitName}' el retrato grande no se verá. " +
+                             "Pon en 'Portrait Name' el nombre real del elemento de imagen de VE_TestimonyInformation.", this);
         nameLabel = FindInPage<Label>(nameLabelName);
         dialogueScroll = FindInPage<ScrollView>(dialogueScrollName);
         dialogueLabel = FindInPage<Label>(dialogueLabelName);
@@ -91,6 +103,11 @@ public class UIT_PeoplePageView : UIT_JournalPageView
             int index = slots.Count;
             TemplateContainer slot = slotTemplate.CloneTree();
             slot.AddToClassList(SlotClass);
+
+            // Igual que UIT_CluePageView: aviso una vez si el nombre no coincide con el slotTemplate.
+            if (index == 0 && slot.Q<VisualElement>(slotIconName) == null)
+                Debug.LogWarning($"{name}: el slotTemplate no tiene ningún elemento '{slotIconName}'. " +
+                                 "Revisa 'Slot Icon Name' (debe ser el mismo que en Page_Items).", this);
             slot.RegisterCallback<ClickEvent>(evt =>
             {
                 if (evt.button == 0)
@@ -104,11 +121,20 @@ public class UIT_PeoplePageView : UIT_JournalPageView
 
     private void SetIcon(VisualElement slot, Sprite sprite)
     {
+        // Antes, si no encontraba el icono, pintaba en el propio hueco y la imagen de ejemplo
+        // de la plantilla (el cuchillo) quedaba encima. Ahora se usa el mismo elemento que Page_Items.
         var icon = slot.Q<VisualElement>(slotIconName);
-        if (icon != null)
-            icon.style.backgroundImage = sprite != null
-                ? new StyleBackground(sprite)
-                : new StyleBackground(StyleKeyword.None);
+        if (icon == null)
+            return;
+
+        icon.style.backgroundImage = sprite != null
+            ? new StyleBackground(sprite)
+            : new StyleBackground(StyleKeyword.None);
+        FitBackground(icon);
+
+        if (sprite == null)
+            Debug.LogWarning($"{name}: un testimonio no tiene retrato. Asigna Portrait (o Neutral) " +
+                             "a ese personaje en su DialogueData.", this);
     }
 
     // =========================
@@ -134,9 +160,12 @@ public class UIT_PeoplePageView : UIT_JournalPageView
     private void ShowDetail(PersonJournalEntry entry)
     {
         if (portrait != null)
+        {
             portrait.style.backgroundImage = entry?.portrait != null
                 ? new StyleBackground(entry.portrait)
                 : new StyleBackground(StyleKeyword.None);
+            FitBackground(portrait);
+        }
 
         if (nameLabel != null)
             nameLabel.text = entry?.personName ?? "";
@@ -146,6 +175,15 @@ public class UIT_PeoplePageView : UIT_JournalPageView
 
         if (dialogueScroll != null)
             dialogueScroll.scrollOffset = Vector2.zero;
+    }
+
+    /// <summary>Equivale al antiguo scale-to-fit: la imagen entera, centrada y sin deformar.</summary>
+    private static void FitBackground(VisualElement element)
+    {
+        element.style.backgroundSize = new BackgroundSize(BackgroundSizeType.Contain);
+        element.style.backgroundRepeat = new BackgroundRepeat(Repeat.NoRepeat, Repeat.NoRepeat);
+        element.style.backgroundPositionX = new BackgroundPosition(BackgroundPositionKeyword.Center);
+        element.style.backgroundPositionY = new BackgroundPosition(BackgroundPositionKeyword.Center);
     }
 
     private static string FormatDialogues(PersonJournalEntry entry)
