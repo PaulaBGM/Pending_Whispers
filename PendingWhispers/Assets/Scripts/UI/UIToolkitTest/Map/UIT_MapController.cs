@@ -141,16 +141,22 @@ public class UIT_MapController : BaseSingleton<UIT_MapController>
         }
 
         root = document.rootVisualElement;
-        mapArea = root.Q<VisualElement>(mapAreaName);
-        if (mapArea == null)
-        {
-            Debug.LogError($"[UIT_MapController] No se encontró '{mapAreaName}'.", this);
-            return false;
-        }
 
+        // Los textos se enlazan siempre, aunque falte el mapa: así la capa de arriba funciona sola.
         nameContainer = root.Q<VisualElement>(nameContainerName);
         nameLabel = root.Q<Label>(nameLabelName);
         instructionsLabel = root.Q<Label>(instructionsLabelName);
+
+        mapArea = root.Q<VisualElement>(mapAreaName);
+        if (mapArea == null)
+        {
+            Debug.LogError($"[UIT_MapController] No se encontró '{mapAreaName}' en el UXML. " +
+                           "Falta añadir la zona del mapa (fondo, nodos, waypoints y avatar). " +
+                           "Mientras tanto solo funcionan los textos.", this);
+            HideName();
+            SetInstructions(GetCurrentObjective());
+            return false;
+        }
 
         if (avatar != null)
         {

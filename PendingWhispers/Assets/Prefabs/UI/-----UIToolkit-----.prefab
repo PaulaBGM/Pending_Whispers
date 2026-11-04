@@ -268,7 +268,7 @@ MonoBehaviour:
     elementName: Tab_Settings
     page: {fileID: 493512562118336478}
     itemFilter: 0
-  defaultTab: 0
+  defaultTab: 2
   openDirector: {fileID: 4888902059279755552}
   closeDirector: {fileID: 235633647433247171}
   pageTurnDirector: {fileID: 1452449439673010934}
@@ -434,6 +434,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4543488561300539358}
+  - component: {fileID: 5701771457690033447}
   m_Layer: 0
   m_Name: Journal_UI
   m_TagString: Untagged
@@ -458,6 +459,18 @@ Transform:
   - {fileID: 4118239692008340358}
   m_Father: {fileID: 7177495405511165935}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5701771457690033447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4668501307054832765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7452dfe8d1014a045ad6b1996d4e3828, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5070401462287133609
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,7 +805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bb6b3ef62e740146bb35e25665c7ec0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  root: {fileID: 8899730034865719641}
+  root: {fileID: 4668501307054832765}
   content: {fileID: 8363983173477165376}
   slotPrefab: {fileID: 0}
 --- !u!114 &9164072629459276821
@@ -942,7 +955,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7177495405511165935}
-  - component: {fileID: 8944004555488441114}
+  - component: {fileID: 7313538616523921264}
   m_Layer: 0
   m_Name: -----UIToolkit-----
   m_TagString: Untagged
@@ -969,7 +982,7 @@ Transform:
   - {fileID: 8363983173477165376}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8944004555488441114
+--- !u!114 &7313538616523921264
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -978,10 +991,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8899730034865719641}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b602cc4dc29ea7d45a715f7036152859, type: 3}
+  m_Script: {fileID: 11500000, guid: 7452dfe8d1014a045ad6b1996d4e3828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryUI: {fileID: 7257875437486285935}
 --- !u!1 &8925974820569060872
 GameObject:
   m_ObjectHideFlags: 0
