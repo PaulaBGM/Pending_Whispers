@@ -12,3 +12,10 @@ VisualElement {
     border-bottom-width: 2px;
     border-left-width: 2px;
 }
+
+.unity-button:select {
+    scale: 0.9 0.9;
+    transition-duration: 0.2s;
+    background-color: rgba(207, 204, 204, 0.2);
+    transition-timing-function: ease-in-out;
+}
