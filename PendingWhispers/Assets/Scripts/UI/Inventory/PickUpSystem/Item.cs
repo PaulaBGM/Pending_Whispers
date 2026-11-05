@@ -16,23 +16,38 @@ public class Item : MonoBehaviour, IInteractable
 
     [Header("Highlight")]
     [SerializeField] private SpriteRenderer spriteRenderer;
+
     [SerializeField] private Color highlightColor = Color.cyan;
 
+    private Color originalColor;
+
     [Header("Persistence")]
-    [Tooltip("Flag que marca este objeto como registrado. Sin él, el objeto vuelve a ser interactuable al recargar la escena o la partida.")]
     [SerializeField] private FlagSO persistenceFlag;
+
+    private bool alreadyRegistered;
+
+    [Header("Spectral Lock")]
+    [Tooltip("Si se asigna (o hay un SpectralTrace en el mismo objeto), la pista solo se puede recoger " +
+             "después de revelarla con la habilidad de detección de Lyra.")]
+    [SerializeField] private SpectralTrace requiredTrace;
 
     [Header("FMOD")]
     [SerializeField] private EventReference highlightEvent;
-
-    private Collider2D interactionCollider;
-    private Color originalColor;
-    private bool alreadyRegistered;
     private bool isHighlighted;
+
+    /// <summary>False mientras la pista oculta no haya sido revelada por la onda espectral.</summary>
+    public bool CanInteract => requiredTrace == null || requiredTrace.IsRevealed;
 
     private void Awake()
     {
-        interactionCollider = GetComponent<Collider2D>();
+        if (persistenceFlag != null &&
+            GameProgress.Instance.HasFlag(persistenceFlag))
+        {
+            alreadyRegistered = true;
+        }
+
+        if (requiredTrace == null)
+            requiredTrace = GetComponent<SpectralTrace>();
 
         if (spriteRenderer == null)
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -41,45 +56,28 @@ public class Item : MonoBehaviour, IInteractable
             originalColor = spriteRenderer.color;
     }
 
-    private void OnEnable()
-    {
-        InteractionBlocker.OnBlockedChanged += HandleBlockedChanged;
-    }
-
-    private void OnDisable()
-    {
-        InteractionBlocker.OnBlockedChanged -= HandleBlockedChanged;
-    }
-
-    // En Start y no en Awake: al cargar partida, los flags se restauran
-    // después de los Awake de la escena y antes de los Start.
-    private void Start()
-    {
-        if (persistenceFlag != null &&
-            GameProgress.Instance != null &&
-            GameProgress.Instance.HasFlag(persistenceFlag))
-        {
-            MarkAsRegistered();
-        }
-    }
-
     public void Interact(PlayerController_Actions player)
     {
-        if (alreadyRegistered || InteractionBlocker.IsBlocked)
+        // Pista oculta sin revelar: el clic no hace nada, como si fuera suelo.
+        if (!CanInteract)
             return;
 
+        if (alreadyRegistered)
+        {
+            UIGameEvents.OnFeedback?.Invoke("You have already examined this evidence.");
+            return;
+        }
+
+        alreadyRegistered = true;
         string textToShow = string.IsNullOrEmpty(discoveryText) ? InventoryItem.Name : discoveryText;
         UIGameEvents.OnDialogue?.Invoke(textToShow);
-
         player.Inventory.AddItem(InventoryItem, 1);
         UIGameEvents.RaiseEvidenceRegistered(InventoryItem);
         CameraFlash.Instance?.PlayFlash();
         UIGameEvents.OnFeedback?.Invoke("Evidence registered");
 
-        if (persistenceFlag != null && GameProgress.Instance != null)
+        if (persistenceFlag != null)
             GameProgress.Instance.AddFlag(persistenceFlag);
-
-        MarkAsRegistered();
     }
 
     public Transform GetTransform()
@@ -89,35 +87,22 @@ public class Item : MonoBehaviour, IInteractable
 
     public void SetHighlight(bool value)
     {
-        // Ni registrado ni con UI encima: nunca se resalta ni suena.
-        if (value && (alreadyRegistered || InteractionBlocker.IsBlocked))
+        if (spriteRenderer == null)
+            return;
+
+        // El hover no debe delatar una pista oculta que aún no se ha revelado.
+        if (value && !CanInteract)
             value = false;
 
-        if (spriteRenderer == null || value == isHighlighted)
+        if (value == isHighlighted)
             return;
 
         spriteRenderer.color = value ? highlightColor : originalColor;
         isHighlighted = value;
 
         if (value)
+        {
             RuntimeManager.PlayOneShot(highlightEvent, transform.position);
-    }
-
-    // Una vez registrado deja de ser interactuable: sin collider no recibe
-    // hover ni clic. Para consultarlo, el jugador tiene que ir al cuaderno.
-    private void MarkAsRegistered()
-    {
-        alreadyRegistered = true;
-        SetHighlight(false);
-
-        if (interactionCollider != null)
-            interactionCollider.enabled = false;
-    }
-
-    // Si estaba resaltado al abrirse el cuaderno, se quita el resaltado.
-    private void HandleBlockedChanged(bool blocked)
-    {
-        if (blocked)
-            SetHighlight(false);
+        }
     }
 }

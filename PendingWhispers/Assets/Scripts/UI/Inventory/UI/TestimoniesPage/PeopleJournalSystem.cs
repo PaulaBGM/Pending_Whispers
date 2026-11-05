@@ -54,6 +54,10 @@ public class PeopleJournalSystem : BaseSingleton<PeopleJournalSystem>
             existing.shortDialogue = Trim(dialogue);
             existing.fullDialogue = BuildFullDialogue(existing.dialogues);
 
+            // Si la primera frase llegó sin retrato, se completa con la primera que lo traiga.
+            if (existing.portrait == null && portrait != null)
+                existing.portrait = portrait;
+
             return;
         }
 

@@ -38,9 +38,71 @@ public class UIT_PeoplePageView : UIT_JournalPageView
 
     private int selectedIndex = -1;
 
+    [Header("Respaldo si falta la hoja izquierda en el UXML")]
+    [Tooltip("Si el UXML no tiene la hoja izquierda de testimonios, se crea copiando esta (la de pistas).")]
+    [SerializeField] private string fallbackSourcePageName = "VE_ClueDialogueInventory";
+    [SerializeField] private string testimonyPageName = "VE_TestimonyPage";
+    [SerializeField] private string testimonyTitleName = "T_Title_Testimony";
+    [SerializeField] private string testimonyTitleText = "Testimonies";
+
     // =========================
     // BIND
     // =========================
+
+    /// <summary>
+    /// Si alguien borra VE_TestimonyPage del UXML (ya ha pasado), la página se reconstruye
+    /// copiando la hoja de pistas del propio UXML. Así People sigue funcionando aunque se toque el diseño.
+    /// </summary>
+    protected override void PrepareElements(VisualElement journalRoot)
+    {
+        if (journalRoot.Q<VisualElement>(testimonyPageName) != null)
+            return;
+
+        VisualElement source = journalRoot.Q<VisualElement>(fallbackSourcePageName);
+        VisualTreeAsset template = FindJournalTemplate(journalRoot);
+        if (source == null || template == null)
+        {
+            Debug.LogError($"{name}: falta '{testimonyPageName}' en el UXML y no se pudo reconstruir.", this);
+            return;
+        }
+
+        VisualElement copy = template.CloneTree().Q<VisualElement>(fallbackSourcePageName);
+        if (copy == null)
+            return;
+
+        copy.name = testimonyPageName;
+        copy.style.display = DisplayStyle.None;
+
+        var title = copy.Q<Label>("T_Title_Inventory");
+        if (title != null)
+        {
+            title.name = testimonyTitleName;
+            title.text = testimonyTitleText;
+        }
+
+        var list = copy.Q<ScrollView>() ?? copy.Q<VisualElement>("SV_SelectorContainer");
+        if (list != null)
+            list.name = listContainerName;
+
+        VisualElement parent = source.parent;
+        parent.Insert(parent.IndexOf(source) + 1, copy);
+
+        Debug.LogWarning($"{name}: el UXML no tenía '{testimonyPageName}'. Se ha creado por código copiando " +
+                         $"'{fallbackSourcePageName}'. Conviene volver a añadirlo en UI Builder.", this);
+    }
+
+    private static VisualTreeAsset FindJournalTemplate(VisualElement journalRoot)
+    {
+        foreach (var document in FindObjectsByType<UIDocument>(FindObjectsSortMode.None))
+        {
+            if (document.rootVisualElement != null &&
+                document.rootVisualElement.Contains(journalRoot) &&
+                document.visualTreeAsset != null)
+                return document.visualTreeAsset;
+        }
+        return null;
+    }
+
     protected override void OnBind(VisualElement journalRoot)
     {
         listContainer = FindInPage<VisualElement>(listContainerName);

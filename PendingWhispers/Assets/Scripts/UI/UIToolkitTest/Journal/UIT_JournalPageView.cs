@@ -23,6 +23,7 @@ public abstract class UIT_JournalPageView : MonoBehaviour
     public void Bind(VisualElement journalRoot)
     {
         elements.Clear();
+        PrepareElements(journalRoot);
 
         foreach (string elementName in elementNames)
         {
@@ -85,6 +86,12 @@ public abstract class UIT_JournalPageView : MonoBehaviour
         foreach (var element in elements)
             element.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
     }
+
+    /// <summary>
+    /// Se llama antes de buscar los elementos de la página. Sirve para crear por código
+    /// las partes que falten en el UXML (p. ej. si se ha perdido al editarlo).
+    /// </summary>
+    protected virtual void PrepareElements(VisualElement journalRoot) { }
 
     protected abstract void OnBind(VisualElement journalRoot);
     protected virtual void OnShow(ItemType filter) { }
