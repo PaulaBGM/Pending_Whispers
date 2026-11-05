@@ -33,6 +33,9 @@ public class MapManager : BaseSingleton<MapManager>
         if (Instance != this)
             return;
 
+        if (avatar == null)
+            avatar = FindFirstObjectByType<MapAvatar>(FindObjectsInactive.Include);
+
         BuildNodeLookup();
     }
 
@@ -67,6 +70,24 @@ public class MapManager : BaseSingleton<MapManager>
     private void BuildNodeLookup()
     {
         nodeLookup.Clear();
+
+        // Se añaden también los MapNode de la escena que no estén en la lista
+        // (incluidos los desactivados), para que ninguno se quede fuera.
+        var allNodes = new List<MapNode>();
+        var seen = new HashSet<MapNode>();
+
+        if (nodes != null)
+        {
+            foreach (MapNode node in nodes)
+                if (node != null && seen.Add(node))
+                    allNodes.Add(node);
+        }
+
+        foreach (MapNode node in FindObjectsByType<MapNode>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            if (node != null && node.gameObject.scene == gameObject.scene && seen.Add(node))
+                allNodes.Add(node);
+
+        nodes = allNodes;
 
         foreach (MapNode node in nodes)
         {

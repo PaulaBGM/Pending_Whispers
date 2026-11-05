@@ -56,7 +56,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5525973422903271977}
-  - component: {fileID: 8401559312300626151}
+  - component: {fileID: 1700867020238219136}
   m_Layer: 0
   m_Name: Page_People
   m_TagString: Untagged
@@ -79,7 +79,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4118239692008340358}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8401559312300626151
+--- !u!114 &1700867020238219136
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -237,7 +237,7 @@ MonoBehaviour:
     itemFilter: 2
   - tab: 3
     elementName: Tab_DialogueClue
-    page: {fileID: 8401559312300626151}
+    page: {fileID: 1700867020238219136}
     itemFilter: 1
   - tab: 4
     elementName: Tab_CaseState
@@ -247,7 +247,7 @@ MonoBehaviour:
     elementName: Tab_Settings
     page: {fileID: 493512562118336478}
     itemFilter: 0
-  defaultTab: 2
+  defaultTab: 1
   openDirector: {fileID: 4888902059279755552}
   closeDirector: {fileID: 235633647433247171}
   pageTurnDirector: {fileID: 1452449439673010934}
