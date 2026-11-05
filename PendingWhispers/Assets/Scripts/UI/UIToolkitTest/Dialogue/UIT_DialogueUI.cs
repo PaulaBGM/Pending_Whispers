@@ -60,9 +60,19 @@ public class UIT_DialogueUI : MonoBehaviour, IDialogueView
     [Header("Topic Selector")]
     [SerializeField] private string topicSelectorSpeaker = "Talk";
     [SerializeField] private string seenTopicPrefix = "✓  ";
+    [Tooltip("Color del texto de los temas ya hablados (el mismo que tenía el DialogueUI antiguo).")]
+    [SerializeField] private Color seenTopicColor = new Color(0.55f, 0.12f, 0.24f, 1f);
+    [Tooltip("Color del texto de las opciones normales (la plantilla usa blanco).")]
+    [SerializeField] private Color unseenTopicColor = Color.white;
+
+    [Header("Botones de respuesta")]
+    [Tooltip("Plantilla de cada opción (ButtonReplyDialogue_Template). Vacío = botón simple.")]
+    [SerializeField] private VisualTreeAsset replyButtonTemplate;
+    [SerializeField] private string replyButtonName = "BT_ReplyDialogueButton";
+    [SerializeField] private string replyLabelName = "T_DialogueReply";
 
     [Header("Input")]
-    [Tooltip("Opcional: UI/Submit para avanzar con teclado/mando.")]
+    [Tooltip("Opcional: para avanzar con teclado/mando. El ratón ya avanza con el clic sobre el diálogo.")]
     [SerializeField] private InputActionReference advanceAction;
 
     [Header("Evidence Presentation")]
@@ -88,7 +98,8 @@ public class UIT_DialogueUI : MonoBehaviour, IDialogueView
     private VisualElement continueIndicator;
 
     private readonly List<ChoiceEntry> choiceEntries = new();
-    private readonly List<Button> choiceButtonPool = new(); // solo si el contenedor no es un ListView
+    private readonly List<VisualElement> choiceButtonPool = new(); // solo si el contenedor no es un ListView
+    private int lastAdvanceFrame = -1;
     private readonly StringBuilder typingBuilder = new();
 
     private Coroutine typingCoroutine;
@@ -220,7 +231,7 @@ public class UIT_DialogueUI : MonoBehaviour, IDialogueView
         choicesList.virtualizationMethod = CollectionVirtualizationMethod.DynamicHeight;
         choicesList.itemsSource = choiceEntries;
         choicesList.makeItem = CreateChoiceButton;
-        choicesList.bindItem = (element, index) => BindChoiceButton((Button)element, index);
+        choicesList.bindItem = BindChoiceButton;
     }
 
     // =========================
@@ -333,12 +344,25 @@ public class UIT_DialogueUI : MonoBehaviour, IDialogueView
         TryAdvance();
     }
 
-    private void OnAdvanceInput(InputAction.CallbackContext _) => TryAdvance();
+    private void OnAdvanceInput(InputAction.CallbackContext context)
+    {
+        // El clic del ratón ya lo gestiona OnDialogueClicked. Si la acción también está
+        // enlazada al ratón, cada clic avanzaba DOS líneas (una al pulsar y otra al soltar).
+        if (context.control != null && context.control.device is Pointer)
+            return;
+
+        TryAdvance();
+    }
 
     private void TryAdvance()
     {
         if (!IsShowing)
             return;
+
+        // Segunda protección: nunca más de un avance por frame.
+        if (Time.frameCount == lastAdvanceFrame)
+            return;
+        lastAdvanceFrame = Time.frameCount;
 
         if (isTyping)
         {
@@ -478,25 +502,66 @@ public class UIT_DialogueUI : MonoBehaviour, IDialogueView
         SetContinueVisible(!hasChoices && !isTyping && IsShowing);
     }
 
-    private Button CreateChoiceButton()
+    /// <summary>
+    /// Crea una opción. Con plantilla: ButtonReplyDialogue_Template (botón + label con el texto).
+    /// El índice de la opción se guarda en userData de la raíz del elemento.
+    /// </summary>
+    private VisualElement CreateChoiceButton()
     {
-        var button = new Button();
-        button.AddToClassList(ChoiceClass);
-        button.clicked += () => OnChoiceClicked(button);
-        return button;
+        VisualElement root;
+        Button button;
+
+        if (replyButtonTemplate != null)
+        {
+            root = replyButtonTemplate.CloneTree();
+            button = root.Q<Button>(replyButtonName) ?? root.Q<Button>();
+            if (button == null)
+                Debug.LogError($"UIT_DialogueUI: la plantilla de respuesta no tiene ningún Button '{replyButtonName}'.", this);
+        }
+        else
+        {
+            button = new Button();
+            root = button;
+        }
+
+        root.AddToClassList(ChoiceClass);
+        if (button != null)
+            button.clicked += () => OnChoiceClicked(root);
+        return root;
     }
 
-    private void BindChoiceButton(Button button, int index)
+    private void BindChoiceButton(VisualElement root, int index)
     {
         var entry = choiceEntries[index];
-        button.userData = index;
-        button.text = entry.Text;
-        button.EnableInClassList(ChoiceSeenClass, entry.Seen);
+        root.userData = index;
+        root.EnableInClassList(ChoiceSeenClass, entry.Seen);
+
+        Button button = root as Button ?? root.Q<Button>(replyButtonName) ?? root.Q<Button>();
+        Label label = root.Q<Label>(replyLabelName);
+
+        // El texto va en el label de la plantilla; si no hay, en el propio botón.
+        if (label != null)
+        {
+            label.text = entry.Text;
+            if (button != null)
+                button.text = string.Empty;
+        }
+        else if (button != null)
+        {
+            button.text = entry.Text;
+        }
+
+        // Rojo para los temas ya hablados, color normal para el resto. Se pinta en el label
+        // porque la plantilla le pone el color directamente. Siempre se asigna uno de los dos:
+        // el ListView reutiliza elementos y si no, un rojo antiguo se quedaría en otra opción.
+        var colorTarget = (VisualElement)label ?? button;
+        if (colorTarget != null)
+            colorTarget.style.color = entry.Seen ? seenTopicColor : unseenTopicColor;
     }
 
-    private void OnChoiceClicked(Button button)
+    private void OnChoiceClicked(VisualElement root)
     {
-        if (button.userData is not int index || index < 0 || index >= choiceEntries.Count)
+        if (root.userData is not int index || index < 0 || index >= choiceEntries.Count)
             return;
 
         // Se copia antes: la acción suele limpiar las opciones.

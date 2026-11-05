@@ -185,6 +185,14 @@ public class PlayerController_Actions : MonoBehaviour
 
     private void HandleHover()
     {
+        // Con el diario abierto, en un diálogo o con el ratón encima de la UI (diario, HUD, pausa…)
+        // no se resaltan objetos del mundo: si no, sonaba el hover de las pistas que hay debajo.
+        if (!canMove || IsPointerOverUI())
+        {
+            ClearHover();
+            return;
+        }
+
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         Collider2D hit = Physics2D.OverlapPoint(mousePos, interactableLayer);
@@ -207,11 +215,28 @@ public class PlayerController_Actions : MonoBehaviour
         hoveredInteractable = newHover;
     }
 
+    private void ClearHover()
+    {
+        if (hoveredInteractable is Item item)
+            item.SetHighlight(false);
+
+        hoveredInteractable = null;
+    }
+
+    // Funciona también con UI Toolkit: los paneles se registran en el EventSystem.
+    private static bool IsPointerOverUI()
+    {
+        return EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+    }
+
     // ---------------- UI / JOURNAL ----------------
 
     private void HandleJournalStateChanged(bool opened)
     {
         canMove = !opened;
+
+        if (opened)
+            ClearHover();
 
         if (agent != null)
         {

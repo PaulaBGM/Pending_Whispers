@@ -101,6 +101,10 @@ MonoBehaviour:
   nameLabelName: T_PersonName
   dialogueScrollName: SV_PersonDialogue
   dialogueLabelName: T_PersonDialogue
+  fallbackSourcePageName: VE_ClueDialogueInventory
+  testimonyPageName: VE_TestimonyPage
+  testimonyTitleName: T_Title_Testimony
+  testimonyTitleText: Testimonies
 --- !u!1 &2801484176166185756
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,6 +772,11 @@ MonoBehaviour:
   preventWordJump: 1
   topicSelectorSpeaker: Talk
   seenTopicPrefix: "\u2713  "
+  seenTopicColor: {r: 0.55, g: 0.12, b: 0.24, a: 1}
+  unseenTopicColor: {r: 1, g: 1, b: 1, a: 1}
+  replyButtonTemplate: {fileID: 9197481963319205126, guid: fe98df10e56631743b2c498ece7ee604, type: 3}
+  replyButtonName: BT_ReplyDialogueButton
+  replyLabelName: T_DialogueReply
   advanceAction: {fileID: 3001919216989983466, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   evidencePicker: {fileID: 0}
   dialogueEventPath: event:/Dialogue
@@ -924,7 +933,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7177495405511165935}
-  - component: {fileID: 7313538616523921264}
   m_Layer: 0
   m_Name: -----UIToolkit-----
   m_TagString: Untagged
@@ -951,18 +959,6 @@ Transform:
   - {fileID: 8363983173477165376}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7313538616523921264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8899730034865719641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7452dfe8d1014a045ad6b1996d4e3828, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8925974820569060872
 GameObject:
   m_ObjectHideFlags: 0

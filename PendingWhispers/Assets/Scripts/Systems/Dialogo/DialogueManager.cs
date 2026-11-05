@@ -276,6 +276,29 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         StartDialogue(topic.dialogue, currentNPC, topic);
     }
 
+    // ---------------- SAVE / LOAD ----------------
+
+    /// <summary>Temas de conversacion ya hablados (claves caso|npc|tema), para el SaveSystem.</summary>
+    public List<string> GetSeenDialogueTopics()
+    {
+        return new List<string>(seenDialogueTopicKeys);
+    }
+
+    /// <summary>Sustituye los temas vistos por los de la partida cargada. null = partida nueva.</summary>
+    public void RestoreSeenDialogueTopics(IEnumerable<string> keys)
+    {
+        seenDialogueTopicKeys.Clear();
+
+        if (keys == null)
+            return;
+
+        foreach (string key in keys)
+        {
+            if (!string.IsNullOrEmpty(key))
+                seenDialogueTopicKeys.Add(key);
+        }
+    }
+
     private bool HasSeenDialogueTopic(DialogueCondition topic)
     {
         string key = GetDialogueTopicKey(topic);

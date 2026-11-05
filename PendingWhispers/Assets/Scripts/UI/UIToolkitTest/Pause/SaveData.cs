@@ -27,6 +27,10 @@ public class SaveData
     // Casos
     public string currentCaseID;
     public List<CaseSaveData> cases = new();
+
+    // Dialogos: temas ya hablados (se pintan en rojo en el selector).
+    // Las partidas antiguas no lo tienen: JsonUtility lo deja como lista vacia.
+    public List<string> seenDialogueTopics = new();
 }
 
 [Serializable]

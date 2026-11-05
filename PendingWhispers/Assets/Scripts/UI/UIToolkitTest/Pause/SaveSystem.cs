@@ -129,6 +129,10 @@ public class SaveSystem : BaseSingleton<SaveSystem>
             }
         }
 
+        // Dialogos ya hablados
+        if (DialogueManager.Instance != null)
+            data.seenDialogueTopics.AddRange(DialogueManager.Instance.GetSeenDialogueTopics());
+
         // Casos (las pistas encontradas no se guardan: se reconstruyen desde los flags)
         if (CaseJournalSystem.Instance != null)
         {
@@ -231,6 +235,10 @@ public class SaveSystem : BaseSingleton<SaveSystem>
 
         // 4. Casos
         RestoreCases(data);
+
+        // 5. Dialogos ya hablados
+        if (DialogueManager.Instance != null)
+            DialogueManager.Instance.RestoreSeenDialogueTopics(data.seenDialogueTopics);
     }
 
     private void RestoreCases(SaveData data)
@@ -301,6 +309,9 @@ public class SaveSystem : BaseSingleton<SaveSystem>
 
         if (MapState.Instance != null)
             MapState.Instance.SetCurrentNode(string.Empty);
+
+        if (DialogueManager.Instance != null)
+            DialogueManager.Instance.RestoreSeenDialogueTopics(null);
     }
 
     // =========================================================
