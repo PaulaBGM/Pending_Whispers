@@ -396,9 +396,17 @@ public class UIT_HUDController : MonoBehaviour
         if (state == null)
             return;
 
+        // Al cargar partida el inventario se rellena de golpe: no son pistas nuevas.
+        bool restoring = SaveSystem.Instance != null && SaveSystem.Instance.IsRestoring;
+
         foreach (var kvp in state)
         {
-            if (!kvp.Value.IsEmpty && kvp.Value.item != null)
+            if (kvp.Value.IsEmpty || kvp.Value.item == null)
+                continue;
+
+            if (restoring)
+                knownItems.Add(kvp.Value.item);
+            else
                 RegisterNewItem(kvp.Value.item);
         }
     }

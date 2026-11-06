@@ -44,6 +44,9 @@ public class UIT_MapController : BaseSingleton<UIT_MapController>
     [SerializeField] private Vector2 buttonOffset = Vector2.zero;
     [Tooltip("Ocultar el botón del nodo donde ya está el jugador.")]
     [SerializeField] private bool hideCurrentNodeButton = false;
+    [Tooltip("Ocultar los nodos bloqueados: en el mapa solo aparecen los sitios a los que ya se puede ir " +
+             "(p. ej. tras aceptar el caso en la pizarra del HUB, solo la mansión).")]
+    [SerializeField] private bool hideLockedNodes = true;
     [Tooltip("Desactiva las imágenes/botones uGUI antiguos de cada MapNode para que no se vean dos selectores.")]
     [SerializeField] private bool hideLegacyNodeGraphics = true;
 
@@ -55,7 +58,7 @@ public class UIT_MapController : BaseSingleton<UIT_MapController>
     [Tooltip("Texto del recuadro del nombre (el mismo que tenía el mapa uGUI).")]
     [SerializeField] private string mapTitle = "Map of the suburbs of Paris";
     [Tooltip("De dónde salen las instrucciones de la misión.")]
-    [SerializeField] private InstructionsSource instructionsSource = InstructionsSource.FixedText;
+    [SerializeField] private InstructionsSource instructionsSource = InstructionsSource.CurrentObjective;
     [TextArea]
     [SerializeField] private string missionText = "Investigate the catacombs for more information on Vivienne and her close ones";
     [Tooltip("Al pasar el ratón por un nodo, mostrar el displayName/description de su NodeData. " +
@@ -265,7 +268,8 @@ public class UIT_MapController : BaseSingleton<UIT_MapController>
         bool isCurrent = !string.IsNullOrEmpty(currentID) && view.Node.GetID() == currentID;
         view.Button.EnableInClassList(CurrentClass, isCurrent);
 
-        DisplayStyle display = hideCurrentNodeButton && isCurrent ? DisplayStyle.None : DisplayStyle.Flex;
+        bool hidden = (hideCurrentNodeButton && isCurrent) || (hideLockedNodes && !unlocked);
+        DisplayStyle display = hidden ? DisplayStyle.None : DisplayStyle.Flex;
         if (view.Element.resolvedStyle.display != display)
             view.Element.style.display = display;
     }
@@ -356,7 +360,9 @@ public class UIT_MapController : BaseSingleton<UIT_MapController>
                 SetInstructions(missionText);
                 break;
             case InstructionsSource.CurrentObjective:
-                SetInstructions(GetCurrentObjective());
+                // Sin caso activo (o sin objetivos) se cae al texto fijo.
+                string objective = GetCurrentObjective();
+                SetInstructions(string.IsNullOrEmpty(objective) ? missionText : objective);
                 break;
             case InstructionsSource.CurrentNodeDescription:
                 SetInstructions(GetCurrentNodeDescription());

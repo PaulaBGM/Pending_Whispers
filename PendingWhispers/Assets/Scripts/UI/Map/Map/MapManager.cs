@@ -170,6 +170,12 @@ public class MapManager : BaseSingleton<MapManager>
         string currentID =
             MapState.Instance.GetCurrentNode();
 
+        // Sin nodo guardado (partida nueva que empieza en el HUB): el avatar sale del nodo
+        // de la escena desde la que se abrio el mapa, no del nodo inicial.
+        if (string.IsNullOrEmpty(currentID))
+            currentID = GetNodeIDForScene(
+                SceneController.Instance != null ? SceneController.Instance.PreviousScene : null);
+
         if (string.IsNullOrEmpty(currentID))
             currentID = startNodeID;
 
@@ -202,6 +208,20 @@ public class MapManager : BaseSingleton<MapManager>
         }
 
         avatar.SetPosition(currentNode.Waypoint);
+    }
+
+    private string GetNodeIDForScene(string sceneName)
+    {
+        if (string.IsNullOrEmpty(sceneName))
+            return null;
+
+        foreach (var pair in nodeLookup)
+        {
+            if (pair.Value != null && pair.Value.GetScene() == sceneName)
+                return pair.Key;
+        }
+
+        return null;
     }
 
     // =========================================================

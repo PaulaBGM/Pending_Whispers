@@ -16,17 +16,20 @@ public class GhostTransformationController : MonoBehaviour
 
     public void TryTransform()
     {
-        if (correctHypothesisFlag == null)
+        if (correctHypothesisFlag == null || GameProgress.Instance == null)
             return;
 
         if (!GameProgress.Instance.HasFlag(correctHypothesisFlag))
             return;
 
-        if (transformedFlag == null &&
+        // Antes ponia '== null': la condicion nunca se cumplia y el fantasma se volvia
+        // a transformar al acabar CADA conversacion despues de la hipotesis correcta.
+        if (transformedFlag != null &&
             GameProgress.Instance.HasFlag(transformedFlag))
             return;
 
-        animator.SetTrigger("Transformation");
+        if (animator != null)
+            animator.SetTrigger("Transformation");
         RuntimeManager.PlayOneShot(transformationEvent, transform.position);
         
         if (transformedFlag != null)

@@ -227,12 +227,27 @@ public class HubBoardController : MonoBehaviour
     {
         if (data == null) return;
 
-        if (data.startedFlag != null)
-            GameProgress.Instance.AddFlag(data.startedFlag);
+        GameProgress progress = GameProgress.Instance;
 
-        CaseManager.Instance.LoadCase(data);
-        UIGameEvents.RaiseFeedback($"Caso aceptado: {data.caseTitle}");
+        if (progress != null && data.startedFlag != null)
+            progress.AddFlag(data.startedFlag);
 
+        CaseManager.Instance?.LoadCase(data);
+
+        // Primero se cierra la pizarra: así el botón del mapa se anima ya con el HUD a la vista.
         Close();
+
+        // Desbloqueo del mapa y del destino del caso (MapUnlocked + unlockFlag del NodeData).
+        // El HUD escucha el flag del mapa y hace aparecer su botón; MapManager lee el del nodo.
+        if (progress != null && data.onAcceptFlags != null)
+        {
+            foreach (FlagSO flag in data.onAcceptFlags)
+                progress.AddFlag(flag);
+        }
+
+        string destination = string.IsNullOrEmpty(data.requesterLocation)
+            ? string.Empty
+            : $" — Ve a {data.requesterLocation}";
+        UIGameEvents.RaiseFeedback($"Caso aceptado: {data.caseTitle}{destination}");
     }
 }

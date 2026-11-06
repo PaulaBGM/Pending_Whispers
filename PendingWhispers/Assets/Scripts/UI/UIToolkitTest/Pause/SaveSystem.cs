@@ -28,6 +28,9 @@ public class SaveSystem : BaseSingleton<SaveSystem>
     public event Action<int> OnGameSaved;
     public event Action<int> OnGameLoaded;
 
+    /// <summary>True mientras se aplica una partida cargada (p. ej. para que el HUD no avise de cada pista restaurada).</summary>
+    public bool IsRestoring { get; private set; }
+
     protected override void OnDestroy()
     {
         SceneManager.sceneLoaded -= HandleSceneLoaded;
@@ -187,7 +190,15 @@ public class SaveSystem : BaseSingleton<SaveSystem>
 
         SceneManager.sceneLoaded -= HandleSceneLoaded;
 
-        ApplyState(pendingLoad);
+        IsRestoring = true;
+        try
+        {
+            ApplyState(pendingLoad);
+        }
+        finally
+        {
+            IsRestoring = false;
+        }
 
         int slot = pendingSlot;
         pendingLoad = null;

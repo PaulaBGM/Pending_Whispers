@@ -58,6 +58,14 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         runner = new DialogueRunner(dialogue);
         currentNode = runner.Start();
 
+        if (currentNode == null)
+        {
+            // Sin nodo 'start' no hay nada que mostrar: se cierra en vez de dejar al jugador bloqueado.
+            Debug.LogError($"[DialogueManager] '{dialogue.name}' no tiene nodo 'start'. Se cierra el dialogo.");
+            EndDialogue();
+            return;
+        }
+
         ShowNode(currentNode);
     }
 
@@ -69,7 +77,20 @@ public class DialogueManager : BaseSingleton<DialogueManager>
             return;
         }
 
-        currentNode = runner.Next(nodeID);
+        DialogueNode next = runner.Next(nodeID);
+
+        if (next == null)
+        {
+            // Un nextNodeID que apunta a un nodo inexistente dejaba el dialogo abierto sin forma
+            // de avanzar (el jugador no podia moverse). Ahora se cierra y se avisa en consola.
+            string dialogueName = currentDialogue != null ? currentDialogue.name : "?";
+            Debug.LogError($"[DialogueManager] '{dialogueName}': el nodo '{nodeID}' no existe " +
+                           $"(lo pide '{currentNode?.id}'). Se cierra el dialogo.");
+            EndDialogue();
+            return;
+        }
+
+        currentNode = next;
         ShowNode(currentNode);
     }
 

@@ -288,8 +288,21 @@ namespace Inventory.UI
 
         public override void Refresh()
         {
-            UIT_InventoryController.Instance?.RefreshUI();
+            // EnsureFor: el controlador persiste entre escenas y esta vista no; asi siempre
+            // pinta en la vista de la escena actual (y se crea si la escena no lo trae, p. ej. el HUB).
+            UIT_InventoryController.EnsureFor(this)?.RefreshUI();
             ResetSelection();
+        }
+
+        private void Awake()
+        {
+            UIT_InventoryController.EnsureFor(this);
+        }
+
+        private void OnDestroy()
+        {
+            if (UIT_InventoryController.Instance != null)
+                UIT_InventoryController.Instance.UnregisterView(this);
         }
 
         // =========================

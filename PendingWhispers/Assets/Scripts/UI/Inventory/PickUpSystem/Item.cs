@@ -38,14 +38,19 @@ public class Item : MonoBehaviour, IInteractable
     /// <summary>False mientras la pista oculta no haya sido revelada por la onda espectral.</summary>
     public bool CanInteract => requiredTrace == null || requiredTrace.IsRevealed;
 
+    /// <summary>
+    /// Ya recogida en esta partida. Se consulta al interactuar y no en Awake: al cargar una
+    /// partida los flags se restauran DESPUES del Awake de la escena (SaveSystem, sceneLoaded),
+    /// asi que en Awake la pista parecia sin recoger y se podia volver a registrar.
+    /// </summary>
+    private bool IsAlreadyRegistered =>
+        alreadyRegistered ||
+        (persistenceFlag != null && GameProgress.Instance != null && GameProgress.Instance.HasFlag(persistenceFlag)) ||
+        (InventoryItem is ClueItemSO && InventoryRuntime.Instance != null &&
+         InventoryRuntime.Instance.GetInventory() != null && InventoryRuntime.Instance.GetInventory().Contains(InventoryItem));
+
     private void Awake()
     {
-        if (persistenceFlag != null &&
-            GameProgress.Instance.HasFlag(persistenceFlag))
-        {
-            alreadyRegistered = true;
-        }
-
         if (requiredTrace == null)
             requiredTrace = GetComponent<SpectralTrace>();
 
@@ -62,7 +67,7 @@ public class Item : MonoBehaviour, IInteractable
         if (!CanInteract)
             return;
 
-        if (alreadyRegistered)
+        if (IsAlreadyRegistered)
         {
             UIGameEvents.OnFeedback?.Invoke("You have already examined this evidence.");
             return;

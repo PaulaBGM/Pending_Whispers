@@ -16,10 +16,11 @@ public class UIT_MainMenuController : MonoBehaviour
     private const string ExitButtonName = "BT_Exit";
 
     [Header("Flow")]
-    [SerializeField] private string firstSceneName = "SC_HouseOfPhantom1";
+    [Tooltip("La partida nueva empieza en el despacho (HUB): el caso se acepta en la pizarra.")]
+    [SerializeField] private string firstSceneName = "SC_Catacombs_HUB";
 
     [Header("New Game")]
-    [Tooltip("Caso con el que empieza una partida nueva. Necesario si CaseManager persiste entre escenas.")]
+    [Tooltip("Opcional. Vacío = no hay caso activo hasta aceptarlo en la pizarra del HUB.")]
     [SerializeField] private CaseData startingCase;
 
     [Header("Save")]

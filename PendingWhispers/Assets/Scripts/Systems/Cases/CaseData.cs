@@ -32,6 +32,11 @@ public class CaseData : ScriptableObject
     [Header("Mapa")]
     public string unlockedNodeID;
 
+    [Header("Al aceptar en la pizarra (HUB)")]
+    [Tooltip("Flags que se anaden al aceptar el caso: el del mapa (MapUnlocked) y el unlockFlag " +
+             "del NodeData al que hay que ir, para que su boton aparezca en el mapa.")]
+    public List<FlagSO> onAcceptFlags = new();
+
     [Header("Siguiente caso")]
     public CaseData nextCase;
 
