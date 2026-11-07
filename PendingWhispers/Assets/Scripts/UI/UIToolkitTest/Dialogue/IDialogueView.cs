@@ -14,7 +14,9 @@ public interface IDialogueView
 
     void ShowLine(DialogueCharacter character, string speaker, string text, Sprite expressionSprite);
     void ShowChoices(List<DialogueChoice> choices);
-    void ShowDialogueSelector(List<DialogueCondition> topics,
+    /// <param name="title">Nombre del NPC (en lugar de "Talk"). Vacío = texto por defecto de la vista.</param>
+    void ShowDialogueSelector(string title,
+                              List<DialogueCondition> topics,
                               Func<DialogueCondition, bool> isTopicSeen,
                               Action<DialogueCondition> onTopicSelected);
     void ClearChoices();

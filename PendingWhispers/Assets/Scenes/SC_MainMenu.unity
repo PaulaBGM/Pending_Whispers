@@ -811,7 +811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstSceneName: SC_Catacombs_HUB
-  startingCase: {fileID: 0}
+  startingCase: {fileID: 11400000, guid: 3e85a2fb99d126649871b389b4c96626, type: 2}
   saveSlot: 0
 --- !u!1 &591746893
 GameObject:
@@ -1781,6 +1781,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841018929}
   m_CullTransparentMesh: 1
+--- !u!114 &2110779131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590800994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd5023a61e92b834d860861934806703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  document: {fileID: 590800996}
+  clickEvent:
+    Guid:
+      Data1: 536392396
+      Data2: 1092836268
+      Data3: 1670356873
+      Data4: 2123521980
+    Path: event:/ButtonMainMenu
+  hoverEvent:
+    Guid:
+      Data1: 536392396
+      Data2: 1092836268
+      Data3: 1670356873
+      Data4: 2123521980
+    Path: event:/ButtonMainMenu
+  overrides: []
+  logPlays: 0
 --- !u!1001 &1140459063357989112
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1895,34 +1924,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a42722c172905ba4e9e45a3815ee30b4, type: 3}
---- !u!114 &2110779131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 590800994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd5023a61e92b834d860861934806703, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  document: {fileID: 590800996}
-  clickEvent:
-    Guid:
-      Data1: 536392396
-      Data2: 1092836268
-      Data3: 1670356873
-      Data4: 2123521980
-    Path: event:/ButtonMainMenu
-  hoverEvent:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  overrides: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

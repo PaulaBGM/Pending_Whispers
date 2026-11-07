@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -44,9 +45,15 @@ public class UIT_MapController : BaseSingleton<UIT_MapController>
     [SerializeField] private Vector2 buttonOffset = Vector2.zero;
     [Tooltip("Ocultar el botón del nodo donde ya está el jugador.")]
     [SerializeField] private bool hideCurrentNodeButton = false;
-    [Tooltip("Ocultar los nodos bloqueados: en el mapa solo aparecen los sitios a los que ya se puede ir " +
-             "(p. ej. tras aceptar el caso en la pizarra del HUB, solo la mansión).")]
-    [SerializeField] private bool hideLockedNodes = true;
+
+    [Header("Pop-up de nodos nuevos")]
+    [Tooltip("Los nodos bloqueados se ocultan con SetEnabled(false) (el USS de MapButton los pone a escala 0). " +
+             "Los recién desbloqueados aparecen con la transición de :enabled la primera vez que se abre el mapa.")]
+    [SerializeField] private bool popNewlyUnlockedNodes = true;
+    [Tooltip("Espera tras abrir el mapa antes del pop-up, para que se vea.")]
+    [SerializeField] private float popDelay = 0.4f;
+    [Tooltip("Separación entre pop-ups si aparecen varios nodos a la vez.")]
+    [SerializeField] private float popInterval = 0.2f;
     [Tooltip("Desactiva las imágenes/botones uGUI antiguos de cada MapNode para que no se vean dos selectores.")]
     [SerializeField] private bool hideLegacyNodeGraphics = true;
 
@@ -72,6 +79,8 @@ public class UIT_MapController : BaseSingleton<UIT_MapController>
         public VisualElement Element;
         public Button Button;
         public Vector2 LastPosition = new(float.NaN, float.NaN);
+        // False mientras el nodo espera su pop-up: el botón sigue desactivado aunque ya esté desbloqueado.
+        public bool Revealed = true;
     }
 
     private readonly List<NodeView> views = new();
@@ -135,6 +144,28 @@ public class UIT_MapController : BaseSingleton<UIT_MapController>
         Bind();
         CreateNodeButtons();
         ShowIdleTexts();
+
+        StartCoroutine(RevealNewNodes());
+    }
+
+    /// <summary>Pop-up de los nodos desbloqueados que aún no se habían visto en el mapa (p. ej. la mansión).</summary>
+    private IEnumerator RevealNewNodes()
+    {
+        if (popDelay > 0f)
+            yield return new WaitForSecondsRealtime(popDelay);
+
+        foreach (NodeView view in views)
+        {
+            if (view.Revealed || view.Node == null || !view.Node.IsUnlocked)
+                continue;
+
+            // UpdateView lo activa en el siguiente LateUpdate: la transición del USS hace el pop.
+            view.Revealed = true;
+            MapState.Instance?.MarkRevealed(view.Node.GetID());
+
+            if (popInterval > 0f)
+                yield return new WaitForSecondsRealtime(popInterval);
+        }
     }
 
     // Se recoloca cada frame: así aguanta cambios de resolución y una cámara que se mueva.
@@ -213,6 +244,14 @@ public class UIT_MapController : BaseSingleton<UIT_MapController>
             button.AddToClassList(NodeClass);
 
             var view = new NodeView { Node = node, Element = element, Button = button };
+
+            // Siempre abiertos (sin unlockFlag, como el HUB y las catacumbas) o ya vistos: aparecen sin animación.
+            // El resto empieza desactivado (escala 0) y, si está desbloqueado, hace pop en RevealNewNodes.
+            bool alwaysOpen = node.Data.unlockFlag == null;
+            bool seenBefore = MapState.Instance != null && MapState.Instance.WasRevealed(node.GetID());
+            view.Revealed = !popNewlyUnlockedNodes || alwaysOpen || seenBefore;
+            if (!view.Revealed)
+                button.SetEnabled(false);
             button.clicked += () => OnNodeClicked(view);
             button.RegisterCallback<PointerEnterEvent>(_ => OnNodeHovered(view));
             button.RegisterCallback<PointerLeaveEvent>(_ => OnNodeUnhovered(view));
@@ -257,19 +296,18 @@ public class UIT_MapController : BaseSingleton<UIT_MapController>
             view.Element.style.top = topLeft.y;
         }
 
-        // Desbloqueo: lo decide MapManager (MapNode.IsUnlocked).
+        // Desbloqueo: lo decide MapManager (MapNode.IsUnlocked). Se muestra/oculta con SetEnabled:
+        // el USS (:disabled -> escala 0) lo esconde y la transición de :enabled hace el pop-up.
         bool unlocked = view.Node.IsUnlocked;
-        if (view.Button.enabledSelf != unlocked)
-        {
-            view.Button.SetEnabled(unlocked);
-            view.Button.EnableInClassList(LockedClass, !unlocked);
-        }
+        bool shown = unlocked && view.Revealed;
+        if (view.Button.enabledSelf != shown)
+            view.Button.SetEnabled(shown);
+        view.Button.EnableInClassList(LockedClass, !unlocked);
 
         bool isCurrent = !string.IsNullOrEmpty(currentID) && view.Node.GetID() == currentID;
         view.Button.EnableInClassList(CurrentClass, isCurrent);
 
-        bool hidden = (hideCurrentNodeButton && isCurrent) || (hideLockedNodes && !unlocked);
-        DisplayStyle display = hidden ? DisplayStyle.None : DisplayStyle.Flex;
+        DisplayStyle display = hideCurrentNodeButton && isCurrent ? DisplayStyle.None : DisplayStyle.Flex;
         if (view.Element.resolvedStyle.display != display)
             view.Element.style.display = display;
     }
@@ -308,7 +346,7 @@ public class UIT_MapController : BaseSingleton<UIT_MapController>
             return;
         }
 
-        if (!view.Node.IsUnlocked || !manager.CanAcceptInput)
+        if (!view.Node.IsUnlocked || !view.Revealed || !manager.CanAcceptInput)
             return;
 
         manager.TravelTo(view.Node);

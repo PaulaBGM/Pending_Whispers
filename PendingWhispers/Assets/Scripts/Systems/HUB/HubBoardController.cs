@@ -136,6 +136,11 @@ public class HubBoardController : MonoBehaviour
         if (boardRoot == null) return;
 
         boardRoot.style.display = DisplayStyle.Flex;
+
+        // Con la pizarra abierta Lyra no se mueve ni interactua (el EventSystem del HUB
+        // esta desactivado, asi que sin esto los clics en la pizarra la hacian caminar).
+        InteractionBlocker.AddBlock(this);
+
         Refresh();
     }
 
@@ -145,6 +150,13 @@ public class HubBoardController : MonoBehaviour
             boardRoot.style.display = DisplayStyle.None;
 
         CloseDetail();
+
+        InteractionBlocker.RemoveBlock(this);
+    }
+
+    private void OnDestroy()
+    {
+        InteractionBlocker.RemoveBlock(this);
     }
 
     private void Refresh()

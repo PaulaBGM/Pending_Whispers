@@ -64,12 +64,28 @@ public class PlayerController_Actions : MonoBehaviour
     {
         SyncInputSubscription();
         journalStateChannel.OnRaised += HandleJournalStateChanged;
+        InteractionBlocker.OnBlockedChanged += HandleBlockedChanged;
     }
 
     private void OnDisable()
     {
         UnsubscribeInput();
         journalStateChannel.OnRaised -= HandleJournalStateChanged;
+        InteractionBlocker.OnBlockedChanged -= HandleBlockedChanged;
+    }
+
+    // Al abrirse una pantalla que bloquea el mundo (pizarra del HUB, diario, dialogo, pausa)
+    // Lyra se para y se olvida del objetivo que llevaba.
+    private void HandleBlockedChanged(bool blocked)
+    {
+        if (!blocked)
+            return;
+
+        currentTarget = null;
+        ClearHover();
+
+        if (agent != null && agent.isOnNavMesh)
+            agent.isStopped = true;
     }
 
     private void SyncInputSubscription()
@@ -129,6 +145,10 @@ public class PlayerController_Actions : MonoBehaviour
             Debug.Log($"[Player] Clic ignorado: canMove = false (escena {gameObject.scene.name}).", this);
             return;
         }
+
+        // Pizarra del HUB, diario, dialogo o pausa abiertos.
+        if (InteractionBlocker.IsBlocked)
+            return;
 
         // Ignora clicks sobre UI
         if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
@@ -199,7 +219,7 @@ public class PlayerController_Actions : MonoBehaviour
 
     private void CheckInteraction()
     {
-        if (!canMove || currentTarget == null)
+        if (!canMove || currentTarget == null || InteractionBlocker.IsBlocked)
             return;
 
         if (agent.pathPending)
@@ -239,7 +259,7 @@ public class PlayerController_Actions : MonoBehaviour
     {
         // Con el diario abierto, en un diálogo o con el ratón encima de la UI (diario, HUD, pausa…)
         // no se resaltan objetos del mundo: si no, sonaba el hover de las pistas que hay debajo.
-        if (!canMove || IsPointerOverUI())
+        if (!canMove || InteractionBlocker.IsBlocked || IsPointerOverUI())
         {
             ClearHover();
             return;

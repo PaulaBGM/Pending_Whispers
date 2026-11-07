@@ -285,7 +285,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         if (!TryGetDialogueUI(out IDialogueView dialogueUI))
             return;
 
-        dialogueUI.ShowDialogueSelector(topics, HasSeenDialogueTopic, SelectDialogueTopic);
+        dialogueUI.ShowDialogueSelector(npc != null ? npc.DisplayName : null, topics, HasSeenDialogueTopic, SelectDialogueTopic);
     }
 
     private void SelectDialogueTopic(DialogueCondition topic)

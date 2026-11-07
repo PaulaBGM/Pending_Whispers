@@ -265,6 +265,97 @@ MonoBehaviour:
       Data4: 278826754
     Path: event:/TurnPage
   onJournalStateChannel: {fileID: 11400000, guid: f2fa85d8ec6606849bfe046413a30a79, type: 2}
+--- !u!114 &861298895858578156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2869069730443013099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd5023a61e92b834d860861934806703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  document: {fileID: 2961306876600247505}
+  clickEvent:
+    Guid:
+      Data1: 536392396
+      Data2: 1092836268
+      Data3: 1670356873
+      Data4: 2123521980
+    Path: event:/ButtonMainMenu
+  hoverEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  overrides:
+  - buttonName: Tab_CaseState
+    clickEvent:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
+    mute: 1
+  - buttonName: Tab_DialogueClue
+    clickEvent:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
+    mute: 1
+  - buttonName: Tab_Information
+    clickEvent:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
+    mute: 1
+  - buttonName: Tab_Inventory
+    clickEvent:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
+    mute: 1
+  - buttonName: Tab_ObjectClue
+    clickEvent:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
+    mute: 1
+  - buttonName: Tab_Settings
+    clickEvent:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
+    mute: 1
+  - buttonName: B_CloseButton
+    clickEvent:
+      Guid:
+        Data1: 462276463
+        Data2: 1274612670
+        Data3: 93147573
+        Data4: -1094488079
+      Path: event:/JournalSound
+    mute: 0
 --- !u!1 &3099988816173566853
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,12 +587,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 5070401462287133609}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 370111aadc4d2ac4fba4e2c33b950d52, type: 3}
+  m_Script: {fileID: 11500000, guid: e3b7e9b5559746539eb9b97fe7e01d5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   elementNames:
   - VE_SettingsPage
   - VE_CreditsInformation
+  sfxSliderName: SL_Sfx
+  musicSliderName: SL_Music
+  brightnessSliderName: SL_Brightness
+  sfxPreviewEvent:
+    Guid:
+      Data1: 536392396
+      Data2: 1092836268
+      Data3: 1670356873
+      Data4: 2123521980
+    Path: event:/ButtonMainMenu
 --- !u!1 &5230893114027954864
 GameObject:
   m_ObjectHideFlags: 0
@@ -695,6 +796,34 @@ MonoBehaviour:
   saveFailedText: The game could not be saved
   panelTransitionTime: 0.6
   finalMessageTime: 1.5
+--- !u!114 &7653612804605738521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7428725069092635145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd5023a61e92b834d860861934806703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  document: {fileID: 487543754471067309}
+  clickEvent:
+    Guid:
+      Data1: 536392396
+      Data2: 1092836268
+      Data3: 1670356873
+      Data4: 2123521980
+    Path: event:/ButtonMainMenu
+  hoverEvent:
+    Guid:
+      Data1: 536392396
+      Data2: 1092836268
+      Data3: 1670356873
+      Data4: 2123521980
+    Path: event:/ButtonMainMenu
+  overrides: []
 --- !u!1 &8132552447720638924
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,6 +926,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onTestimonyRegistered: {fileID: 11400000, guid: 11ab5f6cdba954e4d9500a03e274a911, type: 2}
   onDialogueStateChannel: {fileID: 11400000, guid: 983c7fe0404ee5f4abf7f477fe1c0487, type: 2}
+--- !u!114 &4686084227007681539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8132552447720638924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd5023a61e92b834d860861934806703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  document: {fileID: 6859236302733710352}
+  clickEvent:
+    Guid:
+      Data1: 536392396
+      Data2: 1092836268
+      Data3: 1670356873
+      Data4: 2123521980
+    Path: event:/ButtonMainMenu
+  hoverEvent:
+    Guid:
+      Data1: 536392396
+      Data2: 1092836268
+      Data3: 1670356873
+      Data4: 2123521980
+    Path: event:/ButtonMainMenu
+  overrides:
+  - buttonName: BT_JournalButton
+    clickEvent:
+      Guid:
+        Data1: 462276463
+        Data2: 1274612670
+        Data3: 93147573
+        Data4: -1094488079
+      Path: event:/JournalSound
+    mute: 0
 --- !u!1 &8822890690984116068
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,6 +1094,61 @@ MonoBehaviour:
   mapTutorialID: map
   mapTutorialTitle: Map
   mapTutorialText: 
+--- !u!114 &5293749856100081347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8822890690984116068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd5023a61e92b834d860861934806703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  document: {fileID: 3906431774278543613}
+  clickEvent:
+    Guid:
+      Data1: 536392396
+      Data2: 1092836268
+      Data3: 1670356873
+      Data4: 2123521980
+    Path: event:/ButtonMainMenu
+  hoverEvent:
+    Guid:
+      Data1: 462276463
+      Data2: 1274612670
+      Data3: 93147573
+      Data4: -1094488079
+    Path: event:/JournalSound
+  overrides:
+  - buttonName: HUD_Notebook_Button
+    clickEvent:
+      Guid:
+        Data1: 462276463
+        Data2: 1274612670
+        Data3: 93147573
+        Data4: -1094488079
+      Path: event:/JournalSound
+    mute: 0
+  - buttonName: HUD_Map_Button
+    clickEvent:
+      Guid:
+        Data1: -1549364507
+        Data2: 1203543141
+        Data3: 939585438
+        Data4: 1807465104
+      Path: event:/OpenMap
+    mute: 0
+  - buttonName: HUD_Ability_Button
+    clickEvent:
+      Guid:
+        Data1: -244600590
+        Data2: 1201229841
+        Data3: 1638770306
+        Data4: -973720375
+      Path: event:/SpectralWave
+    mute: 1
 --- !u!1 &8899730034865719641
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,214 +1235,3 @@ PlayableDirector:
     value: {fileID: 2961306876600247505}
   m_ExposedReferences:
     m_References: []
---- !u!114 &5293749856100081347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8822890690984116068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd5023a61e92b834d860861934806703, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  document: {fileID: 3906431774278543613}
-  clickEvent:
-    Guid:
-      Data1: 536392396
-      Data2: 1092836268
-      Data3: 1670356873
-      Data4: 2123521980
-    Path: event:/ButtonMainMenu
-  hoverEvent:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  overrides:
-  - buttonName: HUD_Notebook_Button
-    clickEvent:
-      Guid:
-        Data1: 462276463
-        Data2: 1274612670
-        Data3: 93147573
-        Data4: -1094488079
-      Path: event:/JournalSound
-    mute: 0
-  - buttonName: HUD_Map_Button
-    clickEvent:
-      Guid:
-        Data1: -1549364507
-        Data2: 1203543141
-        Data3: 939585438
-        Data4: 1807465104
-      Path: event:/OpenMap
-    mute: 0
-  - buttonName: HUD_Ability_Button
-    clickEvent:
-      Guid:
-        Data1: 0
-        Data2: 0
-        Data3: 0
-        Data4: 0
-      Path: 
-    mute: 1
---- !u!114 &7653612804605738521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7428725069092635145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd5023a61e92b834d860861934806703, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  document: {fileID: 487543754471067309}
-  clickEvent:
-    Guid:
-      Data1: 536392396
-      Data2: 1092836268
-      Data3: 1670356873
-      Data4: 2123521980
-    Path: event:/ButtonMainMenu
-  hoverEvent:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  overrides: []
---- !u!114 &4686084227007681539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8132552447720638924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd5023a61e92b834d860861934806703, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  document: {fileID: 6859236302733710352}
-  clickEvent:
-    Guid:
-      Data1: 536392396
-      Data2: 1092836268
-      Data3: 1670356873
-      Data4: 2123521980
-    Path: event:/ButtonMainMenu
-  hoverEvent:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  overrides:
-  - buttonName: BT_JournalButton
-    clickEvent:
-      Guid:
-        Data1: 462276463
-        Data2: 1274612670
-        Data3: 93147573
-        Data4: -1094488079
-      Path: event:/JournalSound
-    mute: 0
---- !u!114 &861298895858578156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2869069730443013099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd5023a61e92b834d860861934806703, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  document: {fileID: 2961306876600247505}
-  clickEvent:
-    Guid:
-      Data1: 536392396
-      Data2: 1092836268
-      Data3: 1670356873
-      Data4: 2123521980
-    Path: event:/ButtonMainMenu
-  hoverEvent:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  overrides:
-  - buttonName: Tab_CaseState
-    clickEvent:
-      Guid:
-        Data1: 0
-        Data2: 0
-        Data3: 0
-        Data4: 0
-      Path: 
-    mute: 1
-  - buttonName: Tab_DialogueClue
-    clickEvent:
-      Guid:
-        Data1: 0
-        Data2: 0
-        Data3: 0
-        Data4: 0
-      Path: 
-    mute: 1
-  - buttonName: Tab_Information
-    clickEvent:
-      Guid:
-        Data1: 0
-        Data2: 0
-        Data3: 0
-        Data4: 0
-      Path: 
-    mute: 1
-  - buttonName: Tab_Inventory
-    clickEvent:
-      Guid:
-        Data1: 0
-        Data2: 0
-        Data3: 0
-        Data4: 0
-      Path: 
-    mute: 1
-  - buttonName: Tab_ObjectClue
-    clickEvent:
-      Guid:
-        Data1: 0
-        Data2: 0
-        Data3: 0
-        Data4: 0
-      Path: 
-    mute: 1
-  - buttonName: Tab_Settings
-    clickEvent:
-      Guid:
-        Data1: 0
-        Data2: 0
-        Data3: 0
-        Data4: 0
-      Path: 
-    mute: 1
-  - buttonName: B_CloseButton
-    clickEvent:
-      Guid:
-        Data1: 462276463
-        Data2: 1274612670
-        Data3: 93147573
-        Data4: -1094488079
-      Path: event:/JournalSound
-    mute: 0

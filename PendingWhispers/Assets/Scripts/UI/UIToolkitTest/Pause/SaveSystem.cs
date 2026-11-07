@@ -319,7 +319,10 @@ public class SaveSystem : BaseSingleton<SaveSystem>
             CaseManager.Instance.RestoreCurrentCase(null, null);
 
         if (MapState.Instance != null)
+        {
             MapState.Instance.SetCurrentNode(string.Empty);
+            MapState.Instance.ClearRevealed();
+        }
 
         if (DialogueManager.Instance != null)
             DialogueManager.Instance.RestoreSeenDialogueTopics(null);

@@ -103,6 +103,7 @@ public class UIT_HUDController : MonoBehaviour
     private InventorySO watchedInventory;
 
     private Coroutine gameNotificationRoutine;
+    private string currentGameNotification;
     private Coroutine mapRevealRoutine;
     private IVisualElementScheduledItem bumpReset;
 
@@ -168,6 +169,7 @@ public class UIT_HUDController : MonoBehaviour
             StopCoroutine(gameNotificationRoutine);
             gameNotificationRoutine = null;
         }
+        currentGameNotification = null;
 
         // Si se desactiva a mitad de la animación del mapa, se repetirá al reactivarse.
         if (mapRevealRoutine != null)
@@ -337,7 +339,10 @@ public class UIT_HUDController : MonoBehaviour
     {
         Debug.Log($"[HUD] Nuevo testimonio: {entry.Name}");
         AddClueNotification();
-        ShowGameNotification(string.Format(testimonyMessage, entry.Name));
+
+        // Un diálogo suele registrar varias frases importantes de la misma persona: el aviso
+        // sale una sola vez por persona (no se repite si ya está en pantalla o en cola).
+        ShowGameNotification(string.Format(testimonyMessage, entry.Name), skipIfAlreadyPending: true);
     }
 
     private void HandleEvidenceRegistered(ItemSO item) => RegisterNewItem(item);
@@ -590,9 +595,14 @@ public class UIT_HUDController : MonoBehaviour
     /// Pone un aviso en cola. Se muestran de uno en uno, y solo con el HUD visible:
     /// los que llegan durante un diálogo esperan a que termine.
     /// </summary>
-    public void ShowGameNotification(string message)
+    public void ShowGameNotification(string message) => ShowGameNotification(message, false);
+
+    public void ShowGameNotification(string message, bool skipIfAlreadyPending)
     {
         if (gameNotification == null || string.IsNullOrWhiteSpace(message))
+            return;
+
+        if (skipIfAlreadyPending && (message == currentGameNotification || gameNotificationQueue.Contains(message)))
             return;
 
         gameNotificationQueue.Enqueue(message);
@@ -609,6 +619,8 @@ public class UIT_HUDController : MonoBehaviour
 
     private IEnumerator GameNotificationRoutine(string message)
     {
+        currentGameNotification = message;
+
         if (gameNotificationText != null)
             gameNotificationText.text = message;
 
@@ -625,6 +637,7 @@ public class UIT_HUDController : MonoBehaviour
 
         gameNotification.style.display = DisplayStyle.None;
         gameNotificationRoutine = null;
+        currentGameNotification = null;
 
         TryPlayNextGameNotification();
     }
@@ -636,6 +649,8 @@ public class UIT_HUDController : MonoBehaviour
             StopCoroutine(gameNotificationRoutine);
             gameNotificationRoutine = null;
         }
+
+        currentGameNotification = null;
 
         if (gameNotification == null)
             return;

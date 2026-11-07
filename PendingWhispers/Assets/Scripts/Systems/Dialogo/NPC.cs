@@ -7,6 +7,11 @@ public class NPC : MonoBehaviour, IInteractable
     [Tooltip("Stable id used to scope dialogue topic seen-state across cases. Uses the GameObject name when empty.")]
     [SerializeField] private string npcId;
 
+    [Tooltip("Nombre que sale en el selector de temas. Vacío = el displayName de su personaje en sus diálogos.")]
+    [SerializeField] private string displayName;
+    [Tooltip("Id del personaje del jugador en los DialogueData, para no confundirlo con el NPC.")]
+    [SerializeField] private string playerCharacterId = "lyra";
+
     public List<DialogueCondition> dialogues;
 
     private readonly List<DialogueCondition> validDialoguesCache = new();
@@ -27,6 +32,33 @@ public class NPC : MonoBehaviour, IInteractable
     }
 
     public string DialogueId => !string.IsNullOrWhiteSpace(npcId) ? npcId.Trim() : name;
+
+    /// <summary>Nombre del NPC: el del Inspector o, si está vacío, el de su personaje en los diálogos.</summary>
+    public string DisplayName
+    {
+        get
+        {
+            if (!string.IsNullOrWhiteSpace(displayName))
+                return displayName.Trim();
+
+            if (dialogues == null)
+                return null;
+
+            foreach (DialogueCondition condition in dialogues)
+            {
+                if (condition?.dialogue?.characters == null)
+                    continue;
+
+                foreach (DialogueCharacter character in condition.dialogue.characters)
+                {
+                    if (character != null && !string.IsNullOrWhiteSpace(character.displayName) && character.id != playerCharacterId)
+                        return character.displayName;
+                }
+            }
+
+            return null;
+        }
+    }
 
     public Sprite GetExpression(DialogueExpression expression)
     {

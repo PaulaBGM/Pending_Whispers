@@ -136,10 +136,10 @@ public class DialogueUI : MonoBehaviour, IDialogueView
         }
     }
 
-    public void ShowDialogueSelector(List<DialogueCondition> topics, Func<DialogueCondition, bool> isTopicSeen, Action<DialogueCondition> onTopicSelected)
+    public void ShowDialogueSelector(string title, List<DialogueCondition> topics, Func<DialogueCondition, bool> isTopicSeen, Action<DialogueCondition> onTopicSelected)
     {
         panel.SetActive(true);
-        speakerText.text = topicSelectorSpeaker;
+        speakerText.text = string.IsNullOrEmpty(title) ? topicSelectorSpeaker : title;
         dialogueText.text = string.Empty;
 
         if (CharacterUIController.Instance != null)

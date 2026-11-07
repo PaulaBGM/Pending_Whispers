@@ -32,4 +32,24 @@ public class MapState : BaseSingleton<MapState>
     {
         return unlockedNodes.Contains(nodeID);
     }
+
+    // Nodos cuyo boton ya ha aparecido en el mapa (con su animacion de pop-up).
+    // Los nuevos salen con animacion la primera vez que se abre el mapa tras desbloquearlos.
+    private readonly HashSet<string> revealedNodes = new HashSet<string>();
+
+    public bool WasRevealed(string nodeID)
+    {
+        return !string.IsNullOrEmpty(nodeID) && revealedNodes.Contains(nodeID);
+    }
+
+    public void MarkRevealed(string nodeID)
+    {
+        if (!string.IsNullOrEmpty(nodeID))
+            revealedNodes.Add(nodeID);
+    }
+
+    public void ClearRevealed()
+    {
+        revealedNodes.Clear();
+    }
 }

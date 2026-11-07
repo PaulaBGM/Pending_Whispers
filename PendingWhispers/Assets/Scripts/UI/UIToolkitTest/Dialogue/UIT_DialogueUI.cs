@@ -267,7 +267,8 @@ public class UIT_DialogueUI : MonoBehaviour, IDialogueView
         RefreshChoices();
     }
 
-    public void ShowDialogueSelector(List<DialogueCondition> topics,
+    public void ShowDialogueSelector(string title,
+                                     List<DialogueCondition> topics,
                                      Func<DialogueCondition, bool> isTopicSeen,
                                      Action<DialogueCondition> onTopicSelected)
     {
@@ -276,7 +277,8 @@ public class UIT_DialogueUI : MonoBehaviour, IDialogueView
 
         SetVisible(true);
         StopTyping();
-        SetSpeaker(topicSelectorSpeaker);
+        // Nombre del NPC con el que se habla; "Talk" solo si no se sabe.
+        SetSpeaker(string.IsNullOrEmpty(title) ? topicSelectorSpeaker : title);
         dialogueLabel.text = string.Empty;
         ResetCharacters();
 
@@ -313,10 +315,11 @@ public class UIT_DialogueUI : MonoBehaviour, IDialogueView
         SetVisible(false);
     }
 
+    // Los botones del diálogo se muestran/ocultan con SetEnabled: el USS (#...:disabled) decide cómo
+    // se esconden (y puede animarlo). Un botón desactivado tampoco recibe clics.
     public void SetEvidenceButtonVisible(bool visible)
     {
-        if (presentEvidenceButton != null)
-            presentEvidenceButton.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
+        presentEvidenceButton?.SetEnabled(visible);
     }
 
     public void OpenEvidencePicker()
@@ -386,6 +389,10 @@ public class UIT_DialogueUI : MonoBehaviour, IDialogueView
     {
         for (var current = element; current != null; current = current.parent)
         {
+            // Opciones ocultas (desactivadas): un clic ahí avanza el diálogo como en el resto del panel.
+            if (!current.enabledSelf)
+                return false;
+
             if (current is Button || current is ListView)
                 return true;
         }
@@ -571,8 +578,7 @@ public class UIT_DialogueUI : MonoBehaviour, IDialogueView
 
     private void SetChoicesVisible(bool visible)
     {
-        if (choicesContainer != null)
-            choicesContainer.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
+        choicesContainer?.SetEnabled(visible);
     }
 
     // =========================
