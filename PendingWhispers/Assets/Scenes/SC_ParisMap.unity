@@ -2288,14 +2288,16 @@ MonoBehaviour:
   buttonSize: {x: 120, y: 120}
   buttonOffset: {x: 0, y: 0}
   hideCurrentNodeButton: 0
-  hideLockedNodes: 1
+  popNewlyUnlockedNodes: 1
+  popDelay: 0.4
+  popInterval: 0.2
   hideLegacyNodeGraphics: 1
   worldCamera: {fileID: 701209500}
   mapTitle: Map of the suburbs of Paris
   instructionsSource: 1
   missionText: Investigate the catacombs for more information on Vivienne and her
     close ones
-  showNodeInfoOnHover: 0
+  showNodeInfoOnHover: 1
   lockedNodeName: ???
 --- !u!1001 &526620985
 PrefabInstance:
@@ -4228,6 +4230,7 @@ MonoBehaviour:
       Data4: 1807465104
     Path: event:/OpenMap
   overrides: []
+  logPlays: 0
 --- !u!1001 &1416510341
 PrefabInstance:
   m_ObjectHideFlags: 0

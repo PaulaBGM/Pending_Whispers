@@ -70,7 +70,7 @@ public class UIT_MapController : BaseSingleton<UIT_MapController>
     [SerializeField] private string missionText = "Investigate the catacombs for more information on Vivienne and her close ones";
     [Tooltip("Al pasar el ratón por un nodo, mostrar el displayName/description de su NodeData. " +
              "Desactivado = los textos no cambian (como el mapa uGUI).")]
-    [SerializeField] private bool showNodeInfoOnHover = false;
+    [SerializeField] private bool showNodeInfoOnHover = true;
     [SerializeField] private string lockedNodeName = "???";
 
     private sealed class NodeView
