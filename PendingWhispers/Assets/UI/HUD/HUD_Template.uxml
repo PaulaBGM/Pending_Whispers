@@ -21,7 +21,7 @@
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="HUD_GameNotification" enabled="false" class="gameNotification" style="flex-grow: 1; display: flex;">
+    <ui:VisualElement name="HUD_GameNotification" enabled="false" class="gameNotification" style="flex-grow: 1; display: flex; background-color: rgba(0, 0, 0, 0.84);">
         <ui:Label text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sed euismod orci. Maecenas egestas nibh sed tortor sagittis volutpat. " name="T_GameNotification" class="gameNotificationText" />
     </ui:VisualElement>
 </ui:UXML>

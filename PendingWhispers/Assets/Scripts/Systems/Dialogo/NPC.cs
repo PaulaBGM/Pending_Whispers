@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using FMODUnity;
 
 public class NPC : MonoBehaviour, IInteractable
 {
@@ -9,13 +10,20 @@ public class NPC : MonoBehaviour, IInteractable
     public List<DialogueCondition> dialogues;
 
     private readonly List<DialogueCondition> validDialoguesCache = new();
+
     private NPCExpressions expressions;
     private GhostTransformationController transformationController;
+
+    // FMOD: puede ser null si el NPC no tiene emitter
+    private StudioEventEmitter audioEmitter;
 
     private void Awake()
     {
         expressions = GetComponentInChildren<NPCExpressions>();
         transformationController = GetComponent<GhostTransformationController>();
+
+        // Busca el emitter en el mismo GameObject
+        audioEmitter = GetComponent<StudioEventEmitter>();
     }
 
     public string DialogueId => !string.IsNullOrWhiteSpace(npcId) ? npcId.Trim() : name;
@@ -44,9 +52,17 @@ public class NPC : MonoBehaviour, IInteractable
             return;
         }
 
+        // Detener audio FMOD si el NPC tiene un emitter
+        audioEmitter?.Stop();
+
         if (validDialogues.Count == 1)
         {
-            DialogueManager.Instance.StartDialogue(validDialogues[0].dialogue, this, validDialogues[0]);
+            DialogueManager.Instance.StartDialogue(
+                validDialogues[0].dialogue,
+                this,
+                validDialogues[0]
+            );
+
             return;
         }
 

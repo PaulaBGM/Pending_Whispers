@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5719235797501257939
+--- !u!1001 &8007116628246285277
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -14,19 +14,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 749836734348205680, guid: 419e09fb71d837047abd26d197d9bdae, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.201
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672094710063391505, guid: 419e09fb71d837047abd26d197d9bdae, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.59
       objectReference: {fileID: 0}
     - target: {fileID: 6374301664020428767, guid: 419e09fb71d837047abd26d197d9bdae, type: 3}
       propertyPath: m_Name
-      value: FrontWorktop Variant
+      value: FrontKitchenCupboard
+      objectReference: {fileID: 0}
+    - target: {fileID: 7024090224697295996, guid: 419e09fb71d837047abd26d197d9bdae, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7024090224697295996, guid: 419e09fb71d837047abd26d197d9bdae, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7024090224697295996, guid: 419e09fb71d837047abd26d197d9bdae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.99
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7024090224697295996, guid: 419e09fb71d837047abd26d197d9bdae, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.19
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7024090224697295996, guid: 419e09fb71d837047abd26d197d9bdae, type: 3}
       propertyPath: m_LocalPosition.z
@@ -62,40 +74,40 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8140405933041827479, guid: 419e09fb71d837047abd26d197d9bdae, type: 3}
       propertyPath: m_Size.x
-      value: 2.24
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8140405933041827479, guid: 419e09fb71d837047abd26d197d9bdae, type: 3}
       propertyPath: m_Size.y
-      value: 0.75
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8174618737474151696, guid: 419e09fb71d837047abd26d197d9bdae, type: 3}
       propertyPath: m_Size.x
-      value: 2.5186691
+      value: 2.2496734
       objectReference: {fileID: 0}
     - target: {fileID: 8174618737474151696, guid: 419e09fb71d837047abd26d197d9bdae, type: 3}
       propertyPath: m_Size.y
-      value: 0.7857792
+      value: 1.7328877
       objectReference: {fileID: 0}
     - target: {fileID: 8174618737474151696, guid: 419e09fb71d837047abd26d197d9bdae, type: 3}
       propertyPath: m_Offset.x
-      value: -0.0072393417
+      value: -0.00723958
       objectReference: {fileID: 0}
     - target: {fileID: 8174618737474151696, guid: 419e09fb71d837047abd26d197d9bdae, type: 3}
       propertyPath: m_Offset.y
-      value: 0.1661301
+      value: 0.11288163
       objectReference: {fileID: 0}
     - target: {fileID: 8356027437382346925, guid: 419e09fb71d837047abd26d197d9bdae, type: 3}
       propertyPath: m_Size.x
-      value: 2.5085714
+      value: 2.2457142
       objectReference: {fileID: 0}
     - target: {fileID: 8356027437382346925, guid: 419e09fb71d837047abd26d197d9bdae, type: 3}
       propertyPath: m_Size.y
-      value: 1.1142857
+      value: 2.597143
       objectReference: {fileID: 0}
     - target: {fileID: 8356027437382346925, guid: 419e09fb71d837047abd26d197d9bdae, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -5264178191903341850, guid: 57b95afe80a0e2645a3b0dffb2e994d1, type: 3}
+      objectReference: {fileID: 1349443755186590289, guid: 3b64a7d49453afe47b5cbc2b7674ed75, type: 3}
     - target: {fileID: 8356027437382346925, guid: 419e09fb71d837047abd26d197d9bdae, type: 3}
       propertyPath: m_SortingOrder
       value: 21
