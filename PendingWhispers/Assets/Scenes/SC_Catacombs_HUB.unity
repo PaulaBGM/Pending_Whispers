@@ -985,6 +985,7 @@ GameObject:
   - component: {fileID: 179451480}
   - component: {fileID: 179451481}
   - component: {fileID: 179451482}
+  - component: {fileID: 154114761}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -5463,6 +5464,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 96228272}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &154114761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179451479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd5023a61e92b834d860861934806703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  document: {fileID: 179451481}
+  clickEvent:
+    Guid:
+      Data1: 536392396
+      Data2: 1092836268
+      Data3: 1670356873
+      Data4: 2123521980
+    Path: event:/ButtonMainMenu
+  hoverEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  overrides: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -55,31 +55,55 @@ public class PlayerController_Actions : MonoBehaviour
         }
     }
 
+    // InputController al que estamos suscritos. Al cambiar de escena se destruye el anterior
+    // (no es raiz y no persiste) y aparece otro: si el jugador se suscribia antes de que
+    // existiera el nuevo, se quedaba sin recibir clics y no se podia mover.
+    private InputController subscribedInput;
+
     private void OnEnable()
     {
-        if (InputController.Instance != null)
-        {
-            InputController.Instance.OnClickPressed += HandleClick;
-            InputController.Instance.OnInventoryPressed += ToggleInventory;
-            InputController.Instance.OnMapPressed += OpenMap;
-        }
-
+        SyncInputSubscription();
         journalStateChannel.OnRaised += HandleJournalStateChanged;
     }
 
     private void OnDisable()
     {
-        if (InputController.Instance != null)
-        {
-            InputController.Instance.OnClickPressed -= HandleClick;
-            InputController.Instance.OnInventoryPressed -= ToggleInventory;
-            InputController.Instance.OnMapPressed -= OpenMap;
-        }
+        UnsubscribeInput();
         journalStateChannel.OnRaised -= HandleJournalStateChanged;
+    }
+
+    private void SyncInputSubscription()
+    {
+        InputController current = InputController.Instance;
+        if (current == subscribedInput && !ReferenceEquals(subscribedInput, null))
+            return;
+
+        UnsubscribeInput();
+
+        if (current == null)
+            return;
+
+        current.OnClickPressed += HandleClick;
+        current.OnInventoryPressed += ToggleInventory;
+        current.OnMapPressed += OpenMap;
+        subscribedInput = current;
+    }
+
+    private void UnsubscribeInput()
+    {
+        if (!ReferenceEquals(subscribedInput, null))
+        {
+            subscribedInput.OnClickPressed -= HandleClick;
+            subscribedInput.OnInventoryPressed -= ToggleInventory;
+            subscribedInput.OnMapPressed -= OpenMap;
+        }
+
+        subscribedInput = null;
     }
 
     private void Update()
     {
+        SyncInputSubscription();
         UpdateAnimator();
         CheckInteraction();
         HandleHover();
@@ -101,11 +125,17 @@ public class PlayerController_Actions : MonoBehaviour
     private void HandleClick()
     {
         if (!canMove)
+        {
+            Debug.Log($"[Player] Clic ignorado: canMove = false (escena {gameObject.scene.name}).", this);
             return;
+        }
 
         // Ignora clicks sobre UI
         if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+        {
+            LogUIBlockingClick();
             return;
+        }
 
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -130,6 +160,22 @@ public class PlayerController_Actions : MonoBehaviour
         MoveTo(mousePos);
     }
 
+    // Diagnostico: dice que UI se esta comiendo el clic (UIDocument, Canvas...).
+    private static readonly System.Collections.Generic.List<RaycastResult> uiHits = new();
+
+    private void LogUIBlockingClick()
+    {
+        var data = new PointerEventData(EventSystem.current) { position = Input.mousePosition };
+        uiHits.Clear();
+        EventSystem.current.RaycastAll(data, uiHits);
+
+        string names = uiHits.Count == 0
+            ? "(ningun raycast; probablemente un panel de UI Toolkit)"
+            : string.Join(", ", uiHits.ConvertAll(h => h.gameObject != null ? h.gameObject.name : "?"));
+
+        Debug.Log($"[Player] Clic ignorado: el raton esta sobre UI -> {names}", this);
+    }
+
     private void MoveTo(Vector2 destination)
     {
         if (!canMove)
@@ -139,7 +185,13 @@ public class PlayerController_Actions : MonoBehaviour
 
         if (NavMesh.SamplePosition(destination, out NavMeshHit hit, 2f, NavMesh.AllAreas))
         {
-            agent.SetDestination(hit.position);
+            if (!agent.isOnNavMesh || !agent.SetDestination(hit.position))
+                Debug.Log($"[Player] No se pudo mover: agente en NavMesh = {agent.isOnNavMesh}, " +
+                          $"posicion = {transform.position}.", this);
+        }
+        else
+        {
+            Debug.Log($"[Player] Clic fuera del NavMesh en {destination}.", this);
         }
     }
 

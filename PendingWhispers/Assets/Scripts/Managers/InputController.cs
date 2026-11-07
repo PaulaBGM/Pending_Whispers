@@ -29,12 +29,39 @@ public class InputController : BaseSingleton<InputController>
 
     private void OnEnable()
     {
-        pauseAction = playerInput.actions["PauseMenu"];
-        submitAction = playerInput.actions["Submit"];
-        clickAction = playerInput.actions["Click"];
-        mapAction = playerInput.actions["Map"];
-        inventoryAction = playerInput.actions["Inventory"];
-        detectionAction = playerInput.actions["Detection"];
+        // Copia de otra escena que se va a destruir: no se engancha a nada.
+        if (Instance != this)
+            return;
+
+        // Se usan las acciones del proyecto (Project-wide Actions = InputSystem_Actions), que
+        // Unity activa al arrancar y no dependen de ningun PlayerInput. Antes se leian de
+        // playerInput.actions: al venir de otra escena con PlayerInput (HUB -> mapa -> casa),
+        // el PlayerInput nuevo podia hacer una COPIA del asset que nunca se activaba y se
+        // quedaba sin teclado/raton, asi que el clic no llegaba y el jugador no se movia.
+        InputActionAsset actions = InputSystem.actions;
+        if (actions == null && playerInput != null)
+            actions = playerInput.actions;
+
+        if (actions == null)
+        {
+            Debug.LogError("[InputController] No hay acciones de input (Project-wide Actions ni PlayerInput).", this);
+            return;
+        }
+
+        pauseAction = actions["PauseMenu"];
+        submitAction = actions["Submit"];
+        clickAction = actions["Click"];
+        mapAction = actions["Map"];
+        inventoryAction = actions["Inventory"];
+        detectionAction = actions["Detection"];
+
+        // Por si algo las desactivo (no hace nada si ya estan activas).
+        pauseAction.Enable();
+        submitAction.Enable();
+        clickAction.Enable();
+        mapAction.Enable();
+        inventoryAction.Enable();
+        detectionAction.Enable();
 
         pauseAction.performed += OnPause;
         submitAction.performed += OnSubmit;
@@ -46,6 +73,9 @@ public class InputController : BaseSingleton<InputController>
 
     private void OnDisable()
     {
+        if (clickAction == null)
+            return;
+
         pauseAction.performed -= OnPause;
         submitAction.performed -= OnSubmit;
         clickAction.performed -= OnClick;
