@@ -18,3 +18,8 @@ VisualElement {
 #BT_PresentEvidence:disabled {
     display: none;
 }
+
+/* Etiqueta "List is empty" del ListView cuando no hay opciones: no se muestra. */
+#LV_ButtonsContainer .unity-list-view__empty-label {
+    display: none;
+}

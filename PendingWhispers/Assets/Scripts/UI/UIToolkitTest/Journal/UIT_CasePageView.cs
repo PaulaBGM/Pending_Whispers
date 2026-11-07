@@ -19,6 +19,12 @@ public class UIT_CasePageView : UIT_JournalPageView
     [SerializeField] private UIT_HypothesisController hypothesisController;
     [SerializeField] private UIT_HypothesisPanelView hypothesisPanel;
 
+    [Header("Slot de caso")]
+    [Tooltip("CaseSlot_Template.uxml. Vacío = entradas de texto simples (como antes).")]
+    [SerializeField] private VisualTreeAsset caseSlotTemplate;
+    [SerializeField] private string slotButtonName = "CaseSlot_BG";
+    [SerializeField] private string slotTextName = "T_CaseResume";
+
     [Header("Hoja izquierda")]
     [SerializeField] private string listPageName = "VE_CaseListPage";
     [SerializeField] private string listContainerName = "SV_CaseList";
@@ -112,33 +118,81 @@ public class UIT_CasePageView : UIT_JournalPageView
         {
             int index = entries.Count;
 
-            var entry = new VisualElement();
-            entry.AddToClassList(EntryClass);
-
-            var title = new Label { name = "Title" };
-            title.AddToClassList(EntryTitleClass);
-            var subtitle = new Label { name = "Subtitle" };
-            subtitle.AddToClassList(EntrySubtitleClass);
-
-            entry.Add(title);
-            entry.Add(subtitle);
+            VisualElement entry = caseSlotTemplate != null
+                ? CreateSlotEntry(index)
+                : CreateTextEntry(index);
 
             entry.RegisterCallback<PointerEnterEvent>(_ => Preview(index));
-            entry.RegisterCallback<ClickEvent>(evt =>
-            {
-                if (evt.button == 0)
-                    OpenCase(index);
-            });
 
             entries.Add(entry);
             listContainer.Add(entry);
         }
     }
 
+    /// <summary>Entrada a partir de CaseSlot_Template: el botón del slot abre la hipótesis.</summary>
+    private VisualElement CreateSlotEntry(int index)
+    {
+        TemplateContainer entry = caseSlotTemplate.CloneTree();
+        entry.name = $"CaseSlot_{index}";
+        entry.AddToClassList(EntryClass);
+
+        Button button = entry.Q<Button>(slotButtonName) ?? entry.Q<Button>();
+        if (button != null)
+            button.clicked += () => OpenCase(index);
+        else
+            Debug.LogWarning($"[UIT_CasePageView] CaseSlot_Template no tiene el botón '{slotButtonName}'.", this);
+
+        if (entry.Q<Label>(slotTextName) == null)
+            Debug.LogWarning($"[UIT_CasePageView] CaseSlot_Template no tiene la Label '{slotTextName}'.", this);
+
+        return entry;
+    }
+
+    /// <summary>Entrada antigua (solo texto). Se usa si no hay plantilla asignada.</summary>
+    private VisualElement CreateTextEntry(int index)
+    {
+        var entry = new VisualElement();
+        entry.AddToClassList(EntryClass);
+
+        var title = new Label { name = "Title" };
+        title.AddToClassList(EntryTitleClass);
+        var subtitle = new Label { name = "Subtitle" };
+        subtitle.AddToClassList(EntrySubtitleClass);
+
+        entry.Add(title);
+        entry.Add(subtitle);
+
+        entry.RegisterCallback<ClickEvent>(evt =>
+        {
+            if (evt.button == 0)
+                OpenCase(index);
+        });
+
+        return entry;
+    }
+
     private void FillEntry(VisualElement entry, CaseRuntime runtime)
     {
-        entry.Q<Label>("Title").text = runtime.Title;
-        entry.Q<Label>("Subtitle").text = runtime.isResolved ? resolvedText : GetObjectiveText(runtime);
+        string subtitle = runtime.isResolved ? resolvedText : GetObjectiveText(runtime);
+
+        Label slotText = entry.Q<Label>(slotTextName);
+        if (slotText != null)
+        {
+            // Misma info que antes (título + objetivo), en una sola Label del slot.
+            slotText.enableRichText = true;
+            slotText.text = string.IsNullOrEmpty(subtitle)
+                ? $"<b>{runtime.Title}</b>"
+                : $"<b>{runtime.Title}</b>\n{subtitle}";
+            return;
+        }
+
+        Label title = entry.Q<Label>("Title");
+        if (title != null)
+            title.text = runtime.Title;
+
+        Label subtitleLabel = entry.Q<Label>("Subtitle");
+        if (subtitleLabel != null)
+            subtitleLabel.text = subtitle;
     }
 
     // =========================

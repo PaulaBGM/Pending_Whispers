@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
 
@@ -7,6 +8,10 @@ public class GhostTransformationController : MonoBehaviour
     [SerializeField] private FlagSO transformedFlag;
     [SerializeField] private Animator animator;
     [SerializeField] private EventReference transformationEvent;
+
+    [Tooltip("Dialogos que, al terminar, transforman al fantasma (p. ej. Revelation). " +
+             "Vacio = comportamiento antiguo: se intenta al acabar cualquier dialogo.")]
+    [SerializeField] private List<DialogueData> transformationDialogues = new();
     
     private void Awake()
     {
@@ -14,8 +19,12 @@ public class GhostTransformationController : MonoBehaviour
             animator = GetComponent<Animator>();
     }
 
-    public void TryTransform()
+    public void TryTransform(DialogueData endedDialogue)
     {
+        if (transformationDialogues != null && transformationDialogues.Count > 0 &&
+            (endedDialogue == null || !transformationDialogues.Contains(endedDialogue)))
+            return;
+
         if (correctHypothesisFlag == null || GameProgress.Instance == null)
             return;
 

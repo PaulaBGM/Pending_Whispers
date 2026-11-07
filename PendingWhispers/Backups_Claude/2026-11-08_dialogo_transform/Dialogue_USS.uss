@@ -1,0 +1,20 @@
+VisualElement {
+}
+
+.openJournalButton:hover {
+    translate: 0 4%;
+    scale: 1 1;
+    transition-property: translate;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+}
+
+/* UIT_DialogueUI oculta las opciones y el boton de presentar pruebas con SetEnabled(false).
+   Aqui se decide como desaparecen (se puede cambiar por una transicion de opacity/scale). */
+#LV_ButtonsContainer:disabled {
+    display: none;
+}
+
+#BT_PresentEvidence:disabled {
+    display: none;
+}

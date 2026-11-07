@@ -68,10 +68,9 @@ public class NPC : MonoBehaviour, IInteractable
         return expressions.GetSprite(expression);
     }
 
-    public void TryTransform()
+    public void TryTransform(DialogueData endedDialogue)
     {
-        Debug.Log($"{name} TryTransform");
-        transformationController?.TryTransform();
+        transformationController?.TryTransform(endedDialogue);
     }
 
     public void Interact(PlayerController_Actions player)

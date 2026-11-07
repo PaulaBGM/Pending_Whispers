@@ -14,7 +14,10 @@ public class DialogueManager : BaseSingleton<DialogueManager>
     private NPC currentNPC;
     private DialogueCondition currentDialogueTopic;
 
-    private readonly HashSet<string> seenDialogueTopicKeys = new();
+    // Static: el DialogueManager vive en un hijo del prefab de UI de cada escena (DontDestroyOnLoad
+    // no funciona en hijos), asi que se recrea al cambiar de escena. Antes los temas ya hablados
+    // se perdian al ir de las catacumbas a la casa. Partida nueva / cargar lo reinician via Restore.
+    private static readonly HashSet<string> seenDialogueTopicKeys = new();
 
     private PlayerController_Actions player;
 
@@ -195,7 +198,8 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         SetDialogueActive(false);
         CurrentView?.Hide();
 
-        currentNPC?.TryTransform();
+        // Solo se transforma si el dialogo que acaba es uno de transformacion del NPC (p. ej. Revelation).
+        currentNPC?.TryTransform(currentDialogue);
 
         runner = null;
         currentNode = null;

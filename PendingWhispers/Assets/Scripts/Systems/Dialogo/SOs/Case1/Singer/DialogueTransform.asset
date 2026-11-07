@@ -55,8 +55,7 @@ MonoBehaviour:
     - text: No one murdered you... you suffered an accident, and died because of
         an allergy reaction
       nextNodeID: 2
-      addFlags:
-      - {fileID: 11400000, guid: b20d31eec589dbb4fafd6102542a3f00, type: 2}
+      addFlags: []
       requiredFlags:
       - {fileID: 11400000, guid: 8c9823eacec837c4299e0acca9e31dad, type: 2}
       requiredReputation: 0
