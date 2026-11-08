@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6629645828435719355}
   - component: {fileID: 6326990540394921193}
   - component: {fileID: 4392150056532008061}
+  - component: {fileID: 2775628873630502802}
   m_Layer: 0
   m_Name: SpectralScanWave
   m_TagString: Untagged
@@ -91,6 +92,36 @@ MonoBehaviour:
   ps: {fileID: 2286042802219499495}
   startParticleSize: 4
   maxParticleSize: 6
+  OnScanStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2775628873630502802}
+        m_TargetAssemblyTypeName: SpectralScanAudio, Assembly-CSharp
+        m_MethodName: PlayScanSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnScanFinished:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2775628873630502802}
+        m_TargetAssemblyTypeName: SpectralScanAudio, Assembly-CSharp
+        m_MethodName: StopScanSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!50 &-7670695304013292331
 Rigidbody2D:
   serializedVersion: 5
@@ -241,6 +272,25 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &2775628873630502802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2225883164517504690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 599af77cb8f23074b927e64fda5a4f89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scanSound:
+    Guid:
+      Data1: -244600590
+      Data2: 1201229841
+      Data3: 1638770306
+      Data4: -973720375
+    Path: event:/SpectralWave
 --- !u!1001 &2481520012795476063
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -2315,14 +2315,6 @@ PrefabInstance:
       propertyPath: onAbilityClicked.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2135614966}
-    - target: {fileID: 1599402615309012786, guid: bb3670226f9a3174dbace004dda2e93a, type: 3}
-      propertyPath: onMapClicked.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenMap
-      objectReference: {fileID: 0}
-    - target: {fileID: 1599402615309012786, guid: bb3670226f9a3174dbace004dda2e93a, type: 3}
-      propertyPath: onAbilityClicked.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LaunchScan
-      objectReference: {fileID: 0}
     - target: {fileID: 7177495405511165935, guid: bb3670226f9a3174dbace004dda2e93a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2366,10 +2358,6 @@ PrefabInstance:
     - target: {fileID: 8899730034865719641, guid: bb3670226f9a3174dbace004dda2e93a, type: 3}
       propertyPath: m_Name
       value: -----UIToolkit-----
-      objectReference: {fileID: 0}
-    - target: {fileID: 8899730034865719641, guid: bb3670226f9a3174dbace004dda2e93a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7078,6 +7066,18 @@ PrefabInstance:
     - target: {fileID: 2366997595347320042, guid: 91d7f6049b767ac449f95de88e606c70, type: 3}
       propertyPath: m_Name
       value: ButlerNPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 2456334407320603034, guid: 91d7f6049b767ac449f95de88e606c70, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: eed51c092dc1cdc4f966647072a558f1, type: 2}
+    - target: {fileID: 3801063788064508956, guid: 91d7f6049b767ac449f95de88e606c70, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1099378364170453330, guid: a73f62af9baa37243868b44e239772ae, type: 3}
+    - target: {fileID: 7618010187976405036, guid: 91d7f6049b767ac449f95de88e606c70, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -55,7 +55,7 @@ public class UIT_ButtonSounds : MonoBehaviour
     private readonly List<Button> scratch = new();
     private int nextScanFrame;
     private bool loggedBind;
-
+    
     private void Reset()
     {
         document = GetComponent<UIDocument>();

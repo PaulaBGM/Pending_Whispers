@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(CircleCollider2D))]
 public class SpectralScanWave : MonoBehaviour
@@ -15,6 +16,10 @@ public class SpectralScanWave : MonoBehaviour
     [SerializeField] private float startParticleSize = 0.1f;
     [SerializeField] private float maxParticleSize = 0.5f;
 
+    [Header("Events")]
+    public UnityEvent OnScanStarted;
+    public UnityEvent OnScanFinished;
+    
     private CircleCollider2D circleCollider;
 
     private readonly HashSet<SpectralTrace> detected = new();
@@ -38,6 +43,7 @@ public class SpectralScanWave : MonoBehaviour
 
     private void OnEnable()
     {
+        OnScanStarted?.Invoke();
         ResetScan();
 
         timer = 0f;
@@ -65,6 +71,7 @@ public class SpectralScanWave : MonoBehaviour
 
         if (t >= 1f)
         {
+            OnScanFinished?.Invoke();
             gameObject.SetActive(false);
         }
     }
