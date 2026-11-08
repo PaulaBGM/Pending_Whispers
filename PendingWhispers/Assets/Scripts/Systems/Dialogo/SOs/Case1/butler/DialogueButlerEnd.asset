@@ -80,16 +80,14 @@ MonoBehaviour:
     choices:
     - text: "See you, Desir\xE9e"
       nextNodeID: 
-      addFlags:
-      - {fileID: 11400000, guid: 5ee7935ae53503c41b0946528eeac02a, type: 2}
+      addFlags: []
       requiredFlags: []
       requiredReputation: 0
       reputationChange: 0
       onSelectedEvent: {fileID: 11400000, guid: 889f61a947eee54448fee4cf3b0368f5, type: 2}
       endsDialogue: 1
     requiredFlags: []
-    onEnterFlags:
-    - {fileID: 11400000, guid: 5ee7935ae53503c41b0946528eeac02a, type: 2}
+    onEnterFlags: []
     onEnterEvents:
     - {fileID: 11400000, guid: 889f61a947eee54448fee4cf3b0368f5, type: 2}
     isImportantLine: 0
