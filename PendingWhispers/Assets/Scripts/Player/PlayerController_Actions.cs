@@ -278,19 +278,19 @@ public class PlayerController_Actions : MonoBehaviour
         if (hoveredInteractable == newHover)
             return;
 
-        if (hoveredInteractable is Item oldItem)
-            oldItem.SetHighlight(false);
+        if (hoveredInteractable is IHighlightable oldHighlight)
+            oldHighlight.SetHighlight(false);
 
-        if (newHover is Item newItem)
-            newItem.SetHighlight(true);
+        if (newHover is IHighlightable newHighlight)
+            newHighlight.SetHighlight(true);
 
         hoveredInteractable = newHover;
     }
 
     private void ClearHover()
     {
-        if (hoveredInteractable is Item item)
-            item.SetHighlight(false);
+        if (hoveredInteractable is IHighlightable highlight)
+            highlight.SetHighlight(false);
 
         hoveredInteractable = null;
     }

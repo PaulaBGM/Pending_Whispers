@@ -975,6 +975,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   board: {fileID: 179451482}
+  spriteRenderer: {fileID: 2096291085}
+  highlightColor: {r: 0.6745098, g: 0.4509804, b: 0.9254902, a: 1}
+  highlightEvent:
+    Guid:
+      Data1: 143249075
+      Data2: 1281150225
+      Data3: 1531029413
+      Data4: 1653313218
+    Path: event:/HoverItem
 --- !u!114 &154114761
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using UnityEngine;
 using FMODUnity;
 
 [RequireComponent(typeof(Collider2D))]
-public class Item : MonoBehaviour, IInteractable
+public class Item : MonoBehaviour, IInteractable, IHighlightable
 {
     [field: SerializeField]
     public ItemSO InventoryItem { get; private set; }
