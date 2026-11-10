@@ -1,3 +1,4 @@
+using Inventory.Model;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class DialogueNode
     public string id;
 
     public string speakerID;
+    public TestimonyItemSO testimony;
 
     [TextArea(3, 6)]
     public string text;
