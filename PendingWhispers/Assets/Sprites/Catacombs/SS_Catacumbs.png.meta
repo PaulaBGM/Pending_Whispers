@@ -3,29 +3,44 @@ guid: 6e3427c2ffde6a445a263902e55f8549
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3338742140420958425
-    second: Tiles_Catacumbs_0
+      213: 7915706181989078206
+    second: SS_Catacumbs_0
   - first:
-      213: 8387157800113729191
-    second: Tiles_Catacumbs_1
+      213: -242744379671107941
+    second: SS_Catacumbs_1
   - first:
-      213: 5875815271696207909
-    second: Tiles_Catacumbs_2
+      213: 482643544876913137
+    second: SS_Catacumbs_2
   - first:
-      213: -1149979509654362983
-    second: Tiles_Catacumbs_3
+      213: -2182441012995552721
+    second: SS_Catacumbs_3
   - first:
-      213: -7104790482485155207
-    second: Tiles_Catacumbs_4
+      213: -173298826240310793
+    second: SS_Catacumbs_4
   - first:
-      213: 4728917218303258502
-    second: Tiles_Catacumbs_5
+      213: 1646818339060449314
+    second: SS_Catacumbs_5
   - first:
-      213: -6214030110678930814
-    second: Tiles_Catacumbs_6
+      213: -3138114339961456483
+    second: SS_Catacumbs_6
   - first:
-      213: -475589417593974667
-    second: Tiles_Catacumbs_7
+      213: -8152528674769843340
+    second: SS_Catacumbs_7
+  - first:
+      213: -2556358423885929687
+    second: SS_Catacumbs_8
+  - first:
+      213: 829513308139734021
+    second: SS_Catacumbs_9
+  - first:
+      213: 4763262766270722796
+    second: SS_Catacumbs_10
+  - first:
+      213: -1638989520729134852
+    second: SS_Catacumbs_11
+  - first:
+      213: -7881070015034830651
+    second: SS_Catacumbs_12
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -58,7 +73,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -160,11 +175,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SS_Catacumbs_1
+      name: SS_Catacumbs_0
       rect:
         serializedVersion: 2
-        x: 2048
-        y: 4096
+        x: 0
+        y: 5120
         width: 512
         height: 512
       alignment: 0
@@ -173,10 +188,32 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 93d838fa1ee05bc489b9d7b8a52e5ddf
-      internalID: 2000562790
+      spriteID: eb492d355dc3add60800000000000000
+      internalID: 7915706181989078206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 5120
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b962b76d54991acf0800000000000000
+      internalID: -242744379671107941
       vertices: []
       indices: 
       edges: []
@@ -185,8 +222,8 @@ TextureImporter:
       name: SS_Catacumbs_2
       rect:
         serializedVersion: 2
-        x: 2560
-        y: 4096
+        x: 1024
+        y: 5120
         width: 512
         height: 512
       alignment: 0
@@ -195,10 +232,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: bbff160cc1e914a40b0894315cd09799
-      internalID: 1841240078
+      spriteID: 1f116853fb1b2b600800000000000000
+      internalID: 482643544876913137
       vertices: []
       indices: 
       edges: []
@@ -207,8 +244,8 @@ TextureImporter:
       name: SS_Catacumbs_3
       rect:
         serializedVersion: 2
-        x: 3072
-        y: 4096
+        x: 1536
+        y: 5120
         width: 512
         height: 512
       alignment: 0
@@ -217,10 +254,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: bed987712a22cce43bf3bb169630fc60
-      internalID: 932431355
+      spriteID: f2a0825367966b1e0800000000000000
+      internalID: -2182441012995552721
       vertices: []
       indices: 
       edges: []
@@ -229,6 +266,512 @@ TextureImporter:
       name: SS_Catacumbs_4
       rect:
         serializedVersion: 2
+        x: 2048
+        y: 5120
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f144fdb2a1589df0800000000000000
+      internalID: -173298826240310793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_5
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 5120
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2200c4ddd8caad610800000000000000
+      internalID: 1646818339060449314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_6
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 5120
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d98b90e52ad2374d0800000000000000
+      internalID: -3138114339961456483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_7
+      rect:
+        serializedVersion: 2
+        x: 3584
+        y: 5120
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47b482f3d566cde80800000000000000
+      internalID: -8152528674769843340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_8
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 5120
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 923a3b1ce8df58cd0800000000000000
+      internalID: -2556358423885929687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_9
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 5120
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 504c02475f5038b00800000000000000
+      internalID: 829513308139734021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4608
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce23963cf328a1240800000000000000
+      internalID: 4763262766270722796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_11
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 4608
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf82a52f6b32149e0800000000000000
+      internalID: -1638989520729134852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_12
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 4608
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c0ddd7b390d0a290800000000000000
+      internalID: -7881070015034830651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_13
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 4608
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de6662f675e511742a3df25fbd23ce30
+      internalID: -1180635313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_14
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 4608
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66bb270ff5e22f2468a37e3ab250a8c1
+      internalID: -1945474860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_15
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 4608
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0ac886ffefeab74cbee4b7f75be6798
+      internalID: 939623767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_16
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 4608
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da9cb52dee03dc14b9ae0f8800a99215
+      internalID: 1207304160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_17
+      rect:
+        serializedVersion: 2
+        x: 3584
+        y: 4608
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37fa9da633f3ca946be848f353da68cd
+      internalID: -1165181169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_18
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 4608
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1312439123c6ca4592c892c53c4762d
+      internalID: -157619908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_19
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 4608
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ac4ef2c36110fb45a6910231966c860
+      internalID: -1459166835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4096
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab0d957ac1eda984692ecc28b8a1402c
+      internalID: -700178293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_21
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 4096
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ad29999e484ba64d98e4a5d91505f88
+      internalID: 889402300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_22
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 4096
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6887f3ce914ab1c40be450da24704f74
+      internalID: 1934394077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_23
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 4096
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cca68523993dc1e4eb4ec9c5c77e0a39
+      internalID: 984096975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_24
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 4096
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85eeb46e8885e38438e3b4292739cce8
+      internalID: -938659099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_25
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 4096
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10dafabe1dfde7d43927e406e272bd9c
+      internalID: 1479200157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_26
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 4096
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfe5ba5e9544b6548b6e7e29434172db
+      internalID: -1934684383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_27
+      rect:
+        serializedVersion: 2
         x: 3584
         y: 4096
         width: 512
@@ -241,206 +784,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b80594f4d87faaf4cb6acdca22dc28b2
-      internalID: -588791988
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SS_Catacumbs_6
-      rect:
-        serializedVersion: 2
-        x: 2048
-        y: 3584
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ffb1788846cb4984583247f1453452db
-      internalID: 1521107458
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SS_Catacumbs_7
-      rect:
-        serializedVersion: 2
-        x: 2560
-        y: 3584
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9a709894aa2117b468908c3574f8da03
-      internalID: 365500918
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SS_Catacumbs_8
-      rect:
-        serializedVersion: 2
-        x: 3072
-        y: 3584
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 32663a6f076949343a3b57c9b092cdaf
-      internalID: 1724811971
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SS_Catacumbs_9
-      rect:
-        serializedVersion: 2
-        x: 3584
-        y: 3584
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 40a0186c597ef374eae96114cba4cd26
-      internalID: -341847013
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SS_Catacumbs_18
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 2560
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8326a15005df0694a9985f87c641942c
-      internalID: -2049175898
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SS_Catacumbs_19
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 2560
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 78d870221d011e5429aeeda915b65f8b
-      internalID: 1271521793
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SS_Catacumbs_20
-      rect:
-        serializedVersion: 2
-        x: 1024
-        y: 2560
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b2ff2870a53e5574aa99c35b88b3f698
-      internalID: -326437225
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SS_Catacumbs_26
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 2048
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 156bf39e361b20b4cbfc09be19064b87
-      internalID: 55582467
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SS_Catacumbs_27
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 2048
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 776918f202de64d4ea90555d7adf4688
-      internalID: 1978968234
+      spriteID: f7590fa075afc394e8cd19f30e8b27f2
+      internalID: 558257138
       vertices: []
       indices: 
       edges: []
@@ -449,8 +794,8 @@ TextureImporter:
       name: SS_Catacumbs_28
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 2048
+        x: 4096
+        y: 4096
         width: 512
         height: 512
       alignment: 0
@@ -461,8 +806,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 343309e42344f3e4281031b79ad002e2
-      internalID: -209195618
+      spriteID: 4a21509194ccd8a46a0bc71bd4e08487
+      internalID: -386036450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_29
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 4096
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f895787c66e69b42a51b9305b06d388
+      internalID: 2017806185
       vertices: []
       indices: 
       edges: []
@@ -471,8 +838,8 @@ TextureImporter:
       name: SS_Catacumbs_30
       rect:
         serializedVersion: 2
-        x: 2048
-        y: 2048
+        x: 0
+        y: 3584
         width: 512
         height: 512
       alignment: 0
@@ -483,8 +850,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3cf51c0e1dc38ce47aba6aff3c7fe264
-      internalID: 365646470
+      spriteID: f1f2a8e1dd4df7541807e20b767111bf
+      internalID: 352663148
       vertices: []
       indices: 
       edges: []
@@ -493,8 +860,8 @@ TextureImporter:
       name: SS_Catacumbs_31
       rect:
         serializedVersion: 2
-        x: 2560
-        y: 2048
+        x: 512
+        y: 3584
         width: 512
         height: 512
       alignment: 0
@@ -505,8 +872,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e8c6814d46ad0cf4b955a77d46d82340
-      internalID: -1602985191
+      spriteID: 497947dcc04f24a40a71c12c32e31624
+      internalID: 658215563
       vertices: []
       indices: 
       edges: []
@@ -515,8 +882,8 @@ TextureImporter:
       name: SS_Catacumbs_32
       rect:
         serializedVersion: 2
-        x: 3072
-        y: 2048
+        x: 1024
+        y: 3584
         width: 512
         height: 512
       alignment: 0
@@ -527,8 +894,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 640c5d614973ab146ab69971f55efe67
-      internalID: 860951355
+      spriteID: 479ef44e5de4464429d2002dea2924c2
+      internalID: 925532813
       vertices: []
       indices: 
       edges: []
@@ -537,6 +904,622 @@ TextureImporter:
       name: SS_Catacumbs_33
       rect:
         serializedVersion: 2
+        x: 1536
+        y: 3584
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caa383e5336bad34c966dff99fd8cb09
+      internalID: 556545450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_34
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 3584
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7196378ebb7ef5541881682bbe3e835a
+      internalID: -692095114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_35
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 3584
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca0a3218ac07ce54180e7e8d0f418981
+      internalID: 1223710723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_36
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 3584
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae78f2ab1a46a414892d6a9342488068
+      internalID: -1861593385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_37
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 3072
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74e12e168420c1f469ad43853b04cd20
+      internalID: 1771390878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_38
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 3072
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea01a293a9bf84c43ad6d521381cb5cf
+      internalID: -213730448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_39
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 3072
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f231672321fed67438bac6b3039d941d
+      internalID: -1732546794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_40
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 3072
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c91d32bc568376f488f85b6ef0daac18
+      internalID: 1407593558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_41
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 3072
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 487fb91b9949e1e4ea2440cd9f566510
+      internalID: 1672564802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_42
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 3072
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afef45a8af283e149a98516696f3ba78
+      internalID: -13315100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_43
+      rect:
+        serializedVersion: 2
+        x: 3584
+        y: 3072
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6f24453a8af7e643ae91307c3723023
+      internalID: -687060990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_44
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 3072
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4aceab50f8cd1654fb0eb4b6cc89bb62
+      internalID: -1431812500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_45
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 3072
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6ab16052bfd9eb4895e00dc5fa5529c
+      internalID: -589845347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_46
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9365ba74c6852154a852d7f2d4e93ce6
+      internalID: 1434946750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_47
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1eaf78f29d11a5d4db0853ae6f0381cc
+      internalID: -644670157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_48
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb41366f6b0950e4789faca7afad3d78
+      internalID: 416352017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_49
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed04305484fcaf44c80f053a8d6e8839
+      internalID: -454004950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_50
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbea90505771c104c88de6047d0391cb
+      internalID: -202915103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_51
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b420eb6bab21ca419df878a30b4c55f
+      internalID: 1217633551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_52
+      rect:
+        serializedVersion: 2
+        x: 3584
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acc3093cee202444db54fea08bce0357
+      internalID: 309857589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_53
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc6d8fa2761ff4a48abae06318c00bf1
+      internalID: 1462220522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_54
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c59a9c55897e2e47a4eb6d8aa4fa950
+      internalID: -180494231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_55
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5f0f097f6627524c8558717d9a8c076
+      internalID: 897656024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_56
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d482fa0626bb4d468d1e6a852c273e0
+      internalID: 107509178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_57
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61e60942f5432564788b6c6ac46ede85
+      internalID: 1270852750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_58
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45363063cbb2b2243bf2b8dc929c41a2
+      internalID: 1132665478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_59
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8659bc65ca17a7d4a97843713a4ca0a6
+      internalID: 749165589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_60
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e5588c8ba2a49041ab293c093ec13b6
+      internalID: 1590990809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_61
+      rect:
+        serializedVersion: 2
         x: 3584
         y: 2048
         width: 512
@@ -549,14 +1532,58 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25e81c046a441d9499f218fa95597915
-      internalID: -344644072
+      spriteID: 1d8f8df0e3ec15547b0dbb9292d12522
+      internalID: 190495001
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Catacumbs_34
+      name: SS_Catacumbs_62
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8b9a9399f6b7e740b4e7bb3a96805cc
+      internalID: -2092625478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_63
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 590231c4058fa9a4bafaeb522de7abff
+      internalID: -4110084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_64
       rect:
         serializedVersion: 2
         x: 0
@@ -571,14 +1598,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 713e6a4c6ec9dc14c975da65b93b0db3
-      internalID: 1292584554
+      spriteID: 7d234b8fa239d3045a041788f06f22eb
+      internalID: -1152929977
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Catacumbs_35
+      name: SS_Catacumbs_65
       rect:
         serializedVersion: 2
         x: 512
@@ -593,14 +1620,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4455a2c7b70000c418f23c50549145c6
-      internalID: 203359135
+      spriteID: 115cc995c99c7934aa0575c4b55aeda6
+      internalID: -444300704
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Catacumbs_36
+      name: SS_Catacumbs_66
       rect:
         serializedVersion: 2
         x: 1024
@@ -615,17 +1642,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf6d8a28418d6a4449df7949b5c37c64
-      internalID: -956376284
+      spriteID: c6b8ce319f6e3ae4b8d53f6fc6263465
+      internalID: -1294106066
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Catacumbs_38
+      name: SS_Catacumbs_67
       rect:
         serializedVersion: 2
-        x: 2048
+        x: 1536
         y: 1536
         width: 512
         height: 512
@@ -637,14 +1664,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58d7e198edf894248a3c270ad8ea2c2c
-      internalID: -1602135310
+      spriteID: 29515075e9cecef4db8f468f21683061
+      internalID: -1279473769
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Catacumbs_39
+      name: SS_Catacumbs_68
       rect:
         serializedVersion: 2
         x: 2560
@@ -659,14 +1686,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ab550efa0dea3c2439f4451f5a41c277
-      internalID: 1376618416
+      spriteID: 1cdf87957ea015b448bc82894e89a638
+      internalID: -1514921974
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Catacumbs_40
+      name: SS_Catacumbs_69
       rect:
         serializedVersion: 2
         x: 3072
@@ -681,14 +1708,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b0d026b98aaf89468e5b7a9b8b86488
-      internalID: -1906939765
+      spriteID: b787a78463d24f94da01280a68709bfd
+      internalID: -391581058
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Catacumbs_41
+      name: SS_Catacumbs_70
       rect:
         serializedVersion: 2
         x: 3584
@@ -703,14 +1730,58 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d39e8496a33f5014ebeaa02178d6492d
-      internalID: -1303820254
+      spriteID: 0b62713d5ad802d49a3db4a692e257f8
+      internalID: 1961394481
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Catacumbs_42
+      name: SS_Catacumbs_71
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa2b1a53f1c36a542a8331cb1b8c64f2
+      internalID: 371719847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_72
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 404e4e5fccee9944ea6b92bd067c39d2
+      internalID: 602815198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_73
       rect:
         serializedVersion: 2
         x: 0
@@ -725,14 +1796,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cdd804b33128df24099c0af72d3f3760
-      internalID: 1331870101
+      spriteID: b5f3e809ee8391e49aa0b901395f951e
+      internalID: -892235881
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Catacumbs_43
+      name: SS_Catacumbs_74
       rect:
         serializedVersion: 2
         x: 512
@@ -747,14 +1818,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5a7607df36fbe384caf947f7a6277488
-      internalID: 491099860
+      spriteID: 3352b9cfb8fa3064ba59e8143f63f706
+      internalID: 1444445672
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Catacumbs_44
+      name: SS_Catacumbs_75
       rect:
         serializedVersion: 2
         x: 1024
@@ -769,17 +1840,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06244622d44ec5c4cb6d68e01c1d53e4
-      internalID: 966009392
+      spriteID: 0f4551cb7fe73624db8232299561a96a
+      internalID: -838169929
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Catacumbs_46
+      name: SS_Catacumbs_76
       rect:
         serializedVersion: 2
-        x: 2048
+        x: 1536
         y: 1024
         width: 512
         height: 512
@@ -791,14 +1862,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed19ca8715d654b4d99c77584a38f963
-      internalID: 1997602330
+      spriteID: 145272d74c718e04ea9fde26a0e68ddd
+      internalID: -1740772075
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Catacumbs_47
+      name: SS_Catacumbs_77
       rect:
         serializedVersion: 2
         x: 2560
@@ -813,14 +1884,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8d324e34742d3046905fbc526eb5a79
-      internalID: -846738390
+      spriteID: 125ab7c8382a4fa42a0360bfdc980f2e
+      internalID: 1607203625
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Catacumbs_48
+      name: SS_Catacumbs_78
       rect:
         serializedVersion: 2
         x: 3072
@@ -835,14 +1906,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0658c1f6a77e9c14fa9f35e500442ab7
-      internalID: -1889236263
+      spriteID: 95c1b03e2012ecc438037d7ccfb538cd
+      internalID: 1780142724
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Catacumbs_49
+      name: SS_Catacumbs_79
       rect:
         serializedVersion: 2
         x: 3584
@@ -857,14 +1928,58 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6d8269c801e6844c877596669b04450
-      internalID: 1381242752
+      spriteID: 1a44b39326f04414c9980aa0ae11a4be
+      internalID: 891621753
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Catacumbs_50
+      name: SS_Catacumbs_80
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 316a1e0a2db052e46a99ac4c9c4eec2c
+      internalID: -320866094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_81
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d704f88ae98bff341b6c05fb0a10044c
+      internalID: -515696382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_82
       rect:
         serializedVersion: 2
         x: 0
@@ -879,14 +1994,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b862ec98b2ed7a49ac4366972074117
-      internalID: -349922926
+      spriteID: b28304d0cbb19f947b4db74523e67233
+      internalID: 1390928370
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Catacumbs_51
+      name: SS_Catacumbs_83
       rect:
         serializedVersion: 2
         x: 512
@@ -901,14 +2016,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4faf68dc53b7bfb498497618ac9814af
-      internalID: 1938776782
+      spriteID: 302e576dcf2e3274cb23edc60c68a0be
+      internalID: 351259911
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SS_Catacumbs_52
+      name: SS_Catacumbs_84
       rect:
         serializedVersion: 2
         x: 1024
@@ -923,8 +2038,360 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 79a438e596b55294b9b4775de145a984
-      internalID: -582596269
+      spriteID: 61f65818212103642957650f17589e43
+      internalID: 2001631431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_85
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09352083cdc8b8f4bb756808721c8a9f
+      internalID: -937652260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_86
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22a87735d82c9d846a4dfe66eb36bdbf
+      internalID: 1419254583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_87
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7067fc758c6bfa47a5ad5a84b219b9d
+      internalID: -2024158370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_88
+      rect:
+        serializedVersion: 2
+        x: 3584
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12551afbd62226c4b96eb7fed67a0ec6
+      internalID: -2089633294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_89
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bd4d0d3b3d76ab489a87bd0a1b09ccc
+      internalID: -84274703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_90
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c12cd11aa3bb8844a34ed5085c17234
+      internalID: -1469247597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_91
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25c02288d25b78a44a26adaee351f006
+      internalID: -1068217395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_92
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a34ce323f9819a64582e1849c568a113
+      internalID: -957343936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_93
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89a5c649614cbe8458a29fbc84dfaabe
+      internalID: -360151553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_94
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15036dfdd6823bf489d56ae658cf314d
+      internalID: -1388089331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_95
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de4a6f3236565ac4aa70f69a9aedec36
+      internalID: -1834640383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_96
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b60e8ccbbc27d414f8c4c8fca695c980
+      internalID: 1582668405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_97
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 392449d291fd42746bb333064c0178b9
+      internalID: 308779236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_98
+      rect:
+        serializedVersion: 2
+        x: 3584
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c68a4531d3187a408df3ac9f217c9ea
+      internalID: 1333689494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_99
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69490646a72d3af44b49c5fe3526f329
+      internalID: -1446360333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SS_Catacumbs_100
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91430b36c7199754190777f51fe6d31e
+      internalID: 571568661
       vertices: []
       indices: 
       edges: []
@@ -933,7 +2400,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: a3d0c66a9ac078a498663801086701aa
+    spriteID: 6269f77d340681844ad116597055fa51
     internalID: 0
     vertices: []
     indices: 
@@ -943,72 +2410,107 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      SS_Catacumbs_0: -1742919919
-      SS_Catacumbs_1: 2000562790
-      SS_Catacumbs_10: -1427639642
-      SS_Catacumbs_11: 1834695315
-      SS_Catacumbs_12: -183328895
-      SS_Catacumbs_13: 1617624542
-      SS_Catacumbs_14: 1197232718
-      SS_Catacumbs_15: -975010335
-      SS_Catacumbs_16: 1544640822
-      SS_Catacumbs_17: 1710905514
-      SS_Catacumbs_18: -2049175898
-      SS_Catacumbs_19: 1271521793
-      SS_Catacumbs_2: 1841240078
-      SS_Catacumbs_20: -326437225
-      SS_Catacumbs_21: 878309595
-      SS_Catacumbs_22: -1810833203
-      SS_Catacumbs_23: 2030616074
-      SS_Catacumbs_24: -907776157
-      SS_Catacumbs_25: 871911608
-      SS_Catacumbs_26: 55582467
-      SS_Catacumbs_27: 1978968234
-      SS_Catacumbs_28: -209195618
-      SS_Catacumbs_29: -1807058662
-      SS_Catacumbs_3: 932431355
-      SS_Catacumbs_30: 365646470
-      SS_Catacumbs_31: -1602985191
-      SS_Catacumbs_32: 860951355
-      SS_Catacumbs_33: -344644072
-      SS_Catacumbs_34: 1292584554
-      SS_Catacumbs_35: 203359135
-      SS_Catacumbs_36: -956376284
-      SS_Catacumbs_37: 1694781844
-      SS_Catacumbs_38: -1602135310
-      SS_Catacumbs_39: 1376618416
-      SS_Catacumbs_4: -588791988
-      SS_Catacumbs_40: -1906939765
-      SS_Catacumbs_41: -1303820254
-      SS_Catacumbs_42: 1331870101
-      SS_Catacumbs_43: 491099860
-      SS_Catacumbs_44: 966009392
-      SS_Catacumbs_45: -537983392
-      SS_Catacumbs_46: 1997602330
-      SS_Catacumbs_47: -846738390
-      SS_Catacumbs_48: -1889236263
-      SS_Catacumbs_49: 1381242752
-      SS_Catacumbs_5: -1384437347
-      SS_Catacumbs_50: -349922926
-      SS_Catacumbs_51: 1938776782
-      SS_Catacumbs_52: -582596269
-      SS_Catacumbs_53: -1904374308
-      SS_Catacumbs_54: 1581177007
-      SS_Catacumbs_55: 1511297212
-      SS_Catacumbs_56: 1148672676
-      SS_Catacumbs_57: -482137035
-      SS_Catacumbs_58: 1296598888
-      SS_Catacumbs_59: 673222625
-      SS_Catacumbs_6: 1521107458
-      SS_Catacumbs_60: 1556762638
-      SS_Catacumbs_61: 648105903
-      SS_Catacumbs_62: 911309851
-      SS_Catacumbs_63: 786942231
-      SS_Catacumbs_64: 1934174144
-      SS_Catacumbs_65: 555678677
-      SS_Catacumbs_7: 365500918
-      SS_Catacumbs_8: 1724811971
-      SS_Catacumbs_9: -341847013
+      SS_Catacumbs_0: 7915706181989078206
+      SS_Catacumbs_1: -242744379671107941
+      SS_Catacumbs_10: 4763262766270722796
+      SS_Catacumbs_100: 571568661
+      SS_Catacumbs_11: -1638989520729134852
+      SS_Catacumbs_12: -7881070015034830651
+      SS_Catacumbs_13: -1180635313
+      SS_Catacumbs_14: -1945474860
+      SS_Catacumbs_15: 939623767
+      SS_Catacumbs_16: 1207304160
+      SS_Catacumbs_17: -1165181169
+      SS_Catacumbs_18: -157619908
+      SS_Catacumbs_19: -1459166835
+      SS_Catacumbs_2: 482643544876913137
+      SS_Catacumbs_20: -700178293
+      SS_Catacumbs_21: 889402300
+      SS_Catacumbs_22: 1934394077
+      SS_Catacumbs_23: 984096975
+      SS_Catacumbs_24: -938659099
+      SS_Catacumbs_25: 1479200157
+      SS_Catacumbs_26: -1934684383
+      SS_Catacumbs_27: 558257138
+      SS_Catacumbs_28: -386036450
+      SS_Catacumbs_29: 2017806185
+      SS_Catacumbs_3: -2182441012995552721
+      SS_Catacumbs_30: 352663148
+      SS_Catacumbs_31: 658215563
+      SS_Catacumbs_32: 925532813
+      SS_Catacumbs_33: 556545450
+      SS_Catacumbs_34: -692095114
+      SS_Catacumbs_35: 1223710723
+      SS_Catacumbs_36: -1861593385
+      SS_Catacumbs_37: 1771390878
+      SS_Catacumbs_38: -213730448
+      SS_Catacumbs_39: -1732546794
+      SS_Catacumbs_4: -173298826240310793
+      SS_Catacumbs_40: 1407593558
+      SS_Catacumbs_41: 1672564802
+      SS_Catacumbs_42: -13315100
+      SS_Catacumbs_43: -687060990
+      SS_Catacumbs_44: -1431812500
+      SS_Catacumbs_45: -589845347
+      SS_Catacumbs_46: 1434946750
+      SS_Catacumbs_47: -644670157
+      SS_Catacumbs_48: 416352017
+      SS_Catacumbs_49: -454004950
+      SS_Catacumbs_5: 1646818339060449314
+      SS_Catacumbs_50: -202915103
+      SS_Catacumbs_51: 1217633551
+      SS_Catacumbs_52: 309857589
+      SS_Catacumbs_53: 1462220522
+      SS_Catacumbs_54: -180494231
+      SS_Catacumbs_55: 897656024
+      SS_Catacumbs_56: 107509178
+      SS_Catacumbs_57: 1270852750
+      SS_Catacumbs_58: 1132665478
+      SS_Catacumbs_59: 749165589
+      SS_Catacumbs_6: -3138114339961456483
+      SS_Catacumbs_60: 1590990809
+      SS_Catacumbs_61: 190495001
+      SS_Catacumbs_62: -2092625478
+      SS_Catacumbs_63: -4110084
+      SS_Catacumbs_64: -1152929977
+      SS_Catacumbs_65: -444300704
+      SS_Catacumbs_66: -1294106066
+      SS_Catacumbs_67: -1279473769
+      SS_Catacumbs_68: -1514921974
+      SS_Catacumbs_69: -391581058
+      SS_Catacumbs_7: -8152528674769843340
+      SS_Catacumbs_70: 1961394481
+      SS_Catacumbs_71: 371719847
+      SS_Catacumbs_72: 602815198
+      SS_Catacumbs_73: -892235881
+      SS_Catacumbs_74: 1444445672
+      SS_Catacumbs_75: -838169929
+      SS_Catacumbs_76: -1740772075
+      SS_Catacumbs_77: 1607203625
+      SS_Catacumbs_78: 1780142724
+      SS_Catacumbs_79: 891621753
+      SS_Catacumbs_8: -2556358423885929687
+      SS_Catacumbs_80: -320866094
+      SS_Catacumbs_81: -515696382
+      SS_Catacumbs_82: 1390928370
+      SS_Catacumbs_83: 351259911
+      SS_Catacumbs_84: 2001631431
+      SS_Catacumbs_85: -937652260
+      SS_Catacumbs_86: 1419254583
+      SS_Catacumbs_87: -2024158370
+      SS_Catacumbs_88: -2089633294
+      SS_Catacumbs_89: -84274703
+      SS_Catacumbs_9: 829513308139734021
+      SS_Catacumbs_90: -1469247597
+      SS_Catacumbs_91: -1068217395
+      SS_Catacumbs_92: -957343936
+      SS_Catacumbs_93: -360151553
+      SS_Catacumbs_94: -1388089331
+      SS_Catacumbs_95: -1834640383
+      SS_Catacumbs_96: 1582668405
+      SS_Catacumbs_97: 308779236
+      SS_Catacumbs_98: 1333689494
+      SS_Catacumbs_99: -1446360333
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
