@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Inventory.Model;
 
 public class PeopleJournalSystem : BaseSingleton<PeopleJournalSystem>
 {
@@ -23,7 +24,7 @@ public class PeopleJournalSystem : BaseSingleton<PeopleJournalSystem>
 
     private void AddEntry(TestimonyEntry entry)
     {
-        AddEntry(entry.Name, entry.Portrait, entry.Dialogue);
+        AddEntry(entry.Name, entry.Portrait, entry.Dialogue, entry.TestimonyItem);
     }
 
     private void OnDisable()
@@ -33,7 +34,7 @@ public class PeopleJournalSystem : BaseSingleton<PeopleJournalSystem>
             onTestimonyRegistered.OnRaised -= AddEntry;
         }
     }
-    public void AddEntry(string name, Sprite portrait, string dialogue)
+    public void AddEntry(string name, Sprite portrait, string dialogue, TestimonyItemSO testimonyItem)
     {
         if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(dialogue))
             return;
@@ -49,10 +50,15 @@ public class PeopleJournalSystem : BaseSingleton<PeopleJournalSystem>
             if (existing.dialogues == null)
                 existing.dialogues = new List<string>();
 
+            if (existing.testimonies == null)
+                existing.testimonies = new List<TestimonyItemSO>();
+
             existing.dialogues.Add(dialogue);
 
             existing.shortDialogue = Trim(dialogue);
             existing.fullDialogue = BuildFullDialogue(existing.dialogues);
+
+            existing.testimonies.Add(testimonyItem);
 
             // Si la primera frase llegó sin retrato, se completa con la primera que lo traiga.
             if (existing.portrait == null && portrait != null)
@@ -68,6 +74,7 @@ public class PeopleJournalSystem : BaseSingleton<PeopleJournalSystem>
             portrait = portrait,
             shortDialogue = Trim(dialogue),
             dialogues = new List<string> { dialogue },
+            testimonies = new List<TestimonyItemSO> { testimonyItem },
             fullDialogue = dialogue
         };
 

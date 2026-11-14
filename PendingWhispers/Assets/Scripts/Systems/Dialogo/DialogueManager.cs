@@ -123,7 +123,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
             return;
 
         ApplyNodeEffects(node);
-
+       
         DialogueCharacter charData = currentDialogue.GetCharacter(node.speakerID);
         string speakerName = charData != null ? charData.displayName : "???";
         Sprite expressionSprite = charData?.GetExpression(node.expression);
@@ -132,7 +132,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
 
         if (ShouldRegisterImportantLine(node, charData))
         {
-            onTestimonyRegistered?.Raise(new TestimonyEntry(charData.displayName, GetTestimonyPortrait(charData, expressionSprite), node.text));
+            onTestimonyRegistered?.Raise(new TestimonyEntry(charData.displayName, GetTestimonyPortrait(charData, expressionSprite), node.text, node.testimony));
         }
 
         var validChoices = GetValidChoices(node);
@@ -155,7 +155,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
 
     private bool ShouldRegisterImportantLine(DialogueNode node, DialogueCharacter character)
     {
-        if (!node.isImportantLine || character == null)
+        if (node.testimony == null || character == null)
             return false;
 
         return PeopleJournalSystem.Instance == null || !PeopleJournalSystem.Instance.HasEntry(character.displayName, node.text);

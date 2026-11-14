@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Inventory.Model;
 
 [System.Serializable]
 public class PersonJournalEntry : IJournalEntry
@@ -15,6 +16,8 @@ public class PersonJournalEntry : IJournalEntry
     public string fullDialogue;
 
     public List<string> dialogues;
+
+    public List<TestimonyItemSO> testimonies;
 
     public Sprite Icon => portrait;
 
