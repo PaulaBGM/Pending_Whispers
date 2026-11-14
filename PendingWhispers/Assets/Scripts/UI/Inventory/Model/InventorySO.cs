@@ -51,8 +51,7 @@ namespace Inventory.Model
             InventoryItem newItem = new InventoryItem
             {
                 item = item,
-                quantity = quantity,
-                itemState = new List<ItemParameter>()
+                quantity = quantity
             };
 
             for (int i = 0; i < inventoryItems.Count; i++)
@@ -174,8 +173,7 @@ namespace Inventory.Model
                     inventoryItems[index] = new InventoryItem
                     {
                         item = item,
-                        quantity = quantity,
-                        itemState = new List<ItemParameter>()
+                        quantity = quantity
                     };
                 }
             }
@@ -189,7 +187,6 @@ namespace Inventory.Model
     {
         public int quantity;
         public ItemSO item;
-        public List<ItemParameter> itemState;
 
         public bool IsEmpty => item == null;
 
@@ -198,8 +195,7 @@ namespace Inventory.Model
             return new InventoryItem
             {
                 item = null,
-                quantity = 0,
-                itemState = new List<ItemParameter>()
+                quantity = 0
             };
         }
     }

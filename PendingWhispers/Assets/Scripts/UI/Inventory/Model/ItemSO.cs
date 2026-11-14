@@ -1,38 +1,27 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Inventory.Model
 {
-
+    /// <summary>
+    /// Base de todo lo que va al cuaderno: pistas, testimonios, objetos y casos.
+    /// Solo guarda lo que comparten todos; lo específico va en cada subclase.
+    /// </summary>
     public abstract class ItemSO : ScriptableObject
     {
-        [field: SerializeField] public bool IsStackable { get; set; }
-        public int ID => GetInstanceID();
+        [field: SerializeField] public string Name { get; private set; }
 
-        [field: SerializeField] public int MaxStackSize { get; set; } = 1;
-        [field: SerializeField] public string Name { get; set; }
-        [field: SerializeField] public string NameHypothesis { get; set; }
+        [field: SerializeField, Tooltip("Texto que aparece como opción en el panel de hipótesis.")]
+        public string NameHypothesis { get; private set; }
+
         [field: SerializeField, TextArea]
-        public string Description { get; set; }
+        public string Description { get; private set; }
 
-        [field: SerializeField] public Sprite ItemImage { get; set; }
-        [field: SerializeField] public List<ItemParameter> DefaultParametersList { get; set; }
+        [field: SerializeField] public Sprite ItemImage { get; private set; }
 
-        [field: SerializeField] public ItemType ItemType { get; set; }
+        [field: SerializeField, Tooltip("Pestaña del cuaderno en la que aparece.")]
+        public ItemType ItemType { get; private set; }
 
-        [field: SerializeField] public string CaseID { get; set; }
-    }
-
-    [Serializable]
-    public struct ItemParameter : IEquatable<ItemParameter>
-    {
-        public ItemParameterSO itemParameter;
-        public float value;
-
-        public bool Equals(ItemParameter other)
-        {
-            return other.itemParameter == itemParameter;
-        }
+        [field: SerializeField, Tooltip("Caso al que pertenece. Aún no lo lee ningún script.")]
+        public string CaseID { get; private set; }
     }
 }
