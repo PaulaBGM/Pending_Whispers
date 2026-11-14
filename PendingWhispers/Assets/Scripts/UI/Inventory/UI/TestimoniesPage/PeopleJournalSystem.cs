@@ -10,7 +10,7 @@ public class PeopleJournalSystem : BaseSingleton<PeopleJournalSystem>
 
     private readonly List<PersonJournalEntry> entries = new();
     private readonly Dictionary<string, PersonJournalEntry> entriesByName = new();
-    private readonly HashSet<string> seenLines = new();
+    private readonly HashSet<TestimonyItemSO> seenLines = new();
 
     private void OnEnable()
     {
@@ -42,7 +42,7 @@ public class PeopleJournalSystem : BaseSingleton<PeopleJournalSystem>
         string npcId = name;
         string lineKey = GetLineKey(name, dialogue);
 
-        if (!seenLines.Add(lineKey))
+        if (!seenLines.Add(testimonyItem))
             return;
 
         if (entriesByName.TryGetValue(name, out PersonJournalEntry existing))
@@ -82,12 +82,12 @@ public class PeopleJournalSystem : BaseSingleton<PeopleJournalSystem>
         entriesByName[name] = entry;
     }
 
-    public bool HasEntry(string name, string dialogue)
+    public bool HasTestimony(TestimonyItemSO testimony)
     {
-        if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(dialogue))
+        if (testimony == null)
             return false;
 
-        return seenLines.Contains(GetLineKey(name, dialogue));
+        return seenLines.Contains(testimony);
     }
 
     private string GetLineKey(string name, string dialogue)

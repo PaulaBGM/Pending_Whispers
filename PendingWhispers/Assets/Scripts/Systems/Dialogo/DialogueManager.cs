@@ -158,7 +158,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         if (node.testimony == null || character == null)
             return false;
 
-        return PeopleJournalSystem.Instance == null || !PeopleJournalSystem.Instance.HasEntry(character.displayName, node.text);
+        return PeopleJournalSystem.Instance == null || !PeopleJournalSystem.Instance.HasTestimony(node.testimony);
     }
 
     private void ApplyNodeEffects(DialogueNode node)
