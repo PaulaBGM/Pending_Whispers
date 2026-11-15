@@ -18,7 +18,6 @@ public class DialogueNode
     public List<FlagSO> requiredFlags;
     public List<FlagSO> onEnterFlags;
     public List<GameEventSO> onEnterEvents;
-    public bool isImportantLine;
 
     [Header("Presentación de pruebas")]
     public bool allowsEvidencePresentation;

@@ -137,7 +137,7 @@ namespace Inventory.Model
 
                 foreach (var item in inventoryItems)
                 {
-                    if (!item.IsEmpty && item.item is ClueItemSO clue)
+                    if (!item.IsEmpty && item.item is ClueItemSO clue && clue.ClueID == requiredID)
                     {
                         if (clue.DiscoveryFlag != null &&
                             GameProgress.Instance.HasFlag(clue.DiscoveryFlag))

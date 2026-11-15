@@ -210,13 +210,7 @@ namespace Inventory
                 if (kvp.Value.item.ItemType == currentTab)
                 {
                     filteredIndices.Add(kvp.Key);
-
-                    inventoryUI.UpdateData(
-                        uiIndex,
-                        kvp.Value.item.ItemImage,
-                        kvp.Value.quantity
-                    );
-
+                    inventoryUI.UpdateData(uiIndex,kvp.Value.item.ItemImage,kvp.Value.quantity);
                     uiIndex++;
                 }
             }
@@ -253,6 +247,7 @@ namespace Inventory
         {
             if (inventoryData == null) return;
             if (a < 0 || b < 0) return;
+
             if (a >= filteredIndices.Count || b >= filteredIndices.Count) return;
 
             inventoryData.SwapItems(filteredIndices[a], filteredIndices[b]);
@@ -269,13 +264,7 @@ namespace Inventory
                 inventoryUI.ResetSelection();
                 return;
             }
-
-            inventoryUI.UpdateDescription(
-                index,
-                item.item.ItemImage,
-                item.item.Name,
-                item.item.Description
-            );
+            inventoryUI.UpdateDescription(index,item.item.ItemImage,item.item.Name,item.item.Description);
         }
     }
 }
