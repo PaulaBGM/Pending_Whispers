@@ -36,18 +36,11 @@ MonoBehaviour:
   nodes:
   - id: start
     speakerID: butler
-    text: 'Oh, is that a knife? '
+    testimony: {fileID: 0}
+    text: You seem serious. What did you discover?
     nextNodeID: 1
     choices:
-    - text: It is. There's a stain on it.
-      nextNodeID: 1
-      addFlags: []
-      requiredFlags: []
-      requiredReputation: 0
-      reputationChange: 0
-      onSelectedEvent: {fileID: 0}
-      endsDialogue: 0
-    - text: See you
+    - text: I'll come back later
       nextNodeID: 
       addFlags: []
       requiredFlags: []
@@ -56,17 +49,21 @@ MonoBehaviour:
       onSelectedEvent: {fileID: 0}
       endsDialogue: 1
     requiredFlags:
-    - {fileID: 0}
+    - {fileID: 11400000, guid: 554eb40ad28579549a9e386ce47a0b5c, type: 2}
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
     allowsEvidencePresentation: 0
-    evidenceOptions: []
+    evidenceOptions:
+    - item: {fileID: 11400000, guid: bf5aa14119038e04da55a64de30c2e23, type: 2}
+      nextNodeID: 
+      addFlags: []
+      onSelectedEvent: {fileID: 0}
     wrongEvidenceNodeID: 
     wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 0
   - id: 1
     speakerID: butler
+    testimony: {fileID: 0}
     text: And?
     nextNodeID: 2
     choices: []
@@ -74,7 +71,6 @@ MonoBehaviour:
     - {fileID: 0}
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
     allowsEvidencePresentation: 0
     evidenceOptions: []
     wrongEvidenceNodeID: 
@@ -82,6 +78,7 @@ MonoBehaviour:
     expression: 1
   - id: 2
     speakerID: lyra
+    testimony: {fileID: 0}
     text: It's not blood. Which is odd, considering the rest of the evidence.
     nextNodeID: 3
     choices: []
@@ -89,7 +86,6 @@ MonoBehaviour:
     - {fileID: 0}
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
     allowsEvidencePresentation: 0
     evidenceOptions: []
     wrongEvidenceNodeID: 
@@ -97,6 +93,7 @@ MonoBehaviour:
     expression: 5
   - id: 3
     speakerID: butler
+    testimony: {fileID: 0}
     text: Well, that's a relief.
     nextNodeID: 4
     choices:
@@ -111,7 +108,6 @@ MonoBehaviour:
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
     allowsEvidencePresentation: 0
     evidenceOptions: []
     wrongEvidenceNodeID: 
@@ -119,13 +115,13 @@ MonoBehaviour:
     expression: 5
   - id: 4
     speakerID: butler
+    testimony: {fileID: 0}
     text: Strawberry. I was making myself a peanut butter and jam sandwich.
     nextNodeID: 5
     choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
     allowsEvidencePresentation: 0
     evidenceOptions: []
     wrongEvidenceNodeID: 
@@ -133,13 +129,13 @@ MonoBehaviour:
     expression: 5
   - id: 5
     speakerID: butler
+    testimony: {fileID: 0}
     text: Vivienne was allergic to peanuts.
     nextNodeID: 6
     choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
     allowsEvidencePresentation: 0
     evidenceOptions: []
     wrongEvidenceNodeID: 
@@ -147,13 +143,13 @@ MonoBehaviour:
     expression: 0
   - id: 6
     speakerID: butler
+    testimony: {fileID: 0}
     text: I know. It wasn't for her.
     nextNodeID: 7
     choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
     allowsEvidencePresentation: 0
     evidenceOptions: []
     wrongEvidenceNodeID: 
@@ -161,13 +157,13 @@ MonoBehaviour:
     expression: 2
   - id: 7
     speakerID: lyra
+    testimony: {fileID: 0}
     text: Then why is this important?
     nextNodeID: 8
     choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
     allowsEvidencePresentation: 0
     evidenceOptions: []
     wrongEvidenceNodeID: 
@@ -175,6 +171,7 @@ MonoBehaviour:
     expression: 5
   - id: 8
     speakerID: butler
+    testimony: {fileID: 0}
     text: Because she ate it before I could stop her.
     nextNodeID: 9
     choices:
@@ -189,7 +186,6 @@ MonoBehaviour:
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
     allowsEvidencePresentation: 0
     evidenceOptions: []
     wrongEvidenceNodeID: 
@@ -197,13 +193,13 @@ MonoBehaviour:
     expression: 2
   - id: 9
     speakerID: butler
+    testimony: {fileID: 0}
     text: I tried to warn her, but she was faster than me.
     nextNodeID: 10
     choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
     allowsEvidencePresentation: 0
     evidenceOptions: []
     wrongEvidenceNodeID: 
@@ -211,6 +207,7 @@ MonoBehaviour:
     expression: 2
   - id: 10
     speakerID: butler
+    testimony: {fileID: 0}
     text: Because she ate it before I could stop her.
     nextNodeID: 11
     choices:
@@ -225,7 +222,6 @@ MonoBehaviour:
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
     allowsEvidencePresentation: 0
     evidenceOptions: []
     wrongEvidenceNodeID: 
@@ -233,6 +229,7 @@ MonoBehaviour:
     expression: 2
   - id: 11
     speakerID: butler
+    testimony: {fileID: 0}
     text: ...Yes.
     nextNodeID: 12
     choices:
@@ -247,7 +244,6 @@ MonoBehaviour:
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
     allowsEvidencePresentation: 0
     evidenceOptions: []
     wrongEvidenceNodeID: 
@@ -255,13 +251,13 @@ MonoBehaviour:
     expression: 2
   - id: 12
     speakerID: lyra
+    testimony: {fileID: 0}
     text: You remember it clearly.
     nextNodeID: 13
     choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
     allowsEvidencePresentation: 0
     evidenceOptions: []
     wrongEvidenceNodeID: 
@@ -269,13 +265,13 @@ MonoBehaviour:
     expression: 4
   - id: 13
     speakerID: lyra
+    testimony: {fileID: 0}
     text: I remember everything about Vivienne.
     nextNodeID: 
     choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
     allowsEvidencePresentation: 0
     evidenceOptions: []
     wrongEvidenceNodeID: 
