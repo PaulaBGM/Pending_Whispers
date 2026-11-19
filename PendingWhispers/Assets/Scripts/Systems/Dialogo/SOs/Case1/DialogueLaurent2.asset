@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772d907194c90e1499655d8cccb4f43c, type: 3}
+  m_Name: DialogueLaurent2
+  m_EditorClassIdentifier: 
+  characters:
+  - id: lyra
+    displayName: Lyra
+    portrait: {fileID: 0}
+    isLeftSide: 1
+    neutral: {fileID: 6795179555359847349, guid: 40d62a340747ee84c8946e698480bdf6, type: 3}
+    happy: {fileID: -1103926389690433412, guid: 40d62a340747ee84c8946e698480bdf6, type: 3}
+    sad: {fileID: 21300000, guid: c00d9d5beefb325458cb48dfca4219c7, type: 3}
+    angry: {fileID: 0}
+    surprised: {fileID: -8241981511714330664, guid: 40d62a340747ee84c8946e698480bdf6, type: 3}
+    thinking: {fileID: 3356771313395980172, guid: 40d62a340747ee84c8946e698480bdf6, type: 3}
+  - id: laurent
+    displayName: "Laurent DuRh\xFBm"
+    portrait: {fileID: 0}
+    isLeftSide: 0
+    neutral: {fileID: 0}
+    happy: {fileID: 0}
+    sad: {fileID: 0}
+    angry: {fileID: 0}
+    surprised: {fileID: 0}
+    thinking: {fileID: 0}
+  nodes:
+  - id: start
+    speakerID: 
+    testimony: {fileID: 0}
+    text: "Back again, ma ch\xE8re? Forgive me if I don't stand. I've lost my taste
+      for entertaining."
+    nextNodeID: hub
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: 
+    expression: 0
+  - id: hub
+    speakerID: laurent
+    testimony: {fileID: 0}
+    text: Is there something else?
+    nextNodeID: 
+    choices:
+    - text: 'I''ll come back later '
+      nextNodeID: 
+      addFlags: []
+      requiredFlags: []
+      requiredReputation: 0
+      reputationChange: 0
+      onSelectedEvent: {fileID: 0}
+      endsDialogue: 1
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 1
+    evidenceOptions:
+    - item: {fileID: 11400000, guid: e140c36a81ee8724985b2059cfd188fb, type: 2}
+      nextNodeID: t6a
+      addFlags: []
+      onSelectedEvent: {fileID: 0}
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Laurent barely looks up.
+    expression: 0
+  - id: t6a
+    speakerID: laurent
+    testimony: {fileID: 0}
+    text: "A sandwich? Not poison. Not my rum\u2026"
+    nextNodeID: 
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Laurent barely looks up.
+    expression: 0
+  - id: t6b
+    speakerID: laurent
+    testimony: {fileID: 0}
+    text: 'But she only went to that kitchen because my rum made her dizzy.
+
+      Funny.
+      For fifty years I wanted to be innocent. Now I''d settle for being forgiven.'
+    nextNodeID: 
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Laurent barely looks up.
+    expression: 0

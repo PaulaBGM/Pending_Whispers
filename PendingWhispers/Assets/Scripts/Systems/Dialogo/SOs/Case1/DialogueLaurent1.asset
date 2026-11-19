@@ -1,0 +1,366 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772d907194c90e1499655d8cccb4f43c, type: 3}
+  m_Name: DialogueLaurent1
+  m_EditorClassIdentifier: 
+  characters:
+  - id: lyra
+    displayName: Lyra
+    portrait: {fileID: 0}
+    isLeftSide: 1
+    neutral: {fileID: 6795179555359847349, guid: 40d62a340747ee84c8946e698480bdf6, type: 3}
+    happy: {fileID: -1103926389690433412, guid: 40d62a340747ee84c8946e698480bdf6, type: 3}
+    sad: {fileID: 21300000, guid: c00d9d5beefb325458cb48dfca4219c7, type: 3}
+    angry: {fileID: 0}
+    surprised: {fileID: -8241981511714330664, guid: 40d62a340747ee84c8946e698480bdf6, type: 3}
+    thinking: {fileID: 3356771313395980172, guid: 40d62a340747ee84c8946e698480bdf6, type: 3}
+  - id: laurent
+    displayName: "Laurent DuRh\xFBm"
+    portrait: {fileID: 0}
+    isLeftSide: 0
+    neutral: {fileID: 0}
+    happy: {fileID: 0}
+    sad: {fileID: 0}
+    angry: {fileID: 0}
+    surprised: {fileID: 0}
+    thinking: {fileID: 0}
+  nodes:
+  - id: start
+    speakerID: laurent
+    testimony: {fileID: 0}
+    text: "Ah, a visitor! And a living one, no less. Forgive me, ma ch\xE8re, I'd
+      offer you a glass\u2026\r\nbut I haven't been able to hold one in fifty years."
+    nextNodeID: 
+    choices:
+    - text: I'm here about Vivienne Encore.
+      nextNodeID: 1
+      addFlags: []
+      requiredFlags: []
+      requiredReputation: 0
+      reputationChange: 0
+      onSelectedEvent: {fileID: 0}
+      endsDialogue: 0
+    - text: I'll come back later
+      nextNodeID: 
+      addFlags: []
+      requiredFlags: []
+      requiredReputation: 0
+      reputationChange: 0
+      onSelectedEvent: {fileID: 0}
+      endsDialogue: 1
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: 
+    expression: 0
+  - id: 1
+    speakerID: laurent
+    testimony: {fileID: 0}
+    text: "Vivienne\u2026 Now there was a vintage. Bold on the first note, unforgettable
+      on the last.\r\nThey don't bottle voices like hers anymore."
+    nextNodeID: 2
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: 
+    expression: 0
+  - id: 2
+    speakerID: lyra
+    testimony: {fileID: 0}
+    text: She called you her lover.
+    nextNodeID: 
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: 
+    expression: 0
+  - id: 3
+    speakerID: 
+    testimony: {fileID: 0}
+    text: "Did she? Ma ch\xE8re, half of Paris claimed to love her, and she let them.\r\nA
+      fine wine never asks who's drinking it."
+    nextNodeID: 4
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: 
+    expression: 0
+  - id: 4
+    speakerID: lyra
+    testimony: {fileID: 0}
+    text: Where were you during the intermission?
+    nextNodeID: 5
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: 
+    expression: 0
+  - id: 5
+    speakerID: laurent
+    testimony: {fileID: 11400000, guid: cca978fd0271823438891c08d9e8b73d, type: 2}
+    text: 'In the ballroom, of course. Ten minutes of champagne and small talk with
+      some dreadfully dull duchess.
+
+      I never set foot outside it.'
+    nextNodeID: 6
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: 
+    expression: 0
+  - id: 6
+    speakerID: laurent
+    testimony: {fileID: 0}
+    text: "You look unconvinced. Do you have proof? Without it, ma ch\xE8re, an accusation
+      is just\u2026 vinegar."
+    nextNodeID: 6
+    choices:
+    - text: I'll come back later
+      nextNodeID: 
+      addFlags: []
+      requiredFlags: []
+      requiredReputation: 0
+      reputationChange: 0
+      onSelectedEvent: {fileID: 0}
+      endsDialogue: 1
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 1
+    evidenceOptions:
+    - item: {fileID: 11400000, guid: 628bfc80ed75e2545a80669a56ba5dca, type: 2}
+      nextNodeID: b1
+      addFlags: []
+      onSelectedEvent: {fileID: 0}
+    - item: {fileID: 11400000, guid: 555bda5e7edefa0459fcf08cf8e66864, type: 2}
+      nextNodeID: t1
+      addFlags: []
+      onSelectedEvent: {fileID: 0}
+    - item: {fileID: 11400000, guid: b53b2caef91578c41856a773a83ab023, type: 2}
+      nextNodeID: v1
+      addFlags: []
+      onSelectedEvent: {fileID: 0}
+    - item: {fileID: 11400000, guid: ca30fc7c17d189c4d89c473fb3b18292, type: 2}
+      nextNodeID: r1
+      addFlags: []
+      onSelectedEvent: {fileID: 0}
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Laurent swirls an empty glass, unimpressed.
+    expression: 0
+  - id: b1
+    speakerID: laurent
+    testimony: {fileID: 0}
+    text: "Waker's Wark\u2026 from my private reserve. There was only one bottle,
+      and I only ever gave it to one person."
+    nextNodeID: c1
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Laurent swirls an empty glass, unimpressed.
+    expression: 0
+  - id: t1
+    speakerID: laurent
+    testimony: {fileID: 0}
+    text: "That maid. Desir\xE9e never could look away from anything that concerned
+      her lady."
+    nextNodeID: c1
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Laurent swirls an empty glass, unimpressed.
+    expression: 0
+  - id: v1
+    speakerID: laurent
+    testimony: {fileID: 0}
+    text: "She\u2026 remembers the toast? After all these years.\r\nOf course she
+      does. She never forgot anything that flattered her."
+    nextNodeID: c1
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Laurent swirls an empty glass, unimpressed.
+    expression: 0
+  - id: r1
+    speakerID: laurent
+    testimony: {fileID: 0}
+    text: "Put that away. \u2026She hated that portrait, you know. Said the painter
+      got her left side wrong.\r\nIt changes nothing."
+    nextNodeID: 6
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Laurent swirls an empty glass, unimpressed.
+    expression: 0
+  - id: c1
+    speakerID: laurent
+    testimony: {fileID: 0}
+    text: "\u2026Fine. No more games."
+    nextNodeID: c2
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Laurent swirls an empty glass, unimpressed.
+    expression: 0
+  - id: c2
+    speakerID: laurent
+    testimony: {fileID: 0}
+    text: 'I was with her in her dressing room. I brought the rum, like before every
+      performance.
+
+      We drank a toast to the last song.'
+    nextNodeID: c3
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Laurent swirls an empty glass, unimpressed.
+    expression: 0
+  - id: c3
+    speakerID: laurent
+    testimony: {fileID: 0}
+    text: She was terrified that night. She drank too fast. She hadn't eaten since
+      morning.
+    nextNodeID: c4
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Laurent swirls an empty glass, unimpressed.
+    expression: 0
+  - id: c4
+    speakerID: laurent
+    testimony: {fileID: 0}
+    text: I left before the intermission ended. No one could see us leave that room
+      together.
+    nextNodeID: c5
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Laurent swirls an empty glass, unimpressed.
+    expression: 0
+  - id: c5
+    speakerID: laurent
+    testimony: {fileID: 0}
+    text: 'When she didn''t come back on stage, I went looking for her. I found her
+      on the floor.
+
+      She couldn''t breathe.'
+    nextNodeID: c6
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Laurent swirls an empty glass, unimpressed.
+    expression: 0
+  - id: c6
+    speakerID: laurent
+    testimony: {fileID: 11400000, guid: 7b7cc17f5e9834f45ac46ee8145a490c, type: 2}
+    text: "I tried to save her. I held her, begged her to breathe\u2026\r\nHer breath
+      was sweet. Strawberries. I thought it was her perfume."
+    nextNodeID: c7
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Laurent swirls an empty glass, unimpressed.
+    expression: 0
+  - id: c7
+    speakerID: laurent
+    testimony: {fileID: 0}
+    text: 'Fifty years believing my rum killed her. I suppose that''s why I''m still
+      here.
+
+      Waiting for the bill.'
+    nextNodeID: c8
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Laurent swirls an empty glass, unimpressed.
+    expression: 0
+  - id: c8
+    speakerID: lyra
+    testimony: {fileID: 0}
+    text: Rum doesn't smell of strawberries, Laurent.
+    nextNodeID: 
+    choices: []
+    requiredFlags: []
+    onEnterFlags:
+    - {fileID: 11400000, guid: 554eb40ad28579549a9e386ce47a0b5c, type: 2}
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Laurent swirls an empty glass, unimpressed.
+    expression: 0

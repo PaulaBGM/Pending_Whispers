@@ -52,8 +52,12 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 554eb40ad28579549a9e386ce47a0b5c, type: 2}
     onEnterFlags: []
     onEnterEvents: []
-    allowsEvidencePresentation: 0
+    allowsEvidencePresentation: 1
     evidenceOptions:
+    - item: {fileID: 11400000, guid: bf5aa14119038e04da55a64de30c2e23, type: 2}
+      nextNodeID: 
+      addFlags: []
+      onSelectedEvent: {fileID: 0}
     - item: {fileID: 11400000, guid: bf5aa14119038e04da55a64de30c2e23, type: 2}
       nextNodeID: 
       addFlags: []
