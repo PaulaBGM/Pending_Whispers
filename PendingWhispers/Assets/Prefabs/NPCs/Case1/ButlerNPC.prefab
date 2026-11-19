@@ -245,6 +245,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcId: case1_desiree
+  displayName: 
+  playerCharacterId: lyra
   dialogues:
   - dialogue: {fileID: 11400000, guid: 9f8656febfccda04599f485cd36ee88c, type: 2}
     topicTitle: 
@@ -265,12 +267,6 @@ MonoBehaviour:
     topicId: 
     hideSeenCheckmark: 0
     requiredFlags: []
-  - dialogue: {fileID: 11400000, guid: 76b84ce87eaca99448b2174d9ecbadab, type: 2}
-    topicTitle: 
-    topicId: 
-    hideSeenCheckmark: 0
-    requiredFlags:
-    - {fileID: 11400000, guid: d441018d88620d34a8f6bb453bd4514c, type: 2}
 --- !u!70 &176805181648224533
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
