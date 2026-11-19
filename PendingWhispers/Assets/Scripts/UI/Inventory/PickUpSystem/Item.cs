@@ -46,8 +46,11 @@ public class Item : MonoBehaviour, IInteractable, IHighlightable
     private bool IsAlreadyRegistered =>
         alreadyRegistered ||
         (persistenceFlag != null && GameProgress.Instance != null && GameProgress.Instance.HasFlag(persistenceFlag)) ||
-        (InventoryItem is ClueItemSO && InventoryRuntime.Instance != null &&
+        (InventoryRuntime.Instance != null &&
          InventoryRuntime.Instance.GetInventory() != null && InventoryRuntime.Instance.GetInventory().Contains(InventoryItem));
+
+    /// <summary>Pista o testimonio (evidencia) frente a objeto de inventario usable.</summary>
+    private bool IsObject => InventoryItem is ObjectItemSO;
 
     private void Awake()
     {
@@ -69,20 +72,41 @@ public class Item : MonoBehaviour, IInteractable, IHighlightable
 
         if (IsAlreadyRegistered)
         {
-            UIGameEvents.OnFeedback?.Invoke("You have already examined this evidence.");
+            UIGameEvents.OnFeedback?.Invoke(IsObject
+                ? "You already picked this up."
+                : "You have already examined this evidence.");
+            return;
+        }
+
+        // AddItem devuelve lo que NO ha cabido. Si no cabe, no se marca como recogido
+        // para que el jugador pueda volver a intentarlo.
+        int notAdded = player.Inventory.AddItem(InventoryItem, 1);
+        if (notAdded > 0)
+        {
+            Debug.LogWarning($"[Item] Inventario lleno: '{InventoryItem.name}' no se ha añadido. Sube Size en el InventorySO.", this);
+            UIGameEvents.OnFeedback?.Invoke("Your inventory is full.");
             return;
         }
 
         alreadyRegistered = true;
         string textToShow = string.IsNullOrEmpty(discoveryText) ? InventoryItem.Name : discoveryText;
         UIGameEvents.OnDialogue?.Invoke(textToShow);
-        player.Inventory.AddItem(InventoryItem, 1);
-        UIGameEvents.RaiseEvidenceRegistered(InventoryItem);
-        CameraFlash.Instance?.PlayFlash();
-        UIGameEvents.OnFeedback?.Invoke("Evidence registered");
+
+        if (IsObject)
+        {
+            UIGameEvents.OnFeedback?.Invoke("Item added to inventory");
+        }
+        else
+        {
+            UIGameEvents.RaiseEvidenceRegistered(InventoryItem);
+            CameraFlash.Instance?.PlayFlash();
+            UIGameEvents.OnFeedback?.Invoke("Evidence registered");
+        }
 
         if (persistenceFlag != null)
             GameProgress.Instance.AddFlag(persistenceFlag);
+        else if (IsObject)
+            Debug.LogWarning($"[Item] '{name}' es un objeto sin persistenceFlag: se podrá volver a recoger tras usarlo o al recargar la escena.", this);
     }
 
     public Transform GetTransform()

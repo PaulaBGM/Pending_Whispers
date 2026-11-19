@@ -120,6 +120,7 @@ namespace Inventory
             view.OnSwapItems += HandleSwapItems;
             view.OnStartDragging += HandleDragging;
             view.OnItemActionRequested += HandleItemActionRequest;
+            view.OnUseRequested += HandleUseRequest;
 
             // Lo que ya hay en el inventario (escena anterior o partida cargada) se pinta al abrir.
             RefreshUI();
@@ -142,6 +143,7 @@ namespace Inventory
                 boundView.OnSwapItems -= HandleSwapItems;
                 boundView.OnStartDragging -= HandleDragging;
                 boundView.OnItemActionRequested -= HandleItemActionRequest;
+                boundView.OnUseRequested -= HandleUseRequest;
             }
 
             boundView = null;
@@ -233,6 +235,34 @@ namespace Inventory
             if (item.IsEmpty || inventoryUI == null) return;
 
             inventoryUI.ShowItemAction(index);
+        }
+
+        /// <summary>
+        /// Botón "Use" (BT_UseObject) de la pestaña de objetos: Lyra coge el objeto en la mano
+        /// y se cierra el diario. Las pistas no se "usan": se presentan en diálogo o hipótesis.
+        /// </summary>
+        private void HandleUseRequest(int index)
+        {
+            var item = GetItemByFilteredIndex(index);
+            if (item.IsEmpty)
+                return;
+
+            var journal = UIT_JournalController.Instance;
+
+            // Diario abierto para elegir algo (p. ej. presentar en un diálogo): se entrega el item.
+            if (journal != null && journal.ActiveRequest != null)
+            {
+                journal.SubmitSelection(item.item);
+                return;
+            }
+
+            if (item.item is not ObjectItemSO objectItem)
+                return;
+
+            HeldItemState.Hold(objectItem);
+
+            if (journal != null && journal.IsOpen)
+                journal.ToggleJournal();
         }
 
         private void HandleDragging(int index)

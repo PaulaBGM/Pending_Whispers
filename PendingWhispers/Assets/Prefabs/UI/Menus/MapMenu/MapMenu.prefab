@@ -1983,7 +1983,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!114 &6260168472135428733
 MonoBehaviour:
@@ -2040,7 +2040,7 @@ MonoBehaviour:
   nodes:
   - {fileID: 2647273950266461979}
   - {fileID: 2281915339443495018}
-  avatar: {fileID: 0}
+  avatar: {fileID: 9004670573969033025}
   startNodeID: start
   inputCooldown: 0
 --- !u!1 &8484065934726061505
@@ -2107,6 +2107,7 @@ GameObject:
   - component: {fileID: 3740189207666179827}
   - component: {fileID: 8348898024618173937}
   - component: {fileID: 6497148607318854904}
+  - component: {fileID: 9004670573969033025}
   m_Layer: 5
   m_Name: PlayerIcon
   m_TagString: Untagged
@@ -2227,7 +2228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 111f12b5e70215141849c198a55d9cb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 400
+  speed: 6000
   idleSprite: {fileID: 6505568838696119098, guid: d37eb46ff9c05824ca1b467510c15a85, type: 3}
   walkFrames:
   - {fileID: -3866093549892034932, guid: d37eb46ff9c05824ca1b467510c15a85, type: 3}
@@ -2236,6 +2237,20 @@ MonoBehaviour:
   - {fileID: 4833221656957261396, guid: d37eb46ff9c05824ca1b467510c15a85, type: 3}
   framesPerSecond: 8
   flipWhenMovingLeft: 1
+--- !u!114 &9004670573969033025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8516732704290714796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89d723a1241fcbd4e83235086a9f62f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 200
+  animator: {fileID: 3740189207666179827}
 --- !u!1 &8527944690945245580
 GameObject:
   m_ObjectHideFlags: 0

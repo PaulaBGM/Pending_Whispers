@@ -52,6 +52,9 @@ public class UIT_JournalController : BaseSingleton<UIT_JournalController>
 
     /// <summary>Igual que antes: true desde que se pide abrir hasta que se pide cerrar.</summary>
     public bool IsOpen => state == State.Opening || state == State.Open || state == State.TurningPage;
+    /// <summary>Petición de selección activa; null si el diario se abrió normal.</summary>
+    public JournalSelectionRequest ActiveRequest { get; private set; }
+    public event Action<JournalSelectionRequest> OnSelectionRequestChanged;
 
     [Header("UI Toolkit")]
     [SerializeField] private UIDocument document;
@@ -142,6 +145,7 @@ public class UIT_JournalController : BaseSingleton<UIT_JournalController>
             currentTab = null;
             if (wasOpen)
                 onJournalStateChannel?.Raise(false);
+            CancelRequest();
         }
     }
 
@@ -312,8 +316,8 @@ public class UIT_JournalController : BaseSingleton<UIT_JournalController>
             return;
 
         state = State.Closed;
-        // Ojo: NO desactivar el GameObject del UIDocument; eso reconstruye el árbol
-        // y se pierden todas las referencias y callbacks.
+        CancelRequest();
+
         root.style.display = DisplayStyle.None;
         onJournalStateChannel?.Raise(false);
     }
@@ -424,6 +428,51 @@ public class UIT_JournalController : BaseSingleton<UIT_JournalController>
         director.Evaluate();
         director.Play();
     }
+    public void OpenForSelection(JournalSelectionRequest request, UIT_JournalTab tab = UIT_JournalTab.Clues)
+    {
+        if (request == null)
+            return;
+
+        SetRequest(request);
+
+        // Ya abierto en esa pestaña: SelectTab no hace nada, así que se repinta para mostrar el botón.
+        if (state == State.Open && currentTab == tab)
+            ShowTabImmediate(tab);
+        else
+            OpenToTab(tab);
+    }
+
+    /// <summary>Lo llama la página cuando el jugador pulsa el botón de acción.</summary>
+    public void SubmitSelection(ItemSO item)
+    {
+        var request = ActiveRequest;
+        if (request == null || item == null)
+            return;
+
+        if (request.CanSelect != null && !request.CanSelect(item))
+            return;
+
+        SetRequest(null);
+        RequestClose();
+        request.OnSelected?.Invoke(item);
+    }
+
+    private void SetRequest(JournalSelectionRequest request)
+    {
+        ActiveRequest = request;
+        OnSelectionRequestChanged?.Invoke(request);
+    }
+
+    /// <summary>Si se cierra el diario sin elegir nada, la petición se cancela.</summary>
+    private void CancelRequest()
+    {
+        var request = ActiveRequest;
+        if (request == null)
+            return;
+
+        SetRequest(null);
+        request.OnCancelled?.Invoke();
+    }
 
     // Requiere Wrap Mode = None en el director; con Hold o Loop nunca se dispara stopped.
     private void HandleDirectorStopped(PlayableDirector director)
@@ -435,14 +484,7 @@ public class UIT_JournalController : BaseSingleton<UIT_JournalController>
         var callback = pendingDirectorCallback;
         pendingDirectorCallback = null;
 
-        // Al parar, el plugin de animación restaura los estilos que tenían los elementos
-        // al empezar el timeline (display incluido). Si mostramos la página o cerramos el
-        // diario aquí mismo, esa restauración lo deshace. Esperamos un frame para aplicar
-        // nuestros cambios después de la restauración.
-        // Si el director se ha parado porque se desactivó el GameObject, no hay nada que hacer:
-        // OnDisable ya ha dejado el diario cerrado.
-        // Ojo: durante la desactivación el director se para ANTES de que llegue nuestro OnDisable,
-        // así que isActiveAndEnabled aún es true; activeInHierarchy ya es false.
+      
         if (!gameObject.activeInHierarchy)
             return;
 

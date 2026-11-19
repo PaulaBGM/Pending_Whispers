@@ -30,11 +30,15 @@ namespace Inventory.UI
             public string descriptionName;
             [Tooltip("Opcional (p. ej. BT_UseObject).")]
             public string useButtonName;
+            [Tooltip("El botón solo aparece cuando el diario se abre para elegir algo (p. ej. presentar en un diálogo).")]
+            public bool showOnlyWhenSelecting;
 
             [NonSerialized] public VisualElement root;
             [NonSerialized] public VisualElement image;
             [NonSerialized] public Label title;
             [NonSerialized] public Label description;
+            [NonSerialized] public Button useButton;
+            [NonSerialized] public string defaultUseText;
         }
 
         private const string GridClass = "inventory-grid";
@@ -129,13 +133,16 @@ namespace Inventory.UI
                 return;
             }
 
+            panel.useButton = QueryOptional<Button>(panel.root, panel.useButtonName);
+            if (panel.useButton != null)
+            {
+                panel.defaultUseText = panel.useButton.text;
+                panel.useButton.clicked += HandleUseClicked;
+            }
+
             panel.image = QueryOptional<VisualElement>(panel.root, panel.imageName);
             panel.title = QueryOptional<Label>(panel.root, panel.titleName);
             panel.description = QueryOptional<Label>(panel.root, panel.descriptionName);
-
-            var useButton = QueryOptional<Button>(panel.root, panel.useButtonName);
-            if (useButton != null)
-                useButton.clicked += HandleUseClicked;
 
             panel.root.style.display = DisplayStyle.None;
         }
@@ -272,6 +279,7 @@ namespace Inventory.UI
                 sectionTitleLabel.text = activePanel.sectionTitle;
 
             OnTabChanged?.Invoke(filter);
+            ApplySelectionRequest();
         }
 
         protected override void OnHide()
@@ -393,6 +401,24 @@ namespace Inventory.UI
                 panel.description.text = "";
         }
 
+        /// <summary>Con una petición activa el botón muestra su etiqueta ("Present"); sin ella, la suya.</summary>
+        private void ApplySelectionRequest()
+        {
+            var request = UIT_JournalController.Instance != null ? UIT_JournalController.Instance.ActiveRequest : null;
+
+            foreach (var panel in detailPanels)
+            {
+                if (panel.useButton == null)
+                    continue;
+
+                panel.useButton.text = request != null && !string.IsNullOrEmpty(request.ActionLabel)
+                    ? request.ActionLabel
+                    : panel.defaultUseText;
+
+                if (panel.showOnlyWhenSelecting)
+                    panel.useButton.style.display = request != null ? DisplayStyle.Flex : DisplayStyle.None;
+            }
+        }
         // =========================
         // INPUT
         // =========================

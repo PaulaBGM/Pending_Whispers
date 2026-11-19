@@ -716,14 +716,15 @@ MonoBehaviour:
     imageName: VE_ObjImage
     titleName: T_ObjName
     descriptionName: T_ObjDescription
-    useButtonName: 
+    useButtonName: BT_UseObject
   - filter: 2
     sectionTitle: Clues
     panelName: VE_ObjectClueInformation
     imageName: VE_ClueImage
     titleName: T_ClueName
     descriptionName: T_ClueDescription
-    useButtonName: 
+    useButtonName: BT_PresentClue
+    showOnlyWhenSelecting: 1
   actionPanelName: 
 --- !u!1 &7428725069092635145
 GameObject:

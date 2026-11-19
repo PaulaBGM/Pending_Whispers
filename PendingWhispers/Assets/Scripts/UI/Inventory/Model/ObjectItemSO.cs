@@ -1,16 +1,15 @@
 using UnityEngine;
 
-public class ObjectItemSO : MonoBehaviour
+namespace Inventory.Model
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    /// <summary>
+    /// Objeto de inventario usable en el escenario (llave, ron, herramienta...).
+    /// Va en la pestaña de objetos del diario: en el inspector, ItemType = Item.
+    /// De momento no añade campos: lo que se hace con el objeto lo define el
+    /// hotspot que lo acepta, no el propio objeto.
+    /// </summary>
+    [CreateAssetMenu(menuName = "Inventory/Object")]
+    public class ObjectItemSO : ItemSO
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
