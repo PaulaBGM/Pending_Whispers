@@ -26,6 +26,9 @@ public class Item : MonoBehaviour, IInteractable, IHighlightable
 
     private bool alreadyRegistered;
 
+    [Tooltip("Solo objetos de inventario: al recogerlo desaparece de la escena (y sigue oculto al volver o cargar partida).")]
+    [SerializeField] private bool hideOnPickup = true;
+
     [Header("Spectral Lock")]
     [Tooltip("Si se asigna (o hay un SpectralTrace en el mismo objeto), la pista solo se puede recoger " +
              "después de revelarla con la habilidad de detección de Lyra.")]
@@ -62,6 +65,13 @@ public class Item : MonoBehaviour, IInteractable, IHighlightable
 
         if (spriteRenderer != null)
             originalColor = spriteRenderer.color;
+    }
+
+    // En Start y no en Awake: las flags de la partida cargada ya estan restauradas aqui.
+    private void Start()
+    {
+        if (hideOnPickup && IsObject && IsAlreadyRegistered)
+            gameObject.SetActive(false);
     }
 
     public void Interact(PlayerController_Actions player)
@@ -107,6 +117,12 @@ public class Item : MonoBehaviour, IInteractable, IHighlightable
             GameProgress.Instance.AddFlag(persistenceFlag);
         else if (IsObject)
             Debug.LogWarning($"[Item] '{name}' es un objeto sin persistenceFlag: se podrÃ¡ volver a recoger tras usarlo o al recargar la escena.", this);
+
+        if (hideOnPickup && IsObject)
+        {
+            SetHighlight(false);
+            gameObject.SetActive(false);
+        }
     }
 
     public Transform GetTransform()

@@ -319,6 +319,7 @@ public class UIT_DialogueUI : MonoBehaviour, IDialogueView
     // se esconden (y puede animarlo). Un botón desactivado tampoco recibe clics.
     public void SetEvidenceButtonVisible(bool visible)
     {
+        evidenceAllowed = visible;
         presentEvidenceButton?.SetEnabled(visible);
     }
 
@@ -414,9 +415,21 @@ public class UIT_DialogueUI : MonoBehaviour, IDialogueView
         return false;
     }
 
+    // Nodo actual admite presentar pruebas (lo avisa DialogueManager via SetEvidenceButtonVisible).
+    private bool evidenceAllowed;
+
+    // Boton del cuaderno: si el nodo admite pruebas, abre el diario en modo "Present";
+    // si no (o si ya esta abierto), abre/cierra el diario normal para consultarlo.
     private void OnJournalButtonClicked()
     {
-        UIT_JournalController.Instance?.ToggleJournal();
+        var journal = UIT_JournalController.Instance;
+        if (evidenceAllowed && (journal == null || !journal.IsOpen))
+        {
+            DialogueManager.Instance?.OpenEvidencePicker();
+            return;
+        }
+
+        journal?.ToggleJournal();
     }
 
     // =========================

@@ -324,7 +324,22 @@ public class UIT_DialogueUI : MonoBehaviour, IDialogueView
 
     public void OpenEvidencePicker()
     {
-        evidencePicker?.Show();
+        var journal = UIT_JournalController.Instance;
+        if (journal == null)
+        {
+            evidencePicker?.Show(); // respaldo uGUI si la escena no tiene el diario nuevo
+            return;
+        }
+
+        journal.OpenForSelection(new JournalSelectionRequest
+        {
+            ActionLabel = "Present",
+            CanSelect = item => item != null &&
+                                (item.ItemType == ItemType.Clue ||
+                                 item.ItemType == ItemType.Testimony ||
+                                 item.ItemType == ItemType.Item),
+            OnSelected = item => OnEvidenceItemSelected?.Invoke(item)
+        }, UIT_JournalTab.Clues);
     }
 
     public void OnPresentEvidenceButtonClicked()
