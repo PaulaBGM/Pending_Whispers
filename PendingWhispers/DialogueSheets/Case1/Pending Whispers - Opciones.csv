@@ -1,7 +1,8 @@
 dialogue,nodeId,text,next,requiredFlags,addFlags,onSelectedEvent,endsDialogue,requiredReputation,reputationChange
+DialogueBottle,hub,I'll come back later,,,,,TRUE,0,0
 DialogueButler1,start,Excuse me?,1,,,,FALSE,0,0
 DialogueButler1,start,I’ll come back later,,,,,TRUE,0,0
-DialogueButler2,hub, I'll come back later,,,,,TRUE,0,0
+DialogueButler2,hub,I'll come back later,,,,,TRUE,0,0
 DialogueButlerEnd,start,Vivienne's murder finally came to an end,1,CorrectHypothesis,,,FALSE,0,5
 DialogueButlerEnd,start,See you,,,,,TRUE,0,0
 DialogueButlerEnd,2,"See you, Desirée",,,,ResolveCurrentCase,TRUE,0,0
@@ -9,18 +10,17 @@ DialogueButlerKnife,start,I'll come back later,,,,,TRUE,0,0
 DialogueButlerKnife,k1,It is. There's a stain on it,k2,,,,FALSE,0,0
 DialogueButlerKnife,k4,Jam?,k5,,,,FALSE,0,0
 DialogueButlerKnife,c2,You saw it happen?,c3,,,,FALSE,0,0
-DialogueButlerKnife,c3,That must have been terrifying. ,c4,,,,FALSE,0,0
+DialogueButlerKnife,c3,That must have been terrifying.,c4,,,,FALSE,0,0
 DialogueButlerNoCatacombs,start,Excuse me. Are you Desirée Cahuete?,1,,,,FALSE,0,0
 DialogueButlerNoCatacombs,start,See you,,,,,TRUE,0,0
+DialogueEND,start,See you Vivienne,,,,ResolveCurrentCase,TRUE,0,5
 DialogueLaurent1,start,I'm here about Vivienne Encore.,1,,,,FALSE,0,0
 DialogueLaurent1,start,I'll come back later,,,,,TRUE,0,0
 DialogueLaurent1,6,I'll come back later,,,,,TRUE,0,0
-DialogueLaurent2,hub,I'll come back later ,,,,,TRUE,0,0
+DialogueLaurent2,hub,I'll come back later,,,,,TRUE,0,0
 DialogueOwner1,14,I see… Then that’s probably where this all began.,,,,,TRUE,0,0
-DialogueBottle,hub, I'll come back later,,,,,TRUE,0,0
-DialogueEND,start,See you Vivienne ,,,,ResolveCurrentCase,TRUE,0,5
 DialogueSinger1,start,Excu-,1,,,,FALSE,0,0
 DialogueSinger1,start,I'll talk to you later,,,,,TRUE,0,0
-DialogueTransform,1,"No one murdered you... you suffered an accident, and died because of an allergy reaction",2,CorrectHypothesis,,,TRUE,0,0
+DialogueTransform,1,"No one murdered you... you suffered an accident, and died because of an allergy reaction",,CorrectHypothesis,,,TRUE,0,0
 DialogueTransform,1,They murdered you because they wanted your precious necklace,3,WrongHypothesis,,,FALSE,0,-5
 DialogueTransform,3,Ahhh!! Sorry!!!,,,,,TRUE,0,-5

@@ -7,7 +7,8 @@ using UnityEngine;
 public class MapAvatar : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] private float speed = 10000f;
+    [Tooltip("Velocidad en píxeles de referencia por segundo (Canvas Scaler a 1920x1080). Igual en cualquier resolución.")]
+    [SerializeField] private float speed = 400f;
 
     [Header("Animation")]
     [SerializeField] private Animator animator;
@@ -91,44 +92,40 @@ public class MapAvatar : MonoBehaviour
             if (waypoint == null)
                 continue;
 
-            Vector3 target =
-                waypoint.RectTransform.position;
+            // Se mueve en el espacio local del padre (unidades del Canvas, que el CanvasScaler
+            // ajusta a la resolución de referencia 1920x1080). Antes se movía en
+            // rectTransform.position, que en un Canvas Overlay son píxeles de PANTALLA:
+            // la velocidad cambiaba según la resolución (más rápido en ventanas pequeñas,
+            // más lento en 4K).
+            Transform parent = rectTransform.parent;
+            Vector3 target = parent != null
+                ? parent.InverseTransformPoint(waypoint.RectTransform.position)
+                : waypoint.RectTransform.position;
 
-            while (
-                (rectTransform.position - target).sqrMagnitude
-                > 0.01f
-            )
+            while ((rectTransform.localPosition - target).sqrMagnitude > 0.01f)
             {
-                Vector3 current =
-                    rectTransform.position;
-
-                Vector2 direction =
-                    (target - current);
+                Vector3 current = rectTransform.localPosition;
+                Vector2 direction = target - current;
 
                 if (direction.sqrMagnitude > 0.001f)
                     direction.Normalize();
 
-                // -----------------------------
-                // ANIMATION
-                // -----------------------------
-
                 UpdateAnimator(direction);
 
-                // -----------------------------
-                // MOVEMENT
-                // -----------------------------
-
-                rectTransform.position =
-                    Vector3.MoveTowards(
-                        current,
-                        target,
-                        speed * Time.unscaledDeltaTime
-                    );
+                // Unscaled: el mapa funciona aunque el juego esté en pausa.
+                rectTransform.localPosition = Vector3.MoveTowards(
+                    current,
+                    target,
+                    speed * Time.unscaledDeltaTime);
 
                 yield return null;
+
+                // Por si el waypoint se mueve (p. ej. cambio de tamaño de ventana durante el viaje).
+                if (parent != null)
+                    target = parent.InverseTransformPoint(waypoint.RectTransform.position);
             }
 
-            rectTransform.position = target;
+            rectTransform.localPosition = target;
         }
 
         IsMoving = false;

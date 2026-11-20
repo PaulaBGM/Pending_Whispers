@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Inventory.Model;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -26,6 +27,20 @@ public class UIT_PeoplePageView : UIT_JournalPageView
     [SerializeField] private string nameLabelName = "T_PersonName";
     [SerializeField] private string dialogueScrollName = "SV_PersonDialogue";
     [SerializeField] private string dialogueLabelName = "T_PersonDialogue";
+
+    [Header("Presentar testimonios")]
+    [Tooltip("Botón de la hoja derecha. Solo aparece cuando el diario se abre para presentar algo.")]
+    [SerializeField] private string presentButtonName = "BT_PresentTestimony";
+    [Tooltip("Fondo de la frase seleccionada. Se puede sustituir por la clase USS 'testimony-line--selected'.")]
+    [SerializeField] private Color selectedLineColor = new Color(0.55f, 0.12f, 0.24f, 0.25f);
+
+    private const string LineClass = "testimony-line";
+    private const string LineSelectedClass = "testimony-line--selected";
+
+    private Button presentButton;
+    private readonly List<Label> lines = new();
+    private PersonJournalEntry shownEntry;
+    private int selectedLine = -1;
 
     private readonly List<VisualElement> slots = new();
     private readonly List<PersonJournalEntry> shownEntries = new();
@@ -121,6 +136,10 @@ public class UIT_PeoplePageView : UIT_JournalPageView
         nameLabel = FindInPage<Label>(nameLabelName);
         dialogueScroll = FindInPage<ScrollView>(dialogueScrollName);
         dialogueLabel = FindInPage<Label>(dialogueLabelName);
+
+        presentButton = FindInPage<Button>(presentButtonName);
+        if (presentButton != null)
+            presentButton.clicked += HandlePresentClicked;
     }
 
     // =========================
@@ -232,11 +251,137 @@ public class UIT_PeoplePageView : UIT_JournalPageView
         if (nameLabel != null)
             nameLabel.text = entry?.personName ?? "";
 
-        if (dialogueLabel != null)
-            dialogueLabel.text = FormatDialogues(entry);
+        BuildLines(entry);
 
         if (dialogueScroll != null)
             dialogueScroll.scrollOffset = Vector2.zero;
+    }
+
+    // =========================
+    // FRASES (una por testimonio, seleccionables)
+    // =========================
+    private void BuildLines(PersonJournalEntry entry)
+    {
+        shownEntry = entry;
+
+        // Sin ScrollView no se pueden poner frases sueltas: se usa el texto de siempre.
+        if (dialogueScroll == null)
+        {
+            if (dialogueLabel != null)
+                dialogueLabel.text = FormatDialogues(entry);
+            UpdatePresentButton();
+            return;
+        }
+
+        // El Label único del UXML sirve de plantilla de estilo; no se muestra.
+        if (dialogueLabel != null)
+            dialogueLabel.style.display = DisplayStyle.None;
+
+        int count = entry?.dialogues?.Count ?? 0;
+
+        while (lines.Count < count)
+            lines.Add(CreateLine(lines.Count));
+
+        for (int i = 0; i < lines.Count; i++)
+        {
+            bool used = i < count;
+            lines[i].style.display = used ? DisplayStyle.Flex : DisplayStyle.None;
+            if (used)
+                lines[i].text = "• " + entry.dialogues[i];
+        }
+
+        SelectLine(-1);
+    }
+
+    private Label CreateLine(int index)
+    {
+        var line = new Label();
+        line.AddToClassList(LineClass);
+
+        // Mismo aspecto que T_PersonDialogue.
+        if (dialogueLabel != null)
+        {
+            line.style.unityFontDefinition = dialogueLabel.style.unityFontDefinition;
+            line.style.fontSize = dialogueLabel.style.fontSize;
+            line.style.color = dialogueLabel.style.color;
+            line.style.unityTextAlign = dialogueLabel.style.unityTextAlign;
+            line.style.wordSpacing = dialogueLabel.style.wordSpacing;
+        }
+        line.style.whiteSpace = WhiteSpace.Normal;
+        line.style.width = Length.Percent(100);
+        line.style.flexShrink = 0;
+        line.style.marginBottom = 10;
+        line.style.paddingTop = 4;
+        line.style.paddingBottom = 4;
+        line.style.paddingLeft = 4;
+        line.style.paddingRight = 4;
+
+        line.RegisterCallback<ClickEvent>(evt =>
+        {
+            if (evt.button == 0)
+                SelectLine(index);
+        });
+
+        dialogueScroll.Add(line);
+        return line;
+    }
+
+    private void SelectLine(int index)
+    {
+        selectedLine = index;
+        if (index >= 0)
+            Debug.Log($"[Present] Frase {index} seleccionada. Testimonio: {(GetSelectedTestimony() != null ? GetSelectedTestimony().name : "NINGUNO (null)")}. " +
+                      $"Testimonios de esta persona: {shownEntry?.testimonies?.Count ?? 0}, frases: {shownEntry?.dialogues?.Count ?? 0}");
+
+        for (int i = 0; i < lines.Count; i++)
+        {
+            bool selected = i == index;
+            lines[i].EnableInClassList(LineSelectedClass, selected);
+            lines[i].style.backgroundColor = selected ? selectedLineColor : new StyleColor(Color.clear);
+        }
+
+        UpdatePresentButton();
+    }
+
+    private TestimonyItemSO GetSelectedTestimony()
+    {
+        var testimonies = shownEntry?.testimonies;
+        if (testimonies == null || selectedLine < 0 || selectedLine >= testimonies.Count)
+            return null;
+        return testimonies[selectedLine];
+    }
+
+    private void UpdatePresentButton()
+    {
+        if (presentButton == null)
+        {
+            Debug.LogWarning($"[Present] No se encontró '{presentButtonName}' en la página de testimonios.");
+            return;
+        }
+
+        var journal = UIT_JournalController.Instance;
+        var request = journal != null ? journal.ActiveRequest : null;
+
+        Debug.Log($"[Present] Página testimonios: petición activa = {request != null}, botón encontrado = {presentButton != null}");
+        presentButton.style.display = request != null ? DisplayStyle.Flex : DisplayStyle.None;
+        if (request == null)
+            return;
+
+        if (!string.IsNullOrEmpty(request.ActionLabel))
+            presentButton.text = request.ActionLabel;
+        presentButton.SetEnabled(GetSelectedTestimony() != null);
+    }
+
+    private void HandlePresentClicked()
+    {
+        var testimony = GetSelectedTestimony();
+        Debug.Log($"[Present] Botón pulsado. Testimonio: {(testimony != null ? testimony.name : "null")}");
+        if (testimony == null)
+            return;
+
+        var journal = UIT_JournalController.Instance;
+        if (journal != null)
+            journal.SubmitSelection(testimony);
     }
 
     /// <summary>Equivale al antiguo scale-to-fit: la imagen entera, centrada y sin deformar.</summary>

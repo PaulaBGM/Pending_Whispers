@@ -450,7 +450,11 @@ public class UIT_JournalController : BaseSingleton<UIT_JournalController>
             return;
 
         if (request.CanSelect != null && !request.CanSelect(item))
+        {
+            Debug.LogWarning($"[Present] '{item.name}' rechazado por CanSelect (ItemType = {item.ItemType}).");
             return;
+        }
+        Debug.Log($"[Present] Entregado al diálogo: {item.name}");
 
         SetRequest(null);
         RequestClose();

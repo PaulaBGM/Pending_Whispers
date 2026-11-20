@@ -38,7 +38,7 @@ MonoBehaviour:
     speakerID: laurent
     testimony: {fileID: 0}
     text: "Ah, a visitor! And a living one, no less. Forgive me, ma ch\xE8re, I'd
-      offer you a glass\u2026\r\nbut I haven't been able to hold one in fifty years."
+      offer you a glass\u2026\nbut I haven't been able to hold one in fifty years."
     nextNodeID: 
     choices:
     - text: I'm here about Vivienne Encore.
@@ -63,13 +63,13 @@ MonoBehaviour:
     allowsEvidencePresentation: 0
     evidenceOptions: []
     wrongEvidenceNodeID: 
-    wrongEvidenceFeedback: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 0
   - id: 1
     speakerID: laurent
     testimony: {fileID: 0}
     text: "Vivienne\u2026 Now there was a vintage. Bold on the first note, unforgettable
-      on the last.\r\nThey don't bottle voices like hers anymore."
+      on the last.\nThey don't bottle voices like hers anymore."
     nextNodeID: 2
     choices: []
     requiredFlags: []
@@ -78,13 +78,13 @@ MonoBehaviour:
     allowsEvidencePresentation: 0
     evidenceOptions: []
     wrongEvidenceNodeID: 
-    wrongEvidenceFeedback: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 0
   - id: 2
     speakerID: lyra
     testimony: {fileID: 0}
     text: She called you her lover.
-    nextNodeID: 
+    nextNodeID: 3
     choices: []
     requiredFlags: []
     onEnterFlags: []
@@ -92,12 +92,12 @@ MonoBehaviour:
     allowsEvidencePresentation: 0
     evidenceOptions: []
     wrongEvidenceNodeID: 
-    wrongEvidenceFeedback: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 0
   - id: 3
-    speakerID: 
+    speakerID: laurent
     testimony: {fileID: 0}
-    text: "Did she? Ma ch\xE8re, half of Paris claimed to love her, and she let them.\r\nA
+    text: "Did she? Ma ch\xE8re, half of Paris claimed to love her, and she let them.\nA
       fine wine never asks who's drinking it."
     nextNodeID: 4
     choices: []
@@ -107,7 +107,7 @@ MonoBehaviour:
     allowsEvidencePresentation: 0
     evidenceOptions: []
     wrongEvidenceNodeID: 
-    wrongEvidenceFeedback: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 0
   - id: 4
     speakerID: lyra
@@ -121,7 +121,7 @@ MonoBehaviour:
     allowsEvidencePresentation: 0
     evidenceOptions: []
     wrongEvidenceNodeID: 
-    wrongEvidenceFeedback: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 0
   - id: 5
     speakerID: laurent
@@ -138,7 +138,7 @@ MonoBehaviour:
     allowsEvidencePresentation: 0
     evidenceOptions: []
     wrongEvidenceNodeID: 
-    wrongEvidenceFeedback: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 0
   - id: 6
     speakerID: laurent
@@ -212,8 +212,8 @@ MonoBehaviour:
   - id: v1
     speakerID: laurent
     testimony: {fileID: 0}
-    text: "She\u2026 remembers the toast? After all these years.\r\nOf course she
-      does. She never forgot anything that flattered her."
+    text: "She\u2026 remembers the toast? After all these years.\nOf course she does.
+      She never forgot anything that flattered her."
     nextNodeID: c1
     choices: []
     requiredFlags: []
@@ -228,7 +228,7 @@ MonoBehaviour:
     speakerID: laurent
     testimony: {fileID: 0}
     text: "Put that away. \u2026She hated that portrait, you know. Said the painter
-      got her left side wrong.\r\nIt changes nothing."
+      got her left side wrong.\nIt changes nothing."
     nextNodeID: 6
     choices: []
     requiredFlags: []
@@ -320,7 +320,7 @@ MonoBehaviour:
   - id: c6
     speakerID: laurent
     testimony: {fileID: 11400000, guid: 7b7cc17f5e9834f45ac46ee8145a490c, type: 2}
-    text: "I tried to save her. I held her, begged her to breathe\u2026\r\nHer breath
+    text: "I tried to save her. I held her, begged her to breathe\u2026\nHer breath
       was sweet. Strawberries. I thought it was her perfume."
     nextNodeID: c7
     choices: []

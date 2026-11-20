@@ -36,6 +36,7 @@ MonoBehaviour:
   nodes:
   - id: start
     speakerID: owner
+    testimony: {fileID: 0}
     text: It seems like everything really calmed down... mediums are not as much
       of a fraud as I thought.
     nextNodeID: 1
@@ -44,15 +45,22 @@ MonoBehaviour:
     onEnterFlags:
     - {fileID: 11400000, guid: 8026d71d73230a548b720e9ed6b330cf, type: 2}
     onEnterEvents: []
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 5
   - id: 1
     speakerID: lyra
-    text: 'I''m glad everything turned out okay '
+    testimony: {fileID: 0}
+    text: I'm glad everything turned out okay
     nextNodeID: 
     choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 1

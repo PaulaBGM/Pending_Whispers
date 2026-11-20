@@ -75,8 +75,18 @@ namespace PendingWhispers.EditorTools
 
             int nodeCount = 0;
 
+            var exportedNames = new HashSet<string>();
+
             foreach (DialogueData dialogue in dialogues)
             {
+                // Dos assets con el mismo nombre se mezclarían en la hoja y el importador los rechazaría.
+                if (!exportedNames.Add(dialogue.name))
+                {
+                    warnings.Add($"Hay más de un DialogueData llamado '{dialogue.name}' " +
+                                 $"({AssetDatabase.GetAssetPath(dialogue)}). Se exporta solo el primero: renombra o borra el duplicado.");
+                    continue;
+                }
+
                 if (dialogue.nodes == null)
                     continue;
 
@@ -213,6 +223,7 @@ namespace PendingWhispers.EditorTools
                 : AssetDatabase.FindAssets("t:DialogueData");
 
             return guids
+                .Distinct()
                 .Select(guid => AssetDatabase.GUIDToAssetPath(guid))
                 .OrderBy(path => path)
                 .Select(path => AssetDatabase.LoadAssetAtPath<DialogueData>(path))

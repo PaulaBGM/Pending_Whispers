@@ -36,13 +36,14 @@ MonoBehaviour:
   nodes:
   - id: start
     speakerID: ghost1
+    testimony: {fileID: 0}
     text: "Oh? Is that so? All of these years I've hold on to these grudge against
       the world who silenced me, when I was the one who didn't listen to others...
       how... sad... \nIf you see my loyal Desir\xE9e, tell her I'll be waiting for
       her."
     nextNodeID: 
     choices:
-    - text: 'See you Vivienne '
+    - text: See you Vivienne
       nextNodeID: 
       addFlags: []
       requiredFlags: []
@@ -55,5 +56,8 @@ MonoBehaviour:
     onEnterFlags:
     - {fileID: 11400000, guid: b20d31eec589dbb4fafd6102542a3f00, type: 2}
     onEnterEvents: []
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 1

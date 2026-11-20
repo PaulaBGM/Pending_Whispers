@@ -52,9 +52,9 @@ MonoBehaviour:
     speakerID: butler
     testimony: {fileID: 0}
     text: Do you need anything else?
-    nextNodeID: 2
+    nextNodeID: 
     choices:
-    - text: ' I''ll come back later'
+    - text: I'll come back later
       nextNodeID: 
       addFlags: []
       requiredFlags: []
@@ -65,8 +65,28 @@ MonoBehaviour:
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    allowsEvidencePresentation: 0
-    evidenceOptions: []
+    allowsEvidencePresentation: 1
+    evidenceOptions:
+    - item: {fileID: 11400000, guid: f3e78da910b13d14a8c4224ed28823c3, type: 2}
+      nextNodeID: collar1
+      addFlags: []
+      onSelectedEvent: {fileID: 0}
+    - item: {fileID: 11400000, guid: 628bfc80ed75e2545a80669a56ba5dca, type: 2}
+      nextNodeID: botella1
+      addFlags: []
+      onSelectedEvent: {fileID: 0}
+    - item: {fileID: 11400000, guid: e49abcc183c13c445bfc9d5a5faf44f0, type: 2}
+      nextNodeID: alergia1
+      addFlags: []
+      onSelectedEvent: {fileID: 0}
+    - item: {fileID: 11400000, guid: bf5aa14119038e04da55a64de30c2e23, type: 2}
+      nextNodeID: cuchillo1
+      addFlags: []
+      onSelectedEvent: {fileID: 0}
+    - item: {fileID: 11400000, guid: cca978fd0271823438891c08d9e8b73d, type: 2}
+      nextNodeID: laurent1
+      addFlags: []
+      onSelectedEvent: {fileID: 0}
     wrongEvidenceNodeID: 
     wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 0
@@ -89,7 +109,7 @@ MonoBehaviour:
   - id: botella1
     speakerID: butler
     testimony: {fileID: 0}
-    text: "My lady's favourite rum. That womanizer Laurent brought her a new bottle\r\nbefore
+    text: "My lady's favourite rum. That womanizer Laurent brought her a new bottle\nbefore
       every performance\u2026 including the last one."
     nextNodeID: hub
     choices: []
@@ -147,8 +167,22 @@ MonoBehaviour:
     wrongEvidenceNodeID: 
     wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 5
+  - id: alergia2
+    speakerID: butler
+    testimony: {fileID: 0}
+    text: I made sure none ever came near her beautiful face.
+    nextNodeID: hub
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
+    expression: 5
   - id: cuchillo1
-    speakerID: cuchillo1
+    speakerID: butler
     testimony: {fileID: 0}
     text: "A kitchen knife? What is it doing down here? How odd\u2026"
     nextNodeID: hub

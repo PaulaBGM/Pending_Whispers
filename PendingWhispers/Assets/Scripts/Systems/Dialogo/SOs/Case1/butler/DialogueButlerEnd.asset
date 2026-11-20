@@ -36,6 +36,7 @@ MonoBehaviour:
   nodes:
   - id: start
     speakerID: butler
+    testimony: {fileID: 0}
     text: 'Oh... it''s you again, what the issue? '
     nextNodeID: 1
     choices:
@@ -59,10 +60,14 @@ MonoBehaviour:
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 0
   - id: 1
     speakerID: lyra
+    testimony: {fileID: 0}
     text: She finally knows the truth, and has chosen to forgive. She is now finally
       resting, and waiting for you
     nextNodeID: 2
@@ -70,10 +75,14 @@ MonoBehaviour:
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 0
   - id: 2
     speakerID: butler
+    testimony: {fileID: 0}
     text: Really? My lady is waiting for me? My fragile heart couldn't be more thankful
       to you, Lyra... Thank you for helping my beloved lady Vivienne
     nextNodeID: 
@@ -90,5 +99,8 @@ MonoBehaviour:
     onEnterFlags: []
     onEnterEvents:
     - {fileID: 11400000, guid: 889f61a947eee54448fee4cf3b0368f5, type: 2}
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 1

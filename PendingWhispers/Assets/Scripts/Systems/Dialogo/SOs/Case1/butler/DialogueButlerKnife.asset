@@ -38,7 +38,7 @@ MonoBehaviour:
     speakerID: butler
     testimony: {fileID: 0}
     text: You seem serious. What did you discover?
-    nextNodeID: 1
+    nextNodeID: 
     choices:
     - text: I'll come back later
       nextNodeID: 
@@ -79,8 +79,7 @@ MonoBehaviour:
       reputationChange: 0
       onSelectedEvent: {fileID: 0}
       endsDialogue: 0
-    requiredFlags:
-    - {fileID: 0}
+    requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
     allowsEvidencePresentation: 0
@@ -246,7 +245,7 @@ MonoBehaviour:
   - id: c2
     speakerID: butler
     testimony: {fileID: 11400000, guid: e140c36a81ee8724985b2059cfd188fb, type: 2}
-    text: "Instead of waiting for me to bring her usual snacks, she came to the kitchen\u2026\r\nand
+    text: "Instead of waiting for me to bring her usual snacks, she came to the kitchen\u2026\nand
       ate my sandwich before I could stop her."
     nextNodeID: c3
     choices:
@@ -272,7 +271,7 @@ MonoBehaviour:
     text: I tried to warn her, but she was faster than me.
     nextNodeID: 
     choices:
-    - text: 'That must have been terrifying. '
+    - text: That must have been terrifying.
       nextNodeID: c4
       addFlags: []
       requiredFlags: []

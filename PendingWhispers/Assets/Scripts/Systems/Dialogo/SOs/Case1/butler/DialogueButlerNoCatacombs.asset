@@ -36,6 +36,7 @@ MonoBehaviour:
   nodes:
   - id: start
     speakerID: butler
+    testimony: {fileID: 0}
     text: Oh, mistress Vivienne... Such a beautiful voice...
     nextNodeID: start
     choices:
@@ -58,10 +59,14 @@ MonoBehaviour:
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 2
   - id: 1
     speakerID: butler
+    testimony: {fileID: 0}
     text: I am. And if you're here to gossip about Lady Vivienne, I have no interest
       in helping.
     nextNodeID: 2
@@ -69,40 +74,56 @@ MonoBehaviour:
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 0
   - id: 2
     speakerID: lyra
+    testimony: {fileID: 0}
     text: I'm trying to understand what happened to her.
     nextNodeID: 3
     choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 0
   - id: 3
     speakerID: butler
+    testimony: {fileID: 0}
     text: ...Then you're already kinder than most visitors.
     nextNodeID: 4
     choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 0
   - id: 4
     speakerID: lyra
+    testimony: {fileID: 0}
     text: You were with her the night she died?
     nextNodeID: 5
     choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 5
   - id: 5
     speakerID: butler
+    testimony: {fileID: 0}
     text: Of course. There was a grand celebration in the manor. Music, guests, applause...
       everything was for her.
     nextNodeID: 6
@@ -110,20 +131,28 @@ MonoBehaviour:
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 1
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 1
   - id: 6
     speakerID: lyra
+    testimony: {fileID: 0}
     text: And her final performance?
     nextNodeID: 7
     choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 5
   - id: 7
     speakerID: butler
+    testimony: {fileID: 0}
     text: She never got to sing it. There was a short intermission before the last
       song. Ten minutes, perhaps. She left to prepare herself and never returned.
     nextNodeID: 8
@@ -131,20 +160,28 @@ MonoBehaviour:
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 2
   - id: 8
     speakerID: lyra
+    testimony: {fileID: 0}
     text: Did anything seem unusual?
     nextNodeID: 9
     choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 5
   - id: 9
     speakerID: butler
+    testimony: {fileID: 0}
     text: Lady Vivienne had become fearful. She believed people were plotting against
       her. I told her she was worrying too much, but... she seemed convinced.
     nextNodeID: 10
@@ -152,20 +189,28 @@ MonoBehaviour:
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 2
   - id: 10
     speakerID: lyra
+    testimony: {fileID: 0}
     text: Do you know who she suspected?
     nextNodeID: 11
     choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 5
   - id: 11
     speakerID: butler
+    testimony: {fileID: 0}
     text: Laurent, sometimes. Certain guests. Even members of the staff. She trusted
       fewer and fewer people as time went on.
     nextNodeID: 12
@@ -173,10 +218,14 @@ MonoBehaviour:
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 2
   - id: 12
     speakerID: butler
+    testimony: {fileID: 0}
     text: I only know one thing for certain. Lady Vivienne deserved better than what
       happened that night.
     nextNodeID: 
@@ -184,5 +233,8 @@ MonoBehaviour:
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 2

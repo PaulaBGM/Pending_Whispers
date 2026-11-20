@@ -47,7 +47,7 @@ MonoBehaviour:
     allowsEvidencePresentation: 0
     evidenceOptions: []
     wrongEvidenceNodeID: 
-    wrongEvidenceFeedback: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 0
   - id: hub
     speakerID: laurent
@@ -55,7 +55,7 @@ MonoBehaviour:
     text: Is there something else?
     nextNodeID: 
     choices:
-    - text: 'I''ll come back later '
+    - text: I'll come back later
       nextNodeID: 
       addFlags: []
       requiredFlags: []

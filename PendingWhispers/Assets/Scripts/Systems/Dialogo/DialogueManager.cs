@@ -122,6 +122,11 @@ public class DialogueManager : BaseSingleton<DialogueManager>
         if (!TryGetDialogueUI(out IDialogueView dialogueUI))
             return;
 
+        // Cada nodo muestra solo sus propias opciones. Sin esto, al llegar a un nodo por un camino
+        // que no es una opcion (p. ej. presentar una prueba), se quedaban en pantalla las del nodo
+        // anterior y bloqueaban el avance (la UI no deja avanzar mientras haya opciones visibles).
+        dialogueUI.ClearChoices();
+
         ApplyNodeEffects(node);
        
         DialogueCharacter charData = currentDialogue.GetCharacter(node.speakerID);
@@ -430,6 +435,7 @@ public class DialogueManager : BaseSingleton<DialogueManager>
             return;
 
         DialogueEvidenceOption match = currentNode.evidenceOptions?.Find(o => o.item == item);
+        Debug.Log($"[Present] Nodo '{currentNode.id}' recibe '{(item != null ? item.name : "null")}': {(match != null ? "CORRECTO -> " + match.nextNodeID : "no coincide")}");
 
         if (match != null)
         {

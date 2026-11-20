@@ -36,6 +36,7 @@ MonoBehaviour:
   nodes:
   - id: start
     speakerID: owner
+    testimony: {fileID: 0}
     text: YOU'VE RUINED MY BUSINESS!!! MY LIFE!!
     nextNodeID: 1
     choices: []
@@ -43,35 +44,50 @@ MonoBehaviour:
     onEnterFlags:
     - {fileID: 11400000, guid: 8026d71d73230a548b720e9ed6b330cf, type: 2}
     onEnterEvents: []
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 3
   - id: 1
     speakerID: owner
-    text: "\xBFHow will I ever recover from this? "
+    testimony: {fileID: 0}
+    text: "\xBFHow will I ever recover from this?"
     nextNodeID: 2
     choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 5
   - id: 2
     speakerID: owner
+    testimony: {fileID: 0}
     text: YOU'RE A FRAUD OF A MEDIUM!!!
     nextNodeID: 3
     choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 3
   - id: 3
     speakerID: lyra
+    testimony: {fileID: 0}
     text: 'I''m so sorry, I didn''t mean to... '
     nextNodeID: 
     choices: []
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 2

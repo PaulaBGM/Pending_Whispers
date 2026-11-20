@@ -39,7 +39,7 @@ MonoBehaviour:
     testimony: {fileID: 0}
     text: You again. Have you come to steal something too, or have you finally brought
       me something useful?
-    nextNodeID: 
+    nextNodeID: hub
     choices: []
     requiredFlags:
     - {fileID: 11400000, guid: 1b75c72b9eb796b48bd430228ed4bc8e, type: 2}
@@ -56,7 +56,7 @@ MonoBehaviour:
     text: Well? Don't keep a diva waiting.
     nextNodeID: 
     choices:
-    - text: ' I''ll come back later'
+    - text: I'll come back later
       nextNodeID: 
       addFlags: []
       requiredFlags: []
@@ -71,7 +71,7 @@ MonoBehaviour:
     allowsEvidencePresentation: 1
     evidenceOptions:
     - item: {fileID: 11400000, guid: 628bfc80ed75e2545a80669a56ba5dca, type: 2}
-      nextNodeID: 
+      nextNodeID: b1
       addFlags: []
       onSelectedEvent: {fileID: 0}
     wrongEvidenceNodeID: 
@@ -163,8 +163,7 @@ MonoBehaviour:
     nextNodeID: b7
     choices: []
     requiredFlags: []
-    onEnterFlags:
-    - {fileID: 0}
+    onEnterFlags: []
     onEnterEvents: []
     allowsEvidencePresentation: 0
     evidenceOptions: []

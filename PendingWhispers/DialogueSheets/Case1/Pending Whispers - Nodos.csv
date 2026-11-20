@@ -1,4 +1,14 @@
 dialogue,id,speaker,text,next,expression,testimony,requiredFlags,onEnterFlags,onEnterEvents,allowsEvidence,wrongEvidenceNode,wrongEvidenceFeedback
+DialogueBottle,start,ghost1,"You again. Have you come to steal something too, or have you finally brought me something useful?",,Happy,,BottleClueCase1,,,FALSE,,Eso no parece relevante ahora mismo.
+DialogueBottle,hub,ghost1,Well? Don't keep a diva waiting.,,Happy,,BottleClueCase1,,,TRUE,,"Vivienne turns her back on you, offended."
+DialogueBottle,b1,ghost1,"Is that… Waker's Wark? My favourite. Oh, how I've missed it.",b2,Happy,,BottleClueCase1,,,FALSE,,"Vivienne turns her back on you, offended."
+DialogueBottle,b2,ghost1,"Laurent brought me a bottle before every performance. That night too.
+We toasted in my dressing room during the intermission. No one was supposed to know.",b3,Happy,Case1_T3,BottleClueCase1,,,FALSE,,"Vivienne turns her back on you, offended."
+DialogueBottle,b3,lyra,What happened after the toast?,b4,Happy,,BottleClueCase1,,,FALSE,,"Vivienne turns her back on you, offended."
+DialogueBottle,b4,ghost1,My throat began to burn. I couldn't breathe. It was as if the air itself had turned against me…,b5,Angry,,,,,FALSE,,"Vivienne turns her back on you, offended."
+DialogueBottle,b5,ghost1,"The rum. THE RUM! He poured my glass, and then he LEFT me there!",b6,Happy,,BottleClueCase1,,,FALSE,,"Vivienne turns her back on you, offended."
+DialogueBottle,b6,ghost1,LAURENT POISONED ME!,b7,Happy,,,,,FALSE,,"Vivienne turns her back on you, offended."
+DialogueBottle,b7,lyra,"Then I'll find him, and I'll get the truth out of him.",,Happy,,BottleClueCase1,,,FALSE,,"Vivienne turns her back on you, offended."
 DialogueButler1,start,butler,"♪ Oh, mistress Vivienne… Your voice was more beautiful than the angels’… ♪",start,Neutral,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueButler1,1,butler,"Hm?
 Oh… you’re not her.
@@ -6,17 +16,17 @@ Oh… you’re not her.
 DialogueButler1,2,lyra,"I’m Lyra. I’m trying to understand what happened to Vivienne. You’re her maid, right?  ",3,Neutral,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueButler1,3,butler,"Yes, I’m her maid, Desirée Cahuète. Ah… my lady… Always so radiant ",4,Neutral,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueButler1,4,lyra,"Most spirits I meet linger out of anger. You’re lingering out of love, aren’t you?",5,Happy,,,,,FALSE,,Eso no parece relevante ahora mismo.
-DialogueButler1,5,butler,More than anything. Well… perhaps equally to peanuts.,6,Neutral,,,,,FALSE,,Eso no parece relevante ahora mismo.
+DialogueButler1,5,butler,More than anything. Well… perhaps equally to peanuts.,7,Neutral,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueButler1,7,lyra,"You were there the night she died, weren’t you?",8,Thinking,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueButler1,8,butler,Yes.,9,Sad,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueButler1,9,lyra,What happened?,10,Thinking,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueButler1,10,butler,"The manor was full of guests. A grand celebration, all for her final performance. She left during a short intermission before the last song… and never came back.",11,Neutral,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueButler1,11,butler,Laurent went looking for her first. Then… the screaming started.,12,Neutral,Case1_T2_Butler1,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueButler1,12,lyra,Did you notice anything strange before that?,13,Thinking,,,,,FALSE,,Eso no parece relevante ahora mismo.
-DialogueButler1,13,butler,Lady Vivienne was frightened lately. She believed people around her wished her harm. …But I would never let anything happen to her. ,14,Neutral,,,,,FALSE,,Eso no parece relevante ahora mismo.
+DialogueButler1,13,butler,Lady Vivienne was frightened lately. She believed people around her wished her harm. …But I would never let anything happen to her.,14,Neutral,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueButler1,14,butler,NEVER.,,Sad,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueButler2,start,lyra,"Hello again, Miss Desirée.",hub,Neutral,,,,,FALSE,,Eso no parece relevante ahora mismo.
-DialogueButler2,hub,butler,Do you need anything else?,2,Neutral,,,,,FALSE,,Eso no parece relevante ahora mismo.
+DialogueButler2,hub,butler,Do you need anything else?,,Neutral,,,,,TRUE,,Eso no parece relevante ahora mismo.
 DialogueButler2,collar1,butler,"My lady was so proud of that necklace. It was her most prized possessions, besides her voice. Only the finest gold and gems. She wore it on stage every night.",hub,Neutral,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueButler2,botella1,butler,"My lady's favourite rum. That womanizer Laurent brought her a new bottle
 before every performance… including the last one.",hub,Neutral,,,,,FALSE,,Eso no parece relevante ahora mismo.
@@ -24,11 +34,12 @@ DialogueButler2,laurent1,butler,"Master Laurent was her lover. They kept it quie
 but he visited the manor far more often than a mere admirer should.",laurent2,Happy,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueButler2,laurent2,butler,Though Master Laurent's reputation was never quite as spotless as my lady's.,hub,Neutral,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueButler2,alergia1,butler,My lady's allergy to peanuts… the only enemy her greatness ever had.,alergia2,Thinking,,,,,FALSE,,Eso no parece relevante ahora mismo.
-DialogueButler2,cuchillo1,cuchillo1,A kitchen knife? What is it doing down here? How odd…,hub,Thinking,,,,,FALSE,,Eso no parece relevante ahora mismo.
+DialogueButler2,alergia2,butler,I made sure none ever came near her beautiful face.,hub,Thinking,,,,,FALSE,,Eso no parece relevante ahora mismo.
+DialogueButler2,cuchillo1,butler,A kitchen knife? What is it doing down here? How odd…,hub,Thinking,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueButlerEnd,start,butler,"Oh... it's you again, what the issue? ",1,Neutral,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueButlerEnd,1,lyra,"She finally knows the truth, and has chosen to forgive. She is now finally resting, and waiting for you",2,Neutral,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueButlerEnd,2,butler,"Really? My lady is waiting for me? My fragile heart couldn't be more thankful to you, Lyra... Thank you for helping my beloved lady Vivienne",,Happy,,,,ResolveCurrentCase,FALSE,,Eso no parece relevante ahora mismo.
-DialogueButlerKnife,start,butler,You seem serious. What did you discover?,1,Neutral,,LaurentConfessed,,,TRUE,,Eso no parece relevante ahora mismo.
+DialogueButlerKnife,start,butler,You seem serious. What did you discover?,,Neutral,,LaurentConfessed,,,TRUE,,Eso no parece relevante ahora mismo.
 DialogueButlerKnife,k1,butler,"Oh, is that a knife?",k2,Happy,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueButlerKnife,k2,butler,And?,k3,Thinking,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueButlerKnife,k3,lyra,It's not blood. Too sticky… and it smells sweet.,k4,Thinking,,,,,FALSE,,Eso no parece relevante ahora mismo.
@@ -61,16 +72,18 @@ DialogueButlerNoCatacombs,9,butler,"Lady Vivienne had become fearful. She believ
 DialogueButlerNoCatacombs,10,lyra,Do you know who she suspected?,11,Thinking,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueButlerNoCatacombs,11,butler,"Laurent, sometimes. Certain guests. Even members of the staff. She trusted fewer and fewer people as time went on.",12,Sad,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueButlerNoCatacombs,12,butler,I only know one thing for certain. Lady Vivienne deserved better than what happened that night.,,Sad,,,,,FALSE,,Eso no parece relevante ahora mismo.
+DialogueEND,start,ghost1,"Oh? Is that so? All of these years I've hold on to these grudge against the world who silenced me, when I was the one who didn't listen to others... how... sad... 
+If you see my loyal Desirée, tell her I'll be waiting for her.",,Happy,,CorrectHypothesis,Transformed,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueLaurent1,start,laurent,"Ah, a visitor! And a living one, no less. Forgive me, ma chère, I'd offer you a glass…
-but I haven't been able to hold one in fifty years.",,Neutral,,,,,FALSE,,
+but I haven't been able to hold one in fifty years.",,Neutral,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueLaurent1,1,laurent,"Vivienne… Now there was a vintage. Bold on the first note, unforgettable on the last.
-They don't bottle voices like hers anymore.",2,Neutral,,,,,FALSE,,
-DialogueLaurent1,2,lyra,She called you her lover.,,Neutral,,,,,FALSE,,
+They don't bottle voices like hers anymore.",2,Neutral,,,,,FALSE,,Eso no parece relevante ahora mismo.
+DialogueLaurent1,2,lyra,She called you her lover.,,Neutral,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueLaurent1,3,,"Did she? Ma chère, half of Paris claimed to love her, and she let them.
-A fine wine never asks who's drinking it.",4,Neutral,,,,,FALSE,,
-DialogueLaurent1,4,lyra,Where were you during the intermission?,5,Neutral,,,,,FALSE,,
+A fine wine never asks who's drinking it.",4,Neutral,,,,,FALSE,,Eso no parece relevante ahora mismo.
+DialogueLaurent1,4,lyra,Where were you during the intermission?,5,Neutral,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueLaurent1,5,laurent,"In the ballroom, of course. Ten minutes of champagne and small talk with some dreadfully dull duchess.
-I never set foot outside it.",6,Neutral,Case1_T4,,,,FALSE,,
+I never set foot outside it.",6,Neutral,Case1_T4,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueLaurent1,6,laurent,"You look unconvinced. Do you have proof? Without it, ma chère, an accusation is just… vinegar.",6,Neutral,,,,,TRUE,,"Laurent swirls an empty glass, unimpressed."
 DialogueLaurent1,b1,laurent,"Waker's Wark… from my private reserve. There was only one bottle, and I only ever gave it to one person.",c1,Neutral,,,,,FALSE,,"Laurent swirls an empty glass, unimpressed."
 DialogueLaurent1,t1,laurent,That maid. Desirée never could look away from anything that concerned her lady.,c1,Neutral,,,,,FALSE,,"Laurent swirls an empty glass, unimpressed."
@@ -90,7 +103,7 @@ Her breath was sweet. Strawberries. I thought it was her perfume.",c7,Neutral,Ca
 DialogueLaurent1,c7,laurent,"Fifty years believing my rum killed her. I suppose that's why I'm still here.
 Waiting for the bill.",c8,Neutral,,,,,FALSE,,"Laurent swirls an empty glass, unimpressed."
 DialogueLaurent1,c8,lyra,"Rum doesn't smell of strawberries, Laurent.",,Neutral,,,LaurentConfessed,,FALSE,,"Laurent swirls an empty glass, unimpressed."
-DialogueLaurent2,start,,"Back again, ma chère? Forgive me if I don't stand. I've lost my taste for entertaining.",hub,Neutral,,,,,FALSE,,
+DialogueLaurent2,start,,"Back again, ma chère? Forgive me if I don't stand. I've lost my taste for entertaining.",hub,Neutral,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueLaurent2,hub,laurent,Is there something else?,,Neutral,,,,,TRUE,,Laurent barely looks up.
 DialogueLaurent2,t6a,laurent,A sandwich? Not poison. Not my rum…,,Neutral,,,,,FALSE,,Laurent barely looks up.
 DialogueLaurent2,t6b,laurent,"But she only went to that kitchen because my rum made her dizzy.
@@ -111,23 +124,11 @@ DialogueOwner1,12,owner,"A former lover, rivals, a few servants… I don’t kno
 DialogueOwner1,13,lyra,And her remains?,14,Thinking,TestimonyRene,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueOwner1,14,owner,Most of Vivienne and her family were moved to the catacombs long ago. Stored there with countless others.,,Neutral,TestimonyRene,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueOwnerBAD,start,owner,YOU'VE RUINED MY BUSINESS!!! MY LIFE!!,1,Angry,,,UnlockCase1,,FALSE,,Eso no parece relevante ahora mismo.
-DialogueOwnerBAD,1,owner,¿How will I ever recover from this? ,2,Thinking,,,,,FALSE,,Eso no parece relevante ahora mismo.
+DialogueOwnerBAD,1,owner,¿How will I ever recover from this?,2,Thinking,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueOwnerBAD,2,owner,YOU'RE A FRAUD OF A MEDIUM!!!,3,Angry,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueOwnerBAD,3,lyra,"I'm so sorry, I didn't mean to... ",,Sad,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueOwnerGOOD,start,owner,It seems like everything really calmed down... mediums are not as much of a fraud as I thought.,1,Thinking,,,UnlockCase1,,FALSE,,Eso no parece relevante ahora mismo.
-DialogueOwnerGOOD,1,lyra,I'm glad everything turned out okay ,,Happy,,,,,FALSE,,Eso no parece relevante ahora mismo.
-DialogueBottle,start,ghost1,"You again. Have you come to steal something too, or have you finally brought me something useful?",,Happy,,BottleClueCase1,,,FALSE,,Eso no parece relevante ahora mismo.
-DialogueBottle,hub,ghost1,Well? Don't keep a diva waiting.,,Happy,,BottleClueCase1,,,TRUE,,"Vivienne turns her back on you, offended."
-DialogueBottle,b1,ghost1,"Is that… Waker's Wark? My favourite. Oh, how I've missed it.",b2,Happy,,BottleClueCase1,,,FALSE,,"Vivienne turns her back on you, offended."
-DialogueBottle,b2,ghost1,"Laurent brought me a bottle before every performance. That night too.
-We toasted in my dressing room during the intermission. No one was supposed to know.",b3,Happy,Case1_T3,BottleClueCase1,,,FALSE,,"Vivienne turns her back on you, offended."
-DialogueBottle,b3,lyra,What happened after the toast?,b4,Happy,,BottleClueCase1,,,FALSE,,"Vivienne turns her back on you, offended."
-DialogueBottle,b4,ghost1,My throat began to burn. I couldn't breathe. It was as if the air itself had turned against me…,b5,Angry,,,,,FALSE,,"Vivienne turns her back on you, offended."
-DialogueBottle,b5,ghost1,"The rum. THE RUM! He poured my glass, and then he LEFT me there!",b6,Happy,,BottleClueCase1,,,FALSE,,"Vivienne turns her back on you, offended."
-DialogueBottle,b6,ghost1,LAURENT POISONED ME!,b7,Happy,,,,,FALSE,,"Vivienne turns her back on you, offended."
-DialogueBottle,b7,lyra,"Then I'll find him, and I'll get the truth out of him.",,Happy,,BottleClueCase1,,,FALSE,,"Vivienne turns her back on you, offended."
-DialogueEND,start,ghost1,"Oh? Is that so? All of these years I've hold on to these grudge against the world who silenced me, when I was the one who didn't listen to others... how... sad... 
-If you see my loyal Desirée, tell her I'll be waiting for her.",,Happy,,CorrectHypothesis,Transformed,,FALSE,,Eso no parece relevante ahora mismo.
+DialogueOwnerGOOD,1,lyra,I'm glad everything turned out okay,,Happy,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueSinger1,start,ghost1,Another visitor? Another rat hungry for stories?,start,Neutral,,,UnlockCatacombs,UnlockHouse1,FALSE,,Eso no parece relevante ahora mismo.
 DialogueSinger1,1,ghost1,GET OUT OF MY HOUSE!,2,Angry,,,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueSinger1,2,lyra,I’m not here for the museum. I came to help.,3,Surprised,,,,,FALSE,,Eso no parece relevante ahora mismo.
@@ -143,4 +144,4 @@ DialogueSinger1,10,ghost1,"And now they desecrate my home to sell memories!
 DialogueSinger1,11,ghost1,THEY WILL NEVER KNOW PEACE!,,Angry,,,UnlockCatacombs,UnlockHouse1,FALSE,,Eso no parece relevante ahora mismo.
 DialogueTransform,start,lyra,I've finally reached the truth.,1,Neutral,,UnlockCatacombs;AllCluesCase1Collected,,,FALSE,,Eso no parece relevante ahora mismo.
 DialogueTransform,1,ghost1,Really? You found out who was the murderous fiend? The one who tried to quiet my magnificent voice?,,Neutral,,,,,FALSE,,Eso no parece relevante ahora mismo.
-DialogueTransform,3,ghost1,"So... IT WAS TRUE, THEY WANTED MY RICHES, MY POWER, MY FAME, MY VOICE!!",4,Angry,,WrongHypothesis,,,FALSE,,Eso no parece relevante ahora mismo.
+DialogueTransform,3,ghost1,"So... IT WAS TRUE, THEY WANTED MY RICHES, MY POWER, MY FAME, MY VOICE!!",,Angry,,WrongHypothesis,,,FALSE,,Eso no parece relevante ahora mismo.

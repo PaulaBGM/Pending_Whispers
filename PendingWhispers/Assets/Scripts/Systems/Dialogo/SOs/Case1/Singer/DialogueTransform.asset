@@ -36,6 +36,7 @@ MonoBehaviour:
   nodes:
   - id: start
     speakerID: lyra
+    testimony: {fileID: 0}
     text: I've finally reached the truth.
     nextNodeID: 1
     choices: []
@@ -44,17 +45,21 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 0bd4ea81fb4c46f4b95fd4140e9cab7d, type: 2}
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 0
   - id: 1
     speakerID: ghost1
+    testimony: {fileID: 0}
     text: Really? You found out who was the murderous fiend? The one who tried to
       quiet my magnificent voice?
     nextNodeID: 
     choices:
     - text: No one murdered you... you suffered an accident, and died because of
         an allergy reaction
-      nextNodeID: 2
+      nextNodeID: 
       addFlags: []
       requiredFlags:
       - {fileID: 11400000, guid: 8c9823eacec837c4299e0acca9e31dad, type: 2}
@@ -74,12 +79,16 @@ MonoBehaviour:
     requiredFlags: []
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 0
   - id: 3
     speakerID: ghost1
+    testimony: {fileID: 0}
     text: So... IT WAS TRUE, THEY WANTED MY RICHES, MY POWER, MY FAME, MY VOICE!!
-    nextNodeID: 4
+    nextNodeID: 
     choices:
     - text: Ahhh!! Sorry!!!
       nextNodeID: 
@@ -93,5 +102,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 62256de666409794a87f3313daea52e4, type: 2}
     onEnterFlags: []
     onEnterEvents: []
-    isImportantLine: 0
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
     expression: 3
