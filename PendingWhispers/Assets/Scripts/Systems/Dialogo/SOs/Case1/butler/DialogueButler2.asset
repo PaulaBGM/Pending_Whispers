@@ -1,0 +1,163 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772d907194c90e1499655d8cccb4f43c, type: 3}
+  m_Name: DialogueButler2
+  m_EditorClassIdentifier: 
+  characters:
+  - id: lyra
+    displayName: Lyra
+    portrait: {fileID: 0}
+    isLeftSide: 1
+    neutral: {fileID: 6795179555359847349, guid: 40d62a340747ee84c8946e698480bdf6, type: 3}
+    happy: {fileID: -1103926389690433412, guid: 40d62a340747ee84c8946e698480bdf6, type: 3}
+    sad: {fileID: 21300000, guid: c00d9d5beefb325458cb48dfca4219c7, type: 3}
+    angry: {fileID: 0}
+    surprised: {fileID: -8241981511714330664, guid: 40d62a340747ee84c8946e698480bdf6, type: 3}
+    thinking: {fileID: 3356771313395980172, guid: 40d62a340747ee84c8946e698480bdf6, type: 3}
+  - id: butler
+    displayName: "Desir\xE9e Cahu\xE8te"
+    portrait: {fileID: 21300000, guid: 1d9d06d2743f64d40b8de496f9ee24b4, type: 3}
+    isLeftSide: 0
+    neutral: {fileID: 21300000, guid: 96995f6e35002944986f3e6c872d5347, type: 3}
+    happy: {fileID: 21300000, guid: 1d9d06d2743f64d40b8de496f9ee24b4, type: 3}
+    sad: {fileID: 21300000, guid: 96995f6e35002944986f3e6c872d5347, type: 3}
+    angry: {fileID: 0}
+    surprised: {fileID: 0}
+    thinking: {fileID: 21300000, guid: faad24f5235c7554fb58102c5c1442ef, type: 3}
+  nodes:
+  - id: start
+    speakerID: lyra
+    testimony: {fileID: 0}
+    text: "Hello again, Miss Desir\xE9e."
+    nextNodeID: hub
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
+    expression: 0
+  - id: hub
+    speakerID: butler
+    testimony: {fileID: 0}
+    text: Do you need anything else?
+    nextNodeID: 2
+    choices:
+    - text: ' I''ll come back later'
+      nextNodeID: 
+      addFlags: []
+      requiredFlags: []
+      requiredReputation: 0
+      reputationChange: 0
+      onSelectedEvent: {fileID: 0}
+      endsDialogue: 1
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
+    expression: 0
+  - id: collar1
+    speakerID: butler
+    testimony: {fileID: 0}
+    text: My lady was so proud of that necklace. It was her most prized possessions,
+      besides her voice. Only the finest gold and gems. She wore it on stage every
+      night.
+    nextNodeID: hub
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
+    expression: 0
+  - id: botella1
+    speakerID: butler
+    testimony: {fileID: 0}
+    text: "My lady's favourite rum. That womanizer Laurent brought her a new bottle\r\nbefore
+      every performance\u2026 including the last one."
+    nextNodeID: hub
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
+    expression: 0
+  - id: laurent1
+    speakerID: butler
+    testimony: {fileID: 0}
+    text: 'Master Laurent was her lover. They kept it quiet, for the sake of their
+      reputations,
+
+      but he visited the manor far more often than a mere admirer
+      should.'
+    nextNodeID: laurent2
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
+    expression: 1
+  - id: laurent2
+    speakerID: butler
+    testimony: {fileID: 0}
+    text: Though Master Laurent's reputation was never quite as spotless as my lady's.
+    nextNodeID: hub
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
+    expression: 0
+  - id: alergia1
+    speakerID: butler
+    testimony: {fileID: 0}
+    text: "My lady's allergy to peanuts\u2026 the only enemy her greatness ever had."
+    nextNodeID: alergia2
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
+    expression: 5
+  - id: cuchillo1
+    speakerID: cuchillo1
+    testimony: {fileID: 0}
+    text: "A kitchen knife? What is it doing down here? How odd\u2026"
+    nextNodeID: hub
+    choices: []
+    requiredFlags: []
+    onEnterFlags: []
+    onEnterEvents: []
+    allowsEvidencePresentation: 0
+    evidenceOptions: []
+    wrongEvidenceNodeID: 
+    wrongEvidenceFeedback: Eso no parece relevante ahora mismo.
+    expression: 5
